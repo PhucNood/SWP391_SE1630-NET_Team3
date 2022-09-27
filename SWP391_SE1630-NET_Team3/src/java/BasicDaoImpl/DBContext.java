@@ -1,5 +1,5 @@
 
-package dao;
+package BasicDaoImpl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

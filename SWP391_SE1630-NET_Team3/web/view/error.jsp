@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -98,26 +100,12 @@
 
                 <div class="inner-box">
 
-                    <form action="recovery" method="post">
-
-
-                        <c:if test="${messSuccess == null}">
-                            <h3>Enter Your Email Address.</h3>
-                            <input type="email" name="email" placeholder="Email Address" required/>
-                            <p class="text-warning">${messAlert}</p>
-                            <input type="submit" value="Send Recovery Password" />
-                        </c:if>
-                        <c:if test="${messSuccess != null}">
-                            <p class="text-success">${messSuccess}</p>
-                        </c:if>
-                    </form>
+                    <h3>Error: </h3>
 
                 </div>
 
             </div>
         </div>
-
-        <div style="height: 100px"></div>
 
         <jsp:include page="footer.jsp"/>
 
@@ -131,12 +119,12 @@
         <!--===============================================================================================-->
         <script src="../vendor/select2/select2.min.js"></script>
         <script>
-                            $(".js-select2").each(function () {
-                                $(this).select2({
-                                    minimumResultsForSearch: 20,
-                                    dropdownParent: $(this).next('.dropDownSelect2')
-                                });
-                            })
+            $(".js-select2").each(function () {
+                $(this).select2({
+                    minimumResultsForSearch: 20,
+                    dropdownParent: $(this).next('.dropDownSelect2')
+                });
+            })
         </script>
         <!--===============================================================================================-->
         <script src="../vendor/daterangepicker/moment.min.js"></script>
@@ -147,77 +135,77 @@
         <!--===============================================================================================-->
         <script src="../vendor/parallax100/parallax100.js"></script>
         <script>
-                            $('.parallax100').parallax100();
+            $('.parallax100').parallax100();
         </script>
         <!--===============================================================================================-->
         <script src="../vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
         <script>
-                            $('.gallery-lb').each(function () { // the containers for all your galleries
-                                $(this).magnificPopup({
-                                    delegate: 'a', // the selector for gallery item
-                                    type: 'image',
-                                    gallery: {
-                                        enabled: true
-                                    },
-                                    mainClass: 'mfp-fade'
-                                });
-                            });
+            $('.gallery-lb').each(function () { // the containers for all your galleries
+                $(this).magnificPopup({
+                    delegate: 'a', // the selector for gallery item
+                    type: 'image',
+                    gallery: {
+                        enabled: true
+                    },
+                    mainClass: 'mfp-fade'
+                });
+            });
         </script>
         <!--===============================================================================================-->
         <script src="../vendor/isotope/isotope.pkgd.min.js"></script>
         <!--===============================================================================================-->
         <script src="../vendor/sweetalert/sweetalert.min.js"></script>
         <script>
-                            $('.js-addwish-b2').on('click', function (e) {
-                                e.preventDefault();
-                            });
+            $('.js-addwish-b2').on('click', function (e) {
+                e.preventDefault();
+            });
 
-                            $('.js-addwish-b2').each(function () {
-                                var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-                                $(this).on('click', function () {
-                                    swal(nameProduct, "is added to wishlist !", "success");
+            $('.js-addwish-b2').each(function () {
+                var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+                $(this).on('click', function () {
+                    swal(nameProduct, "is added to wishlist !", "success");
 
-                                    $(this).addClass('js-addedwish-b2');
-                                    $(this).off('click');
-                                });
-                            });
+                    $(this).addClass('js-addedwish-b2');
+                    $(this).off('click');
+                });
+            });
 
-                            $('.js-addwish-detail').each(function () {
-                                var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+            $('.js-addwish-detail').each(function () {
+                var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
-                                $(this).on('click', function () {
-                                    swal(nameProduct, "is added to wishlist !", "success");
+                $(this).on('click', function () {
+                    swal(nameProduct, "is added to wishlist !", "success");
 
-                                    $(this).addClass('js-addedwish-detail');
-                                    $(this).off('click');
-                                });
-                            });
+                    $(this).addClass('js-addedwish-detail');
+                    $(this).off('click');
+                });
+            });
 
-                            /*---------------------------------------------*/
+            /*---------------------------------------------*/
 
-                            $('.js-addcart-detail').each(function () {
-                                var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-                                $(this).on('click', function () {
-                                    swal(nameProduct, "is added to cart !", "success");
-                                });
-                            });
+            $('.js-addcart-detail').each(function () {
+                var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+                $(this).on('click', function () {
+                    swal(nameProduct, "is added to cart !", "success");
+                });
+            });
         </script>
         <!--===============================================================================================-->
         <script src="../vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
         <script>
-                            $('.js-pscroll').each(function () {
-                                $(this).css('position', 'relative');
-                                $(this).css('overflow', 'hidden');
-                                var ps = new PerfectScrollbar(this, {
-                                    wheelSpeed: 1,
-                                    scrollingThreshold: 1000,
-                                    wheelPropagation: false,
-                                });
+            $('.js-pscroll').each(function () {
+                $(this).css('position', 'relative');
+                $(this).css('overflow', 'hidden');
+                var ps = new PerfectScrollbar(this, {
+                    wheelSpeed: 1,
+                    scrollingThreshold: 1000,
+                    wheelPropagation: false,
+                });
 
-                                $(window).on('resize', function () {
-                                    ps.update();
-                                })
-                            });
+                $(window).on('resize', function () {
+                    ps.update();
+                })
+            });
         </script>
         <!--===============================================================================================-->
         <script src="../js/main.js"></script>

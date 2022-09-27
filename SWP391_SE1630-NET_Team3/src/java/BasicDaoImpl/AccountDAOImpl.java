@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dao;
+package BasicDaoImpl;
 
 import entity.Account;
 import java.sql.PreparedStatement;
@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author admin
  */
-public class AccountDAO extends DBContext{
+public class AccountDAOImpl extends DBContext{
     public List<Account> getListAccount() {
         List<Account> list = new ArrayList<>();
         String sql = "SELECT [id]\n"
@@ -46,7 +46,7 @@ public class AccountDAO extends DBContext{
     }
 
     public static void main(String[] args) {
-        AccountDAO d = new AccountDAO();
+        AccountDAOImpl d = new AccountDAOImpl();
         List<Account> list = d.getListAccount();
         System.out.println(list.get(1).getFullname());
     }
