@@ -21,7 +21,9 @@ public class Account {
     public Account() {
     }
 
-    public Account(int id, String fullname, int gender, String pass, String user, String email, String phone, int imageID, String address, int role, String createAt, String updateAt) {
+    public Account(int id, String fullname, int gender, String pass, String user, 
+            String email, String phone, int imageID, String address, int role, 
+            String createAt, String updateAt) {
         this.id = id;
         this.fullname = fullname;
         this.gender = gender;
@@ -35,6 +37,8 @@ public class Account {
         this.createAt = createAt;
         this.updateAt = updateAt;
     }
+
+    
     
     
 
