@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author admin
  */
-public class login extends HttpServlet {
+public class loginController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -56,7 +56,9 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        session.setAttribute("inPage", "login");
+        response.sendRedirect("view/login.jsp");
     } 
 
     /** 
