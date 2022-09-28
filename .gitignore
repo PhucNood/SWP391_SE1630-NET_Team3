@@ -39,6 +39,7 @@ nb-configuration.xml
 # Maven
 log/
 target/
+private.xml
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup

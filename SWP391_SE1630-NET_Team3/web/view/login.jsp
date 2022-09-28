@@ -102,7 +102,7 @@
 
                     <form action="../login" method="post">
 
-                        <h2>Login Here</h2>
+                        <h2 style="color: #808080">Login Here</h2>
 
                         <input  name= "email" type="email" value="${sessionScope.email}"placeholder="Email" required />
                         <input name="pass" type="password" value="${sessionScope.pass}" placeholder="Password" required />

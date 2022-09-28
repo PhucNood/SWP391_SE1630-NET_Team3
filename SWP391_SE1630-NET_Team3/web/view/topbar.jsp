@@ -52,27 +52,27 @@
                         <a href="home.jsp" class="logo">
                             <img src="images/icons/logo-01.png" alt="IMG-LOGO">
                         </a>
-
+                        
                         <!-- Menu desktop -->
                         <div class="menu-desktop">
                             <ul class="main-menu">
-                                <li class="active-menu">
-                                    <a href="home.jsp">Home</a>
+                                <li class="${(inPage=="home") ? "active-menu" :""}">
+                                    <a href="../home">Home</a>
                                 </li>
 
-                                <li>
-                                    <a href="product.html">Shop</a>
+                                <li class="${(inPage=="shop") ? "active-menu" :""}">
+                                    <a href="../product">Shop</a>
                                 </li>
 
-                                <li>
+                                <li class="${(inPage=="blog") ? "active-menu" :""}">
                                     <a href="blog.html">Blog</a>
                                 </li>
 
-                                <li>
+                                <li class="${(inPage=="about") ? "active-menu" :""}">
                                     <a href="about.html">About</a>
                                 </li>
 
-                                <li>
+                                <li class="${(inPage=="contact") ? "active-menu" :""}">
                                     <a href="contact.html">Contact</a>
                                 </li>
                             </ul>
@@ -81,11 +81,11 @@
                         <!-- Icon header -->
                         <div class="wrap-icon-header flex-w flex-r-m h-full">
                             <ul class="main-menu">
-                                <li>
-                                    <a href="login.jsp">Login</a>
+                                <li class="${(inPage=="login") ? "active" :""}">
+                                    <a href="../login">Login</a>
                                 </li>
 
-                                <li>
+                                <li class="${(inPage=="signup") ? "active-menu" :""}">
                                     <a href="product.html">Sign Up</a>
                                 </li>
 
@@ -145,31 +145,6 @@
                 </div>
             </div>
 
-
-            <!-- Menu Mobile -->
-            <div class="menu-mobile">
-                <ul class="main-menu-m">
-                    <li>
-                        <a href="home.jsp">Home</a>
-                    </li>
-
-                    <li>
-                        <a href="product.html">Shop</a>
-                    </li>
-
-                    <li>
-                        <a href="blog.html">Blog</a>
-                    </li>
-
-                    <li>
-                        <a href="about.html">About</a>
-                    </li>
-
-                    <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
-                </ul>
-            </div>
 
             <!-- Modal Search -->
             <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
