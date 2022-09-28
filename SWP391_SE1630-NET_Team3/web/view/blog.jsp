@@ -7,28 +7,28 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--===============================================================================================-->	
-        <link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
+        <link rel="icon" type="image/png" href="images/icons/favicon.png"/>
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="../fonts/iconic/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="../fonts/linearicons-v1.0.0/icon-font.min.css">
+        <link rel="stylesheet" type="text/css" href="fonts/linearicons-v1.0.0/icon-font.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
+        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
         <!--===============================================================================================-->	
-        <link rel="stylesheet" type="text/css" href="../vendor/css-hamburgers/hamburgers.min.css">
+        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="./vendor/animsition/css/animsition.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="../vendor/select2/select2.min.css">
+        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="../vendor/perfect-scrollbar/perfect-scrollbar.css">
+        <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="../css/util.css">
-        <link rel="stylesheet" type="text/css" href="../css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/util.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
         <!--===============================================================================================-->
     </head>
     <body class="animsition">
@@ -54,7 +54,7 @@
                     <ul class="header-cart-wrapitem w-full">
                         <li class="header-cart-item flex-w flex-t m-b-12">
                             <div class="header-cart-item-img">
-                                <img src="../images/item-cart-01.jpg" alt="IMG">
+                                <img src="images/item-cart-01.jpg" alt="IMG">
                             </div>
 
                             <div class="header-cart-item-txt p-t-8">
@@ -70,7 +70,7 @@
 
                         <li class="header-cart-item flex-w flex-t m-b-12">
                             <div class="header-cart-item-img">
-                                <img src="../images/item-cart-02.jpg" alt="IMG">
+                                <img src="images/item-cart-02.jpg" alt="IMG">
                             </div>
 
                             <div class="header-cart-item-txt p-t-8">
@@ -86,7 +86,7 @@
 
                         <li class="header-cart-item flex-w flex-t m-b-12">
                             <div class="header-cart-item-img">
-                                <img src="../images/item-cart-03.jpg" alt="IMG">
+                                <img src="images/item-cart-03.jpg" alt="IMG">
                             </div>
 
                             <div class="header-cart-item-txt p-t-8">
@@ -132,7 +132,7 @@
                             <!-- item blog -->
                             <div class="p-b-63">
                                 <a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-                                    <img src="../images/blog-04.jpg" alt="IMG-BLOG">
+                                    <img src="images/blog-04.jpg" alt="IMG-BLOG">
 
                                     <div class="flex-col-c-m size-123 bg9 how-pos5">
                                         <span class="ltext-107 cl2 txt-center">
@@ -185,7 +185,7 @@
                             <!-- item blog -->
                             <div class="p-b-63">
                                 <a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-                                    <img src="../images/blog-05.jpg" alt="IMG-BLOG">
+                                    <img src="images/blog-05.jpg" alt="IMG-BLOG">
 
                                     <div class="flex-col-c-m size-123 bg9 how-pos5">
                                         <span class="ltext-107 cl2 txt-center">
@@ -238,7 +238,7 @@
                             <!-- item blog -->
                             <div class="p-b-63">
                                 <a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-                                    <img src="../images/blog-06.jpg" alt="IMG-BLOG">
+                                    <img src="images/blog-06.jpg" alt="IMG-BLOG">
 
                                     <div class="flex-col-c-m size-123 bg9 how-pos5">
                                         <span class="ltext-107 cl2 txt-center">
@@ -357,7 +357,7 @@
                                 <ul>
                                     <li class="flex-w flex-t p-b-30">
                                         <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                            <img src="../images/product-min-01.jpg" alt="PRODUCT">
+                                            <img src="images/product-min-01.jpg" alt="PRODUCT">
                                         </a>
 
                                         <div class="size-215 flex-col-t p-t-8">
@@ -373,7 +373,7 @@
 
                                     <li class="flex-w flex-t p-b-30">
                                         <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                            <img src="../images/product-min-02.jpg" alt="PRODUCT">
+                                            <img src="images/product-min-02.jpg" alt="PRODUCT">
                                         </a>
 
                                         <div class="size-215 flex-col-t p-t-8">
@@ -389,7 +389,7 @@
 
                                     <li class="flex-w flex-t p-b-30">
                                         <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                            <img src="../images/product-min-03.jpg" alt="PRODUCT">
+                                            <img src="images/product-min-03.jpg" alt="PRODUCT">
                                         </a>
 
                                         <div class="size-215 flex-col-t p-t-8">
@@ -547,14 +547,14 @@
         <jsp:include page="footer.jsp"/>
 
         <!--===============================================================================================-->	
-        <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
+        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
         <!--===============================================================================================-->
-        <script src="../vendor/animsition/js/animsition.min.js"></script>
+        <script src="vendor/animsition/js/animsition.min.js"></script>
         <!--===============================================================================================-->
-        <script src="../vendor/bootstrap/js/popper.js"></script>
-        <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="vendor/bootstrap/js/popper.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
         <!--===============================================================================================-->
-        <script src="../vendor/select2/select2.min.js"></script>
+        <script src="vendor/select2/select2.min.js"></script>
         <script>
             $(".js-select2").each(function () {
                 $(this).select2({
@@ -564,9 +564,9 @@
             })
         </script>
         <!--===============================================================================================-->
-        <script src="../vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+        <script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
         <!--===============================================================================================-->
-        <script src="../vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+        <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
         <script>
             $('.js-pscroll').each(function () {
                 $(this).css('position', 'relative');
@@ -583,7 +583,7 @@
             });
         </script>
         <!--===============================================================================================-->
-        <script src="../js/main.js"></script>
+        <script src="js/main.js"></script>
 
     </body>
 </html>
