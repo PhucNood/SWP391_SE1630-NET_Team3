@@ -50,7 +50,8 @@
 
                         <!-- Logo desktop -->		
                         <a href="home" class="logo">
-                            <img src="view/images/icons/logo-01.png" alt="IMG-LOGO">
+                            <img src="view/images/T3 Logo.jpg" alt="IMG-LOGO">
+                            
                         </a>
 
                         <!-- Menu desktop -->
@@ -61,7 +62,7 @@
                                 </li>
 
                                 <li class="${page == "shop" ? "active-menu" :""}">
-                                    <a href="shop?cid=0">Shop</a>
+                                    <a href="shop">Shop</a>
                                 </li>
 
                                 <li class="${page == "blog" ? "active-menu" :""}">
