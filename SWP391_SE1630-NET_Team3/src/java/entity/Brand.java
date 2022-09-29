@@ -32,7 +32,7 @@ public class Brand {
     }
 
     public String getTitle() {
-        return title;
+        return title.substring(0, 1).toUpperCase()+title.substring(1);
     }
 
     public void setTitle(String title) {
