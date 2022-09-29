@@ -56,7 +56,7 @@ public class homeController extends HttpServlet {
     throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.setAttribute("inPage", "home");
-        response.sendRedirect("view/home.jsp");
+        request.getRequestDispatcher("view/home.jsp").forward(request, response);
     } 
 
     /** 

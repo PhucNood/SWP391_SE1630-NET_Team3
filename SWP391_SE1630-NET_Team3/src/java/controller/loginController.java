@@ -58,7 +58,7 @@ public class loginController extends HttpServlet {
     throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.setAttribute("inPage", "login");
-        response.sendRedirect("view/login.jsp");
+        request.getRequestDispatcher("view/login.jsp").forward(request, response);
     } 
 
     /** 
@@ -79,11 +79,11 @@ public class loginController extends HttpServlet {
         Account a = AccD.getAccByEmail(email);
         if (a == null) {
             session.setAttribute("fail", "Incorrect username or password.");
-            response.sendRedirect("view/login.jsp");
+            request.getRequestDispatcher("view/login.jsp").forward(request, response);
         } else {
             if (a.getRole() == 0) {
                 session.setAttribute("fail", "Your account has been locked.");
-                response.sendRedirect("view/login.jsp");
+                request.getRequestDispatcher("view/login.jsp").forward(request, response);
             } else {
                 if (a.getPass().equals(pass)) {
                     session.removeAttribute("fail");
@@ -97,10 +97,10 @@ public class loginController extends HttpServlet {
                         session.removeAttribute("pass");
                         session.removeAttribute("check");
                     }
-                    response.sendRedirect("view/home.jsp");
+                    request.getRequestDispatcher("view/home.jsp").forward(request, response);
                 } else {
                     session.setAttribute("fail", "Incorrect username or password.");
-                    response.sendRedirect("view/login.jsp");
+                    request.getRequestDispatcher("view/login.jsp").forward(request, response);
                 }
             }
         }

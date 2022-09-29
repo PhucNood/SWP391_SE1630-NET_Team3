@@ -4,6 +4,8 @@
  */
 package entity;
 
+import java.util.List;
+
 /**
  *
  * @author 84923
@@ -12,14 +14,16 @@ public class Product {
     private int productID;
     private String name,description,size;
     private int categoryID,brandID,quantity;
-    private float price;
+    private double price;
     private int sale;
     private String createAt,updateAt;
+    private List<Image> list;
 
     public Product() {
     }
 
-    public Product(int productID, String name, String description, String size, int categoryID, int brandID, int quantity, float price, int sale, String createAt, String updateAt) {
+
+    public Product(int productID, String name, String description, String size, int categoryID, int brandID, int quantity, double price, int sale, String createAt, String updateAt, List<Image> list) {
         this.productID = productID;
         this.name = name;
         this.description = description;
@@ -31,6 +35,20 @@ public class Product {
         this.sale = sale;
         this.createAt = createAt;
         this.updateAt = updateAt;
+        this.list = list;
+    }
+    
+    
+    
+    
+    
+    
+    public List<Image> getList() {
+        return list;
+    }
+
+    public void setList(List<Image> list) {
+        this.list = list;
     }
 
     public int getProductID() {
@@ -89,7 +107,7 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
