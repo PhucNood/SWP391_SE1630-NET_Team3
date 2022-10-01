@@ -10,34 +10,34 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--===============================================================================================-->	
-        <link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+        <link rel="icon" type="image/png" href="view/images/icons/favicon.png"/>
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="view/vendor/bootstrap/css/bootstrap.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="view/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" type="text/css" href="view/fonts/iconic/css/material-design-iconic-font.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="fonts/linearicons-v1.0.0/icon-font.min.css">
+        <link rel="stylesheet" type="text/css" href="view/fonts/linearicons-v1.0.0/icon-font.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+        <link rel="stylesheet" type="text/css" href="view/vendor/animate/animate.css">
         <!--===============================================================================================-->	
-        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+        <link rel="stylesheet" type="text/css" href="view/vendor/css-hamburgers/hamburgers.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+        <link rel="stylesheet" type="text/css" href="view/vendor/animsition/css/animsition.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+        <link rel="stylesheet" type="text/css" href="view/vendor/select2/select2.min.css">
         <!--===============================================================================================-->	
-        <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+        <link rel="stylesheet" type="text/css" href="view/vendor/daterangepicker/daterangepicker.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="vendor/slick/slick.css">
+        <link rel="stylesheet" type="text/css" href="view/vendor/slick/slick.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="vendor/MagnificPopup/magnific-popup.css">
+        <link rel="stylesheet" type="text/css" href="view/vendor/MagnificPopup/magnific-popup.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+        <link rel="stylesheet" type="text/css" href="view/vendor/perfect-scrollbar/perfect-scrollbar.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="css/util.css">
-        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="view/css/util.css">
+        <link rel="stylesheet" type="text/css" href="view/css/main.css">
         <!--===============================================================================================-->
         <style>
             *{
@@ -110,14 +110,14 @@
         <jsp:include page="footer.jsp"/>
 
         <!--===============================================================================================-->	
-        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+        <script src="view/vendor/jquery/jquery-3.2.1.min.js"></script>
         <!--===============================================================================================-->
-        <script src="vendor/animsition/js/animsition.min.js"></script>
+        <script src="view/vendor/animsition/js/animsition.min.js"></script>
         <!--===============================================================================================-->
-        <script src="vendor/bootstrap/js/popper.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="view/vendor/bootstrap/js/popper.js"></script>
+        <script src="view/vendor/bootstrap/js/bootstrap.min.js"></script>
         <!--===============================================================================================-->
-        <script src="vendor/select2/select2.min.js"></script>
+        <script src="view/vendor/select2/select2.min.js"></script>
         <script>
             $(".js-select2").each(function () {
                 $(this).select2({
@@ -127,18 +127,18 @@
             })
         </script>
         <!--===============================================================================================-->
-        <script src="vendor/daterangepicker/moment.min.js"></script>
-        <script src="vendor/daterangepicker/daterangepicker.js"></script>
+        <script src="view/vendor/daterangepicker/moment.min.js"></script>
+        <script src="view/vendor/daterangepicker/daterangepicker.js"></script>
         <!--===============================================================================================-->
-        <script src="vendor/slick/slick.min.js"></script>
-        <script src="js/slick-custom.js"></script>
+        <script src="view/vendor/slick/slick.min.js"></script>
+        <script src="view/js/slick-custom.js"></script>
         <!--===============================================================================================-->
-        <script src="vendor/parallax100/parallax100.js"></script>
+        <script src="view/vendor/parallax100/parallax100.js"></script>
         <script>
             $('.parallax100').parallax100();
         </script>
         <!--===============================================================================================-->
-        <script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+        <script src="view/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
         <script>
             $('.gallery-lb').each(function () { // the containers for all your galleries
                 $(this).magnificPopup({
@@ -152,9 +152,9 @@
             });
         </script>
         <!--===============================================================================================-->
-        <script src="vendor/isotope/isotope.pkgd.min.js"></script>
+        <script src="view/vendor/isotope/isotope.pkgd.min.js"></script>
         <!--===============================================================================================-->
-        <script src="vendor/sweetalert/sweetalert.min.js"></script>
+        <script src="view/vendor/sweetalert/sweetalert.min.js"></script>
         <script>
             $('.js-addwish-b2').on('click', function (e) {
                 e.preventDefault();
@@ -191,7 +191,7 @@
             });
         </script>
         <!--===============================================================================================-->
-        <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+        <script src="view/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
         <script>
             $('.js-pscroll').each(function () {
                 $(this).css('position', 'relative');
@@ -208,7 +208,7 @@
             });
         </script>
         <!--===============================================================================================-->
-        <script src="js/main.js"></script>
+        <script src="view/js/main.js"></script>
 
     </body>
 </html>

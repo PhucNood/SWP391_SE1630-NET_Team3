@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
     <head>
         <title>Billard Shop</title>
         <meta charset="UTF-8">
@@ -38,6 +39,40 @@
         </style>
     </head>
     <body class="animsition">
+=======
+<head>
+	<title>Billard Shop</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="view/images/icons/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="view/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="view/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="view/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="view/fonts/linearicons-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="view/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="view/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="view/./vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="view/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="view/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="view/css/util.css">
+	<link rel="stylesheet" type="text/css" href="view/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body class="animsition">
+	
+	<jsp:include page="topbar.jsp"/>
+>>>>>>> main
 
         <jsp:include page="topbar.jsp"/>
 
@@ -45,6 +80,7 @@
         <div class="wrap-header-cart js-panel-cart">
             <div class="s-full js-hide-cart"></div>
 
+<<<<<<< HEAD
             <div class="header-cart flex-col-l p-l-65 p-r-25">
                 <div class="header-cart-title flex-w flex-sb-m p-b-8">
                     <span class="mtext-103 cl2">
@@ -55,6 +91,24 @@
                         <i class="zmdi zmdi-close"></i>
                     </div>
                 </div>
+=======
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+			
+			<div class="header-cart-content flex-w js-pscroll">
+				<ul class="header-cart-wrapitem w-full">
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="view/images/item-cart-01.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="view/#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								White Shirt Pleat
+							</a>
+>>>>>>> main
 
                 <div class="header-cart-content flex-w js-pscroll">
                     <ul class="header-cart-wrapitem w-full">
@@ -63,6 +117,7 @@
                                 <img src="images/item-cart-01.jpg" alt="IMG">
                             </div>
 
+<<<<<<< HEAD
                             <div class="header-cart-item-txt p-t-8">
                                 <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
                                     White Shirt Pleat
@@ -73,12 +128,24 @@
                                 </span>
                             </div>
                         </li>
+=======
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="view/images/item-cart-02.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="view/#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								Converse All Star
+							</a>
+>>>>>>> main
 
                         <li class="header-cart-item flex-w flex-t m-b-12">
                             <div class="header-cart-item-img">
                                 <img src="images/item-cart-02.jpg" alt="IMG">
                             </div>
 
+<<<<<<< HEAD
                             <div class="header-cart-item-txt p-t-8">
                                 <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
                                     Converse All Star
@@ -89,12 +156,24 @@
                                 </span>
                             </div>
                         </li>
+=======
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="view/images/item-cart-03.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="view/#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								Nixon Porter Leather
+							</a>
+>>>>>>> main
 
                         <li class="header-cart-item flex-w flex-t m-b-12">
                             <div class="header-cart-item-img">
                                 <img src="images/item-cart-03.jpg" alt="IMG">
                             </div>
 
+<<<<<<< HEAD
                             <div class="header-cart-item-txt p-t-8">
                                 <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
                                     Nixon Porter Leather
@@ -125,6 +204,21 @@
                 </div>
             </div>
         </div>
+=======
+					<div class="header-cart-buttons flex-w w-full">
+						<a href="view/shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart
+						</a>
+
+						<a href="view/shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+>>>>>>> main
 
 
         <!-- Title page -->
@@ -145,10 +239,17 @@
                                 Send Us A Message
                             </h4>
 
+<<<<<<< HEAD
                             <div class="bor8 m-b-20 how-pos4-parent">
                                 <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="Your Email Address">
                                 <img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
                             </div>
+=======
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="Your Email Address">
+							<img class="how-pos4 pointer-none" src="view/images/icons/icon-email.png" alt="ICON">
+						</div>
+>>>>>>> main
 
                             <div class="bor8 m-b-30">
                                 <textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="msg" placeholder="How Can We Help?"></textarea>
@@ -223,6 +324,7 @@
 
         <jsp:include page="footer.jsp"/>
 
+<<<<<<< HEAD
         <!--===============================================================================================-->	
         <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
         <!--===============================================================================================-->
@@ -260,6 +362,49 @@
             });
         </script>
         <!--===============================================================================================-->
+=======
+<!--===============================================================================================-->	
+	<script src="view/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="view/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="view/vendor/bootstrap/js/popper.js"></script>
+	<script src="view/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="view/vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="view/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+<!--===============================================================================================-->
+	<script src="view/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="view/https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script>
+	<script src="view/js/map-custom.js"></script>
+<!--===============================================================================================-->
+	<script src="view/js/main.js"></script>
+>>>>>>> main
 
         <script src="js/main.js"></script>
 

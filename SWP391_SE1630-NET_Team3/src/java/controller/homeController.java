@@ -5,8 +5,6 @@
 
 package controller;
 
-import BasicDaoImpl.AccountDAOImpl;
-import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -19,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author admin
  */
-public class login extends HttpServlet {
+public class homeController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,10 +34,10 @@ public class login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet login</title>");  
+            out.println("<title>Servlet homeController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet login at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet homeController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,7 +54,9 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        session.setAttribute("inPage", "home");
+        request.getRequestDispatcher("view/home.jsp").forward(request, response);
     } 
 
     /** 
@@ -69,39 +69,7 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pass = request.getParameter("pass");
-        String remember = request.getParameter("remember");
-        HttpSession session = request.getSession();
-        AccountDAOImpl AccD = new AccountDAOImpl();
-        Account a = AccD.getAccByEmail(email);
-        if (a == null) {
-            session.setAttribute("fail", "Incorrect username or password.");
-            response.sendRedirect("view/login.jsp");
-        } else {
-            if (a.getRole() == 0) {
-                session.setAttribute("fail", "Your account has been locked.");
-                response.sendRedirect("view/login.jsp");
-            } else {
-                if (a.getPass().equals(pass)) {
-                    session.removeAttribute("fail");
-                    session.setAttribute("account", a);
-                    if (request.getParameter("remember") != null && remember.equals("1")) {
-                        session.setAttribute("email", email);
-                        session.setAttribute("pass", pass);
-                        session.setAttribute("check", remember);
-                    } else {
-                        session.removeAttribute("email");
-                        session.removeAttribute("pass");
-                        session.removeAttribute("check");
-                    }
-                    response.sendRedirect("view/home.jsp");
-                } else {
-                    session.setAttribute("fail", "Incorrect username or password.");
-                    response.sendRedirect("view/login.jsp");
-                }
-            }
-        }
+        processRequest(request, response);
     }
 
     /** 
