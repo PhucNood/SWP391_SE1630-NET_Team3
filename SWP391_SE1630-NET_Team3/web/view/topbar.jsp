@@ -70,11 +70,11 @@
                                 </li>
 
                                 <li class="${page == "about" ? "active-menu" :""}">
-                                    <a href="view/about.html">About</a>
+                                    <a href="about.jsp">About</a>
                                 </li>
 
                                 <li class="${page == "contact" ? "active-menu" :""}">
-                                    <a href="view/contact.html">Contact</a>
+                                    <a href="contact.jsp">Contact</a>
                                 </li>
                             </ul>
                         </div>	
@@ -164,11 +164,11 @@
                     </li>
 
                     <li class="${page == "about" ? "active-menu" :""}">
-                        <a href="view/about.html">About</a>
+                        <a href="view/about.jsp">About</a>
                     </li>
 
                     <li class="${page == "contact" ? "active-menu" :""}">
-                        <a href="view/contact.html">Contact</a>
+                        <a href="view/contact.jsp">Contact</a>
                     </li>
                 </ul>
             </div>
