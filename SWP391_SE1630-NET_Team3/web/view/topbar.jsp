@@ -37,7 +37,54 @@
         <link rel="stylesheet" type="text/css" href="view/css/util.css">
         <link rel="stylesheet" type="text/css" href="view/css/main.css">
         <!--===============================================================================================-->
-        
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            /* Style the search field */
+            form.example input[type=text] {
+                padding: 10px;
+                font-size: 17px;
+                border: 1px solid grey;
+                float: left;
+                width: 40%;
+                background: white;
+                margin-left: 55%;
+            }
+
+            /* Style the submit button */
+            form.example button {
+                float: left;
+                width: 5%;
+                padding: 10px;
+                background: #f2f2f2;
+                color: #888888;
+                font-size: 17px;
+                border: 1px solid grey;
+                border-left: none; /* Prevent double borders */
+                cursor: pointer;
+            }
+
+            form.example button:hover {
+                background: #717fe0;
+                float: left;
+                width: 5%;
+                padding: 10px;
+                color: white;
+                font-size: 17px;
+                border: 1px solid grey;
+                border-left: none; /* Prevent double borders */
+                cursor: pointer;
+            }
+
+            /* Clear floats */
+            form.example::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+        </style>
     </head>
     <body class="animsition">
         <c:set var="page" value="${inPage}"/>
@@ -175,15 +222,11 @@
             <!-- Modal Search -->
             <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
                 <div class="container-search-header">
-                    <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-                        <img src="view/images/icons/icon-close2.png" alt="CLOSE">
-                    </button>
-
-                    <form class="wrap-search-header flex-w p-l-15">
-                        <button class="flex-c-m trans-04">
+                    <form class="wrap-search-header flex-w p-l-15" action="search" method="get">
+                        <button type="submit" class="flex-c-m trans-04">
                             <i class="zmdi zmdi-search"></i>
                         </button>
-                        <input class="plh3" type="text" name="search" placeholder="Search...">
+                        <input class="plh3" type="text" name="text" placeholder="Search...">
                     </form>
                 </div>
             </div>

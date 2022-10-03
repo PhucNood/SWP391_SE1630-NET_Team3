@@ -139,5 +139,10 @@ public class Product {
         this.updateAt = updateAt;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" + "productID=" + productID + ", name=" + name + ", description=" + description + ", size=" + size + ", categoryID=" + categoryID + ", brandID=" + brandID + ", quantity=" + quantity + ", price=" + price + ", sale=" + sale + ", createAt=" + createAt + ", updateAt=" + updateAt + ", list=" + list + '}';
+    }
+
     
 }
