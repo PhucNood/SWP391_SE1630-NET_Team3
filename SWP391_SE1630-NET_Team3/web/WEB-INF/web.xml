@@ -13,8 +13,13 @@
         <servlet-class>controller.homeController</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>searchController</servlet-name>
         <servlet-class>controller.searchController</servlet-class>
+
+        <servlet-name>BlogListController</servlet-name>
+        <servlet-class>controller.BlogListController</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>login</servlet-name>
@@ -29,8 +34,13 @@
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>searchController</servlet-name>
         <url-pattern>/search</url-pattern>
+
+        <servlet-name>BlogListController</servlet-name>
+        <url-pattern>/BlogListController</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

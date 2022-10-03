@@ -97,7 +97,8 @@
 
                         <!-- Logo desktop -->		
                         <a href="home" class="logo">
-                            <img src="view/images/icons/logo-01.png" alt="IMG-LOGO">
+                            <img src="view/images/T3 Logo.jpg" alt="IMG-LOGO">
+                            
                         </a>
 
                         <!-- Menu desktop -->
@@ -108,7 +109,7 @@
                                 </li>
 
                                 <li class="${page == "shop" ? "active-menu" :""}">
-                                    <a href="shop?cid=0">Shop</a>
+                                    <a href="shop">Shop</a>
                                 </li>
 
                                 <li class="${page == "blog" ? "active-menu" :""}">
@@ -116,11 +117,11 @@
                                 </li>
 
                                 <li class="${page == "about" ? "active-menu" :""}">
-                                    <a href="view/about.html">About</a>
+                                    <a href="about.jsp">About</a>
                                 </li>
 
                                 <li class="${page == "contact" ? "active-menu" :""}">
-                                    <a href="view/contact.html">Contact</a>
+                                    <a href="contact.jsp">Contact</a>
                                 </li>
                             </ul>
                         </div>	
@@ -210,11 +211,11 @@
                     </li>
 
                     <li class="${page == "about" ? "active-menu" :""}">
-                        <a href="view/about.html">About</a>
+                        <a href="view/about.jsp">About</a>
                     </li>
 
                     <li class="${page == "contact" ? "active-menu" :""}">
-                        <a href="view/contact.html">Contact</a>
+                        <a href="view/contact.jsp">Contact</a>
                     </li>
                 </ul>
             </div>
