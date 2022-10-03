@@ -3,9 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+
+            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/topbar.jsp</file>
+            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/searchController.java</file>
+            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/entity/Product.java</file>
+            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/shop.jsp</file>
+            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/home.jsp</file>
+            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/shopController.java</file>
+            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/BasicDaoImpl/ProductDaoImpl.java</file>
+            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/WEB-INF/web.xml</file>
+
             <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/contact.jsp</file>
             <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/BasicDaoImpl/DBContext.java</file>
             <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/topbar.jsp</file>
+
         </group>
     </open-files>
 </project-private>
