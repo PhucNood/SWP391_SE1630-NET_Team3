@@ -76,6 +76,7 @@ public class SignupController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String passPattern = "(?=.*[A-Z]).{8,20}$";
         Pattern pas = Pattern.compile(passPattern);
         String phonePattern = "^[0-9]{10}";
@@ -97,6 +98,7 @@ public class SignupController extends HttpServlet {
         Matcher matpas = pas.matcher(password);
         Matcher matpho = pho.matcher(phone);
 
+        //check cac dieu kien thoa man
         if (!matpho.matches()) {
             request.setAttribute("messPhone", "Phone must have 10 character!");
         } else if (!matpas.matches()) {
