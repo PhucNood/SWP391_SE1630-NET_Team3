@@ -4,18 +4,33 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/topbar.jsp</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/searchController.java</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/entity/Product.java</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/shop.jsp</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/home.jsp</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/shopController.java</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/BasicDaoImpl/ProductDaoImpl.java</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/WEB-INF/web.xml</file>
-
-            <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/contact.jsp</file>
-            <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/BasicDaoImpl/DBContext.java</file>
-            <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/topbar.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/topbar.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/recovery.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/blogDetail.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/error.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/cartCheckOut.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/signup.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/productDetail.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/test.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/SignoutController.java</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/contact.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/feedback.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/BasicDaoImpl/BlogDAOImpl.java</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/footer.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/profile.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/historyOrder.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/cartComplete.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/SignupController.java</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/LoginController.java</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/blog.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/HomeController.java</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/shopingCart.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/login.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/BasicDaoImpl/AccountDAOImpl.java</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/home.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/about.jsp</file>
+            <file>file:/C:/Users/admin/Documents/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/Test.java</file>
 
         </group>
     </open-files>

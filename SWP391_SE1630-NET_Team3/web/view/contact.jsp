@@ -2,46 +2,42 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Billard Shop</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--===============================================================================================-->	
-        <link rel="icon" type="image/png" href="images/icons/favicon.png"/>
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="fonts/linearicons-v1.0.0/icon-font.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-        <!--===============================================================================================-->	
-        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="./vendor/animsition/css/animsition.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="css/util.css">
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-        <!--===============================================================================================-->
-        <style>
-            .map{
-                text-align: center;
-                margin: 10px;
-            }
-        </style>
-    </head>
-    <body class="animsition">
 
-        <jsp:include page="topbar.jsp"/>
+<head>
+	<title>Billard Shop</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="${pageContext.request.contextPath}/view/images/icons/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/fonts/linearicons-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/./vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/util.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body class="animsition">
+	
+	<jsp:include page="topbar.jsp"/>
 
-        <!-- Title page -->
+	<!-- Title page -->
+
         <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
             <h2 class="ltext-105 clblack txt-center">
                 Contact
@@ -135,45 +131,51 @@
 
 
 
-        <jsp:include page="footer.jsp"/>
 
-        <!--===============================================================================================-->	
-        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="vendor/animsition/js/animsition.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="vendor/bootstrap/js/popper.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="vendor/select2/select2.min.js"></script>
-        <script>
-            $(".js-select2").each(function () {
-                $(this).select2({
-                    minimumResultsForSearch: 20,
-                    dropdownParent: $(this).next('.dropDownSelect2')
-                });
-            })
-        </script>
-        <!--===============================================================================================-->
-        <script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-        <script>
-            $('.js-pscroll').each(function () {
-                $(this).css('position', 'relative');
-                $(this).css('overflow', 'hidden');
-                var ps = new PerfectScrollbar(this, {
-                    wheelSpeed: 1,
-                    scrollingThreshold: 1000,
-                    wheelPropagation: false,
-                });
+	<jsp:include page="footer.jsp"/>
 
-                $(window).on('resize', function () {
-                    ps.update();
-                })
-            });
-        </script>
-        <!--===============================================================================================-->
-        <script src="js/main.js"></script>
-    </body>
+<!--===============================================================================================-->	
+	<script src="${pageContext.request.contextPath}/view/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/view/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/view/vendor/bootstrap/js/popper.js"></script>
+	<script src="${pageContext.request.contextPath}/view/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/view/vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/view/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/view/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/view/https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script>
+	<script src="${pageContext.request.contextPath}/view/js/map-custom.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/view/js/main.js"></script>
+
+</body>
+
 </html>

@@ -8,34 +8,34 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--===============================================================================================-->	
-        <link rel="icon" type="image/png" href="view/images/icons/favicon.png"/>
+        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/view/images/icons/favicon.png"/>
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/bootstrap/css/bootstrap.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/fonts/iconic/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/fonts/iconic/css/material-design-iconic-font.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/fonts/linearicons-v1.0.0/icon-font.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/fonts/linearicons-v1.0.0/icon-font.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/vendor/animate/animate.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/animate/animate.css">
         <!--===============================================================================================-->	
-        <link rel="stylesheet" type="text/css" href="view/vendor/css-hamburgers/hamburgers.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/css-hamburgers/hamburgers.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/vendor/animsition/css/animsition.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/animsition/css/animsition.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/vendor/select2/select2.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/select2/select2.min.css">
         <!--===============================================================================================-->	
-        <link rel="stylesheet" type="text/css" href="view/vendor/daterangepicker/daterangepicker.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/daterangepicker/daterangepicker.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/vendor/slick/slick.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/slick/slick.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/vendor/MagnificPopup/magnific-popup.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/MagnificPopup/magnific-popup.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/vendor/perfect-scrollbar/perfect-scrollbar.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/perfect-scrollbar/perfect-scrollbar.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/css/util.css">
-        <link rel="stylesheet" type="text/css" href="view/css/main.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/util.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/main.css">
         <!--===============================================================================================-->
         <style>
             * {
@@ -97,8 +97,9 @@
 
                         <!-- Logo desktop -->		
                         <a href="home" class="logo">
-                            <img src="view/images/T3 Logo.jpg" alt="IMG-LOGO">
-                            
+
+                            <img src="${pageContext.request.contextPath}/view/images/icons/logo-01.png" alt="IMG-LOGO">
+
                         </a>
 
                         <!-- Menu desktop -->
@@ -113,15 +114,17 @@
                                 </li>
 
                                 <li class="${page == "blog" ? "active-menu" :""}">
-                                    <a href="view/blog.html">Blog</a>
+                                    <a href="blog">Blog</a>
                                 </li>
 
                                 <li class="${page == "about" ? "active-menu" :""}">
-                                    <a href="about.jsp">About</a>
+
+                                    <a href="${pageContext.request.contextPath}/view/about.html">About</a>
                                 </li>
 
                                 <li class="${page == "contact" ? "active-menu" :""}">
-                                    <a href="contact.jsp">Contact</a>
+                                    <a href="${pageContext.request.contextPath}/view/contact.html">Contact</a>
+
                                 </li>
                             </ul>
                         </div>	
@@ -129,15 +132,27 @@
                         <!-- Icon header -->
                         <div class="wrap-icon-header flex-w flex-r-m h-full">
                             <ul class="main-menu">
-                                <li class="${page == "login" ? "active-menu" :""}">
-                                    <a href="view/../login">Login</a>
+                                
+
+                                <c:if test="${account==null}">
+                                    <li class="${page == "login" ? "active-menu" :""}">
+                                    <a href="${pageContext.request.contextPath}/login">Login</a>
                                 </li>
 
                                 <li class="${page == "signup" ? "active-menu" :""}">
-                                    <a href="view/product.html">Sign Up</a>
+                                    <a href="${pageContext.request.contextPath}/signup">Sign Up</a>
                                 </li>
-
-                                </li>
+                                </c:if>
+                                <c:if test="${account!=null}">
+                                    <li>
+                                        
+                                        <a href="#">Hello ${account.user}</a>
+                                    </li>
+                                    <li >
+                                        <a href="signout">Sign Out</a>
+                                        
+                                    </li>
+                                </c:if>
                             </ul>
                             <div class="flex-c-m h-full p-r-24">
                                 <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-modal-search">
@@ -146,7 +161,7 @@
                             </div>
 
                             <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-                                <a href="view/shopingCart.jsp"/>
+                                <a href="${pageContext.request.contextPath}/view/shopingCart.jsp"/>
                                 <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti" data-notify="2">
                                     <i class="zmdi zmdi-shopping-cart"></i>
                                 </div>
@@ -166,7 +181,7 @@
             <div class="wrap-header-mobile">
                 <!-- Logo moblie -->		
                 <div class="logo-mobile">
-                    <a href="view/home.jsp"><img src="view/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+                    <a href="${pageContext.request.contextPath}/view/home.jsp"><img src="${pageContext.request.contextPath}/view/images/icons/logo-01.png" alt="IMG-LOGO"></a>
                 </div>
                 
                 <!-- Icon header -->
@@ -178,7 +193,7 @@
                     </div>
 
                     <div class="flex-c-m h-full p-lr-10 bor5">
-                        <a href="view/shopingCart.jsp"/>
+                        <a href="${pageContext.request.contextPath}/view/shopingCart.jsp"/>
                         <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti" data-notify="2">
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
@@ -207,15 +222,17 @@
                     </li>
 
                     <li class="${page == "blog" ? "active-menu" :""}">
-                        <a href="view/blog.html">Blog</a>
+                        <a href="blog">Blog</a>
                     </li>
 
                     <li class="${page == "about" ? "active-menu" :""}">
-                        <a href="view/about.jsp">About</a>
+                    
+                        <a href="${pageContext.request.contextPath}/view/about.html">About</a>
                     </li>
 
                     <li class="${page == "contact" ? "active-menu" :""}">
-                        <a href="view/contact.jsp">Contact</a>
+                        <a href="${pageContext.request.contextPath}/view/contact.html">Contact</a>
+
                     </li>
                 </ul>
             </div>
@@ -236,14 +253,14 @@
         
 
         <!--===============================================================================================-->	
-        <script src="view/vendor/jquery/jquery-3.2.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/view/vendor/jquery/jquery-3.2.1.min.js"></script>
         <!--===============================================================================================-->
-        <script src="view/vendor/animsition/js/animsition.min.js"></script>
+        <script src="${pageContext.request.contextPath}/view/vendor/animsition/js/animsition.min.js"></script>
         <!--===============================================================================================-->
-        <script src="view/vendor/bootstrap/js/popper.js"></script>
-        <script src="view/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/view/vendor/bootstrap/js/popper.js"></script>
+        <script src="${pageContext.request.contextPath}/view/vendor/bootstrap/js/bootstrap.min.js"></script>
         <!--===============================================================================================-->
-        <script src="view/vendor/select2/select2.min.js"></script>
+        <script src="${pageContext.request.contextPath}/view/vendor/select2/select2.min.js"></script>
         <script>
                             $(".js-select2").each(function () {
                                 $(this).select2({
@@ -253,18 +270,18 @@
                             })
         </script>
         <!--===============================================================================================-->
-        <script src="view/vendor/daterangepicker/moment.min.js"></script>
-        <script src="view/vendor/daterangepicker/daterangepicker.js"></script>
+        <script src="${pageContext.request.contextPath}/view/vendor/daterangepicker/moment.min.js"></script>
+        <script src="${pageContext.request.contextPath}/view/vendor/daterangepicker/daterangepicker.js"></script>
         <!--===============================================================================================-->
-        <script src="view/vendor/slick/slick.min.js"></script>
-        <script src="view/js/slick-custom.js"></script>
+        <script src="${pageContext.request.contextPath}/view/vendor/slick/slick.min.js"></script>
+        <script src="${pageContext.request.contextPath}/view/js/slick-custom.js"></script>
         <!--===============================================================================================-->
-        <script src="view/vendor/parallax100/parallax100.js"></script>
+        <script src="${pageContext.request.contextPath}/view/vendor/parallax100/parallax100.js"></script>
         <script>
                             $('.parallax100').parallax100();
         </script>
         <!--===============================================================================================-->
-        <script src="view/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+        <script src="${pageContext.request.contextPath}/view/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
         <script>
                             $('.gallery-lb').each(function () { // the containers for all your galleries
                                 $(this).magnificPopup({
@@ -278,9 +295,9 @@
                             });
         </script>
         <!--===============================================================================================-->
-        <script src="view/vendor/isotope/isotope.pkgd.min.js"></script>
+        <script src="${pageContext.request.contextPath}/view/vendor/isotope/isotope.pkgd.min.js"></script>
         <!--===============================================================================================-->
-        <script src="view/vendor/sweetalert/sweetalert.min.js"></script>
+        <script src="${pageContext.request.contextPath}/view/vendor/sweetalert/sweetalert.min.js"></script>
         <script>
                             $('.js-addwish-b2').on('click', function (e) {
                                 e.preventDefault();
@@ -317,7 +334,7 @@
                             });
         </script>
         <!--===============================================================================================-->
-        <script src="view/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+        <script src="${pageContext.request.contextPath}/view/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
         <script>
                             $('.js-pscroll').each(function () {
                                 $(this).css('position', 'relative');
@@ -334,7 +351,7 @@
                             });
         </script>
         <!--===============================================================================================-->
-        <script src="view/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
 
     </body>
 </html>

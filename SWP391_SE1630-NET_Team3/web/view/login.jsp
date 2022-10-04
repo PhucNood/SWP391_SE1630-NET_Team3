@@ -10,34 +10,34 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--===============================================================================================-->	
-        <link rel="icon" type="image/png" href="view/images/icons/favicon.png"/>
+        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/view/images/icons/favicon.png"/>
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/bootstrap/css/bootstrap.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/fonts/iconic/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/fonts/iconic/css/material-design-iconic-font.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/fonts/linearicons-v1.0.0/icon-font.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/fonts/linearicons-v1.0.0/icon-font.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/vendor/animate/animate.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/animate/animate.css">
         <!--===============================================================================================-->	
-        <link rel="stylesheet" type="text/css" href="view/vendor/css-hamburgers/hamburgers.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/css-hamburgers/hamburgers.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/vendor/animsition/css/animsition.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/animsition/css/animsition.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/vendor/select2/select2.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/select2/select2.min.css">
         <!--===============================================================================================-->	
-        <link rel="stylesheet" type="text/css" href="view/vendor/daterangepicker/daterangepicker.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/daterangepicker/daterangepicker.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/vendor/slick/slick.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/slick/slick.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/vendor/MagnificPopup/magnific-popup.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/MagnificPopup/magnific-popup.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/vendor/perfect-scrollbar/perfect-scrollbar.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/perfect-scrollbar/perfect-scrollbar.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="view/css/util.css">
-        <link rel="stylesheet" type="text/css" href="view/css/main.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/util.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/main.css">
         <!--===============================================================================================-->
         <style>
             *{
@@ -67,19 +67,25 @@
             .forgot{
                 float:right;
             }
-            input[type="text"],input[type="password"],input[type="submit"],input[type="email"]{
+            .input1{
                 width:100%;
                 padding:10px;
                 margin:10px 0px;
                 border:2px solid #c0c0c0;
             }
-            input[type="submit"]{
+            .input2{
                 border:1px solid #333333 !important;
                 background-color:#333333 !important;
                 color:white;
                 font-size:16px;
                 font-weight:600;
                 cursor:pointer;
+            }
+            .input3{
+                width: 20px;
+                padding: 2px 4px;
+                margin: 8px 0;
+                box-sizing: border-box;
             }
             a {
                 color: #999999;
@@ -89,6 +95,8 @@
             *, *::before, *::after {
                 box-sizing: border-box;
             }
+            
+
         </style>
     </head>
     <body class="animsition">
@@ -103,18 +111,19 @@
 
                     <h2>Login Here</h2>
 
-                    <input  name= "email" type="email" value="${sessionScope.email}"placeholder="Email" required />
-                    <input name="pass" type="password" value="${sessionScope.pass}" placeholder="Password" required />
+                    <input class="input1"  name= "email" type="email" value="${sessionScope.email}"placeholder="Email" required />
+                    <input class="input1" name="pass" type="password" value="${sessionScope.pass}" placeholder="Password" required />
                     <p class="text-warning">${messAlert}</p>
-                    <p>
-                        <input type="checkbox"  name ="remember" ${sessionScope.check!=null ?"checked":""} value="1"/><span> Keep me Signed In</span>
+                    <p >
+                        <input type="checkbox"  name ="remember" ${sessionScope.check!=null ?"checked":""} value="1"/>
+                        <span>Keep me Signed In</span>
 
-                        <span class="forgot"><a href="view/recovery" style="color: #808080">Forgot Password?</a></span>
+                        <span class="forgot"><a href="${pageContext.request.contextPath}/view/recovery" style="color: #808080">Forgot Password?</a></span>
                     </p>
-                    <input type="submit" value="Login" />
+                    <input class="input1 input2" type="submit" value="Login" />
 
                     <p style="text-align:center;">
-                        <span>Not a member ? </span><a class="link" href="view/signup">Sign Up</a>
+                        <span>Not a member ? </span><a class="link" href="${pageContext.request.contextPath}/signup">Sign Up</a>
                     </p>
                     <h6 style="color: red"><i>${sessionScope.fail}</i></h6>
                 </form>
@@ -125,7 +134,7 @@
 
         <jsp:include page="footer.jsp"/>
 
-        
+
 
     </body>
 </html>

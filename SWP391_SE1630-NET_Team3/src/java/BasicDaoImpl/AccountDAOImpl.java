@@ -15,7 +15,8 @@ import java.util.List;
  *
  * @author admin
  */
-public class AccountDAOImpl extends DBContext{
+public class AccountDAOImpl extends DBContext {
+
     public List<Account> getListAccount() {
         List<Account> list = new ArrayList<>();
         String sql = "SELECT [id]\n"
@@ -35,7 +36,7 @@ public class AccountDAOImpl extends DBContext{
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Account a = new Account(rs.getInt(1), rs.getString(2), rs.getInt(3), 
+                Account a = new Account(rs.getInt(1), rs.getString(2), rs.getInt(3),
                         rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
                         rs.getInt(8), rs.getString(9), rs.getInt(10), rs.getString(11), rs.getString(12));
                 list.add(a);
@@ -44,7 +45,7 @@ public class AccountDAOImpl extends DBContext{
         }
         return list;
     }
-    
+
     public Account getAccByEmail(String email) {
         String sql = "SELECT [id]\n"
                 + "      ,[full_name]\n"
@@ -65,7 +66,7 @@ public class AccountDAOImpl extends DBContext{
             st.setString(1, email);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                Account a = new Account(rs.getInt(1), rs.getString(2), rs.getInt(3), 
+                Account a = new Account(rs.getInt(1), rs.getString(2), rs.getInt(3),
                         rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
                         rs.getInt(8), rs.getString(9), rs.getInt(10), rs.getString(11), rs.getString(12));
                 return a;
@@ -73,6 +74,34 @@ public class AccountDAOImpl extends DBContext{
         } catch (SQLException e) {
         }
         return null;
+    }
+
+    public void addAccount(String email, String phone, String fullname, String username, String password) {
+        String sql = "INSERT INTO [dbo].[account]\n"
+                + "           ([full_name]\n"
+                + "           ,[password]\n"
+                + "           ,[user]\n"
+                + "           ,[email]\n"
+                + "           ,[phone]\n"
+                + "           ,[role])\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           , ?\n"
+                + "           , ?\n"
+                + "           , ?\n"
+                + "           , ?\n"
+                + "           ,3)";
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, fullname);
+            st.setString(2, password);
+            st.setString(3, username);
+            st.setString(4, email);
+            st.setString(5, phone);
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
     }
 
     public static void main(String[] args) {
