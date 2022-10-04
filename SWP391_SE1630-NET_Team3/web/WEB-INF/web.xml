@@ -30,8 +30,8 @@
     </servlet>
     <servlet>
 
-        <servlet-name>searchController</servlet-name>
-        <servlet-class>controller.searchController</servlet-class>
+        <servlet-name>SearchController</servlet-name>
+        <servlet-class>controller.SearchController</servlet-class>
 
         <servlet-name>BlogListController</servlet-name>
         <servlet-class>controller.BlogListController</servlet-class>

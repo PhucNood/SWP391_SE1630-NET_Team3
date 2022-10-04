@@ -71,22 +71,24 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pass = request.getParameter("pass");
+        
+        String email = request.getParameter("email").trim();
+        String pass = request.getParameter("pass").trim();
         String remember = request.getParameter("remember");
         HttpSession session = request.getSession();
         
         AccountDAOImpl AccD = new AccountDAOImpl();
         Account a = AccD.getAccByEmail(email);
         
+        //check cac dieu kien thoa man
         if (a == null) {
-            session.setAttribute("fail", "Incorrect username or password.");
+            session.setAttribute("fail", "Incorrect email or password!");
             request.getRequestDispatcher("view/login.jsp").forward(request, response);
         } else {
             if (a.getRole() == 0) {
-                session.setAttribute("fail", "Your account has been locked.");
+                session.setAttribute("fail", "Your account has been locked!");
                 request.getRequestDispatcher("view/login.jsp").forward(request, response);
-            } else {
+            } else {//set cac thuoc tinh 
                 if (a.getPass().equals(pass)) {
                     session.removeAttribute("fail");
                     session.setAttribute("account", a);
@@ -101,7 +103,7 @@ public class LoginController extends HttpServlet {
                     }
                     request.getRequestDispatcher("view/home.jsp").forward(request, response);
                 } else {
-                    session.setAttribute("fail", "Incorrect username or password.");
+                    session.setAttribute("fail", "Incorrect email or password!");
                     request.getRequestDispatcher("view/login.jsp").forward(request, response);
                 }
             }

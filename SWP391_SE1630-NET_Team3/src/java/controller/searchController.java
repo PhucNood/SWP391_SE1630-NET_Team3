@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author admin
  */
-public class searchController extends HttpServlet {
+public class SearchController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
