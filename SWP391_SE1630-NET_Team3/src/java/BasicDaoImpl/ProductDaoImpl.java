@@ -40,29 +40,6 @@ public class ProductDaoImpl extends DBContext {
         }
         return list;
     }
-//
-//    public List<Product> getListProductByCateId(String id){
-//        List<Product> list = new ArrayList<>();
-//        List<Image> listImg = new ArrayList<>();
-//        ImageDaoImpl d = new ImageDaoImpl();
-//        String sql = "Select * from product where categoryID ="+id;
-//
-//        try {
-//            PreparedStatement st = connection.prepareStatement(sql);
-//            ResultSet rs = st.executeQuery();
-//            while (rs.next()) {
-//                listImg = d.getListByIdProduct(rs.getInt(1));
-//                Product c = new Product(rs.getInt(1),
-//                        rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5),
-//                        rs.getInt(6), rs.getInt(7), rs.getDouble(8),
-//                        rs.getInt(9), rs.getString(10), rs.getString(11), listImg);
-//                list.add(c);
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        return list;
-//    }
 
     public List<Product> getProduct(String cid, String bid, String fid, String sid) {
         List<Product> list = new ArrayList<>();
@@ -71,9 +48,9 @@ public class ProductDaoImpl extends DBContext {
         String sql = "select * from Product where 1=1";
         if (!cid.equals("0")) {
             sql += " and categoryID = " + cid;
-            if (!bid.equals("0")) {
-                sql += " and brandID = " + bid;
-            }
+        }
+        if (!bid.equals("0")) {
+            sql += " and brandID = " + bid;
         }
 
         if (!fid.equals("0")) {
@@ -102,16 +79,17 @@ public class ProductDaoImpl extends DBContext {
                 sql += " order by sale DESC";
             }
         }
+
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 listImg = d.getListByIdProduct(rs.getInt(1));
-                Product c = new Product(rs.getInt(1),
+                Product p = new Product(rs.getInt(1),
                         rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5),
                         rs.getInt(6), rs.getInt(7), rs.getDouble(8),
                         rs.getInt(9), rs.getString(10), rs.getString(11), listImg);
-                list.add(c);
+                list.add(p);
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -119,9 +97,35 @@ public class ProductDaoImpl extends DBContext {
         return list;
     }
 
+    public List<Product> searchListProduct(String text) {
+        List<Product> list = new ArrayList<>();
+        List<Image> listImg = new ArrayList<>();
+        ImageDaoImpl d = new ImageDaoImpl();
+        String sql = "select * from Product p inner join brand b on p.brandID = b.brandID\n"
+                + "			inner join category c on p.categoryID = c.categoryID\n"
+                + "where 1=1\n"
+                + " and (p.name like '%"+text+"%' or b.title like '%"+text+"%' or c.title like '%"+text+"%')";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                listImg = d.getListByIdProduct(rs.getInt(1));
+                Product p = new Product(rs.getInt(1),
+                        rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5),
+                        rs.getInt(6), rs.getInt(7), rs.getDouble(8),
+                        rs.getInt(9), rs.getString(10), rs.getString(11), listImg);
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            
+        }
+        return list;
+        
+    }
+
     public static void main(String[] args) {
         ProductDaoImpl d = new ProductDaoImpl();
-//        List<Product> list = d.getListProductByCateId("1");
-//        System.out.println(list.get(1).getList().get(0).getImgSource());
+        List<Product> list = d.searchListProduct("mit");
+        System.out.println(list.get(1));
     }
 }

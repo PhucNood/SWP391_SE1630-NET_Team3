@@ -37,6 +37,54 @@
         <link rel="stylesheet" type="text/css" href="view/css/util.css">
         <link rel="stylesheet" type="text/css" href="view/css/main.css">
         <!--===============================================================================================-->
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            /* Style the search field */
+            form.example input[type=text] {
+                padding: 10px;
+                font-size: 17px;
+                border: 1px solid grey;
+                float: left;
+                width: 40%;
+                background: white;
+                margin-left: 55%;
+            }
+
+            /* Style the submit button */
+            form.example button {
+                float: left;
+                width: 5%;
+                padding: 10px;
+                background: #f2f2f2;
+                color: #888888;
+                font-size: 17px;
+                border: 1px solid grey;
+                border-left: none; /* Prevent double borders */
+                cursor: pointer;
+            }
+
+            form.example button:hover {
+                background: #717fe0;
+                float: left;
+                width: 5%;
+                padding: 10px;
+                color: white;
+                font-size: 17px;
+                border: 1px solid grey;
+                border-left: none; /* Prevent double borders */
+                cursor: pointer;
+            }
+
+            /* Clear floats */
+            form.example::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+        </style>
     </head>
     <body class="animsition">
 
@@ -83,15 +131,10 @@
 
                     <!-- Search product -->
                     <div class="dis-none panel-search w-full p-t-10 p-b-15">
-                        <div class="bor8 dis-flex p-l-15">
-                            <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-                                <i class="zmdi zmdi-search"></i>
-                            </button>
-                            <form>
-                                <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
-                            </form>
-                            
-                        </div>	
+                        <form class="example" action="search" method="get">
+                            <input type="text" placeholder="Search by name, brand,.." name="text" value="${requestScope.text}">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
                     </div>
 
                     <!-- Filter -->
@@ -105,19 +148,19 @@
                                 <ul>
 
                                     <li class="p-b-6">
-                                        <a href="shop?sid=1" class="filter-link stext-106 trans-04 ${(sid == "1") ? "filter-link-active" :""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?sid=1" class="filter-link stext-106 trans-04 ${(sid == "1") ? "filter-link-active" :""}">
                                             Price: High to Low
                                         </a>
                                     </li>
 
                                     <li class="p-b-6">
-                                        <a href="shop?sid=2" class="filter-link stext-106 trans-04 ${(sid == "2") ? "filter-link-active" :""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?sid=2" class="filter-link stext-106 trans-04 ${(sid == "2") ? "filter-link-active" :""}">
                                             Price: Low to High
                                         </a>
                                     </li>
 
                                     <li class="p-b-6">
-                                        <a href="shop?sid=3" class="filter-link stext-106 trans-04 ${(sid == "3") ? "filter-link-active" :""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?sid=3" class="filter-link stext-106 trans-04 ${(sid == "3") ? "filter-link-active" :""}">
                                             Sale: High to Low
                                         </a>
                                     </li>
@@ -131,30 +174,30 @@
 
                                 <ul>
                                     <li class="p-b-6">
-                                        <a href="shop?fid=0" class="filter-link stext-106 trans-04 ${(fid == "0") ? "filter-link-active" : ""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?fid=0" class="filter-link stext-106 trans-04 ${(fid == "0") ? "filter-link-active" : ""}">
                                             All
                                         </a>
                                     </li>
 
                                     <li class="p-b-6">
-                                        <a href="shop?fid=1" class="filter-link stext-106 trans-04 ${(fid == "1") ? "filter-link-active" : ""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?fid=1" class="filter-link stext-106 trans-04 ${(fid == "1") ? "filter-link-active" : ""}">
                                             $0 - $5.000.000
                                         </a>
                                     </li>
 
                                     <li class="p-b-6">
-                                        <a href="shop?fid=2" class="filter-link stext-106 trans-04 ${(fid == "2") ? "filter-link-active" : ""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?fid=2" class="filter-link stext-106 trans-04 ${(fid == "2") ? "filter-link-active" : ""}">
                                             $5.000.000 - $10.000.000
                                         </a>
                                     </li>
 
                                     <li class="p-b-6">
-                                        <a href="shop?fid=3" class="filter-link stext-106 trans-04 ${(fid == "3") ? "filter-link-active" : ""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?fid=3" class="filter-link stext-106 trans-04 ${(fid == "3") ? "filter-link-active" : ""}">
                                             $10.000.000 - $100.000.000
                                         </a>
                                     </li>
                                     <li class="p-b-6">
-                                        <a href="shop?fid=4" class="filter-link stext-106 trans-04 ${(fid == "4") ? "filter-link-active" : ""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?fid=4" class="filter-link stext-106 trans-04 ${(fid == "4") ? "filter-link-active" : ""}">
                                             $100.000.000++
                                         </a>
                                     </li>
@@ -167,9 +210,14 @@
                                 </div>
 
                                 <ul>
+                                    <li class="p-b-6">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?bid=0" class="filter-link stext-106 trans-04 ${(bid == 0 ? "filter-link-active" : "")}">
+                                            All
+                                        </a>
+                                    </li>
                                     <c:forEach items="${listB}" var="i">
                                         <li class="p-b-6">
-                                            <a href="shop?bid=${i.brandID}" class="filter-link stext-106 trans-04 ${(bid == i.brandID ? "filter-link-active" : "")}">
+                                            <a href="${doSearch == "1" ? "search" : "shop"}?bid=${i.brandID}" class="filter-link stext-106 trans-04 ${(bid == i.brandID ? "filter-link-active" : "")}">
                                                 ${i.title}
                                             </a>
                                         </li>
@@ -183,9 +231,9 @@
                 </div>
 
                 <div class="row isotope-grid">
-                    
+
                     <h2 style="margin: auto;">${emptyP}</h2>
-                    
+
                     <c:forEach items="${sessionScope.listProduct}" var="i">
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                             <!-- Block2 -->
@@ -234,7 +282,7 @@
                     </c:forEach>
                 </div>
 
-                
+
             </div>
         </div>
 
