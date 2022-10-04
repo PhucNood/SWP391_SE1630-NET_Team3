@@ -41,7 +41,9 @@ public class Test extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         request.setAttribute("test", "alo");
+
         request.getRequestDispatcher("view/signup.jsp").forward(request, response);
+
     } 
 
     /** 

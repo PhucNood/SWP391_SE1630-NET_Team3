@@ -97,7 +97,9 @@
 
                         <!-- Logo desktop -->		
                         <a href="home" class="logo">
+
                             <img src="${pageContext.request.contextPath}/view/images/icons/logo-01.png" alt="IMG-LOGO">
+
                         </a>
 
                         <!-- Menu desktop -->
@@ -108,7 +110,7 @@
                                 </li>
 
                                 <li class="${page == "shop" ? "active-menu" :""}">
-                                    <a href="shop?cid=0">Shop</a>
+                                    <a href="shop">Shop</a>
                                 </li>
 
                                 <li class="${page == "blog" ? "active-menu" :""}">
@@ -116,11 +118,13 @@
                                 </li>
 
                                 <li class="${page == "about" ? "active-menu" :""}">
+
                                     <a href="${pageContext.request.contextPath}/view/about.html">About</a>
                                 </li>
 
                                 <li class="${page == "contact" ? "active-menu" :""}">
                                     <a href="${pageContext.request.contextPath}/view/contact.html">Contact</a>
+
                                 </li>
                             </ul>
                         </div>	
@@ -222,11 +226,13 @@
                     </li>
 
                     <li class="${page == "about" ? "active-menu" :""}">
+                    
                         <a href="${pageContext.request.contextPath}/view/about.html">About</a>
                     </li>
 
                     <li class="${page == "contact" ? "active-menu" :""}">
                         <a href="${pageContext.request.contextPath}/view/contact.html">Contact</a>
+
                     </li>
                 </ul>
             </div>

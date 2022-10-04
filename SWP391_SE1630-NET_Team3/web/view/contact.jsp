@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>Billard Shop</title>
 	<meta charset="UTF-8">
@@ -36,6 +37,7 @@
 	<jsp:include page="topbar.jsp"/>
 
 	<!-- Title page -->
+
         <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
             <h2 class="ltext-105 clblack txt-center">
                 Contact
@@ -129,6 +131,7 @@
 
 
 
+
 	<jsp:include page="footer.jsp"/>
 
 <!--===============================================================================================-->	
@@ -174,4 +177,5 @@
 	<script src="${pageContext.request.contextPath}/view/js/main.js"></script>
 
 </body>
+
 </html>

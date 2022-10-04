@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="box">
 
@@ -35,5 +36,8 @@
 
             </div>
         </div>
+
+        <h1>${requestScope.test}</h1>
+
     </body>
 </html>
