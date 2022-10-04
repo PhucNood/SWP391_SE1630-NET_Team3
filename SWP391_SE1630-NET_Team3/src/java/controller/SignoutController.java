@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author admin
  */
-public class HomeController extends HttpServlet {
+public class SignoutController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,10 +34,10 @@ public class HomeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet homeController</title>");  
+            out.println("<title>Servlet SignoutController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet homeController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet SignoutController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,8 +55,8 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.setAttribute("inPage", "home");
-        request.getRequestDispatcher("view/home.jsp").forward(request, response);
+        session.removeAttribute("account");
+        request.getRequestDispatcher("view/login.jsp").forward(request, response);
     } 
 
     /** 

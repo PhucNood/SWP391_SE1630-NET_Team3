@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+
             <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/BlogListController.java</file>
             <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/entity/Blog.java</file>
             <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/blogList.jsp</file>
@@ -10,6 +11,15 @@
             <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/js/blogListJS.js</file>
             <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/home.jsp</file>
             <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/BasicDaoImpl/BlogDAOImpl.java</file>
+
+            <file>file:/E:/SWP391_T3/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/SignupController.java</file>
+            <file>file:/E:/SWP391_T3/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/BasicDaoImpl/AccountDAOImpl.java</file>
+            <file>file:/E:/SWP391_T3/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/homeController.java</file>
+            <file>file:/E:/SWP391_T3/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/SearchController.java</file>
+            <file>file:/E:/SWP391_T3/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/shopController.java</file>
+            <file>file:/E:/SWP391_T3/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/loginController.java</file>
+            <file>file:/E:/SWP391_T3/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/WEB-INF/web.xml</file>
+
         </group>
     </open-files>
 </project-private>

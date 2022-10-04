@@ -8,28 +8,28 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="view/images/icons/favicon.png"/>
+	<link rel="icon" type="image/png" href="${pageContext.request.contextPath}/view/images/icons/favicon.png"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="view/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="view/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="view/fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="view/fonts/linearicons-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/fonts/linearicons-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="view/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/animate/animate.css">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="view/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="view/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="view/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/select2/select2.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="view/vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="view/css/util.css">
-	<link rel="stylesheet" type="text/css" href="view/css/main.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/util.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/main.css">
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
@@ -55,11 +55,11 @@
 				<ul class="header-cart-wrapitem w-full">
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="view/images/item-cart-01.jpg" alt="IMG">
+							<img src="${pageContext.request.contextPath}/view/images/item-cart-01.jpg" alt="IMG">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
-							<a href="view/#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							<a href="${pageContext.request.contextPath}/view/#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
 								White Shirt Pleat
 							</a>
 
@@ -71,11 +71,11 @@
 
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="view/images/item-cart-02.jpg" alt="IMG">
+							<img src="${pageContext.request.contextPath}/view/images/item-cart-02.jpg" alt="IMG">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
-							<a href="view/#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							<a href="${pageContext.request.contextPath}/view/#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
 								Converse All Star
 							</a>
 
@@ -87,11 +87,11 @@
 
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="view/images/item-cart-03.jpg" alt="IMG">
+							<img src="${pageContext.request.contextPath}/view/images/item-cart-03.jpg" alt="IMG">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
-							<a href="view/#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							<a href="${pageContext.request.contextPath}/view/#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
 								Nixon Porter Leather
 							</a>
 
@@ -108,11 +108,11 @@
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="view/shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						<a href="${pageContext.request.contextPath}/view/shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Cart
 						</a>
 
-						<a href="view/shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+						<a href="${pageContext.request.contextPath}/view/shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
 							Check Out
 						</a>
 					</div>
@@ -125,7 +125,7 @@
 	<!-- breadcrumb -->
 	<div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-			<a href="view/index.html" class="stext-109 cl8 hov-cl1 trans-04">
+			<a href="${pageContext.request.contextPath}/view/index.html" class="stext-109 cl8 hov-cl1 trans-04">
 				Home
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
@@ -156,7 +156,7 @@
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="view/images/item-cart-04.jpg" alt="IMG">
+											<img src="${pageContext.request.contextPath}/view/images/item-cart-04.jpg" alt="IMG">
 										</div>
 									</td>
 									<td class="column-2">Fresh Strawberries</td>
@@ -180,7 +180,7 @@
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="view/images/item-cart-05.jpg" alt="IMG">
+											<img src="${pageContext.request.contextPath}/view/images/item-cart-05.jpg" alt="IMG">
 										</div>
 									</td>
 									<td class="column-2">Lightweight Jacket</td>
@@ -312,14 +312,14 @@
 	<jsp:include page="footer.jsp"/>
 
 <!--===============================================================================================-->	
-	<script src="view/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/view/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-	<script src="view/vendor/animsition/js/animsition.min.js"></script>
+	<script src="${pageContext.request.contextPath}/view/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
-	<script src="view/vendor/bootstrap/js/popper.js"></script>
-	<script src="view/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/view/vendor/bootstrap/js/popper.js"></script>
+	<script src="${pageContext.request.contextPath}/view/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-	<script src="view/vendor/select2/select2.min.js"></script>
+	<script src="${pageContext.request.contextPath}/view/vendor/select2/select2.min.js"></script>
 	<script>
 		$(".js-select2").each(function(){
 			$(this).select2({
@@ -329,9 +329,9 @@
 		})
 	</script>
 <!--===============================================================================================-->
-	<script src="view/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+	<script src="${pageContext.request.contextPath}/view/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <!--===============================================================================================-->
-	<script src="view/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script src="${pageContext.request.contextPath}/view/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
 		$('.js-pscroll').each(function(){
 			$(this).css('position','relative');
@@ -348,7 +348,7 @@
 		});
 	</script>
 <!--===============================================================================================-->
-	<script src="view/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/view/js/main.js"></script>
 
 </body>
 </html>

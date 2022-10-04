@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author admin
  */
-public class ShopController extends HttpServlet {
+public class SearchController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,7 +33,22 @@ public class ShopController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet searchController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet searchController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -48,26 +63,27 @@ public class ShopController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        List<Product> list = new ArrayList<>();
+        String text = "";
+        if(request.getParameter("text")!= null){
+            text = request.getParameter("text");
+            session.setAttribute("doSearch", "1");
+            session.removeAttribute("bid");
+            session.removeAttribute("fid");
+            session.removeAttribute("sid");
+        }
+        else {
+            text = (String) session.getAttribute("text");
+        }
         ProductDaoImpl d = new ProductDaoImpl();
+        List<Product> sList = d.searchListProduct(text);
+        List<Product> list = new ArrayList<>();
         BrandDaoImpl bd = new BrandDaoImpl();
 
         List<Brand> listBrand = bd.getAllBrand();
         request.setAttribute("listB", listBrand);
         String cid = null, bid = null, fid = null, sid = null;
         session.setAttribute("inPage", "shop");
-        if ((String) session.getAttribute("cid") != null) {
-            cid = (String) session.getAttribute("cid");
-            if (cid.equals("0") || cid.equals("1") || cid.equals("2") || cid.equals("3")) {
-                session.removeAttribute("doSearch");
-                session.removeAttribute("text");
-                session.removeAttribute("bid");
-                session.removeAttribute("fid");
-                session.removeAttribute("sid");
-            }
-        } else {
-            cid = "0";
-        }
+        cid = "0";
         if (session.getAttribute("bid") != null) {
             bid = (String) session.getAttribute("bid");
         } else {
@@ -84,9 +100,6 @@ public class ShopController extends HttpServlet {
             sid = "0";
         }
 
-        if (request.getParameter("cid") != null) {
-            cid = request.getParameter("cid");
-        }
         if (request.getParameter("bid") != null) {
             bid = request.getParameter("bid");
         }
@@ -96,22 +109,25 @@ public class ShopController extends HttpServlet {
         if (request.getParameter("sid") != null) {
             sid = request.getParameter("sid");
         }
-       
+        List<Product> newList = new ArrayList<>();
         list = d.getProduct(cid, bid, fid, sid);
         if (list.isEmpty()) {
             request.setAttribute("emptyP", "Not found!");
+        } else {
+            for (Product item : list) {
+                if(checkInSearchList(item, sList)) newList.add(item);
+            }
         }
-
-
-        session.setAttribute("listProduct", list);
-        session.setAttribute("cid", cid);
+        
+        session.setAttribute("listProduct", newList);
+        session.removeAttribute("cid");
+        session.setAttribute("text", text);
         session.setAttribute("bid", bid);
         session.setAttribute("fid", fid);
         session.setAttribute("sid", sid);
+        
         request.getRequestDispatcher("view/shop.jsp").forward(request, response);
     }
-    
-    
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -124,7 +140,17 @@ public class ShopController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
+
+    }
+
+    public boolean checkInSearchList(Product item, List<Product> sList) {
+        for (Product p : sList) {
+            if (item.getProductID() == p.getProductID()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -136,7 +162,5 @@ public class ShopController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    
 
 }
