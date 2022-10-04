@@ -4,6 +4,7 @@
  */
 package entity;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -13,10 +14,12 @@ import java.util.List;
 public class Blog {
     private int id;
     private int idAuthor;
+    private String authorName;
+    private String title;
     private String content;
     private String createAt;
     private String updateAt;
-    private List<Image> list;
+    private List<Image> listImg;
 
     public Blog() {
     }
@@ -35,6 +38,22 @@ public class Blog {
 
     public void setIdAuthor(int idAuthor) {
         this.idAuthor = idAuthor;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
@@ -61,12 +80,21 @@ public class Blog {
         this.updateAt = updateAt;
     }
 
-    public List<Image> getList() {
-        return list;
+    public List<Image> getListImg() {
+        return listImg;
     }
 
-    public void setList(List<Image> list) {
-        this.list = list;
+    public void setListImg(List<Image> list) {
+        this.listImg = list;
     }
-    
+    public String getFirstImgSrc(){
+        return this.listImg.get(0).getImgSource();
+    }
+    public String getDayCreate(){
+        return getCreateAt().split("-")[2];
+    }
+    public String getMonthYearCreate(){
+        String s = getCreateAt().split("-")[1] + "/" + getCreateAt().split("-")[0];
+        return s;
+    }
 }

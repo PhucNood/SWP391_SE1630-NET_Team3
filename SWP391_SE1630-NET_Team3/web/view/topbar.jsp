@@ -114,7 +114,9 @@
                                 </li>
 
                                 <li class="${page == "blog" ? "active-menu" :""}">
-                                    <a href="blog">Blog</a>
+
+                                    <a href="BlogListController">Blog</a>
+
                                 </li>
 
                                 <li class="${page == "about" ? "active-menu" :""}">
