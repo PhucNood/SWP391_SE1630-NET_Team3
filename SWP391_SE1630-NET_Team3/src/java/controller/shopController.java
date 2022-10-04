@@ -4,8 +4,10 @@
  */
 package controller;
 
-import BasicDaoImpl.BrandDaoImpl;
-import BasicDaoImpl.ProductDaoImpl;
+import dao.BrandDAO;
+import dao.ProductDAO;
+import dao.impl.BrandDAOImpl;
+import dao.impl.ProductDAOImpl;
 import entity.Brand;
 import entity.Product;
 import java.io.IOException;
@@ -49,65 +51,65 @@ public class ShopController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         List<Product> list = new ArrayList<>();
-        ProductDaoImpl d = new ProductDaoImpl();
-        BrandDaoImpl bd = new BrandDaoImpl();
+        ProductDAO d = new ProductDAOImpl();
+        BrandDAO bd = new BrandDAOImpl();
 
         List<Brand> listBrand = bd.getAllBrand();
         request.setAttribute("listB", listBrand);
-        String cid = null, bid = null, fid = null, sid = null;
+        String categoryID = null, brandID = null, filterID = null, sortID = null;
         session.setAttribute("inPage", "shop");
-        if ((String) session.getAttribute("cid") != null) {
-            cid = (String) session.getAttribute("cid");
-            if (cid.equals("0") || cid.equals("1") || cid.equals("2") || cid.equals("3")) {
+        if ((String) session.getAttribute("categoryID") != null) {
+            categoryID = (String) session.getAttribute("categoryID");
+            if (categoryID.equals("0") || categoryID.equals("1") || categoryID.equals("2") || categoryID.equals("3")) {
                 session.removeAttribute("doSearch");
                 session.removeAttribute("text");
-                session.removeAttribute("bid");
-                session.removeAttribute("fid");
-                session.removeAttribute("sid");
+                session.removeAttribute("brandID");
+                session.removeAttribute("filterID");
+                session.removeAttribute("sortID");
             }
         } else {
-            cid = "0";
+            categoryID = "0";
         }
-        if (session.getAttribute("bid") != null) {
-            bid = (String) session.getAttribute("bid");
+        if (session.getAttribute("brandID") != null) {
+            brandID = (String) session.getAttribute("brandID");
         } else {
-            bid = "0";
+            brandID = "0";
         }
-        if (session.getAttribute("fid") != null) {
-            fid = (String) session.getAttribute("fid");
+        if (session.getAttribute("filterID") != null) {
+            filterID = (String) session.getAttribute("filterID");
         } else {
-            fid = "0";
+            filterID = "0";
         }
-        if (session.getAttribute("sid") != null) {
-            sid = (String) session.getAttribute("sid");
+        if (session.getAttribute("sortID") != null) {
+            sortID = (String) session.getAttribute("sortID");
         } else {
-            sid = "0";
+            sortID = "0";
         }
 
-        if (request.getParameter("cid") != null) {
-            cid = request.getParameter("cid");
+        if (request.getParameter("categoryID") != null) {
+            categoryID = request.getParameter("categoryID");
         }
-        if (request.getParameter("bid") != null) {
-            bid = request.getParameter("bid");
+        if (request.getParameter("brandID") != null) {
+            brandID = request.getParameter("brandID");
         }
-        if (request.getParameter("fid") != null) {
-            fid = request.getParameter("fid");
+        if (request.getParameter("filterID") != null) {
+            filterID = request.getParameter("filterID");
         }
-        if (request.getParameter("sid") != null) {
-            sid = request.getParameter("sid");
+        if (request.getParameter("sortID") != null) {
+            sortID = request.getParameter("sortID");
         }
        
-        list = d.getProduct(cid, bid, fid, sid);
+        list = d.getProduct(categoryID, brandID, filterID, sortID);
         if (list.isEmpty()) {
             request.setAttribute("emptyP", "Not found!");
         }
 
 
         session.setAttribute("listProduct", list);
-        session.setAttribute("cid", cid);
-        session.setAttribute("bid", bid);
-        session.setAttribute("fid", fid);
-        session.setAttribute("sid", sid);
+        session.setAttribute("categoryID", categoryID);
+        session.setAttribute("brandID", brandID);
+        session.setAttribute("filterID", filterID);
+        session.setAttribute("sortID", sortID);
         request.getRequestDispatcher("view/shop.jsp").forward(request, response);
     }
     

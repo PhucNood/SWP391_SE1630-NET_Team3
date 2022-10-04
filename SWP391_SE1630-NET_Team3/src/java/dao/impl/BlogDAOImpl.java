@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package BasicDaoImpl;
+package dao.impl;
 
 import entity.Blog;
 import entity.Image;
@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class BlogDAOImpl extends DBContext {
 
     // <editor-fold defaultstate="collapsed" desc="simple get blog arraylist and get image of an blog">
-    public List<Blog> searchBlogPage(String searchTitle,int month, int year, int numPerPage, int curPage) throws SQLException {
+    public List<Blog> searchBlogPage(String searchTitle,int month, int year, int numPerPage, int curPage) throws SQLException, ClassNotFoundException {
         List<Blog> list = new ArrayList<>();
         String searchMonth="";
         String searchYear="";
@@ -44,7 +44,7 @@ public class BlogDAOImpl extends DBContext {
         int startItem = numPerPage * (curPage - 1) + 1;
         int endItem = startItem + numPerPage - 1;
         try {
-            ps = connection.prepareStatement(sql);
+            ps = getConnection().prepareStatement(sql);
             ps.setString(1, "%" + searchTitle + "%");
             ps.setInt(2, startItem);
             ps.setInt(3, endItem);

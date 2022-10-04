@@ -4,7 +4,7 @@
  */
 package controller;
 
-import BasicDaoImpl.AccountDAOImpl;
+import dao.impl.AccountDAOImpl;
 import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;

@@ -5,7 +5,7 @@
 
 package controller;
 
-import BasicDaoImpl.BlogDAOImpl;
+import dao.impl.BlogDAOImpl;
 import entity.Blog;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
