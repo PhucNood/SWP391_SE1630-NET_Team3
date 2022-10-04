@@ -34,12 +34,30 @@ public class BlogListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        BlogDAOImpl blogDAO = new BlogDAOImpl();
         List<Blog> blogList = null;
         try {
-            BlogDAOImpl blogDAO = new BlogDAOImpl();
-            blogList = blogDAO.getBlogList();
+            String searchTitle = request.getParameter("searchTitle");
+            if (searchTitle == null || searchTitle.isEmpty()) {
+                searchTitle="";
+            }
+            String curPageString = request.getParameter("page");
+            int curPage = 1;
+            if (curPageString != null && !curPageString.isEmpty()) {
+                curPage = Integer.parseInt(curPageString);
+            }
+            
+            
+            
+            blogList = blogDAO.searchBlogPage(searchTitle,-1,-1, 3, curPage);
+            int totalPage = blogDAO.getTotalSearchPage(searchTitle,-1,-1, 3);
+            
+            
             request.setAttribute("blogList", blogList);
-            request.getRequestDispatcher("view/blog.jsp").forward(request, response);
+            request.setAttribute("curPage", curPage);
+            request.setAttribute("totalPage", totalPage);
+            
+            request.getRequestDispatcher("view/blogList.jsp").forward(request, response);
 //        response.sendRedirect("view/blog.jsp");
         } catch (SQLException ex) {
             Logger.getLogger(BlogListController.class.getName()).log(Level.SEVERE, null, ex);

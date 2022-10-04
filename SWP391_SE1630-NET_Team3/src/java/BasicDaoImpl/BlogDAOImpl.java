@@ -5,7 +5,6 @@
 package BasicDaoImpl;
 
 import entity.Blog;
-import entity.Brand;
 import entity.Image;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,18 +21,40 @@ import java.util.logging.Logger;
 public class BlogDAOImpl extends DBContext {
 
     // <editor-fold defaultstate="collapsed" desc="simple get blog arraylist and get image of an blog">
-    public List<Blog> getBlogList() throws SQLException {
+    public List<Blog> searchBlogPage(String searchTitle,int month, int year, int numPerPage, int curPage) throws SQLException {
         List<Blog> list = new ArrayList<>();
-        String sql = "SELECT b.id,b.author_id,b.title,b.content,b.created_at,b.update_at \n"
-                + "FROM blog b";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
+        String searchMonth="";
+        String searchYear="";
+        if(month!=-1){
+            searchMonth=" AND MONTH(b.created_at)="+month;
+        }
+        if(year!=-1){
+            searchYear=" AND YEAR(b.created_at)="+year;
+        }
+        String sql = "SELECT * FROM (\n"
+                + "SELECT ROW_NUMBER() OVER(order by b.id) AS rownum\n"
+                + ", b.id, b.author_id, a.full_name, b.title, b.content, b.count_view, b.created_at, b.update_at \n"
+                + "FROM blog b \n"
+                + "INNER JOIN account a ON a.id = b.author_id\n"
+                + "WHERE b.title like ? \n"
+                + searchMonth+searchYear+") sub\n"
+                + "WHERE sub.rownum >= ? AND sub.rownum <= ?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int startItem = numPerPage * (curPage - 1) + 1;
+        int endItem = startItem + numPerPage - 1;
         try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + searchTitle + "%");
+            ps.setInt(2, startItem);
+            ps.setInt(3, endItem);
+            rs = ps.executeQuery();
 
             while (rs.next()) {
                 Blog b = new Blog();
                 b.setId(rs.getInt("id"));
                 b.setIdAuthor(rs.getInt("author_id"));
+                b.setAuthorName(rs.getNString("full_name"));
                 b.setTitle(rs.getString("title"));
                 b.setContent(rs.getNString("content"));
                 b.setCreateAt(rs.getString("created_at"));
@@ -43,12 +64,43 @@ public class BlogDAOImpl extends DBContext {
                 list.add(b);
             }
         } catch (SQLException e) {
-            throw e;
+             
         } finally {
             rs.close();
             ps.close();
         }
         return list;
+    }
+
+    public int getTotalSearchPage(String searchTitle,int month, int year, int numPerPage) throws SQLException {
+        String searchMonth="";
+        String searchYear="";
+        if(month!=-1){
+            searchMonth=" AND MONTH(b.created_at)="+month;
+        }
+        if(year!=-1){
+            searchYear=" AND YEAR(b.created_at)="+year;
+        }
+        String sql = "SELECT COUNT(b.id)as'total' FROM blog b WHERE b.title like ? "+searchMonth+searchYear;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int totalPage = 0;
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + searchTitle + "%");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                totalPage = rs.getInt("total") / numPerPage;
+                if (rs.getInt("total") % numPerPage != 0) {
+                    totalPage++;
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        return totalPage;
     }
 
     public List<Image> getBlogImage(int blogId) throws SQLException {
@@ -79,20 +131,20 @@ public class BlogDAOImpl extends DBContext {
     }
     //</editor-fold> 
 
-//    public static void main(String[] args) {
-//        try {
-//            BlogDAOImpl dao = new BlogDAOImpl();
-//            List<Image> imList = dao.getBlogImage(1);
-//            List<Blog> blist = dao.getBlogList();
-//            for (Blog b : blist) {
-//                System.out.println("---");
-//                System.out.println(b.getTitle()+"\n"+b.getContent()+"\n"+b.getUpdateAt());
-//                for (Image i : b.getListImg()) {
-//                    System.out.println(i.getId() + " | " + i.getImgSource() + " | " + i.getName());
-//                }
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    public static void main(String[] args) {
+        try {
+            BlogDAOImpl dao = new BlogDAOImpl();
+            List<Blog> blist = dao.searchBlogPage("t",10,2022, 3, 1);
+            for (Blog b : blist) {
+                System.out.println("-------");
+                System.out.println(b.getTitle()+"\n"+b.getContent()+"\n"+b.getCreateAt());
+                for (Image i : b.getListImg()) {
+                    System.out.println(i.getId() + " | " + i.getImgSource() + " | " + i.getName());
+                }
+            }
+            System.out.println("total page:"+dao.getTotalSearchPage("t",-1,-1, 10));
+        } catch (SQLException ex) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

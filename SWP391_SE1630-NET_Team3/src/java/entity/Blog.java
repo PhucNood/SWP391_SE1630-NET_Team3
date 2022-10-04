@@ -14,6 +14,7 @@ import java.util.List;
 public class Blog {
     private int id;
     private int idAuthor;
+    private String authorName;
     private String title;
     private String content;
     private String createAt;
@@ -37,6 +38,14 @@ public class Blog {
 
     public void setIdAuthor(int idAuthor) {
         this.idAuthor = idAuthor;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
     public String getTitle() {
@@ -78,14 +87,14 @@ public class Blog {
     public void setListImg(List<Image> list) {
         this.listImg = list;
     }
-    public Image getFirstImg(){
-        return this.listImg.get(0);
+    public String getFirstImgSrc(){
+        return this.listImg.get(0).getImgSource();
     }
     public String getDayCreate(){
         return getCreateAt().split("-")[2];
     }
     public String getMonthYearCreate(){
-        String s = getCreateAt().split("-")[1] + getCreateAt().split("-")[0];
+        String s = getCreateAt().split("-")[1] + "/" + getCreateAt().split("-")[0];
         return s;
     }
 }

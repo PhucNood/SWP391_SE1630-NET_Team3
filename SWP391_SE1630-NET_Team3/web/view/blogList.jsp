@@ -38,6 +38,11 @@
                 white-space: nowrap;
                 text-overflow: ellipsis;
             }
+            .blog-img>a>img {
+                height: 400px;
+                width: auto;
+                object-fit:cover;
+            }
         </style>
     </head>
     <body class="animsition">
@@ -53,9 +58,9 @@
                             <c:forEach items="${blogList}" var="blog">
                                 <!-- item blog -->
                                 <div class="p-b-30">
-                                    <div class="txt-center">
+                                    <div class="txt-center blog-img">
                                         <a href="${pageContext.request.contextPath}/view/blog-detail.html" class="hov-img0 how-pos5-parent">
-                                            <img src="${pageContext.request.contextPath}/view/images/ball21.jpg" alt="IMG-BLOG">
+                                            <img src="${pageContext.request.contextPath}/view/images/${blog.getFirstImgSrc()}" alt="IMG-BLOG">
                                             <div class="flex-col-c-m size-123 bg9 how-pos5">
                                                 <span class="ltext-107 cl2 txt-center">
                                                     ${blog.getDayCreate()}
@@ -78,7 +83,7 @@
                                         <div class="flex-w flex-sb-m p-t-18">
                                             <span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
                                                 <span>
-                                                    <span class="cl4">By</span> Admin  
+                                                    <span class="cl4">By</span> ${blog.getAuthorName()}
                                                     <span class="cl12 m-l-4 m-r-6">|</span>
                                                 </span>
                                             </span>
@@ -93,16 +98,24 @@
 
                             <!-- Pagination -->
                             <div class="flex-l-m flex-w w-full p-t-10 m-lr--7">
-                                <a href="${pageContext.request.contextPath}/view/#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
-                                    1
-                                </a>
-                                <a href="${pageContext.request.contextPath}/view/#" class="flex-c-m how-pagination1 trans-04 m-all-7">
-                                    2
-                                </a>
+                                <c:if test="${totalPage > 1}">
+                                    <c:forEach step="1" begin="1" end="${totalPage}" var="index">
+                                        <c:if test="${curPage eq index}">
+                                            <a href="" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
+                                                ${index}
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${curPage ne index}">
+                                            <a href="" class="flex-c-m how-pagination1 trans-04 m-all-7 ">
+                                                ${index}
+                                            </a>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
                             </div>
                         </div>
                     </div>
-
+                    <!--side bar-->
                     <div class="col-md-4 col-lg-3 p-b-80">
                         <div class="side-menu">
                             <!--search-->
@@ -184,90 +197,6 @@
 
                                             <span>
                                                 (9)
-                                            </span>
-                                        </a>
-                                    </li>
-
-                                    <li class="p-b-7">
-                                        <a href="${pageContext.request.contextPath}/view/#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                            <span>
-                                                June 2018
-                                            </span>
-
-                                            <span>
-                                                (39)
-                                            </span>
-                                        </a>
-                                    </li>
-
-                                    <li class="p-b-7">
-                                        <a href="${pageContext.request.contextPath}/view/#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                            <span>
-                                                May 2018
-                                            </span>
-
-                                            <span>
-                                                (29)
-                                            </span>
-                                        </a>
-                                    </li>
-
-                                    <li class="p-b-7">
-                                        <a href="${pageContext.request.contextPath}/view/#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                            <span>
-                                                April  2018
-                                            </span>
-
-                                            <span>
-                                                (35)
-                                            </span>
-                                        </a>
-                                    </li>
-
-                                    <li class="p-b-7">
-                                        <a href="${pageContext.request.contextPath}/view/#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                            <span>
-                                                March 2018
-                                            </span>
-
-                                            <span>
-                                                (22)
-                                            </span>
-                                        </a>
-                                    </li>
-
-                                    <li class="p-b-7">
-                                        <a href="${pageContext.request.contextPath}/view/#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                            <span>
-                                                February 2018
-                                            </span>
-
-                                            <span>
-                                                (32)
-                                            </span>
-                                        </a>
-                                    </li>
-
-                                    <li class="p-b-7">
-                                        <a href="${pageContext.request.contextPath}/view/#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                            <span>
-                                                January 2018
-                                            </span>
-
-                                            <span>
-                                                (21)
-                                            </span>
-                                        </a>
-                                    </li>
-
-                                    <li class="p-b-7">
-                                        <a href="${pageContext.request.contextPath}/view/#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                            <span>
-                                                December 2017
-                                            </span>
-
-                                            <span>
-                                                (26)
                                             </span>
                                         </a>
                                     </li>
