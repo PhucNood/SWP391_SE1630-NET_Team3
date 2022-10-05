@@ -4,7 +4,8 @@
  */
 package dao.impl;
 
-import dao.brandin;
+
+import dao.BrandDAO;
 import entity.Brand;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,10 +20,19 @@ import java.util.logging.Logger;
  *
  * @author 84923
  */
-public class BrandDaoImpl extends DBContext implements brandin{
-    Connection conn;
+
+public class BrandDAOImpl extends DBContext implements BrandDAO{
+
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    
+    //get all list brand 
+    @Override
     public List<Brand> getAllBrand() {
-        List<Brand> list = new ArrayList<>();
+        List<Brand> listBrand = new ArrayList<>();
+
         String sql = "SELECT [brandID]\n"
                 + "      ,[title]\n"
                 + "      ,[detail]\n"
@@ -30,20 +40,24 @@ public class BrandDaoImpl extends DBContext implements brandin{
                 + "      ,[update_at]\n"
                 + "  FROM [dbo].[brand]";
         try {
-            conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {
-                Brand c = new Brand(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
-                list.add(c);
+                Brand brand = new Brand(rs.getInt("brandID"), rs.getString("title"), 
+                        rs.getString("detail"), rs.getString("created_at"), rs.getString("update_at"));
+                listBrand.add(brand);
             }
-        } catch (SQLException e) {
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BrandDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(BrandDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+
+        return listBrand;
     }
+
     
+    //get brand info with brandID
+    @Override
     public Brand getBrandById(int id) {
         String sql = "SELECT [brandID]\n"
                 + "      ,[title]\n"
@@ -51,26 +65,26 @@ public class BrandDaoImpl extends DBContext implements brandin{
                 + "      ,[created_at]\n"
                 + "      ,[update_at]\n"
                 + "  FROM [dbo].[brand]"
-                +"WHERE brandID = ?";
+                + "WHERE brandID = ?";
         try {
-            conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(sql);
-            st.setInt(1, id);
-            ResultSet rs = st.executeQuery();
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
             if (rs.next()) {
-                Brand c = new Brand(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
-                return c;
+                Brand brand = new Brand(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                return brand;
             }
-        } catch (SQLException e) {
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BrandDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(BrandDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return null;
     }
 
     public static void main(String[] args) {
-        BrandDaoImpl d = new BrandDaoImpl();
-        Brand b = d.getBrandById(1);
-        System.out.println(b.getTitle());
+        BrandDAOImpl brandDAO = new BrandDAOImpl();
+        Brand brand = brandDAO.getBrandById(1);
+        System.out.println(brand.getTitle());
     }
 }

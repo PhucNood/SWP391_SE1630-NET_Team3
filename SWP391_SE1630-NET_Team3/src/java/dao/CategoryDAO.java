@@ -4,16 +4,15 @@
  */
 package dao;
 
-import entity.Brand;
+import entity.Category;
 import java.util.List;
 
 /**
  *
- * @author stick
+ * @author admin
  */
-public interface brandin {
-        public List<Brand> getAllBrand() ;
-            public Brand getBrandById(int id) ;
-
-
+public interface CategoryDAO {
+    public List<Category> getAllCategory();
+    public Category getCategoryById(int id);
+    
 }

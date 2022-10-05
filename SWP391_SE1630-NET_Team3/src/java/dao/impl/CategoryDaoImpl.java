@@ -4,6 +4,7 @@
  */
 package dao.impl;
 
+import dao.CategoryDAO;
 import entity.Category;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,10 +19,16 @@ import java.util.logging.Logger;
  *
  * @author 84923
  */
-public class CategoryDaoImpl extends DBContext {
-    Connection conn;
+public class CategoryDAOImpl extends DBContext implements CategoryDAO {
+
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    //get all list category 
+    @Override
     public List<Category> getAllCategory() {
-        List<Category> list = new ArrayList<>();
+        List<Category> listCategory = new ArrayList<>();
         String sql = "SELECT [categoryID]\n"
                 + "      ,[title]\n"
                 + "      ,[detail]\n"
@@ -29,50 +36,54 @@ public class CategoryDaoImpl extends DBContext {
                 + "      ,[update_at]\n"
                 + "  FROM [dbo].[category]";
         try {
-            conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {
-                Category c = new Category(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5));
-                list.add(c);
+                Category category = new Category(rs.getInt("categoryID"), rs.getString("title"), rs.getString("detail"), rs.getString("created_at"), rs.getString("update_at"));
+                listCategory.add(category);
             }
-        } catch (SQLException e) {
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CategoryDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CategoryDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+
+        return listCategory;
     }
 
-    public Category getCategoryById(int id) {
+    //get category by productID
+    @Override
+    public Category getCategoryById(int productID) {
         String sql = "SELECT [categoryID]\n"
                 + "      ,[title]\n"
                 + "      ,[detail]\n"
                 + "      ,[created_at]\n"
                 + "      ,[update_at]\n"
                 + "  FROM [dbo].[category]"
-                + "where categoryID = ?" ;
+                + "where categoryID = ?";
+
         try {
-            conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(sql);
-            st.setInt(1, id);
-            ResultSet rs = st.executeQuery();
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, productID);
+            rs = ps.executeQuery();
             if (rs.next()) {
-                Category c = new Category(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5));
-                return c;
+                Category category = new Category(rs.getInt("categoryID"), rs.getString("title"), rs.getString("detail"),
+                        rs.getString("created_at"), rs.getString("update_at"));
+                return category;
             }
-        } catch (SQLException e) {
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CategoryDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CategoryDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+
         }
         return null;
     }
 
     public static void main(String[] args) {
-        CategoryDaoImpl d = new CategoryDaoImpl();
-        Category a = d.getCategoryById(2);
-        List<Category> list = d.getAllCategory();
-        System.out.println(a.getTitle());
-        for(Category c : list){
+        CategoryDAOImpl categoryDAO = new CategoryDAOImpl();
+        Category category = categoryDAO.getCategoryById(2);
+        List<Category> listCategory = categoryDAO.getAllCategory();
+        System.out.println(category.getTitle());
+        for (Category c : listCategory) {
             System.out.println(c.getTitle());
         }
     }

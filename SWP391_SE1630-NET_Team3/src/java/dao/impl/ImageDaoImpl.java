@@ -4,6 +4,7 @@
  */
 package dao.impl;
 
+import dao.ImageDAO;
 import entity.Image;
 import entity.Product;
 import java.sql.Connection;
@@ -19,35 +20,42 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-public class ImageDaoImpl extends DBContext {
-    Connection conn;
+
+public class ImageDAOImpl extends DBContext implements ImageDAO{
+
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    
+    //getlist image by productID 
+    @Override
     public List<Image> getListByIdProduct(int id) {
-        List<Image> list = new ArrayList<>();
+        List<Image> listImg = new ArrayList<>();
         String sql = "Select img.*\n"
                 + "From image_product imp inner join product p on p.productID = imp.product_id\n"
                 + "			inner join [image] img on imp.image_id = img.id\n"
                 + "WHERE p.productID =" + id;
 
         try {
-            conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {
-                Image c = new Image(rs.getInt(1),
-                        rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
-                list.add(c);
+                Image image = new Image(rs.getInt("id"),
+                        rs.getString("name"), rs.getString("imageSource"), rs.getString("created_at"), rs.getString("update_at"));
+                listImg.add(image);
             }
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ImageDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ImageDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+
+        return listImg;
     }
 
     public static void main(String[] args) {
-        ImageDaoImpl d = new ImageDaoImpl();
-        List<Image> list = d.getListByIdProduct(1);
-        System.out.println(list.get(0).getImgSource());
+        ImageDAOImpl d = new ImageDAOImpl();
+        List<Image> listImg = d.getListByIdProduct(1);
+        System.out.println(listImg.get(0).getImgSource());
     }
 }

@@ -4,6 +4,7 @@
  */
 package dao.impl;
 
+import dao.AccountDAO;
 import entity.Account;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,8 +19,13 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-public class AccountDAOImpl extends DBContext {
-    Connection conn;
+public class AccountDAOImpl extends DBContext implements AccountDAO{
+
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+
     public List<Account> getListAccount() {
         List<Account> list = new ArrayList<>();
         String sql = "SELECT [id]\n"
@@ -36,19 +42,19 @@ public class AccountDAOImpl extends DBContext {
                 + "      ,[updated_at]\n"
                 + "  FROM [dbo].[account]";
         try {
-            conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {
-                Account a = new Account(rs.getInt(1), rs.getString(2), rs.getInt(3),
-                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
-                        rs.getInt(8), rs.getString(9), rs.getInt(10), rs.getString(11), rs.getString(12));
+                Account a = new Account(rs.getInt("id"), rs.getString("full_name"), rs.getInt("gender"),
+                        rs.getString("password"), rs.getString("user"), rs.getString("email"), rs.getString("phone"),
+                        rs.getInt("image_id"), rs.getString("address"), rs.getInt("role"), rs.getString("create_at"), rs.getString("updated_at"));
                 list.add(a);
             }
-        } catch (SQLException e) {
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return list;
     }
 
@@ -68,20 +74,20 @@ public class AccountDAOImpl extends DBContext {
                 + "  FROM [dbo].[account]"
                 + "  Where email = ?";
         try {
-            conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(sql);
-            st.setString(1, email);
-            ResultSet rs = st.executeQuery();
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
             if (rs.next()) {
-                Account a = new Account(rs.getInt(1), rs.getString(2), rs.getInt(3),
-                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
-                        rs.getInt(8), rs.getString(9), rs.getInt(10), rs.getString(11), rs.getString(12));
+                Account a = new Account(rs.getInt("id"), rs.getString("full_name"), rs.getInt("gender"),
+                        rs.getString("password"), rs.getString("user"), rs.getString("email"), rs.getString("phone"),
+                        rs.getInt("image_id"), rs.getString("address"), rs.getInt("role"), rs.getString("create_at"), rs.getString("updated_at"));
                 return a;
             }
-        } catch (SQLException e) {
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return null;
     }
 
@@ -102,18 +108,18 @@ public class AccountDAOImpl extends DBContext {
                 + "           ,3)";
 
         try {
-            conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(sql);
-            st.setString(1, fullname);
-            st.setString(2, password);
-            st.setString(3, username);
-            st.setString(4, email);
-            st.setString(5, phone);
-            st.executeUpdate();
-        } catch (SQLException e) {
-        } catch (ClassNotFoundException ex) {
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, fullname);
+            ps.setString(2, password);
+            ps.setString(3, username);
+            ps.setString(4, email);
+            ps.setString(5, phone);
+            ps.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     public static void main(String[] args) {

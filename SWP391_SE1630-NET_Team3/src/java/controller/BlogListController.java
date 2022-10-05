@@ -6,8 +6,6 @@
 package controller;
 
 import dao.impl.BlogDAOImpl;
-import dao.NewInterface;
-
 import entity.Blog;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -36,7 +34,7 @@ public class BlogListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        NewInterface blogDAO = new BlogDAOImpl();
+        BlogDAOImpl blogDAO = new BlogDAOImpl();
         List<Blog> blogList = null;
         try {
             String searchTitle = request.getParameter("searchTitle");
@@ -62,6 +60,8 @@ public class BlogListController extends HttpServlet {
             request.getRequestDispatcher("view/blogList.jsp").forward(request, response);
 //        response.sendRedirect("view/blog.jsp");
         } catch (SQLException ex) {
+            Logger.getLogger(BlogListController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(BlogListController.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 

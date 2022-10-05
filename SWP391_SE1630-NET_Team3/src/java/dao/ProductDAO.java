@@ -9,14 +9,10 @@ import java.util.List;
 
 /**
  *
- * @author stick
+ * @author admin
  */
-public interface shopinter {
-
+public interface ProductDAO {
     public List<Product> getAllProduct();
-
     public List<Product> getProduct(String cid, String bid, String fid, String sid);
-
     public List<Product> searchListProduct(String text);
-
 }

@@ -4,7 +4,8 @@
  */
 package dao.impl;
 
-import dao.shopinter;
+
+import dao.ProductDAO;
 import entity.Image;
 import entity.Product;
 import java.sql.Connection;
@@ -15,57 +16,74 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 /**
  *
  * @author 84923
  */
-public class ProductDaoImpl extends DBContext  implements shopinter{
-    Connection conn;
-    
+public class ProductDAOImpl extends DBContext implements ProductDAO {
+
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    // Get All Product in DataBase
     @Override
     public List<Product> getAllProduct() {
-        List<Product> list = new ArrayList<>();
+        List<Product> listProduct = new ArrayList<>();
         List<Image> listImg = new ArrayList<>();
-        ImageDaoImpl d = new ImageDaoImpl();
-        String sql = "Select * from product";
+        ImageDAOImpl ImageDAO = new ImageDAOImpl();
+        String sql = "SELECT [productID]\n"
+                + "      ,[name]\n"
+                + "      ,[description]\n"
+                + "      ,[size]\n"
+                + "      ,[categoryID]\n"
+                + "      ,[brandID]\n"
+                + "      ,[quantity]\n"
+                + "      ,[price]\n"
+                + "      ,[sale]\n"
+                + "      ,[created_at]\n"
+                + "      ,[update_at]\n"
+                + "  FROM [dbo].[product]";
 
         try {
-            conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {
-                listImg = d.getListByIdProduct(rs.getInt(1));
-                Product c = new Product(rs.getInt(1),
-                        rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5),
-                        rs.getInt(6), rs.getInt(7), rs.getDouble(8),
-                        rs.getInt(9), rs.getString(10), rs.getString(11), listImg);
-                list.add(c);
+                listImg = ImageDAO.getListByIdProduct(rs.getInt("productID"));
+                Product product = new Product(rs.getInt("productID"),
+                        rs.getString("name"), rs.getString("description"), rs.getString("size"), rs.getInt("categoryID"),
+                        rs.getInt("brandID"), rs.getInt("quantity"), rs.getDouble("price"),
+                        rs.getInt("sale"), rs.getString("created_at"), rs.getString("update_at"), listImg);
+                listProduct.add(product);
             }
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProductDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+
+        return listProduct;
     }
-
+    
+    
+    //Get list product base: category, brand, filter, sort type
     @Override
-    public List<Product> getProduct(String cid, String bid, String fid, String sid) {
-        List<Product> list = new ArrayList<>();
+    public List<Product> getProduct(String categoryID, String brandID, String filterID, String sortID) {
+        List<Product> listProduct = new ArrayList<>();
         List<Image> listImg = new ArrayList<>();
-        ImageDaoImpl d = new ImageDaoImpl();
+        ImageDAOImpl ImageDAO = new ImageDAOImpl();
         String sql = "select * from Product where 1=1";
-        if (!cid.equals("0")) {
-            sql += " and categoryID = " + cid;
+        //get category
+        if (!categoryID.equals("0")) {
+            sql += " and categoryID = " + categoryID;
         }
-        if (!bid.equals("0")) {
-            sql += " and brandID = " + bid;
+        //get brand
+        if (!brandID.equals("0")) {
+            sql += " and brandID = " + brandID;
         }
-
-        if (!fid.equals("0")) {
+        //get filter
+        if (!filterID.equals("0")) {
             sql += " and price ";
-            switch (fid) {
+            switch (filterID) {
                 case "1":
                     sql += "between 0 and 5000";
                     break;
@@ -80,69 +98,75 @@ public class ProductDaoImpl extends DBContext  implements shopinter{
                     break;
             }
         }
-        if (!sid.equals("0")) {
-            if (sid.equals("1")) {
-                sql += " order by price DESC";
-            } else if (sid.equals("2")) {
-                sql += " order by price ASC";
-            } else if (sid.equals("3")) {
-                sql += " order by sale DESC";
+        //get sort type
+        if (!sortID.equals("0")) {
+            switch (sortID) {
+                case "1":
+                    sql += " order by price DESC";
+                    break;
+                case "2":
+                    sql += " order by price ASC";
+                    break;
+                case "3":
+                    sql += " order by sale DESC";
+                    break;
+                default:
+                    break;
             }
         }
 
         try {
-            conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {
-                listImg = d.getListByIdProduct(rs.getInt(1));
-                Product p = new Product(rs.getInt(1),
-                        rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5),
-                        rs.getInt(6), rs.getInt(7), rs.getDouble(8),
-                        rs.getInt(9), rs.getString(10), rs.getString(11), listImg);
-                list.add(p);
+                listImg = ImageDAO.getListByIdProduct(rs.getInt(1));
+                Product product = new Product(rs.getInt("productID"),
+                        rs.getString("name"), rs.getString("description"), rs.getString("size"), rs.getInt("categoryID"),
+                        rs.getInt("brandID"), rs.getInt("quantity"), rs.getDouble("price"),
+                        rs.getInt("sale"), rs.getString("created_at"), rs.getString("update_at"), listImg);
+                listProduct.add(product);
             }
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProductDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+
+        return listProduct;
     }
 
+    
+    //get list product after search by text
     @Override
     public List<Product> searchListProduct(String text) {
-        List<Product> list = new ArrayList<>();
+        List<Product> listProduct = new ArrayList<>();
         List<Image> listImg = new ArrayList<>();
-        ImageDaoImpl d = new ImageDaoImpl();
+        ImageDAOImpl ImageDAO = new ImageDAOImpl();
         String sql = "select * from Product p inner join brand b on p.brandID = b.brandID\n"
                 + "			inner join category c on p.categoryID = c.categoryID\n"
                 + "where 1=1\n"
-                + " and (p.name like '%"+text+"%' or b.title like '%"+text+"%' or c.title like '%"+text+"%')";
+                + " and (p.name like '%" + text + "%' or b.title like '%" + text + "%' or c.title like '%" + text + "%')";
         try {
-            conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
-            while(rs.next()){
-                listImg = d.getListByIdProduct(rs.getInt(1));
-                Product p = new Product(rs.getInt(1),
-                        rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5),
-                        rs.getInt(6), rs.getInt(7), rs.getDouble(8),
-                        rs.getInt(9), rs.getString(10), rs.getString(11), listImg);
-                list.add(p);
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listImg = ImageDAO.getListByIdProduct(rs.getInt(1));
+                Product product = new Product(rs.getInt("productID"),
+                        rs.getString("name"), rs.getString("description"), rs.getString("size"), rs.getInt("categoryID"),
+                        rs.getInt("brandID"), rs.getInt("quantity"), rs.getDouble("price"),
+                        rs.getInt("sale"), rs.getString("created_at"), rs.getString("update_at"), listImg);
+                listProduct.add(product);
             }
-        } catch (SQLException e) {
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProductDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
-        
+        return listProduct;
+
     }
 
     public static void main(String[] args) {
-        ProductDaoImpl d = new ProductDaoImpl();
-        List<Product> list = d.searchListProduct("mit");
-        System.out.println(list.get(1));
+        ProductDAOImpl d = new ProductDAOImpl();
+        List<Product> listProduct = d.searchListProduct("mit");
+        System.out.println(listProduct.get(1));
     }
 }

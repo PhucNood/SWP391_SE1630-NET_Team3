@@ -29,14 +29,12 @@
         <servlet-class>controller.SignoutController</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>SearchController</servlet-name>
         <servlet-class>controller.SearchController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BlogListController</servlet-name>
         <servlet-class>controller.BlogListController</servlet-class>
-
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -66,7 +64,6 @@
     <servlet-mapping>
         <servlet-name>SignoutController</servlet-name>
         <url-pattern>/signout</url-pattern>
-
     </servlet-mapping>
     <session-config>
         <session-timeout>
