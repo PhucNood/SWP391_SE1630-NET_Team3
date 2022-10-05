@@ -4,8 +4,10 @@
  */
 package controller;
 
-import BasicDaoImpl.BrandDaoImpl;
-import BasicDaoImpl.ProductDaoImpl;
+import dao.BrandDAO;
+import dao.ProductDAO;
+import dao.impl.BrandDAOImpl;
+import dao.impl.ProductDAOImpl;
 import entity.Brand;
 import entity.Product;
 import java.io.IOException;
@@ -67,50 +69,50 @@ public class SearchController extends HttpServlet {
         if(request.getParameter("text")!= null){
             text = request.getParameter("text");
             session.setAttribute("doSearch", "1");
-            session.removeAttribute("bid");
-            session.removeAttribute("fid");
-            session.removeAttribute("sid");
+            session.removeAttribute("brandID");
+            session.removeAttribute("filterID");
+            session.removeAttribute("sortID");
         }
         else {
             text = (String) session.getAttribute("text");
         }
-        ProductDaoImpl d = new ProductDaoImpl();
+        ProductDAO d = new ProductDAOImpl();
         List<Product> sList = d.searchListProduct(text);
         List<Product> list = new ArrayList<>();
-        BrandDaoImpl bd = new BrandDaoImpl();
+        BrandDAO bd = new BrandDAOImpl();
 
         List<Brand> listBrand = bd.getAllBrand();
         request.setAttribute("listB", listBrand);
-        String cid = null, bid = null, fid = null, sid = null;
+        String categoryID = null, brandID = null, filterID = null, sortID = null;
         session.setAttribute("inPage", "shop");
-        cid = "0";
-        if (session.getAttribute("bid") != null) {
-            bid = (String) session.getAttribute("bid");
+        categoryID = "0";
+        if (session.getAttribute("brandID") != null) {
+            brandID = (String) session.getAttribute("brandID");
         } else {
-            bid = "0";
+            brandID = "0";
         }
-        if (session.getAttribute("fid") != null) {
-            fid = (String) session.getAttribute("fid");
+        if (session.getAttribute("filterID") != null) {
+            filterID = (String) session.getAttribute("filterID");
         } else {
-            fid = "0";
+            filterID = "0";
         }
-        if (session.getAttribute("sid") != null) {
-            sid = (String) session.getAttribute("sid");
+        if (session.getAttribute("sortID") != null) {
+            sortID = (String) session.getAttribute("sortID");
         } else {
-            sid = "0";
+            sortID = "0";
         }
 
-        if (request.getParameter("bid") != null) {
-            bid = request.getParameter("bid");
+        if (request.getParameter("brandID") != null) {
+            brandID = request.getParameter("brandID");
         }
-        if (request.getParameter("fid") != null) {
-            fid = request.getParameter("fid");
+        if (request.getParameter("filterID") != null) {
+            filterID = request.getParameter("filterID");
         }
-        if (request.getParameter("sid") != null) {
-            sid = request.getParameter("sid");
+        if (request.getParameter("sortID") != null) {
+            sortID = request.getParameter("sortID");
         }
         List<Product> newList = new ArrayList<>();
-        list = d.getProduct(cid, bid, fid, sid);
+        list = d.getProduct(categoryID, brandID, filterID, sortID);
         if (list.isEmpty()) {
             request.setAttribute("emptyP", "Not found!");
         } else {
@@ -120,11 +122,11 @@ public class SearchController extends HttpServlet {
         }
         
         session.setAttribute("listProduct", newList);
-        session.removeAttribute("cid");
+        session.removeAttribute("categoryID");
         session.setAttribute("text", text);
-        session.setAttribute("bid", bid);
-        session.setAttribute("fid", fid);
-        session.setAttribute("sid", sid);
+        session.setAttribute("brandID", brandID);
+        session.setAttribute("filterID", filterID);
+        session.setAttribute("sortID", sortID);
         
         request.getRequestDispatcher("view/shop.jsp").forward(request, response);
     }

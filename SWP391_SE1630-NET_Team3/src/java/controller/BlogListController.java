@@ -5,7 +5,7 @@
 
 package controller;
 
-import BasicDaoImpl.BlogDAOImpl;
+import dao.impl.BlogDAOImpl;
 import entity.Blog;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -60,6 +60,8 @@ public class BlogListController extends HttpServlet {
             request.getRequestDispatcher("view/blogList.jsp").forward(request, response);
 //        response.sendRedirect("view/blog.jsp");
         } catch (SQLException ex) {
+            Logger.getLogger(BlogListController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(BlogListController.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 

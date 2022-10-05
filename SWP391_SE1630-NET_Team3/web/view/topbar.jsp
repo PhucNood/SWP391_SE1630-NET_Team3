@@ -115,7 +115,7 @@
 
                                 <li class="${page == "blog" ? "active-menu" :""}">
 
-                                    <a href="BlogListController">Blog</a>
+                                    <a href="blog">Blog</a>
 
                                 </li>
 

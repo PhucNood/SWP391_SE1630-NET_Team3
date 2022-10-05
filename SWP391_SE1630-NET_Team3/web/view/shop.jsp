@@ -96,19 +96,19 @@
             <div class="container">
                 <div class="flex-w flex-sb-m p-b-52">
                     <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-                        <a href="shop?cid=0" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${(cid == 0) ? "how-active1" : ""}">
+                        <a href="shop?categoryID=0" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${(categoryID == 0) ? "how-active1" : ""}">
                             All Products
                         </a>
 
-                        <a href="shop?cid=1" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${(cid == 1) ? "how-active1" : ""}"  >
+                        <a href="shop?categoryID=1" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${(categoryID == 1) ? "how-active1" : ""}"  >
                             Cues
                         </a>
 
-                        <a href="shop?cid=2" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${(cid == 2) ? "how-active1" : ""}" >
+                        <a href="shop?categoryID=2" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${(categoryID == 2) ? "how-active1" : ""}" >
                             Balls
                         </a>
 
-                        <a href="shop?cid=3" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${(cid == 3) ? "how-active1" : ""}" >
+                        <a href="shop?categoryID=3" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${(categoryID == 3) ? "how-active1" : ""}" >
                             Tables
                         </a>
 
@@ -148,19 +148,19 @@
                                 <ul>
 
                                     <li class="p-b-6">
-                                        <a href="${doSearch == "1" ? "search" : "shop"}?sid=1" class="filter-link stext-106 trans-04 ${(sid == "1") ? "filter-link-active" :""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?sortID=1" class="filter-link stext-106 trans-04 ${(sortID == "1") ? "filter-link-active" :""}">
                                             Price: High to Low
                                         </a>
                                     </li>
 
                                     <li class="p-b-6">
-                                        <a href="${doSearch == "1" ? "search" : "shop"}?sid=2" class="filter-link stext-106 trans-04 ${(sid == "2") ? "filter-link-active" :""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?sortID=2" class="filter-link stext-106 trans-04 ${(sortID == "2") ? "filter-link-active" :""}">
                                             Price: Low to High
                                         </a>
                                     </li>
 
                                     <li class="p-b-6">
-                                        <a href="${doSearch == "1" ? "search" : "shop"}?sid=3" class="filter-link stext-106 trans-04 ${(sid == "3") ? "filter-link-active" :""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?sortID=3" class="filter-link stext-106 trans-04 ${(sortID == "3") ? "filter-link-active" :""}">
                                             Sale: High to Low
                                         </a>
                                     </li>
@@ -174,30 +174,30 @@
 
                                 <ul>
                                     <li class="p-b-6">
-                                        <a href="${doSearch == "1" ? "search" : "shop"}?fid=0" class="filter-link stext-106 trans-04 ${(fid == "0") ? "filter-link-active" : ""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?filterID=0" class="filter-link stext-106 trans-04 ${(filterID == "0") ? "filter-link-active" : ""}">
                                             All
                                         </a>
                                     </li>
 
                                     <li class="p-b-6">
-                                        <a href="${doSearch == "1" ? "search" : "shop"}?fid=1" class="filter-link stext-106 trans-04 ${(fid == "1") ? "filter-link-active" : ""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?filterID=1" class="filter-link stext-106 trans-04 ${(filterID == "1") ? "filter-link-active" : ""}">
                                             $0 - $5.000.000
                                         </a>
                                     </li>
 
                                     <li class="p-b-6">
-                                        <a href="${doSearch == "1" ? "search" : "shop"}?fid=2" class="filter-link stext-106 trans-04 ${(fid == "2") ? "filter-link-active" : ""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?filterID=2" class="filter-link stext-106 trans-04 ${(filterID == "2") ? "filter-link-active" : ""}">
                                             $5.000.000 - $10.000.000
                                         </a>
                                     </li>
 
                                     <li class="p-b-6">
-                                        <a href="${doSearch == "1" ? "search" : "shop"}?fid=3" class="filter-link stext-106 trans-04 ${(fid == "3") ? "filter-link-active" : ""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?filterID=3" class="filter-link stext-106 trans-04 ${(filterID == "3") ? "filter-link-active" : ""}">
                                             $10.000.000 - $100.000.000
                                         </a>
                                     </li>
                                     <li class="p-b-6">
-                                        <a href="${doSearch == "1" ? "search" : "shop"}?fid=4" class="filter-link stext-106 trans-04 ${(fid == "4") ? "filter-link-active" : ""}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?filterID=4" class="filter-link stext-106 trans-04 ${(filterID == "4") ? "filter-link-active" : ""}">
                                             $100.000.000++
                                         </a>
                                     </li>
@@ -211,13 +211,13 @@
 
                                 <ul>
                                     <li class="p-b-6">
-                                        <a href="${doSearch == "1" ? "search" : "shop"}?bid=0" class="filter-link stext-106 trans-04 ${(bid == 0 ? "filter-link-active" : "")}">
+                                        <a href="${doSearch == "1" ? "search" : "shop"}?brandID=0" class="filter-link stext-106 trans-04 ${(brandID == 0 ? "filter-link-active" : "")}">
                                             All
                                         </a>
                                     </li>
                                     <c:forEach items="${listB}" var="i">
                                         <li class="p-b-6">
-                                            <a href="${doSearch == "1" ? "search" : "shop"}?bid=${i.brandID}" class="filter-link stext-106 trans-04 ${(bid == i.brandID ? "filter-link-active" : "")}">
+                                            <a href="${doSearch == "1" ? "search" : "shop"}?brandID=${i.brandID}" class="filter-link stext-106 trans-04 ${(brandID == i.brandID ? "filter-link-active" : "")}">
                                                 ${i.title}
                                             </a>
                                         </li>
