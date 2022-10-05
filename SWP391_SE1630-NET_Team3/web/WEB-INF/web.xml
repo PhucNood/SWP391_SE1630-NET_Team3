@@ -32,7 +32,8 @@
 
         <servlet-name>SearchController</servlet-name>
         <servlet-class>controller.SearchController</servlet-class>
-
+    </servlet>
+    <servlet>
         <servlet-name>BlogListController</servlet-name>
         <servlet-class>controller.BlogListController</servlet-class>
 

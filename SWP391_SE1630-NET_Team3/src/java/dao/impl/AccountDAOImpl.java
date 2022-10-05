@@ -2,21 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package BasicDaoImpl;
+package dao.impl;
 
 import entity.Account;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author admin
  */
 public class AccountDAOImpl extends DBContext {
-
+    Connection conn;
     public List<Account> getListAccount() {
         List<Account> list = new ArrayList<>();
         String sql = "SELECT [id]\n"
@@ -33,7 +36,8 @@ public class AccountDAOImpl extends DBContext {
                 + "      ,[updated_at]\n"
                 + "  FROM [dbo].[account]";
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
+            conn = getConnection();
+            PreparedStatement st = conn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Account a = new Account(rs.getInt(1), rs.getString(2), rs.getInt(3),
@@ -42,6 +46,8 @@ public class AccountDAOImpl extends DBContext {
                 list.add(a);
             }
         } catch (SQLException e) {
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
@@ -62,7 +68,8 @@ public class AccountDAOImpl extends DBContext {
                 + "  FROM [dbo].[account]"
                 + "  Where email = ?";
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
+            conn = getConnection();
+            PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, email);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
@@ -72,6 +79,8 @@ public class AccountDAOImpl extends DBContext {
                 return a;
             }
         } catch (SQLException e) {
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -93,7 +102,8 @@ public class AccountDAOImpl extends DBContext {
                 + "           ,3)";
 
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
+            conn = getConnection();
+            PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, fullname);
             st.setString(2, password);
             st.setString(3, username);
@@ -101,6 +111,8 @@ public class AccountDAOImpl extends DBContext {
             st.setString(5, phone);
             st.executeUpdate();
         } catch (SQLException e) {
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

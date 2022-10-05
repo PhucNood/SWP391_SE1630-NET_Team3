@@ -5,7 +5,9 @@
 
 package controller;
 
-import BasicDaoImpl.BlogDAOImpl;
+import dao.impl.BlogDAOImpl;
+import dao.NewInterface;
+
 import entity.Blog;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -34,7 +36,7 @@ public class BlogListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        BlogDAOImpl blogDAO = new BlogDAOImpl();
+        NewInterface blogDAO = new BlogDAOImpl();
         List<Blog> blogList = null;
         try {
             String searchTitle = request.getParameter("searchTitle");

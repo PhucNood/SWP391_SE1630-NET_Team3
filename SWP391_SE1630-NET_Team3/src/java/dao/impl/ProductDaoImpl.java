@@ -2,22 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package BasicDaoImpl;
+package dao.impl;
 
+import dao.shopinter;
 import entity.Image;
 import entity.Product;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author 84923
  */
-public class ProductDaoImpl extends DBContext {
-
+public class ProductDaoImpl extends DBContext  implements shopinter{
+    Connection conn;
+    
+    @Override
     public List<Product> getAllProduct() {
         List<Product> list = new ArrayList<>();
         List<Image> listImg = new ArrayList<>();
@@ -25,7 +31,8 @@ public class ProductDaoImpl extends DBContext {
         String sql = "Select * from product";
 
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
+            conn = getConnection();
+            PreparedStatement st = conn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 listImg = d.getListByIdProduct(rs.getInt(1));
@@ -37,10 +44,13 @@ public class ProductDaoImpl extends DBContext {
             }
         } catch (SQLException e) {
             System.out.println(e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProductDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
 
+    @Override
     public List<Product> getProduct(String cid, String bid, String fid, String sid) {
         List<Product> list = new ArrayList<>();
         List<Image> listImg = new ArrayList<>();
@@ -81,7 +91,8 @@ public class ProductDaoImpl extends DBContext {
         }
 
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
+            conn = getConnection();
+            PreparedStatement st = conn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 listImg = d.getListByIdProduct(rs.getInt(1));
@@ -93,10 +104,13 @@ public class ProductDaoImpl extends DBContext {
             }
         } catch (SQLException e) {
             System.out.println(e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProductDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
 
+    @Override
     public List<Product> searchListProduct(String text) {
         List<Product> list = new ArrayList<>();
         List<Image> listImg = new ArrayList<>();
@@ -106,7 +120,8 @@ public class ProductDaoImpl extends DBContext {
                 + "where 1=1\n"
                 + " and (p.name like '%"+text+"%' or b.title like '%"+text+"%' or c.title like '%"+text+"%')";
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
+            conn = getConnection();
+            PreparedStatement st = conn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while(rs.next()){
                 listImg = d.getListByIdProduct(rs.getInt(1));
@@ -118,6 +133,8 @@ public class ProductDaoImpl extends DBContext {
             }
         } catch (SQLException e) {
             
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProductDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
         
