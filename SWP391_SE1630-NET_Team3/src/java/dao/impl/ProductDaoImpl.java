@@ -4,7 +4,6 @@
  */
 package dao.impl;
 
-
 import dao.ProductDAO;
 import entity.Image;
 import entity.Product;
@@ -16,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.catalina.connector.Connector;
+
 /**
  *
  * @author 84923

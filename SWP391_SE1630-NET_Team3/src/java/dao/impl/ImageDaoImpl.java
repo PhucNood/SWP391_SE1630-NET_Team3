@@ -20,7 +20,6 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-
 public class ImageDAOImpl extends DBContext implements ImageDAO{
 
     Connection con = null;
