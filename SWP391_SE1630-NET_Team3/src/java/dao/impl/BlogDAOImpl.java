@@ -23,7 +23,6 @@ public class BlogDAOImpl extends DBContext {
 
     // <editor-fold defaultstate="collapsed" desc="simple get blog arraylist and get image of an blog">
 
-    
     public List<Blog> searchBlogPage(String searchTitle,int month, int year, int numPerPage, int curPage) throws SQLException, ClassNotFoundException {
         List<Blog> list = new ArrayList<>();
         String searchMonth = "";
