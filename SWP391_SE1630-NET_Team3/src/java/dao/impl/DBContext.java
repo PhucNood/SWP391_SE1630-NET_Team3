@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 
 public class DBContext {
+
+
     public Connection getConnection() throws ClassNotFoundException, SQLException {
 
         String url = "jdbc:sqlserver://" + serverName + ":" + portName + ";databaseName = "

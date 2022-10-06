@@ -25,6 +25,7 @@ public class AccountDAOImpl extends DBContext implements AccountDAO{
     PreparedStatement ps = null;
     ResultSet rs = null;
 
+
     public List<Account> getListAccount() {
         List<Account> list = new ArrayList<>();
         String sql = "SELECT [id]\n"

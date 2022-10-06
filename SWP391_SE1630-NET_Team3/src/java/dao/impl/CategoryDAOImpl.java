@@ -19,13 +19,12 @@ import java.util.logging.Logger;
  *
  * @author 84923
  */
-public class CategoryDAOImpl extends DBContext implements CategoryDAO{
+public class CategoryDAOImpl extends DBContext implements CategoryDAO {
 
     Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    
     //get all list category 
     @Override
     public List<Category> getAllCategory() {
@@ -51,7 +50,6 @@ public class CategoryDAOImpl extends DBContext implements CategoryDAO{
         return listCategory;
     }
 
-    
     //get category by productID
     @Override
     public Category getCategoryById(int categoryID) {
@@ -69,12 +67,13 @@ public class CategoryDAOImpl extends DBContext implements CategoryDAO{
             ps.setInt(1,categoryID);
             rs = ps.executeQuery();
             if (rs.next()) {
-                Category category = new Category(rs.getInt("categoryID"), rs.getString("title"), rs.getString("detail"), 
+                Category category = new Category(rs.getInt("categoryID"), rs.getString("title"), rs.getString("detail"),
                         rs.getString("created_at"), rs.getString("update_at"));
                 return category;
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CategoryDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+
         }
         return null;
     }

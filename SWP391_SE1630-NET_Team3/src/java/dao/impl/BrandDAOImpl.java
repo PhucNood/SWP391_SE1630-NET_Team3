@@ -4,6 +4,7 @@
  */
 package dao.impl;
 
+
 import dao.BrandDAO;
 import entity.Brand;
 import java.sql.Connection;
@@ -19,6 +20,7 @@ import java.util.logging.Logger;
  *
  * @author 84923
  */
+
 public class BrandDAOImpl extends DBContext implements BrandDAO{
 
     Connection con = null;
@@ -30,6 +32,7 @@ public class BrandDAOImpl extends DBContext implements BrandDAO{
     @Override
     public List<Brand> getAllBrand() {
         List<Brand> listBrand = new ArrayList<>();
+
         String sql = "SELECT [brandID]\n"
                 + "      ,[title]\n"
                 + "      ,[detail]\n"
