@@ -188,16 +188,18 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
     }
 
     //get product list In one page
+    @Override
     public List<Product> getListByPage(List<Product> listProduct,
             int start, int end) {
-        ArrayList<Product> arr = new ArrayList<>();
+        ArrayList<Product> listInPage = new ArrayList<>();
         for (int i = start; i < end; i++) {
-            arr.add(listProduct.get(i));
+            listInPage.add(listProduct.get(i));
         }
-        return arr;
+        return listInPage;
     }
 
     //get list product by category
+    @Override
     public List<Product> getProductListByCategoryID(int categoryID) {
         List<Product> listProduct = new ArrayList<>();
         List<Image> listImg = new ArrayList<>();

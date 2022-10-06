@@ -67,7 +67,7 @@ public class ShopController extends HttpServlet {
         } else {
             if (session.getAttribute("categoryID") != null) {
                 categoryID = (String) session.getAttribute("categoryID");
-            }
+            }else categoryID = "0";
         }
         if (session.getAttribute("brandID") != null) {
             brandID = (String) session.getAttribute("brandID");

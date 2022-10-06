@@ -177,7 +177,7 @@
                     <!-- Search product -->
                     <div class="dis-none panel-search w-full p-t-10 p-b-15">
                         <form class="example" action="search" method="get">
-                            <input type="text" placeholder="Search by name, brand,.." name="text" value="${requestScope.text}">
+                            <input type="text" placeholder="Search by name, brand,.." name="text" value="${requestScope.textSearch}">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
@@ -336,7 +336,7 @@
                         <c:if test="${sessionScope.listProduct != null}">
                             <ul class="pagination justify-content-center mb-3">
                                 <li class="page-i ${page==1?"disabled":""}">
-                                    <a class="page-l" href="shop?page=${page-1}" aria-label="Previous">
+                                    <a class="page-l" href="${doSearch == "1" ? "search" : "shop"}?page=${page-1}" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Previous</span>
                                     </a>
@@ -344,12 +344,12 @@
                                 <c:set var="page" value="${requestScope.page}"/>
                                 <c:forEach begin="${1}" end="${requestScope.num}" var="j">
                                     <li class="page-i ${page==j?"active":""}" >
-                                        <a class="page-l" href="shop?page=${j}">${j}</a>
+                                        <a class="page-l" href="${doSearch == "1" ? "search" : "shop"}?page=${j}">${j}</a>
                                     </li>
                                 </c:forEach>
                                 <li class="page-i ${page==num?"disabled":""}">
                                     <a class="page-l" 
-                                       href="shop?page=${page+1}" aria-label="Next">
+                                       href="${doSearch == "1" ? "search" : "shop"}?page=${page+1}" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Next</span>
                                     </a>
