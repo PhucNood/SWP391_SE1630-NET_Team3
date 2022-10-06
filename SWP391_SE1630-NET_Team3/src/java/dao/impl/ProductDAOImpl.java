@@ -64,8 +64,7 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
 
         return listProduct;
     }
-    
-    
+
     //Get list product base: category, brand, filter, sort type
     @Override
     public List<Product> getProduct(String categoryID, String brandID, String filterID, String sortID) {
@@ -83,7 +82,7 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         }
         //get filter
         if (!filterID.equals("0")) {
-            sql += " and price ";
+            sql += " and price*(100-sale)/100 ";
             switch (filterID) {
                 case "1":
                     sql += "between 0 and 5000";
@@ -103,10 +102,10 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         if (!sortID.equals("0")) {
             switch (sortID) {
                 case "1":
-                    sql += " order by price DESC";
+                    sql += " order by (price*(100-sale)/100) DESC";
                     break;
                 case "2":
-                    sql += " order by price ASC";
+                    sql += " order by (price*(100-sale)/100) ASC";
                     break;
                 case "3":
                     sql += " order by sale DESC";
@@ -135,7 +134,6 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         return listProduct;
     }
 
-    
     //get list product after search by text
     @Override
     public List<Product> searchListProduct(String text) {
@@ -165,9 +163,72 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
 
     }
 
+    //get product by productID
+    @Override
+    public Product getProductById(String productID) {
+        List<Image> listImg = new ArrayList<>();
+        ImageDAOImpl ImageDAO = new ImageDAOImpl();
+        String sql = "select * from Product where productID = " + productID;
+        try {
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listImg = ImageDAO.getListByIdProduct(rs.getInt(1));
+                Product product = new Product(rs.getInt("productID"),
+                        rs.getString("name"), rs.getString("description"), rs.getString("size"), rs.getInt("categoryID"),
+                        rs.getInt("brandID"), rs.getInt("quantity"), rs.getDouble("price"),
+                        rs.getInt("sale"), rs.getString("created_at"), rs.getString("update_at"), listImg);
+                return product;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    //get product list In one page
+    @Override
+    public List<Product> getListByPage(List<Product> listProduct,
+            int start, int end) {
+        ArrayList<Product> listInPage = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            listInPage.add(listProduct.get(i));
+        }
+        return listInPage;
+    }
+
+    //get list product by category
+    @Override
+    public List<Product> getProductListByCategoryID(int categoryID) {
+        List<Product> listProduct = new ArrayList<>();
+        List<Image> listImg = new ArrayList<>();
+        ImageDAOImpl ImageDAO = new ImageDAOImpl();
+        String sql = "select * from Product where categoryID = "+categoryID;
+        try {
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listImg = ImageDAO.getListByIdProduct(rs.getInt(1));
+                Product product = new Product(rs.getInt("productID"),
+                        rs.getString("name"), rs.getString("description"), rs.getString("size"), rs.getInt("categoryID"),
+                        rs.getInt("brandID"), rs.getInt("quantity"), rs.getDouble("price"),
+                        rs.getInt("sale"), rs.getString("created_at"), rs.getString("update_at"), listImg);
+                listProduct.add(product);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listProduct;
+    }
+
     public static void main(String[] args) {
         ProductDAOImpl d = new ProductDAOImpl();
         List<Product> listProduct = d.searchListProduct("mit");
         System.out.println(listProduct.get(1));
+
+        Product p = d.getProductById("1");
+        System.out.println(p.getName());
     }
 }

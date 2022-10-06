@@ -84,6 +84,51 @@
                 clear: both;
                 display: table;
             }
+            .cart{
+                color: #808080;
+            }
+            .cart:hover{
+                color: #717fe0;
+            }
+
+            .pagination {
+                display: flex;
+                padding-left: 0;
+                list-style: none;
+            }
+            .pagination-lg .page-l {
+                padding: 0.75rem 1.5rem;
+                font-size: 1.25rem;
+                line-height: 1.5;
+            }
+            .page-l{
+                position: relative;
+                display: block;
+                padding: 0.5rem 0.75rem;
+                margin-left: -1px;
+                line-height: 1.25;
+                color: #999999;
+                background-color: #fff;
+                border: 1px solid #e9ecef;
+            }
+
+
+            .pagination-sm .page-l {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.875rem;
+                line-height: 1.5;
+            }
+            .page-i.active .page-l {
+                color: #fff;
+                background-color: #808080;
+                border-color: #808080;
+            }
+            .page-i .page-l {
+                color: #808080;
+                background-color: #fff;
+                border-color: #808080;
+            }
+
         </style>
     </head>
     <body class="animsition">
@@ -132,7 +177,7 @@
                     <!-- Search product -->
                     <div class="dis-none panel-search w-full p-t-10 p-b-15">
                         <form class="example" action="search" method="get">
-                            <input type="text" placeholder="Search by name, brand,.." name="text" value="${requestScope.text}">
+                            <input type="text" placeholder="Search by name, brand,.." name="text" value="${requestScope.textSearch}">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
@@ -237,50 +282,83 @@
                     <c:forEach items="${sessionScope.listProduct}" var="i">
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                             <!-- Block2 -->
-                            <div class="block2">
+                            <div class="block2" style="border: 1px solid #def2f7; height: 360px">
                                 <div class="block2-pic hov-img0">
                                     <c:set var="img" value=""/>
                                     <c:forEach begin="0" end="0" var="j" items="${i.list}">
                                         <c:set var="img" value="${j.imgSource}"/>
                                     </c:forEach>
-                                    <img src="view/images/${img}" >
+                                    <img src="view/images/${img}" width="250" height="250" >
 
-                                    <a href="view/#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                                    <a href="productdetail?productID=${i.productID}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                         View Detail
                                     </a>
                                 </div>
 
-                                <div class="block2-txt flex-w flex-t p-t-14">
-                                    <div class="block2-txt-child1 flex-col-l ">
-                                        <a href="view/product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                <div class="block2-txt flex-w flex-t p-t-14" style="position: absolute;top: 250px; margin-left:5px">
+                                    <div class="block2-txt-child1 flex-col-l " style="width: 180px">
+                                        <a href="productdetail?productID=${i.productID}" style="font-weight: bold; color: black;height: 50px" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                             ${i.name}
                                         </a>
 
-                                        <span class="stext-105 cl3">
-                                            $<fmt:formatNumber pattern="###,###,###.##" value="${i.price*(100-i.sale)*10}"/>
+                                        <div>
+                                            <span class="stext-105 cl3" style="width: 125px">
+                                                $<fmt:formatNumber pattern="###,###,###.##" value="${i.price*(100-i.sale)*10}"/>
+                                                <c:if test="${i.sale !=0}">
+                                                    &nbsp;&nbsp;(-${i.sale}%)
+                                                </c:if>
+                                            </span>
+
                                             <c:if test="${i.sale !=0}">
-                                                &nbsp;&nbsp;(-${i.sale}%)
+                                                <del class="stext-105 cl3">
+                                                    $<fmt:formatNumber pattern="###,###,###.##" value="${i.price*1000}"/>
+                                                </del>
                                             </c:if>
-                                        </span>
-                                        <c:if test="${i.sale !=0}">
-                                            <del class="stext-105 cl3">
-                                                $<fmt:formatNumber pattern="###,###,###.##" value="${i.price*1000}"/>
-                                            </del>
-                                        </c:if>
+                                        </div>
 
                                     </div>
 
-                                    <div class="block2-txt-child2 flex-r p-t-3">
+                                    <div class="block2-txt-child2" style="margin-left: 35px; height: 50px">
                                         <a href="view/#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                            <img class="icon-heart1 dis-block trans-04" src="view/images/icons/icon-heart-01.png" alt="ICON">
-                                            <img class="icon-heart2 dis-block trans-04 ab-t-l" src="view/images/icons/icon-heart-02.png" alt="ICON">
+                                            <i class="cart zmdi zmdi-shopping-cart" style="font-size:28px"></i>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
+
                 </div>
+
+
+                <div class="col-12 pb-1">
+                    <nav aria-label="Page navigation">
+                        <c:if test="${sessionScope.listProduct != null}">
+                            <ul class="pagination justify-content-center mb-3">
+                                <li class="page-i ${page==1?"disabled":""}">
+                                    <a class="page-l" href="${doSearch == "1" ? "search" : "shop"}?page=${page-1}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <c:set var="page" value="${requestScope.page}"/>
+                                <c:forEach begin="${1}" end="${requestScope.num}" var="j">
+                                    <li class="page-i ${page==j?"active":""}" >
+                                        <a class="page-l" href="${doSearch == "1" ? "search" : "shop"}?page=${j}">${j}</a>
+                                    </li>
+                                </c:forEach>
+                                <li class="page-i ${page==num?"disabled":""}">
+                                    <a class="page-l" 
+                                       href="${doSearch == "1" ? "search" : "shop"}?page=${page+1}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </c:if>
+                    </nav>
+                </div>
+
 
 
             </div>

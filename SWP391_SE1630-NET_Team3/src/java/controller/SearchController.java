@@ -68,6 +68,7 @@ public class SearchController extends HttpServlet {
         String text = "";
         if(request.getParameter("text")!= null){
             text = request.getParameter("text");
+            request.setAttribute("textSearch", text);
             session.setAttribute("doSearch", "1");
             session.removeAttribute("brandID");
             session.removeAttribute("filterID");
@@ -76,12 +77,12 @@ public class SearchController extends HttpServlet {
         else {
             text = (String) session.getAttribute("text");
         }
-        ProductDAO d = new ProductDAOImpl();
-        List<Product> sList = d.searchListProduct(text);
+        ProductDAO ProductDAO = new ProductDAOImpl();
+        List<Product> sList = ProductDAO.searchListProduct(text);
         List<Product> list = new ArrayList<>();
-        BrandDAO bd = new BrandDAOImpl();
+        BrandDAO BrandDAO = new BrandDAOImpl();
 
-        List<Brand> listBrand = bd.getAllBrand();
+        List<Brand> listBrand = BrandDAO.getAllBrand();
         request.setAttribute("listB", listBrand);
         String categoryID = null, brandID = null, filterID = null, sortID = null;
         session.setAttribute("inPage", "shop");
@@ -112,7 +113,7 @@ public class SearchController extends HttpServlet {
             sortID = request.getParameter("sortID");
         }
         List<Product> newList = new ArrayList<>();
-        list = d.getProduct(categoryID, brandID, filterID, sortID);
+        list = ProductDAO.getProduct(categoryID, brandID, filterID, sortID);
         if (list.isEmpty()) {
             request.setAttribute("emptyP", "Not found!");
         } else {
@@ -121,7 +122,23 @@ public class SearchController extends HttpServlet {
             }
         }
         
-        session.setAttribute("listProduct", newList);
+        int size = newList.size();
+        int page, numberpage = 8;
+        int number = (size % 8 == 0 ? (size / 8) : ((size / 8) + 1));
+        String xpage = request.getParameter("page");
+        if (xpage == null) {
+            page = 1;
+        } else {
+            page = Integer.parseInt(xpage);
+        }
+        int start, end;
+        start = (page - 1) * numberpage;
+        end = Math.min(page * numberpage, size);
+        List<Product> listProductInPage = ProductDAO.getListByPage(newList, start, end);
+        request.setAttribute("page", page);
+        request.setAttribute("num", number);
+        
+        session.setAttribute("listProduct", listProductInPage);
         session.removeAttribute("categoryID");
         session.setAttribute("text", text);
         session.setAttribute("brandID", brandID);
