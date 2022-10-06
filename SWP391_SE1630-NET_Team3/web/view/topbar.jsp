@@ -97,7 +97,7 @@
                         <!-- Logo desktop -->		
                         <a href="home" class="logo">
 
-                            <img src="${pageContext.request.contextPath}/view/images/icons/logo-01.png" alt="IMG-LOGO">
+                            <img src="${pageContext.request.contextPath}/view/images/T3.jpeg" alt="IMG-LOGO">
 
                         </a>
 
@@ -120,11 +120,11 @@
 
                                 <li class="${inPage == "about" ? "active-menu" :""}">
 
-                                    <a href="${pageContext.request.contextPath}/view/about.html">About</a>
+                                    <a href="${pageContext.request.contextPath}/view/about.jsp">About</a>
                                 </li>
 
                                 <li class="${inPage == "contact" ? "active-menu" :""}">
-                                    <a href="${pageContext.request.contextPath}/view/contact.html">Contact</a>
+                                    <a href="${pageContext.request.contextPath}/view/contact.jsp">Contact</a>
 
                                 </li>
                             </ul>
