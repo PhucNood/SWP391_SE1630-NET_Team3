@@ -82,7 +82,7 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         }
         //get filter
         if (!filterID.equals("0")) {
-            sql += " and price ";
+            sql += " and price*(100-sale)/100 ";
             switch (filterID) {
                 case "1":
                     sql += "between 0 and 5000";
@@ -102,10 +102,10 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         if (!sortID.equals("0")) {
             switch (sortID) {
                 case "1":
-                    sql += " order by price DESC";
+                    sql += " order by (price*(100-sale)/100) DESC";
                     break;
                 case "2":
-                    sql += " order by price ASC";
+                    sql += " order by (price*(100-sale)/100) ASC";
                     break;
                 case "3":
                     sql += " order by sale DESC";
@@ -164,6 +164,7 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
     }
 
     //get product by productID
+    @Override
     public Product getProductById(String productID) {
         List<Image> listImg = new ArrayList<>();
         ImageDAOImpl ImageDAO = new ImageDAOImpl();

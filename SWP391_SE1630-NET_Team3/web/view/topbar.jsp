@@ -87,7 +87,6 @@
         </style>
     </head>
     <body class="animsition">
-        <c:set var="page" value="${inPage}"/>
         <!-- Header -->
         <header class="header-v2">
             <!-- Header desktop -->
@@ -105,26 +104,26 @@
                         <!-- Menu desktop -->
                         <div class="menu-desktop">
                             <ul class="main-menu">
-                                <li class="${page == "home" ? "active-menu" :""}">
+                                <li class="${inPage == "home" ? "active-menu" :""}">
                                     <a href="home">Home</a>
                                 </li>
 
-                                <li class="${page == "shop" ? "active-menu" :""}">
+                                <li class="${inPage == "shop" ? "active-menu" :""}">
                                     <a href="shop">Shop</a>
                                 </li>
 
-                                <li class="${page == "blog" ? "active-menu" :""}">
+                                <li class="${inPage == "blog" ? "active-menu" :""}">
 
                                     <a href="blog">Blog</a>
 
                                 </li>
 
-                                <li class="${page == "about" ? "active-menu" :""}">
+                                <li class="${inPage == "about" ? "active-menu" :""}">
 
                                     <a href="${pageContext.request.contextPath}/view/about.html">About</a>
                                 </li>
 
-                                <li class="${page == "contact" ? "active-menu" :""}">
+                                <li class="${inPage == "contact" ? "active-menu" :""}">
                                     <a href="${pageContext.request.contextPath}/view/contact.html">Contact</a>
 
                                 </li>
@@ -137,11 +136,11 @@
                                 
 
                                 <c:if test="${account==null}">
-                                    <li class="${page == "login" ? "active-menu" :""}">
+                                    <li class="${inPage == "login" ? "active-menu" :""}">
                                     <a href="${pageContext.request.contextPath}/login">Login</a>
                                 </li>
 
-                                <li class="${page == "signup" ? "active-menu" :""}">
+                                <li class="${inPage == "signup" ? "active-menu" :""}">
                                     <a href="${pageContext.request.contextPath}/signup">Sign Up</a>
                                 </li>
                                 </c:if>
@@ -215,24 +214,24 @@
             <div class="menu-mobile">
                 
                 <ul class="main-menu-m">
-                    <li class="${page == "home" ? "active-menu" :""}">
+                    <li class="${inPage == "home" ? "active-menu" :""}">
                         <a href="home">Home</a>
                     </li>
 
-                    <li class="${page == "shop" ? "active-menu" :""}">
+                    <li class="${inPage == "shop" ? "active-menu" :""}">
                         <a href="shop">Shop</a>
                     </li>
 
-                    <li class="${page == "blog" ? "active-menu" :""}">
+                    <li class="${inPage == "blog" ? "active-menu" :""}">
                         <a href="blog">Blog</a>
                     </li>
 
-                    <li class="${page == "about" ? "active-menu" :""}">
+                    <li class="${inPage == "about" ? "active-menu" :""}">
                     
                         <a href="${pageContext.request.contextPath}/view/about.html">About</a>
                     </li>
 
-                    <li class="${page == "contact" ? "active-menu" :""}">
+                    <li class="${inPage == "contact" ? "active-menu" :""}">
                         <a href="${pageContext.request.contextPath}/view/contact.html">Contact</a>
 
                     </li>
