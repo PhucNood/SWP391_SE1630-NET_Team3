@@ -54,7 +54,7 @@ public class CategoryDAOImpl extends DBContext implements CategoryDAO{
     
     //get category by productID
     @Override
-    public Category getCategoryById(int productID) {
+    public Category getCategoryById(int categoryID) {
         String sql = "SELECT [categoryID]\n"
                 + "      ,[title]\n"
                 + "      ,[detail]\n"
@@ -66,7 +66,7 @@ public class CategoryDAOImpl extends DBContext implements CategoryDAO{
         try {
             con = getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1,productID);
+            ps.setInt(1,categoryID);
             rs = ps.executeQuery();
             if (rs.next()) {
                 Category category = new Category(rs.getInt("categoryID"), rs.getString("title"), rs.getString("detail"), 

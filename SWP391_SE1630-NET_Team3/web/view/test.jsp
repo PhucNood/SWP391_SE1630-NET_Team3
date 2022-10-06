@@ -13,29 +13,30 @@
     </head>
     <body>
 
-        <div id="header-carousel" class="carousel slide" data-ride="carousel">
-            <div class="box">
-
-                <div class="inner-box">
-
-                    <form action="signup" method="post">
-                        <h2>Sign Up Today</h2>
-                        <input type="email" name= "email" placeholder="Email Address" value="${sessionScope.email}" required/>
-                        <input type="text" name= "phone" placeholder="Phone" value="${sessionScope.phone}" required/>
-                        <input type="text" name="fullname" placeholder="Your Full Name" value="${sessionScope.fullname}" required/>
-                        <input type="text" name="username" placeholder="Username" required ${sessionScope.username}/>
-                        <input type="password" name="pass" placeholder="Password" required/>
-                        <input type="password" name="repass" placeholder="Conform Password" required/>
-                        <p class="text-warning">${mess1}</p> 
-                        <input type="submit" value="SignUp" />
-                        <p style="text-align:center;" >
-                            <span>Already Register ? </span><a class="link" href="${pageContext.request.contextPath}/view/login">Login</a>
-                        </p>
-                    </form>
-                </div>
-
-            </div>
-        </div>
+        <div class="col-12 pb-1">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center mb-3">
+                                <li class="page-item ${page==1?"disabled":""}">
+                                    <a class="page-link" href="listproduct?page=${page-1}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <c:set var="page" value="${requestScope.page}"/>
+                                <c:forEach begin="${1}" end="${requestScope.num}" var="j">
+                                    <li class="page-item ${page==j?"active":""}"><a class="page-link" 
+                                                                                    href="listproduct?page=${j}">${j}</a></li>
+                                    </c:forEach>
+                                <li class="page-item ${page==num?"disabled":""}">
+                                    <a class="page-link" 
+                                       href="listproduct?page=${page+1}&cid=${cid}&bid=${bid}&filterprice=${filterprice}&sid=${sid}"" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
 
         <h1>${requestScope.test}</h1>
 

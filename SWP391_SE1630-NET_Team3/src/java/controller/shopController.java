@@ -50,11 +50,11 @@ public class ShopController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        List<Product> list = new ArrayList<>();
-        ProductDAO d = new ProductDAOImpl();
-        BrandDAO bd = new BrandDAOImpl();
+        List<Product> listProduct = new ArrayList<>();
+        ProductDAO ProductDAO = new ProductDAOImpl();
+        BrandDAO BrandDAO = new BrandDAOImpl();
 
-        List<Brand> listBrand = bd.getAllBrand();
+        List<Brand> listBrand = BrandDAO.getAllBrand();
         request.setAttribute("listB", listBrand);
         String categoryID = null, brandID = null, filterID = null, sortID = null;
         session.setAttribute("inPage", "shop");
@@ -99,13 +99,27 @@ public class ShopController extends HttpServlet {
             sortID = request.getParameter("sortID");
         }
        
-        list = d.getProduct(categoryID, brandID, filterID, sortID);
-        if (list.isEmpty()) {
+        listProduct = ProductDAO.getProduct(categoryID, brandID, filterID, sortID);
+        if (listProduct.isEmpty()) {
             request.setAttribute("emptyP", "Not found!");
         }
+        int size = listProduct.size();
+        int page, numberpage = 8;
+        int number = (size%8==0?(size/8):((size/8)+1));
+        String xpage= request.getParameter("page");
+        if(xpage ==null){
+            page = 1;
+        }else{
+            page = Integer.parseInt(xpage);
+        }
+        int start,end;
+        start = (page-1)*numberpage;
+        end = Math.min(page*numberpage,size);
+        List<Product> listProductInPage = ProductDAO.getListByPage(listProduct, start, end);
+        request.setAttribute("page", page);
+        request.setAttribute("num", number);
 
-
-        session.setAttribute("listProduct", list);
+        session.setAttribute("listProduct", listProductInPage);
         session.setAttribute("categoryID", categoryID);
         session.setAttribute("brandID", brandID);
         session.setAttribute("filterID", filterID);
