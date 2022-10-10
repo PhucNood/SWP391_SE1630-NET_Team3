@@ -100,6 +100,7 @@
             }
             
 
+
         </style>
     </head>
     <body class="animsition">
@@ -110,26 +111,19 @@
 
             <div class="inner-box">
 
-                <form action="login" method="post">
+                <form action="changeinfo" >
+                    <h2>Information</h2>
+                    Phone<input class="input1" type="text" name="phone" placeholder="Phone" value="${requestScope.phone}" required/>
+                    Full Name<input class="input1" type="text" name="fullname" placeholder="Your Full Name" value="${requestScope.fullname}" required/>
+                    User Name<input class="input1" type="text" name="username" placeholder="Username" required value="${requestScope.username}"/>
+                    <p class="text-warning">${mess1}</p> 
 
-                    <h2>Login Here</h2>
-                    <div class="sao" >                        
-                    Email*<input class="input1"  name= "email" type="email" value="${sessionScope.email}"placeholder="Email" required /> 
-                    PassWord*<input class="input1" name="pass" type="password" value="${sessionScope.pass}" placeholder="Password" required />
-                    <p class="text-warning">${messAlert}</p>
-                    <p >
-                        </div>
-<!--                    <label><span class="sao">Required*</span></label>   -->
-                    <input type="checkbox"  name ="remember" ${sessionScope.check!=null ?"checked":""} value="1"/>
-                        <span>Keep me Signed In</span>
-                        <span class="forgot"><a href="${pageContext.request.contextPath}/view/recovery" style="color: #808080">Forgot Password?</a></span>
-                    </p>
-                    <input class="input1 input2" type="submit" value="Login" />
-
-                    <p style="text-align:center;">
-                        <span>Not a member ? </span><a class="link" href="${pageContext.request.contextPath}/signup">Sign Up</a>
-                    </p>
-                    <h6 style="color: red"><i>${sessionScope.fail}</i></h6>
+                    <c:if test="${requestScope.success !=null}">
+                        <p class="text-warning">${success}</p> 
+                    </c:if>
+                    <c:if test="${requestScope.success ==null}">
+                        <input class="input1 input2" type="submit" value="Change" />
+                    </c:if>
                 </form>
 
             </div>
