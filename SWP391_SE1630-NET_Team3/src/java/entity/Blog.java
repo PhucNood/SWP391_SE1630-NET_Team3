@@ -94,7 +94,7 @@ public class Blog {
         return getCreateAt().split("-")[2];
     }
     public String getMonthYearCreate(){
-        String s = getCreateAt().split("-")[1] + "/" + getCreateAt().split("-")[0];
+        String s = getCreateAt().split("-")[0] + "-" + getCreateAt().split("-")[1];
         return s;
     }
 }

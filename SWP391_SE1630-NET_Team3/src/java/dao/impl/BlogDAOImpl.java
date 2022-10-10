@@ -23,7 +23,6 @@ public class BlogDAOImpl extends DBContext {
 
     // <editor-fold defaultstate="collapsed" desc="simple get blog arraylist and get image of an blog">
 
-    
     public List<Blog> searchBlogPage(String searchTitle,int month, int year, int numPerPage, int curPage) throws SQLException, ClassNotFoundException {
         List<Blog> list = new ArrayList<>();
         String searchMonth = "";
@@ -146,20 +145,22 @@ public class BlogDAOImpl extends DBContext {
     }
     //</editor-fold> 
 
-//    public static void main(String[] args) {
-//        try {
-//            BlogDAOImpl dao = new BlogDAOImpl();
-//            List<Blog> blist = dao.searchBlogPage("t",10,2022, 3, 1);
-//            for (Blog b : blist) {
-//                System.out.println("-------");
-//                System.out.println(b.getTitle()+"\n"+b.getContent()+"\n"+b.getCreateAt());
-//                for (Image i : b.getListImg()) {
-//                    System.out.println(i.getId() + " | " + i.getImgSource() + " | " + i.getName());
-//                }
-//            }
-//            System.out.println("total page:"+dao.getTotalSearchPage("t",-1,-1, 10));
-//        } catch (SQLException ex) {
-//            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    public static void main(String[] args) {
+        try {
+            BlogDAOImpl dao = new BlogDAOImpl();
+            List<Blog> blist = dao.searchBlogPage("t",10,2022, 3, 1);
+            for (Blog b : blist) {
+                System.out.println("-------");
+                System.out.println(b.getTitle()+"\n"+b.getContent()+"\n"+b.getCreateAt());
+                for (Image i : b.getListImg()) {
+                    System.out.println(i.getId() + " | " + i.getImgSource() + " | " + i.getName());
+                }
+            }
+            System.out.println("total page:"+dao.getTotalSearchPage("t",-1,-1, 10));
+        } catch (SQLException ex) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

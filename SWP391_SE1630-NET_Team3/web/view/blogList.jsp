@@ -53,6 +53,7 @@
         <section class="bg0 p-t-62 p-b-60">
             <div class="container">
                 <div class="row">
+                    <!--blog list-->
                     <div class="col-md-8 col-lg-9 p-b-80">
                         <div class="p-r-45 p-r-0-lg">
                             <c:forEach items="${blogList}" var="blog">
@@ -101,12 +102,14 @@
                                 <c:if test="${totalPage > 1}">
                                     <c:forEach step="1" begin="1" end="${totalPage}" var="index">
                                         <c:if test="${curPage eq index}">
-                                            <a href="" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
+                                            <a href="blog?page=${index}&searchTitle=${searchTitle}&searchTime=${searchTime}" 
+                                               class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
                                                 ${index}
                                             </a>
                                         </c:if>
                                         <c:if test="${curPage ne index}">
-                                            <a href="" class="flex-c-m how-pagination1 trans-04 m-all-7 ">
+                                            <a href="blog?page=${index}&searchTitle=${searchTitle}&searchTime=${searchTime}" 
+                                               class="flex-c-m how-pagination1 trans-04 m-all-7 ">
                                                 ${index}
                                             </a>
                                         </c:if>
@@ -120,11 +123,13 @@
                         <div class="side-menu">
                             <!--search-->
                             <div class="bor17 of-hidden pos-relative">
-                                <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
-
-                                <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
+                                <form method="get" action="blog">
+                                    <input id="SearchName" class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="searchTitle" placeholder="Search">
+                                    <input id="SearchTime" class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="searchTime" placeholder="Search" style="display: none">
+                                    <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04" type="submit">
+                                        <i class="zmdi zmdi-search"></i>
+                                    </button>
+                                </form>
                             </div>
                             <!--optional-->
                             <!--                            <div class="p-t-65">
@@ -190,15 +195,14 @@
 
                                 <ul>
                                     <li class="p-b-7">
-                                        <a href="${pageContext.request.contextPath}/view/#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
+                                        <p onclick="setTimeSearch('2022-10')" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
                                             <span>
-                                                July 2018
+                                                Oct 2022
                                             </span>
-
                                             <span>
                                                 (9)
                                             </span>
-                                        </a>
+                                        </p>
                                     </li>
                                 </ul>
                             </div>
@@ -223,34 +227,35 @@
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/vendor/select2/select2.min.js"></script>
         <script>
-            $(".js-select2").each(function () {
-                $(this).select2({
-                    minimumResultsForSearch: 20,
-                    dropdownParent: $(this).next('.dropDownSelect2')
-                });
-            })
+                                            $(".js-select2").each(function () {
+                                                $(this).select2({
+                                                    minimumResultsForSearch: 20,
+                                                    dropdownParent: $(this).next('.dropDownSelect2')
+                                                });
+                                            })
         </script>
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
         <script>
-            $('.js-pscroll').each(function () {
-                $(this).css('position', 'relative');
-                $(this).css('overflow', 'hidden');
-                var ps = new PerfectScrollbar(this, {
-                    wheelSpeed: 1,
-                    scrollingThreshold: 1000,
-                    wheelPropagation: false,
-                });
+                                            $('.js-pscroll').each(function () {
+                                                $(this).css('position', 'relative');
+                                                $(this).css('overflow', 'hidden');
+                                                var ps = new PerfectScrollbar(this, {
+                                                    wheelSpeed: 1,
+                                                    scrollingThreshold: 1000,
+                                                    wheelPropagation: false,
+                                                });
 
-                $(window).on('resize', function () {
-                    ps.update();
-                })
-            });
+                                                $(window).on('resize', function () {
+                                                    ps.update();
+                                                })
+                                            });
         </script>
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/view/js/blogListJS.js"></script>
 
     </body>
 </html>
