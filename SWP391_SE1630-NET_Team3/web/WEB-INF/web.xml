@@ -41,6 +41,7 @@
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>ManageProductController</servlet-name>
         <servlet-class>controller.ManageProductController</servlet-class>
     </servlet>
@@ -71,6 +72,26 @@
     <servlet>
         <servlet-name>DeleteProductImageController</servlet-name>
         <servlet-class>controller.DeleteProductImageController</servlet-class>
+
+        <servlet-name>ChangePassController</servlet-name>
+        <servlet-class>controller.ChangePassController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InformationController</servlet-name>
+        <servlet-class>controller.InformationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeInformationController</servlet-name>
+        <servlet-class>controller.ChangeInformationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AboutController</servlet-name>
+        <servlet-class>controller.AboutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ContactControler</servlet-name>
+        <servlet-class>controller.ContactControler</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>ShopController</servlet-name>
@@ -105,6 +126,7 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>ManageProductController</servlet-name>
         <url-pattern>/manageProduct</url-pattern>
     </servlet-mapping>
@@ -135,6 +157,26 @@
     <servlet-mapping>
         <servlet-name>DeleteProductImageController</servlet-name>
         <url-pattern>/deleteProductImage</url-pattern>
+
+        <servlet-name>ChangePassController</servlet-name>
+        <url-pattern>/changepass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InformationController</servlet-name>
+        <url-pattern>/information</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeInformationController</servlet-name>
+        <url-pattern>/changeinfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AboutController</servlet-name>
+        <url-pattern>/AboutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactControler</servlet-name>
+        <url-pattern>/contact</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

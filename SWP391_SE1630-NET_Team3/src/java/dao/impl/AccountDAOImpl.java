@@ -121,12 +121,48 @@ public class AccountDAOImpl extends DBContext implements AccountDAO{
         }
 
     }
+    public void ChangePass(String email, String password) {
+        String sql = "UPDATE [dbo].[account]\n"
+                + "   SET [password] = ?\n"
+                + " WHERE email = ?";
+        try {
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, password);
+            ps.setString(2, email);
+            ps.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void UpdateInfo(String email, String phone, String fullname, String user) {
+        String sql = "UPDATE [dbo].[account]\n"
+                + "   SET [phone] = ?\n"
+                + "      ,[fullname] = ?\n"
+                + "      ,[username] = ?\n"
+                + " WHERE email = ?";
+        try {
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, phone);
+            ps.setString(2, fullname);
+            ps.setString(3, user);
+            ps.setString(4, email);
+            ps.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public static void main(String[] args) {
         AccountDAOImpl d = new AccountDAOImpl();
-        List<Account> list = d.getListAccount();
-        Account a = d.getAccByEmail("quochung123@gmail.com");
+//        List<Account> list = d.getListAccount();
+//        Account a = d.getAccByEmail("quochung123@gmail.com");
+//        System.out.println(a.getPass());
+//        System.out.println(list.get(1).getFullname());
+        d.ChangePass("leetung@gmail.com","Tungfif");
+        Account a = d.getAccByEmail("leetung@gmail.com");
         System.out.println(a.getPass());
-        System.out.println(list.get(1).getFullname());
     }
 }

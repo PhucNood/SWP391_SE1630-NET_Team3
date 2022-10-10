@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.catalina.connector.Connector;
 
 /**
  *
@@ -283,4 +282,5 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         d.deleteProductDetail("1");
         //System.out.println(d.getProductById("1"));
     }
+
 }

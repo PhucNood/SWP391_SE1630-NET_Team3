@@ -5,10 +5,9 @@
 
 package controller;
 
-import dao.HomeDAO;
-import dao.impl.BlogDAOImpl;
-import dao.impl.HomeDAOImpl;
-import dao.impl.ProductDAOImpl;
+import dao.AccountDAO;
+import dao.impl.AccountDAOImpl;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,15 +15,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
- * @author admin
+ * @author FPT SHOP DOAN HUNG
  */
-public class HomeController extends HttpServlet {
+public class ChangeInformationController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +39,10 @@ public class HomeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet homeController</title>");  
+            out.println("<title>Servlet ChangeInformationController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet homeController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ChangeInformationController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,19 +60,29 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.setAttribute("inPage", "home");
-        HomeDAO homeDAOImpl = new HomeDAOImpl();
-        
-       request.setAttribute("products", new ProductDAOImpl().getAllProduct());
-        request.setAttribute("listNewProduct", homeDAOImpl.getNewProductsEachCategory());
-        try {
-            request.setAttribute("newBlogs", new BlogDAOImpl().searchBlogPage("", -1, -1, 3, 1));
-        } catch (SQLException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        String phonePattern = "^[0-9]{10}";
+        Pattern pho = Pattern.compile(phonePattern);
+        Account a = (Account) session.getAttribute("account");
+        String email = a.getEmail();
+        String phone = request.getParameter("phone").trim();
+        String name = request.getParameter("fullname").trim();
+        String user = request.getParameter("username").trim();
+
+        Matcher matpho = pho.matcher(phone);
+        AccountDAO accD = new AccountDAOImpl();
+        if (!matpho.matches()) {
+            request.setAttribute("phone", phone);
+            request.setAttribute("username", user);
+            request.setAttribute("fullname", name);
+            request.setAttribute("mess1", "Phone must have 10 character");
+            request.getRequestDispatcher("information.jsp").forward(request, response);
+        } else {
+            accD.UpdateInfo(email, phone, name, user);
+            a = accD.getAccByEmail(email);
+            session.setAttribute("account", a);
+            request.setAttribute("success", "Change information successful.");
+            request.getRequestDispatcher("information.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("view/home.jsp").forward(request, response);
     } 
 
     /** 

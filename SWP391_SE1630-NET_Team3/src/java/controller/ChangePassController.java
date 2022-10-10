@@ -5,10 +5,9 @@
 
 package controller;
 
-import dao.HomeDAO;
-import dao.impl.BlogDAOImpl;
-import dao.impl.HomeDAOImpl;
-import dao.impl.ProductDAOImpl;
+import dao.AccountDAO;
+import dao.impl.AccountDAOImpl;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,15 +15,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 /**
  *
- * @author admin
+ * @author FPT SHOP DOAN HUNG
  */
-public class HomeController extends HttpServlet {
+public class ChangePassController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +38,10 @@ public class HomeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet homeController</title>");  
+            out.println("<title>Servlet ChangePassController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet homeController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ChangePassController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,19 +59,8 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.setAttribute("inPage", "home");
-        HomeDAO homeDAOImpl = new HomeDAOImpl();
-        
-       request.setAttribute("products", new ProductDAOImpl().getAllProduct());
-        request.setAttribute("listNewProduct", homeDAOImpl.getNewProductsEachCategory());
-        try {
-            request.setAttribute("newBlogs", new BlogDAOImpl().searchBlogPage("", -1, -1, 3, 1));
-        } catch (SQLException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.getRequestDispatcher("view/home.jsp").forward(request, response);
+        session.setAttribute("inPage", "changepass");
+        request.getRequestDispatcher("view/changepass.jsp").forward(request, response);
     } 
 
     /** 
@@ -87,7 +73,26 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+  
+        String oldPass = request.getParameter("oldpass").trim();
+        String newPass = request.getParameter("newpass").trim();
+        String reNewpass = request.getParameter("renewpass").trim();
+        HttpSession session = request.getSession();
+    
+        Account a = (Account) session.getAttribute("account");
+        String email = a.getEmail();
+        request.setAttribute("oldpass", oldPass);
+        request.setAttribute("newpass", newPass);
+        request.setAttribute("renewpass", reNewpass);
+        if (!a.getPass().equals(oldPass) || !newPass.equals(reNewpass)) {
+            request.setAttribute("mess", "Incorrect password or new password does not match.");
+            request.getRequestDispatcher("view/changepass.jsp").forward(request, response);
+        } else {
+            AccountDAO change = new AccountDAOImpl();
+            change.ChangePass(email, newPass);
+            request.setAttribute("messSuccessFull", "Change password successful!");
+            request.getRequestDispatcher("view/changepass.jsp").forward(request, response);
+        }
     }
 
     /** 
