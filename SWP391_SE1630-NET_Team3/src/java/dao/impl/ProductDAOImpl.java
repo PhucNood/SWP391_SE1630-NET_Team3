@@ -230,4 +230,5 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         Product p = d.getProductById("1");
         System.out.println(p.getName());
     }
+
 }
