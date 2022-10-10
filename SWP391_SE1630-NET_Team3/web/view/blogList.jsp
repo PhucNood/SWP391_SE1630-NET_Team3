@@ -194,16 +194,18 @@
                                 </h4>
 
                                 <ul>
-                                    <li class="p-b-7">
-                                        <p onclick="setTimeSearch('2022-10')" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                            <span>
-                                                Oct 2022
-                                            </span>
-                                            <span>
-                                                (9)
-                                            </span>
-                                        </p>
-                                    </li>
+                                    <c:forEach items="${archiveList}" var="archive">
+                                        <li class="p-b-7">
+                                            <p onclick="setTimeSearch('${archive.getSearchValue()}')" id="${archive.getSearchValue()}" class="button-archive flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
+                                                <span>
+                                                    ${archive.getMonthYear()}
+                                                </span>
+                                                <span>
+                                                    (${archive.getTotalBlog()})
+                                                </span>
+                                            </p>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
 
@@ -227,31 +229,31 @@
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/vendor/select2/select2.min.js"></script>
         <script>
-                                            $(".js-select2").each(function () {
-                                                $(this).select2({
-                                                    minimumResultsForSearch: 20,
-                                                    dropdownParent: $(this).next('.dropDownSelect2')
-                                                });
-                                            })
+                                                $(".js-select2").each(function () {
+                                                    $(this).select2({
+                                                        minimumResultsForSearch: 20,
+                                                        dropdownParent: $(this).next('.dropDownSelect2')
+                                                    });
+                                                })
         </script>
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
         <script>
-                                            $('.js-pscroll').each(function () {
-                                                $(this).css('position', 'relative');
-                                                $(this).css('overflow', 'hidden');
-                                                var ps = new PerfectScrollbar(this, {
-                                                    wheelSpeed: 1,
-                                                    scrollingThreshold: 1000,
-                                                    wheelPropagation: false,
-                                                });
+                                                $('.js-pscroll').each(function () {
+                                                    $(this).css('position', 'relative');
+                                                    $(this).css('overflow', 'hidden');
+                                                    var ps = new PerfectScrollbar(this, {
+                                                        wheelSpeed: 1,
+                                                        scrollingThreshold: 1000,
+                                                        wheelPropagation: false,
+                                                    });
 
-                                                $(window).on('resize', function () {
-                                                    ps.update();
-                                                })
-                                            });
+                                                    $(window).on('resize', function () {
+                                                        ps.update();
+                                                    })
+                                                });
         </script>
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/js/main.js"></script>

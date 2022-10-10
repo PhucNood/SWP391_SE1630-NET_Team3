@@ -88,6 +88,9 @@ public class Blog {
         this.listImg = list;
     }
     public String getFirstImgSrc(){
+        if(listImg == null || listImg.isEmpty()){
+            return "";
+        }
         return this.listImg.get(0).getImgSource();
     }
     public String getDayCreate(){

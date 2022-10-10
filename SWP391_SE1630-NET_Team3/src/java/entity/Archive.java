@@ -5,38 +5,41 @@
 package entity;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  *
  * @author stick
  */
 public class Archive {
-    String dateString;
-    Date monthYear;
+    String searchValue;
+    String monthYear;
     int totalBlog;
 
     public Archive() {
     }
 
-    public Archive(String dateString, Date monthYear, int totalBlog) {
-        this.dateString = dateString;
+    public Archive(String searchValue, String monthYear, int totalBlog) {
+        this.searchValue = searchValue;
         this.monthYear = monthYear;
         this.totalBlog = totalBlog;
     }
 
-    public String getDateString() {
-        return dateString;
+    public String getSearchValue() {
+        return searchValue;
     }
 
-    public void setDateString(String dateString) {
-        this.dateString = dateString;
+    public void setSearchValue(String searchValue) {
+        this.searchValue = searchValue;
     }
 
-    public Date getMonthYear() {
+    
+
+    public String getMonthYear() {
         return monthYear;
     }
 
-    public void setMonthYear(Date monthYear) {
+    public void setMonthYear(String monthYear) {
         this.monthYear = monthYear;
     }
 
@@ -47,5 +50,5 @@ public class Archive {
     public void setTotalBlog(int totalBlog) {
         this.totalBlog = totalBlog;
     }
-    
+
 }

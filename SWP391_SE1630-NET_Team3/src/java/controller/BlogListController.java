@@ -5,6 +5,7 @@
 package controller;
 
 import dao.impl.BlogDAOImpl;
+import entity.Archive;
 import entity.Blog;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -36,6 +37,7 @@ public class BlogListController extends HttpServlet {
             throws ServletException, IOException {
         BlogDAOImpl blogDAO = new BlogDAOImpl();
         List<Blog> blogList = null;
+        List<Archive> archiveList = null;
         try {
             String searchTitle = request.getParameter("searchTitle");
             if (searchTitle == null || searchTitle.isEmpty()) {
@@ -49,7 +51,7 @@ public class BlogListController extends HttpServlet {
             String searchTime = request.getParameter("searchTime");
             int searchMonth;
             int searchYear;
-            if (searchTitle == null || searchTitle.isEmpty()) {
+            if (searchTime == null || searchTime.isEmpty()) {
                 searchTime = "";
                 searchMonth = -1;
                 searchYear = -1;
@@ -58,12 +60,15 @@ public class BlogListController extends HttpServlet {
                 searchYear = Integer.parseInt(searchTime.split("-")[0]);;
 
             }
-            System.out.println(">" + searchMonth+"|"+searchYear);
+            System.out.println(">" + searchMonth + "|" + searchYear);
+            blogList = blogDAO.searchBlogPage(searchTitle, searchMonth, searchYear, 3, curPage);
+            int totalPage = blogDAO.getTotalSearchPage(searchTitle, searchMonth, searchYear, 3);
+            System.out.println("total page:" + totalPage);
 
-            blogList = blogDAO.searchBlogPage(searchTitle, -1, -1, 3, curPage);
-            int totalPage = blogDAO.getTotalSearchPage(searchTitle, -1, -1, 3);
+            archiveList = blogDAO.getAllArchive();
 
             request.setAttribute("blogList", blogList);
+            request.setAttribute("archiveList", archiveList);
             request.setAttribute("curPage", curPage);
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("searchTitle", searchTitle);
