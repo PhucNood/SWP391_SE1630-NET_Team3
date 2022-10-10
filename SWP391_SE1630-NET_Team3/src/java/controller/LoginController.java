@@ -5,9 +5,9 @@
 
 package controller;
 
-import dao.HomeDAO;
-import dao.impl.BlogDAOImpl;
-import dao.impl.HomeDAOImpl;
+import dao.AccountDAO;
+import dao.impl.AccountDAOImpl;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,15 +15,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author admin
  */
-public class HomeController extends HttpServlet {
+public class LoginController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +37,10 @@ public class HomeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet homeController</title>");  
+            out.println("<title>Servlet LoginController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet homeController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet LoginController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,19 +57,9 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.setAttribute("inPage", "home");
-        HomeDAO homeDAOImpl = new HomeDAOImpl();
-       
-        request.setAttribute("listNewProduct", homeDAOImpl.getNewProductsEachCategory());
-        try {
-            request.setAttribute("newBlogs", new BlogDAOImpl().searchBlogPage("", -1, -1, 3, 1));
-        } catch (SQLException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.getRequestDispatcher("view/home.jsp").forward(request, response);
+         HttpSession session = request.getSession();
+        session.setAttribute("inPage", "login");
+        request.getRequestDispatcher("view/login.jsp").forward(request, response);
     } 
 
     /** 
@@ -85,7 +72,42 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String email = request.getParameter("email").trim();
+        String pass = request.getParameter("pass").trim();
+        String remember = request.getParameter("remember");
+        HttpSession session = request.getSession();
+        
+        AccountDAO AccD = new AccountDAOImpl();
+        Account a = AccD.getAccByEmail(email);
+        
+        //check cac dieu kien thoa man
+        if (a == null) {
+            session.setAttribute("fail", "Incorrect email or password!");
+            request.getRequestDispatcher("view/login.jsp").forward(request, response);
+        } else {
+            if (a.getRole() == 0) {
+                session.setAttribute("fail", "Your account has been locked!");
+                request.getRequestDispatcher("view/login.jsp").forward(request, response);
+            } else {//set cac thuoc tinh 
+                if (a.getPass().equals(pass)) {
+                    session.removeAttribute("fail");
+                    session.setAttribute("account", a);
+                    if (request.getParameter("remember") != null && remember.equals("1")) {
+                        session.setAttribute("email", email);
+                        session.setAttribute("pass", pass);
+                        session.setAttribute("check", remember);
+                    } else {
+                        session.removeAttribute("email");
+                        session.removeAttribute("pass");
+                        session.removeAttribute("check");
+                    }
+                    request.getRequestDispatcher("view/home.jsp").forward(request, response);
+                } else {
+                    session.setAttribute("fail", "Incorrect email or password!");
+                    request.getRequestDispatcher("view/login.jsp").forward(request, response);
+                }
+            }
+        }
     }
 
     /** 

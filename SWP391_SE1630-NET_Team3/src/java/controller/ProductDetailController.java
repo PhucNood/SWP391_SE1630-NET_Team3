@@ -5,25 +5,26 @@
 
 package controller;
 
-import dao.HomeDAO;
-import dao.impl.BlogDAOImpl;
-import dao.impl.HomeDAOImpl;
+import dao.CategoryDAO;
+import dao.ProductDAO;
+import dao.impl.CategoryDAOImpl;
+import dao.impl.ProductDAOImpl;
+import entity.Category;
+import entity.Image;
+import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 
 /**
  *
  * @author admin
  */
-public class HomeController extends HttpServlet {
+public class ProductDetailController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +41,10 @@ public class HomeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet homeController</title>");  
+            out.println("<title>Servlet ProductDetailController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet homeController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ProductDetailController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,19 +61,30 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.setAttribute("inPage", "home");
-        HomeDAO homeDAOImpl = new HomeDAOImpl();
-       
-        request.setAttribute("listNewProduct", homeDAOImpl.getNewProductsEachCategory());
-        try {
-            request.setAttribute("newBlogs", new BlogDAOImpl().searchBlogPage("", -1, -1, 3, 1));
-        } catch (SQLException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        String productID = request.getParameter("productID");
+        ProductDAO ProductDAO = new ProductDAOImpl();
+        //get product by productID
+        Product product = ProductDAO.getProductById(productID);
+        //get Image List of product
+        List<Image> listImg = product.getList();
+        
+        CategoryDAO CategoryDAO = new CategoryDAOImpl();
+        //get category of product
+        Category category = CategoryDAO.getCategoryById(product.getCategoryID());
+        //get product list of category
+        List<Product> listProductInCategory = ProductDAO.getProductListByCategoryID(product.getCategoryID());
+        //remove product in product list of category
+        for(Product item : listProductInCategory){
+            if(item.getProductID() == product.getProductID()){
+                listProductInCategory.remove(item);
+                break;
+            }
         }
-        request.getRequestDispatcher("view/home.jsp").forward(request, response);
+        request.setAttribute("listProduct", listProductInCategory);
+        request.setAttribute("category", category);
+        request.setAttribute("listImg", listImg);
+        request.setAttribute("product", product);
+        request.getRequestDispatcher("view/productDetail.jsp").forward(request, response);
     } 
 
     /** 

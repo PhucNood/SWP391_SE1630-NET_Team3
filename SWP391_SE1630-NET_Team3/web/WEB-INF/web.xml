@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>LoginController</servlet-name>
-        <servlet-class>controller.LoginController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>BlogListController</servlet-name>
         <servlet-class>controller.BlogListController</servlet-class>
     </servlet>
@@ -36,10 +32,26 @@
         <servlet-name>BlogListController</servlet-name>
         <servlet-class>controller.BlogListController</servlet-class>
     </servlet>
-    <servlet-mapping>
+    <servlet>
+        <servlet-name>ProductDetailController</servlet-name>
+        <servlet-class>controller.ProductDetailController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>LoginController</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
+        <servlet-class>controller.LoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePassController</servlet-name>
+        <servlet-class>controller.ChangePassController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InformationController</servlet-name>
+        <servlet-class>controller.InformationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeInformationController</servlet-name>
+        <servlet-class>controller.ChangeInformationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShopController</servlet-name>
         <url-pattern>/shop</url-pattern>
@@ -49,7 +61,6 @@
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>SearchController</servlet-name>
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
@@ -64,6 +75,26 @@
     <servlet-mapping>
         <servlet-name>SignoutController</servlet-name>
         <url-pattern>/signout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetailController</servlet-name>
+        <url-pattern>/productdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassController</servlet-name>
+        <url-pattern>/changepass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InformationController</servlet-name>
+        <url-pattern>/information</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeInformationController</servlet-name>
+        <url-pattern>/changeinfo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

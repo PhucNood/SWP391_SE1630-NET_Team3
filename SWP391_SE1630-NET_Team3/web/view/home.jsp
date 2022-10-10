@@ -55,16 +55,12 @@
 			<div class="sidebar-content flex-w w-full p-lr-65 js-pscroll">
 				<ul class="sidebar-link w-full">
 					<li class="p-b-13">
-						<a href="${pageContext.request.contextPath}/view/index.html" class="stext-102 cl2 hov-cl1 trans-04">
+						<a href="${pageContext.request.contextPath}/home" class="stext-102 cl2 hov-cl1 trans-04">
 							Home
 						</a>
 					</li>
 
-					<li class="p-b-13">
-						<a href="${pageContext.request.contextPath}/view/#" class="stext-102 cl2 hov-cl1 trans-04">
-							My Wishlist
-						</a>
-					</li>
+					
 
 					<li class="p-b-13">
 						<a href="${pageContext.request.contextPath}/view/#" class="stext-102 cl2 hov-cl1 trans-04">
@@ -345,17 +341,18 @@
 	<div class="sec-banner bg0 p-t-80 p-b-50">
 		<div class="container">
 			<div class="row">
+                            <c:forEach items="${listNewProduct}" var="p">
 				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
 					<!-- Block1 -->
 
 					<div class="block1 wrap-pic-w">
-						<img src="${pageContext.request.contextPath}/view/images/banner-01.jpg" alt="IMG-BANNER">
+                                            <img height="400" src="${pageContext.request.contextPath}/view/images/${p.value.getList().get(0).getImgSource()}" alt="IMG-BANNER">
 
-						<a href="${pageContext.request.contextPath}/view/product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<a href="/view/product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 
 							<div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">
-                                                                      Best Sale
+                                                                      ${p.key.getTitle()}
 								</span>
 
 								<span class="block1-info stext-102 trans-04">
@@ -371,60 +368,9 @@
 						</a>
 					</div>
 				</div>
+                                </c:forEach>
 
-				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-					<!-- Block1 -->
-					<div class="block1 wrap-pic-w">
-
-						<img src="${pageContext.request.contextPath}/view/images/banner-02.jpg" alt="IMG-BANNER">
-
-						<a href="${pageContext.request.contextPath}/view/product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-
-							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-								NEW
-								</span>
-
-								<span class="block1-info stext-102 trans-04">
-<!--									Spring 2018-->
-								</span>
-							</div>
-                                                        
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Shop Now
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-					<!-- Block1 -->
-					<div class="block1 wrap-pic-w">
-
-						<img src="${pageContext.request.contextPath}/view/images/banner-03.jpg" alt="IMG-BANNER">
-
-						<a href="${pageContext.request.contextPath}/view/product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-
-							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-<!--									Tables-->
-								</span>
-
-								<span class="block1-info stext-102 trans-04">
-									New Trend
-								</span>
-							</div>
-
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Shop Now
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -1565,6 +1511,7 @@
 			</div>
 
 			<div class="row">
+                            <c:forEach items="${newBlogs}" var="b">
 				<div class="col-sm-6 col-md-4 p-b-40">
 					<div class="blog-item">
 						<div class="hov-img0">
@@ -1581,7 +1528,7 @@
 									</span>
 
 									<span class="cl5">
-										Nancy Ward
+										${b.getAuthorName()}
 									</span>
 								</span>
 
@@ -1591,111 +1538,26 @@
 									</span>
 
 									<span class="cl5">
-										July 22, 2017 
+										${b.getCreateAt()}
 									</span>
 								</span>
 							</div>
 
 							<h4 class="p-b-12">
-								<a href="${pageContext.request.contextPath}/view/blog-detail.html" class="mtext-101 cl2 hov-cl1 trans-04">
-									8 Inspiring Ways to Wear Dresses in the Winter
+								<a href="${pageContext.request.contextPath}/view/blogList.jsp" class="mtext-101 cl2 hov-cl1 trans-04">
+									${b.getTitle()}
 								</a>
 							</h4>
 
 							<p class="stext-108 cl6">
-								Duis ut velit gravida nibh bibendum commodo. Suspendisse pellentesque mattis augue id euismod. Interdum et male-suada fames
+								${b.getContent()}
 							</p>
 						</div>
 					</div>
 				</div>
 
-				<div class="col-sm-6 col-md-4 p-b-40">
-					<div class="blog-item">
-						<div class="hov-img0">
-							<a href="${pageContext.request.contextPath}/view/blog-detail.html">
-								<img src="${pageContext.request.contextPath}/view/images/blog-02.jpg" alt="IMG-BLOG">
-							</a>
-						</div>
-
-						<div class="p-t-15">
-							<div class="stext-107 flex-w p-b-14">
-								<span class="m-r-3">
-									<span class="cl4">
-										By
-									</span>
-
-									<span class="cl5">
-										Nancy Ward
-									</span>
-								</span>
-
-								<span>
-									<span class="cl4">
-										on
-									</span>
-
-									<span class="cl5">
-										July 18, 2017
-									</span>
-								</span>
-							</div>
-
-							<h4 class="p-b-12">
-								<a href="${pageContext.request.contextPath}/view/blog-detail.html" class="mtext-101 cl2 hov-cl1 trans-04">
-									The Great Big List of Men?s Gifts for the Holidays
-								</a>
-							</h4>
-
-							<p class="stext-108 cl6">
-								Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-6 col-md-4 p-b-40">
-					<div class="blog-item">
-						<div class="hov-img0">
-							<a href="${pageContext.request.contextPath}/view/blog-detail.html">
-								<img src="${pageContext.request.contextPath}/view/images/blog-03.jpg" alt="IMG-BLOG">
-							</a>
-						</div>
-
-						<div class="p-t-15">
-							<div class="stext-107 flex-w p-b-14">
-								<span class="m-r-3">
-									<span class="cl4">
-										By
-									</span>
-
-									<span class="cl5">
-										Nancy Ward
-									</span>
-								</span>
-
-								<span>
-									<span class="cl4">
-										on
-									</span>
-
-									<span class="cl5">
-										July 2, 2017 
-									</span>
-								</span>
-							</div>
-
-							<h4 class="p-b-12">
-								<a href="${pageContext.request.contextPath}/view/blog-detail.html" class="mtext-101 cl2 hov-cl1 trans-04">
-									5 Winter-to-Spring Fashion Trends to Try Now
-								</a>
-							</h4>
-
-							<p class="stext-108 cl6">
-								Proin nec vehicula lorem, a efficitur ex. Nam vehicula nulla vel erat tincidunt, sed hendrerit ligula porttitor. Fusce sit amet maximus nunc
-							</p>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
+				
 			</div>
 		</div>
 	</section>

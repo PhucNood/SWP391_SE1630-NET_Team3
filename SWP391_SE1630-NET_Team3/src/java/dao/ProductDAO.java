@@ -15,4 +15,7 @@ public interface ProductDAO {
     public List<Product> getAllProduct();
     public List<Product> getProduct(String cid, String bid, String fid, String sid);
     public List<Product> searchListProduct(String text);
+    public List<Product> getListByPage(List<Product> listProduct,int start, int end);
+    public Product getProductById(String productID);
+    public List<Product> getProductListByCategoryID(int categoryID);
 }
