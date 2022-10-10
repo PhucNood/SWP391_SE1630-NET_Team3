@@ -43,6 +43,10 @@
                 width: auto;
                 object-fit:cover;
             }
+            .button-archive{
+                padding: 10px;
+                border-radius: 4px;
+            }
         </style>
     </head>
     <body class="animsition">

@@ -138,6 +138,38 @@ public class BlogDAOImpl extends DBContext {
         return resultList;
     }
 
+    public Blog getBlogById(int id) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT b.*,a.full_name FROM blog b \n"
+                + "INNER JOIN account a ON a.id = b.author_id\n"
+                + "WHERE b.id = ?";
+        Connection conn;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Blog resultBlog = null;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                resultBlog = new Blog();
+                resultBlog.setId(rs.getInt("id"));
+                resultBlog.setIdAuthor(rs.getInt("author_id"));
+                resultBlog.setAuthorName(rs.getNString("full_name"));
+                resultBlog.setTitle(rs.getString("title"));
+                resultBlog.setContent(rs.getNString("content"));
+                resultBlog.setCreateAt(rs.getString("created_at"));
+                resultBlog.setUpdateAt(rs.getString("update_at"));
+                resultBlog.setListImg(getBlogImage(id));
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        return resultBlog;
+    }
+
     public List<Image> getBlogImage(int blogId) throws SQLException {
         List<Image> list = new ArrayList<>();
         String sql = "SELECT blog_id,image_id,i.* \n"
@@ -189,7 +221,11 @@ public class BlogDAOImpl extends DBContext {
                 System.out.println("archive: " + archive.getMonthYear() + "|" + archive.getSearchValue());
             }
             System.out.println("total page:" + dao.getTotalSearchPage("t", 10, 2022, 3));
-
+            Blog btest = dao.getBlogById(1);
+            System.out.println(btest.getTitle() + "\n" + btest.getContent() + "\n" + btest.getCreateAt());
+            for (Image i : btest.getListImg()) {
+                System.out.println(i.getId() + " | " + i.getImgSource() + " | " + i.getName());
+            }
         } catch (SQLException ex) {
             Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

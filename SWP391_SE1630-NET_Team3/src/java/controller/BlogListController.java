@@ -74,7 +74,7 @@ public class BlogListController extends HttpServlet {
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("searchTitle", searchTitle);
             request.setAttribute("searchTime", searchTime);
-
+            
             request.setAttribute(searchTime, this);
 
             request.getRequestDispatcher("view/blogList.jsp").forward(request, response);
