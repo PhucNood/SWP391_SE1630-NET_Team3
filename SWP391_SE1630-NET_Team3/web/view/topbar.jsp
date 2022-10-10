@@ -124,7 +124,7 @@
                                 </li>
 
                                 <li class="${inPage == "contact" ? "active-menu" :""}">
-                                    <a href="${pageContext.request.contextPath}/view/contact.jsp">Contact</a>
+                                    <a href="contact">Contact</a>
 
                                 </li>
                             </ul>

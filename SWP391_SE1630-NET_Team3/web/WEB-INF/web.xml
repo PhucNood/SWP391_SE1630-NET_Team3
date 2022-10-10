@@ -52,6 +52,14 @@
         <servlet-name>ChangeInformationController</servlet-name>
         <servlet-class>controller.ChangeInformationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AboutController</servlet-name>
+        <servlet-class>controller.AboutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ContactControler</servlet-name>
+        <servlet-class>controller.ContactControler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShopController</servlet-name>
         <url-pattern>/shop</url-pattern>
@@ -95,6 +103,14 @@
     <servlet-mapping>
         <servlet-name>ChangeInformationController</servlet-name>
         <url-pattern>/changeinfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AboutController</servlet-name>
+        <url-pattern>/AboutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactControler</servlet-name>
+        <url-pattern>/contact</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -70,8 +70,8 @@ public class HomeDAOImpl extends DBContext implements dao.HomeDAO {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         HomeDAOImpl dao = new HomeDAOImpl();
-        for (Blog blog : new BlogDAOImpl().searchBlogPage("", -1, -1, 3, 1)) {
-            System.out.println(blog.getId() +" "+ blog.getListImg().get(0).getImgSource());
+        for (Product product : dao.productDAOImpl.getAllProduct()) {
+            System.out.println(product.getProductID());
         }
     }
 
