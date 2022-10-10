@@ -133,8 +133,6 @@
                         <!-- Icon header -->
                         <div class="wrap-icon-header flex-w flex-r-m h-full">
                             <ul class="main-menu">
-                                
-
                                 <c:if test="${account==null}">
                                     <li class="${inPage == "login" ? "active-menu" :""}">
                                     <a href="${pageContext.request.contextPath}/login">Login</a>
@@ -144,16 +142,31 @@
                                     <a href="${pageContext.request.contextPath}/signup">Sign Up</a>
                                 </li>
                                 </c:if>
-                                <c:if test="${account!=null}">
-                                    <li>
-                                        
-                                        <a href="#">Hello ${account.user}</a>
-                                    </li>
+                                
+                                <c:if test="${sessionScope.account!=null}">
+                                    <li>  
+                                        <c:set var="acc" value="${sessionScope.account}"/>
+                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                            <b> Hello ${account.user}${acc.role==1 ? "(Admin)" : ""}</b>
+                                        </a>
+                                        <div class="dropdown-menu rounded-0 m-0">
+                                                    <a href="information" class="dropdown-item">Edit profile</a>
+                                                    <a href="changepass" class="dropdown-item">Change password</a>
+                                                    
+                                                    <c:if test="${sessionScope.account.role==3}">
+                                                        <a href="showCart" class="dropdown-item">Cart</a>
+                                                    </c:if>
+                                                </div>
+                                    </li>                                 
                                     <li >
-                                        <a href="signout">Sign Out</a>
-                                        
+                                        <a href="signout">Sign Out</a>                                        
                                     </li>
+                                 </c:if>
+                                    <c:if test="${sessionScope.account.role==1}">
+                                    <a href="manageproduct" class="nav-item nav-link">Manage product</a>
+                                    <a href="manageaccount" class="nav-item nav-link">Manage account</a>
                                 </c:if>
+                                    
                             </ul>
                             <div class="flex-c-m h-full p-r-24">
                                 <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-modal-search">

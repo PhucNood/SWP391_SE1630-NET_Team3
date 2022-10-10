@@ -87,6 +87,11 @@
             *, *::before, *::after {
                 box-sizing: border-box;
             }
+            .sao{
+                color: red;
+                content: '*';
+                display:inline;
+            }
         </style>
     </head>
     <body class="animsition">
@@ -100,21 +105,24 @@
 
                     <form action="signup" method="post">
                         <h2>Sign Up Today</h2>
-                        <input class="input1" type="email" name= "email" placeholder="Email Address" value="${sessionScope.email}" required/>
+                        <div class="sao" >                          
+                        Email Address*<input class="input1" type="email" name= "email" placeholder="Email Address"  required/>
                         <p class="text-warning">${messMail}</p> 
-                        <input class="input1" type="text" name= "phone" placeholder="Phone" value="${sessionScope.phone}" required/>
+                        Phone*<input class="input1" type="text" name= "phone" placeholder="Phone"  required/>
                         <p class="text-warning">${messPhone}</p> 
-                        <input class="input1" type="text" name="fullname" placeholder="Your Full Name" value="${sessionScope.fullname}" required/>
-                        <input class="input1" type="text" name="username" placeholder="Username" required value="${sessionScope.username}"/>
-                        <input class="input1" type="password" name="pass" placeholder="Password" required/>
+                        FullName*<input class="input1" type="text" name="fullname" placeholder="Your Full Name"  required/>
+                        UserName*<input class="input1" type="text" name="username" placeholder="Username" required/> 
+                        Password*<input class="input1" type="password" name="pass" placeholder="Password" required/>
                         <p class="text-warning">${messPass}</p> 
-                        <input class="input1" type="password" name="repass" placeholder="Conform Password" required/>
+                        Repass*<input class="input1" type="password" name="repass" placeholder="Conform Password" required/>
                         <p class="text-warning">${messRePass}</p> 
                         <input class="input1 input2" type="submit" value="SignUp" />
                         <p class="text-warning">${messSuc}</p> 
+                        </div>
                         <p style="text-align:center;" >
                             <span>Already Register ? </span><a class="link" href="${pageContext.request.contextPath}/login">Login</a>
                         </p>
+                        
                     </form>
                 </div>
 

@@ -97,8 +97,8 @@
             }
             .sao{
                 color: red;
-            }
             
+
 
         </style>
     </head>
@@ -110,27 +110,24 @@
 
             <div class="inner-box">
 
-                <form action="login" method="post">
+                <form action="changepass" method="post">
 
-                    <h2>Login Here</h2>
-                    <div class="sao" >                        
-                    Email*<input class="input1"  name= "email" type="email" value="${sessionScope.email}"placeholder="Email" required /> 
-                    PassWord*<input class="input1" name="pass" type="password" value="${sessionScope.pass}" placeholder="Password" required />
-                    <p class="text-warning">${messAlert}</p>
-                    <p >
-                        </div>
-<!--                    <label><span class="sao">Required*</span></label>   -->
-                    <input type="checkbox"  name ="remember" ${sessionScope.check!=null ?"checked":""} value="1"/>
-                        <span>Keep me Signed In</span>
-                        <span class="forgot"><a href="${pageContext.request.contextPath}/view/recovery" style="color: #808080">Forgot Password?</a></span>
-                    </p>
-                    <input class="input1 input2" type="submit" value="Login" />
+                                    <h2>Change your pass</h2>
+                                    <div class="sao" > 
+                                    Old Pass*<input class="input1"  name= "oldpass" type="password" placeholder="Old password" value="${requestScope.oldpass}" required />
+                                    New PassWord*<input class="input1" name="newpass" type="password" placeholder="New password" value="${requestScope.newpass}" required />
+                                    Renew Pass*<input class="input1" name="renewpass" type="password" placeholder="Re-enter new pass" value="${requestScope.renewpass}" required />
+                                    </div>
+                                    <p class="text-warning">${mess}</p>
+                                    <c:if test="${messSuccessFull !=null}">
+                                        <p class="text-warning">${messSuccessFull}</p>
+                                    </c:if>
+                                    <c:if test="${messSuccessFull ==null}">
+                                        <input class="input1 input2" type="submit" value="Save" />
+                                    </c:if>
+                                    
 
-                    <p style="text-align:center;">
-                        <span>Not a member ? </span><a class="link" href="${pageContext.request.contextPath}/signup">Sign Up</a>
-                    </p>
-                    <h6 style="color: red"><i>${sessionScope.fail}</i></h6>
-                </form>
+                                </form>
 
             </div>
 
