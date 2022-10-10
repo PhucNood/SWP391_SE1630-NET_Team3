@@ -203,7 +203,7 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         List<Product> listProduct = new ArrayList<>();
         List<Image> listImg = new ArrayList<>();
         ImageDAOImpl ImageDAO = new ImageDAOImpl();
-        String sql = "select * from Product where categoryID = "+categoryID;
+        String sql = "select * from Product where categoryID = " + categoryID;
         try {
             con = getConnection();
             ps = con.prepareStatement(sql);
@@ -222,13 +222,65 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         return listProduct;
     }
 
+    @Override
+    public void deleteProductDetail(String productID) {
+        String sql = "DELETE FROM [dbo].[image_product]\n"
+                + "       WHERE product_id = " + productID
+                + "\nDELETE FROM [dbo].[product]\n"
+                + "       WHERE productID = " + productID;
+
+        try {
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateProduct(String name, String description,
+            String size, String categoryID, String brandID,
+            String quantity, String price, String sale, String productID) {
+        String sql = "UPDATE [dbo].[product]\n"
+                + "   SET [name] = ?\n"
+                + "      ,[description] = ?\n"
+                + "      ,[size] = ?\n"
+                + "      ,[categoryID] = ?\n"
+                + "      ,[brandID] = ?\n"
+                + "      ,[quantity] = ?\n"
+                + "      ,[price] = ?\n"
+                + "      ,[sale] = ?\n"
+                + " WHERE productID = ?";
+        
+        try {
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, description);
+            ps.setString(3, size);
+            ps.setInt(4, Integer.parseInt(categoryID));
+            ps.setInt(5, Integer.parseInt(brandID));
+            ps.setInt(6, Integer.parseInt(quantity));
+            ps.setFloat(7, Float.parseFloat(price));
+            ps.setInt(8, Integer.parseInt(sale));
+            ps.setInt(9, Integer.parseInt(productID));
+            ps.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
     public static void main(String[] args) {
         ProductDAOImpl d = new ProductDAOImpl();
-        List<Product> listProduct = d.searchListProduct("mit");
-        System.out.println(listProduct.get(1));
+//        List<Product> listProduct = d.searchListProduct("mit");
+//        System.out.println(listProduct.get(1));
+//
+//        Product p = d.getProductById("1");
+//        System.out.println(p.getName());
 
-        Product p = d.getProductById("1");
-        System.out.println(p.getName());
+        d.deleteProductDetail("1");
+        //System.out.println(d.getProductById("1"));
     }
 
 }

@@ -127,6 +127,15 @@
                                     <a href="contact">Contact</a>
 
                                 </li>
+                                <li class="${inPage == "manageAccount" ? "active-menu" :""}">
+
+                                    <a href="${pageContext.request.contextPath}/view/about.html">Manage Account</a>
+                                </li>
+
+                                <li class="${inPage == "manageProduct" ? "active-menu" :""}">
+                                    <a href="manageProduct">Manage Product</a>
+
+                                </li>
                             </ul>
                         </div>	
 
@@ -175,7 +184,7 @@
                             </div>
 
                             <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-                                <a href="${pageContext.request.contextPath}/view/shopingCart.jsp"/>
+                                <a href="${pageContext.request.contextPath}/cart"/>
                                 <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti" data-notify="2">
                                     <i class="zmdi zmdi-shopping-cart"></i>
                                 </div>

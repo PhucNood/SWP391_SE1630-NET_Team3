@@ -41,6 +41,38 @@
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
     <servlet>
+
+        <servlet-name>ManageProductController</servlet-name>
+        <servlet-class>controller.ManageProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteProduct</servlet-name>
+        <servlet-class>controller.DeleteProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProductController</servlet-name>
+        <servlet-class>controller.EditProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaveEditProductController</servlet-name>
+        <servlet-class>controller.SaveEditProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddProductImageController</servlet-name>
+        <servlet-class>controller.AddProductImageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaveAddImageController</servlet-name>
+        <servlet-class>controller.SaveAddImageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddProductController</servlet-name>
+        <servlet-class>controller.AddProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteProductImageController</servlet-name>
+        <servlet-class>controller.DeleteProductImageController</servlet-class>
+
         <servlet-name>ChangePassController</servlet-name>
         <servlet-class>controller.ChangePassController</servlet-class>
     </servlet>
@@ -59,6 +91,7 @@
     <servlet>
         <servlet-name>ContactControler</servlet-name>
         <servlet-class>controller.ContactControler</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>ShopController</servlet-name>
@@ -93,6 +126,38 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
+        <servlet-name>ManageProductController</servlet-name>
+        <url-pattern>/manageProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProduct</servlet-name>
+        <url-pattern>/deleteProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProductController</servlet-name>
+        <url-pattern>/editProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveEditProductController</servlet-name>
+        <url-pattern>/saveEditProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProductImageController</servlet-name>
+        <url-pattern>/addProductImage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveAddImageController</servlet-name>
+        <url-pattern>/saveAddImage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProductController</servlet-name>
+        <url-pattern>/addProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProductImageController</servlet-name>
+        <url-pattern>/deleteProductImage</url-pattern>
+
         <servlet-name>ChangePassController</servlet-name>
         <url-pattern>/changepass</url-pattern>
     </servlet-mapping>
@@ -111,6 +176,7 @@
     <servlet-mapping>
         <servlet-name>ContactControler</servlet-name>
         <url-pattern>/contact</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>
