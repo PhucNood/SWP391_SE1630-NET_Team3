@@ -88,13 +88,16 @@ public class Blog {
         this.listImg = list;
     }
     public String getFirstImgSrc(){
+        if(listImg == null || listImg.isEmpty()){
+            return "";
+        }
         return this.listImg.get(0).getImgSource();
     }
     public String getDayCreate(){
         return getCreateAt().split("-")[2];
     }
     public String getMonthYearCreate(){
-        String s = getCreateAt().split("-")[1] + "/" + getCreateAt().split("-")[0];
+        String s = getCreateAt().split("-")[0] + "-" + getCreateAt().split("-")[1];
         return s;
     }
 }
