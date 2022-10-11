@@ -72,7 +72,8 @@
     <servlet>
         <servlet-name>EditAccountRoleController</servlet-name>
         <servlet-class>controller.EditAccountRoleController</servlet-class>
-
+    </servlet>
+    <servlet>
         <servlet-name>ChangePassController</servlet-name>
         <servlet-class>controller.ChangePassController</servlet-class>
     </servlet>
@@ -169,7 +170,8 @@
     <servlet-mapping>
         <servlet-name>EditAccountRoleController</servlet-name>
         <url-pattern>/editAccountRole</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ChangePassController</servlet-name>
         <url-pattern>/changepass</url-pattern>
     </servlet-mapping>
