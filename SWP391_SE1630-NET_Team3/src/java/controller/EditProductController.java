@@ -89,7 +89,24 @@ public class EditProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        ProductDAO ProductDAO = new ProductDAOImpl();
+        String productID = request.getParameter("productID");
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        String size = request.getParameter("size");
+        String categoryID = request.getParameter("category");
+        String brandID = request.getParameter("brand");
+        String price = request.getParameter("price");
+        String quantity = request.getParameter("quantity");
+        String sale = request.getParameter("sale");
+      
+
+        ProductDAO.updateProduct(name, description, size, categoryID, brandID, quantity, price, sale, productID);
+        request.setAttribute("choice", 0);
+        request.setAttribute("messsucc", "Update product successful.");
+        Product product = ProductDAO.getProductById(productID);
+        request.setAttribute("product", product);
+        request.getRequestDispatcher("view/editProduct.jsp").forward(request, response);
     }
 
     /** 

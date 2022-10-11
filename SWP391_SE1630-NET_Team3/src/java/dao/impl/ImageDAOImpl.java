@@ -91,7 +91,7 @@ public class ImageDAOImpl extends DBContext implements ImageDAO {
         ImageDAOImpl d = new ImageDAOImpl();
         List<Image> listImg = d.getListByIdProduct(1);
         System.out.println(listImg.get(0).getImgSource());
-        d.addImage("name","nam.jpg");
-        System.out.println(d.getImageID("nam.jpg"));
+//        d.addImage("name","nam.jpg");
+        System.out.println(d.getImageID("AG-201.jpg"));
     }
 }

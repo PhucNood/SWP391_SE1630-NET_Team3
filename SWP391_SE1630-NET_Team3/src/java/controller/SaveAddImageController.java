@@ -82,7 +82,7 @@ public class SaveAddImageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        
         ProductDAO ProductDAO = new ProductDAOImpl();
         String productID = request.getParameter("productID");
         String img = request.getParameter("imgFile");
@@ -93,7 +93,7 @@ public class SaveAddImageController extends HttpServlet {
         Image_ProductDAO Image_ProductDAO = new Image_ProductDAOImpl();
         Image_ProductDAO.addImage_Product(getImageID, productID);
         
-        
+        HttpSession session = request.getSession();
         Product product = ProductDAO.getProductById(productID);
         
         BrandDAO BrandDAO = new BrandDAOImpl();

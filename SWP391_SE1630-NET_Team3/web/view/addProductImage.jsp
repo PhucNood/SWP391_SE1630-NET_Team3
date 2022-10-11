@@ -288,7 +288,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <p style="color: #44EC79; text-align: center">${messsucc}</p> 
-                        <form action="saveAddImage?productID=${product.productID}" method="post" >
+                        <form action="addProduct?productID=${product.productID}" method="post" >
                             <div class="modal-header">						
                                 <h4 class="modal-title">Add Image Of Product</h4>
                             </div>

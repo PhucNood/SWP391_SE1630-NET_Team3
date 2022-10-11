@@ -303,7 +303,7 @@
 
                                         <div>
                                             <span class="stext-105 cl3" style="width: 125px">
-                                                $<fmt:formatNumber pattern="###,###,###.##" value="${i.price*(100-i.sale)*10}"/>
+                                                <fmt:formatNumber pattern="###,###,###.##" value="${i.price*(100-i.sale)*10}"/>₫
                                                 <c:if test="${i.sale !=0}">
                                                     &nbsp;&nbsp;(-${i.sale}%)
                                                 </c:if>
@@ -311,7 +311,7 @@
 
                                             <c:if test="${i.sale !=0}">
                                                 <del class="stext-105 cl3">
-                                                    $<fmt:formatNumber pattern="###,###,###.##" value="${i.price*1000}"/>
+                                                    <fmt:formatNumber pattern="###,###,###.##" value="${i.price*1000}"/>₫
                                                 </del>
                                             </c:if>
                                         </div>

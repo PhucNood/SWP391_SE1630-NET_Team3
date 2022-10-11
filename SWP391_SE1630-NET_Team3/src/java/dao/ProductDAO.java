@@ -22,4 +22,8 @@ public interface ProductDAO {
     public void updateProduct(String name, String description,
             String size, String categoryID, String brandID,
             String quantity, String price, String sale, String productID);
+    public void addProduct(String name, String description, 
+            String size, String categoryID, String brandID,
+            String quantity, String price, String sale);
+    public String getIdOfProduct();
 }

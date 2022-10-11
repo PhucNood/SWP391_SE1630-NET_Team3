@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!DOCTYPE html>
@@ -9,22 +9,6 @@
         <title>Billard Shop</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">-->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
-        <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
-
-        <!-- Google Web Fonts -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-        <!-- Font Awesome -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-
-        <!-- Libraries Stylesheet -->
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
         <!--===============================================================================================-->	
         <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/view/images/icons/favicon.png"/>
         <!--===============================================================================================-->
@@ -51,10 +35,23 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/MagnificPopup/magnific-popup.css">
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/perfect-scrollbar/perfect-scrollbar.css">
+
+        <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/util.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/main.css">
-
         <!--===============================================================================================-->
         <style>
 
@@ -278,22 +275,6 @@
                 clear: both !important;
             }
 
-            .button {
-                background-color: #808080; /* Green */
-                border: none;
-                color: white;
-                padding: 15px 32px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 4px 2px;
-                cursor: pointer;
-                width: 80px;
-                height: 80px;
-            }
-            
-            
         </style>
     </head>
     <body class="animsition">
@@ -305,79 +286,29 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <p style="color: #44EC79; text-align: center">${messsucc}</p> 
-                        <form action="editProduct?productID=${product.productID}" method="post" >
+                        <c:set var="user" value="${sessionScope.account.username}"/>
+                        <form action="editAccountRole?email=${account.email}" method="post" >
                             <div class="modal-header">						
-                                <h4 class="modal-title">Edit product</h4>
+                                <h4 class="modal-title">Edit Account</h4>
                             </div>
+                            <p style="text-align: center; font-weight: 1000">${account.email}</p>
                             <div class="modal-body">					
 
                                 <div class="form-group">
-                                    <label>Product name</label>
-                                    <input name="name" type="text" class="form-control" required value="${product.name}">
-                                </div>
-                                <div class="form-group">
-                                    <label>Category</label>
-                                    <select name="category" class="form-select" aria-label="Default select example"">
-                                        <c:forEach items="${listCategory}" var="i">
-                                            <option value="${i.categoryID}">${i.title}</option>
-
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Brand</label>
-                                    <select name="brand" class="form-select" aria-label="Default select example">
-                                        <c:forEach items="${listBrand}" var="i">
-                                            <option value="${i.brandID}" selected>${i.title}</option>
-
-                                        </c:forEach>
-                                    </select>
-                                </div>     
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea name="description" type="text" class="form-control">${product.description}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Price</label>
-                                    <input type="number" name="price" min="0" class="form-control" value="${product.price}">
-                                </div>
-                                <div class="form-group" >
-                                    <label>Image</label>
-
-                                    <c:forEach var="j" items="${product.list}">
-                                        <div class="col-sm-6 col-md-4 col-lg-3 ">
-                                            <c:set var="img" value="${j.imgSource}"/>
-                                            <img src="view/images/${img}" width="80" height="80" >
-                                            <a href="deleteProductImage?productID=${product.productID}&img=${img}" onclick="alertUser(${product.productID},${img})" >
-                                                <i style="font-size:24px; color: black" class="fa">&#xf014;</i>
-                                            </a>
-                                        </div>
-                                    </c:forEach>  
-                                    <a type="button" href="addProductImage?productID=${product.productID}" class="btn btn-success" data-dismiss="modal" value="Cancel">
-                                        <i style="font-size:24px; color: WHITE" class="fa">&#xf055;</i>
-                                    </a>
+                                    <label>Set Role</label></br>
+                                    <div class="col-sm-6 col-md-6 ">
+                                        <input  name="role" value="2" type="radio" ${account.role == 2 ? "checked":""}>&nbsp;Employee
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 ">
+                                        <input name="role" value="3" type="radio" ${account.role == 3 ? "checked":""}>&nbsp;Customer
+                                    </div>
                                     
                                 </div>
-                                <div class="form-group" style="clear: both">
-                                    <label>Quantity</label>
-                                    <input type="number" name="quantity" class="form-control" min="0" value="${product.quantity}" >
-                                </div>
-                                <div class="form-group">
-                                    <label>Size</label>
-                                    <input name="size" class="form-control" required value="${product.size}">
-                                </div>
 
-
-
-                                <div class="form-group">
-                                    <label>Sale(%)</label>
-                                    <input type="number" name="sale" class="form-control" required value="${product.sale}">
-                                </div>
                             </div>
                             <div class="modal-footer">
-                                <a type="button" href="manageProduct" class="btn btn-success" data-dismiss="modal" value="Cancel">Cancel</a>
+                                <a type="button" href="manageAccount" class="btn btn-success" data-dismiss="modal" value="Cancel">Cancel</a>
                                 <input type="submit" class="btn btn-success" value="Save">
-
                             </div>
                         </form>
                     </div>
@@ -387,28 +318,7 @@
 
         <jsp:include page="footer.jsp"/>
 
-        <script>
-            function alertUser(productID,img) {
-                var option = confirm('Are you sure to delete?');
-                if (option === true) {
-                    window.location.href = location.href;
-                }
-            }
-            
-            function previewFile() {
-                var preview = document.querySelector('.change-img');
-                var file = document.querySelector('input[type=file]').files[0];
-                var reader = new FileReader();
-                reader.onloadend = function () {
-                    preview.src = reader.result;
-                };
-                if (file) {
-                    reader.readAsDataURL(file);
-                } else {
-                    preview.src = "";
-                }
-            }
-        </script>
+
 
     </body>
 </html>

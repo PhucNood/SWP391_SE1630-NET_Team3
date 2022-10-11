@@ -121,12 +121,33 @@ public class AccountDAOImpl extends DBContext implements AccountDAO{
         }
 
     }
+    
+    @Override
+    public void updateAccountRole(String email, String role) {
+        String sql = "UPDATE [dbo].[Account]"
+                + " set role = ? "
+                + "where email = ?";
+        
+        try {
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, role);
+            ps.setString(2, email);
+            ps.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+
+    }
+    
 
     public static void main(String[] args) {
         AccountDAOImpl d = new AccountDAOImpl();
-        List<Account> list = d.getListAccount();
-        Account a = d.getAccByEmail("quochung123@gmail.com");
-        System.out.println(a.getPass());
-        System.out.println(list.get(1).getFullname());
+//        List<Account> list = d.getListAccount();
+//        Account a = d.getAccByEmail("quochung123@gmail.com");
+//        System.out.println(a.getPass());
+//        System.out.println(list.get(1).getFullname());
+        d.updateAccountRole("phuctolai@gmail.com", "3");
     }
 }
