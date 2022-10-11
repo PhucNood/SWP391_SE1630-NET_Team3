@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!DOCTYPE html>
@@ -260,6 +260,45 @@
                 content: " " ;
                 clear: both !important;
             }
+
+            .pagination {
+                display: flex;
+                padding-left: 0;
+                list-style: none;
+            }
+            .pagination-lg .page-l {
+                padding: 0.75rem 1.5rem;
+                font-size: 1.25rem;
+                line-height: 1.5;
+            }
+            .page-l{
+                position: relative;
+                display: block;
+                padding: 0.5rem 0.75rem;
+                margin-left: -1px;
+                line-height: 1.25;
+                color: #999999;
+                background-color: #fff;
+                border: 1px solid #e9ecef;
+            }
+
+
+            .pagination-sm .page-l {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.875rem;
+                line-height: 1.5;
+            }
+            .page-i.active .page-l {
+                color: #fff;
+                background-color: #808080;
+                border-color: #808080;
+            }
+            .page-i .page-l {
+                color: #808080;
+                background-color: #fff;
+                border-color: #808080;
+            }
+
         </style>
     </head>
     <body class="animsition">
@@ -268,6 +307,141 @@
 
         <div class="container">
             <div class="table-wrapper">
+                <div class="flex-w flex-sb-m p-b-52">
+                    <div class="flex-w flex-l-m filter-tope-group m-tb-10">
+                        <a href="manageProduct?categoryID=0" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${(categoryID == 0) ? "how-active1" : ""}">
+                            All Products
+                        </a>
+
+                        <a href="manageProduct?categoryID=1" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${(categoryID == 1) ? "how-active1" : ""}"  >
+                            Cues
+                        </a>
+
+                        <a href="manageProduct?categoryID=2" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${(categoryID == 2) ? "how-active1" : ""}" >
+                            Balls
+                        </a>
+
+                        <a href="manageProduct?categoryID=3" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${(categoryID == 3) ? "how-active1" : ""}" >
+                            Tables
+                        </a>
+
+
+                    </div>
+
+                    <div class="flex-w flex-c-m m-tb-10">
+                        <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+                            <i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+                            <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                            Filter
+                        </div>
+
+                        <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+                            <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+                            <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                            Search
+                        </div>
+                    </div>
+
+                    <!-- Search product -->
+                    <div class="dis-none panel-search w-full p-t-10 p-b-15">
+                        <form class="example" action="searchInManage" method="get">
+                            <input type="text" placeholder="Search by name, brand,.." name="text" value="${requestScope.textSearch}">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+
+                    <!-- Filter -->
+                    <div class="dis-none panel-filter w-full p-t-10">
+                        <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+                            <div class="filter-col1 p-r-15 p-b-27">
+                                <div class="mtext-102 cl2 p-b-15">
+                                    Sort By
+                                </div>
+
+                                <ul>
+
+                                    <li class="p-b-6">
+                                        <a href="${doSearch == "1" ? "searchInManage" : "manageProduct"}?sortID=1" class="filter-link stext-106 trans-04 ${(sortID == "1") ? "filter-link-active" :""}">
+                                            Price: High to Low
+                                        </a>
+                                    </li>
+
+                                    <li class="p-b-6">
+                                        <a href="${doSearch == "1" ? "searchInManage" : "manageProduct"}?sortID=2" class="filter-link stext-106 trans-04 ${(sortID == "2") ? "filter-link-active" :""}">
+                                            Price: Low to High
+                                        </a>
+                                    </li>
+
+                                    <li class="p-b-6">
+                                        <a href="${doSearch == "1" ? "searchInManage" : "manageProduct"}?sortID=3" class="filter-link stext-106 trans-04 ${(sortID == "3") ? "filter-link-active" :""}">
+                                            Sale: High to Low
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="filter-col2 p-r-15 p-b-27">
+                                <div class="mtext-102 cl2 p-b-15">
+                                    Listed Price
+                                </div>
+
+                                <ul>
+                                    <li class="p-b-6">
+                                        <a href="${doSearch == "1" ? "searchInManage" : "manageProduct"}?filterID=0" class="filter-link stext-106 trans-04 ${(filterID == "0") ? "filter-link-active" : ""}">
+                                            All
+                                        </a>
+                                    </li>
+
+                                    <li class="p-b-6">
+                                        <a href="${doSearch == "1" ? "searchInManage" : "manageProduct"}?filterID=1" class="filter-link stext-106 trans-04 ${(filterID == "1") ? "filter-link-active" : ""}">
+                                            $0 - $5.000.000
+                                        </a>
+                                    </li>
+
+                                    <li class="p-b-6">
+                                        <a href="${doSearch == "1" ? "searchInManage" : "manageProduct"}?filterID=2" class="filter-link stext-106 trans-04 ${(filterID == "2") ? "filter-link-active" : ""}">
+                                            $5.000.000 - $10.000.000
+                                        </a>
+                                    </li>
+
+                                    <li class="p-b-6">
+                                        <a href="${doSearch == "1" ? "searchInManage" : "manageProduct"}?filterID=3" class="filter-link stext-106 trans-04 ${(filterID == "3") ? "filter-link-active" : ""}">
+                                            $10.000.000 - $100.000.000
+                                        </a>
+                                    </li>
+                                    <li class="p-b-6">
+                                        <a href="${doSearch == "1" ? "searchInManage" : "manageProduct"}?filterID=4" class="filter-link stext-106 trans-04 ${(filterID == "4") ? "filter-link-active" : ""}">
+                                            $100.000.000++
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="filter-col3 p-r-15 p-b-27">
+                                <div class="mtext-102 cl2 p-b-15">
+                                    Brand
+                                </div>
+
+                                <ul>
+                                    <li class="p-b-6">
+                                        <a href="${doSearch == "1" ? "searchInManage" : "manageProduct"}?brandID=0" class="filter-link stext-106 trans-04 ${(brandID == 0 ? "filter-link-active" : "")}">
+                                            All
+                                        </a>
+                                    </li>
+                                    <c:forEach items="${listB}" var="i">
+                                        <li class="p-b-6">
+                                            <a href="${doSearch == "1" ? "searchInManage" : "manageProduct"}?brandID=${i.brandID}" class="filter-link stext-106 trans-04 ${(brandID == i.brandID ? "filter-link-active" : "")}">
+                                                ${i.title}
+                                            </a>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
                 <div class="table-title">
                     <div class="rowss">
                         <div class="col-sm-6">
@@ -279,12 +453,7 @@
                         </a>
                     </div>
                 </div>
-                <div class=" w-full p-t-10 p-b-15">
-                    <form class="example" action="search" method="get">
-                        <input type="text" placeholder="Search by name, brand,.." name="text" value="${requestScope.textSearch}">
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
-                </div>
+
 
                 <table class="table table-striped table-hover">
                     <thead>
@@ -311,12 +480,12 @@
                                 <td>
                                     <img width="120px" src="view/images/${img}">
                                 </td>
-                                <td>${o.price}₫</td>
+                                <td><fmt:formatNumber pattern="###,###,###.##" value="${o.price*1000}"/>₫</td>
                                 <td>${o.sale}%</td>
                                 <td>
                                     <a href="editProduct?productID=${o.productID}" >
-                                    <i style="font-size:24px; color: black" class="fa">	&#xf044;</i>
-                                    &nbsp;&nbsp; 
+                                        <i style="font-size:24px; color: black" class="fa">	&#xf044;</i>
+                                        &nbsp;&nbsp; 
                                     </a>
                                     <a href="#" onclick="alertUser(${o.productID})" class="delete" data-toggle="modal">
                                         <i style="font-size:24px; color: black" class="fa">&#xf014;</i>
@@ -329,27 +498,31 @@
                 </table>
                 <p class="alert-warning">${messAlert}</p>
 
-                <div class="clearfix">
-                    
-
+                <div class="col-12 pb-1">
                     <nav aria-label="Page navigation">
-                        <ul class="pagination justify-content-center mb-3">
-                            <li class="pagfootere-item disabled">
-                                <a class="page-link" href="${sessionScope.servs}?index=${page!=1?(page-1):(page)}&txt=${txtSearch}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <c:forEach begin="1" end="${endPage}" var="i">
-                                <li class="page-item "><a class=" ${page == i ?"active":""} page-link btn btn-default" href="${sessionScope.servs}?index=${i}&txt=${txtSearch}">${i}</a></li>
+                        <c:if test="${sessionScope.listProduct != null}">
+                            <ul class="pagination justify-content-center mb-3">
+                                <li class="page-i ${page==1?"disabled":""}">
+                                    <a class="page-l" href="${doSearch == "1" ? "searchInManage" : "manageProduct"}?page=${page-1}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <c:set var="page" value="${requestScope.page}"/>
+                                <c:forEach begin="${1}" end="${requestScope.num}" var="j">
+                                    <li class="page-i ${page==j?"active":""}" >
+                                        <a class="page-l" href="${doSearch == "1" ? "searchInManage" : "manageProduct"}?page=${j}">${j}</a>
+                                    </li>
                                 </c:forEach>
-                            <li class="page-item">
-                                <a class="page-link" href="${sessionScope.servs}?index=${page!=endPage?(page+1):(page)}&txt=${txtSearch}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
+                                <li class="page-i ${page==num?"disabled":""}">
+                                    <a class="page-l" 
+                                       href="${doSearch == "1" ? "searchInManage" : "manageProduct"}?page=${page+1}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </c:if>
                     </nav>
                 </div>
             </div>

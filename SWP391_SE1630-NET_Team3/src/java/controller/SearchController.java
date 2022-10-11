@@ -124,7 +124,7 @@ public class SearchController extends HttpServlet {
         
         int size = newList.size();
         int page, numberpage = 8;
-        int number = (size % 8 == 0 ? (size / 8) : ((size / 8) + 1));
+        int number = (size % numberpage == 0 ? (size / numberpage) : ((size / numberpage) + 1));
         String xpage = request.getParameter("page");
         if (xpage == null) {
             page = 1;

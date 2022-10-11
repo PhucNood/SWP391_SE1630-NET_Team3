@@ -292,8 +292,8 @@
                 width: 80px;
                 height: 80px;
             }
-            
-            
+
+
         </style>
     </head>
     <body class="animsition">
@@ -305,7 +305,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <p style="color: #44EC79; text-align: center">${messsucc}</p> 
-                        <form action="saveAddProduct" method="post" >
+                        <form action="addProduct" method="post" >
                             <div class="modal-header">						
                                 <h4 class="modal-title">Edit product</h4>
                             </div>
@@ -343,26 +343,23 @@
                                 </div>
                                 <div class="form-group" >
                                     <label>Image</label>
-
-                                    <a type="button" href="addImageProduct" class="btn btn-success" data-dismiss="modal" value="Cancel">
-                                        <i style="font-size:24px; color: WHITE" class="fa">&#xf055;</i>
-                                    </a>
-                                    
+                                    <input  onchange="previewFile()" type="file" name="imgFile" class="form-control" value="view/images/${img}">
+                                    <img class="change-img" src="view/images/${img}" height="200" alt="Image preview...">
                                 </div>
                                 <div class="form-group" style="clear: both">
                                     <label>Quantity</label>
-                                    <input type="number" name="quantity" class="form-control" min="0" value="${product.quantity}" >
+                                    <input type="number" name="quantity" class="form-control" min="0" " >
                                 </div>
                                 <div class="form-group">
                                     <label>Size</label>
-                                    <input name="size" class="form-control" required value="${product.size}">
+                                    <input name="size" class="form-control" required ">
                                 </div>
 
 
 
                                 <div class="form-group">
                                     <label>Sale(%)</label>
-                                    <input type="number" name="sale" class="form-control" required value="${product.sale}">
+                                    <input type="number" name="sale" class="form-control" required >
                                 </div>
                             </div>
                             <div class="modal-footer">

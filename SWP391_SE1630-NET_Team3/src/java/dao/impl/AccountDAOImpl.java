@@ -121,6 +121,19 @@ public class AccountDAOImpl extends DBContext implements AccountDAO{
         }
 
     }
+
+    
+    @Override
+    public void updateAccountRole(String email, String role) {
+        String sql = "UPDATE [dbo].[Account]"
+                + " set role = ? "
+                + "where email = ?";
+        
+        try {
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, role);
+
     public void ChangePass(String email, String password) {
         String sql = "UPDATE [dbo].[account]\n"
                 + "   SET [password] = ?\n"
@@ -129,11 +142,18 @@ public class AccountDAOImpl extends DBContext implements AccountDAO{
             con = getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, password);
+
             ps.setString(2, email);
             ps.executeUpdate();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+       
+
+    }
+    
+
     }
     
     public void UpdateInfo(String email, String phone, String fullname, String user) {
@@ -155,14 +175,19 @@ public class AccountDAOImpl extends DBContext implements AccountDAO{
         }
     }
 
+
     public static void main(String[] args) {
         AccountDAOImpl d = new AccountDAOImpl();
 //        List<Account> list = d.getListAccount();
 //        Account a = d.getAccByEmail("quochung123@gmail.com");
 //        System.out.println(a.getPass());
 //        System.out.println(list.get(1).getFullname());
+
+        d.updateAccountRole("phuctolai@gmail.com", "3");
+
         d.ChangePass("leetung@gmail.com","Tungfif");
         Account a = d.getAccByEmail("leetung@gmail.com");
         System.out.println(a.getPass());
+
     }
 }

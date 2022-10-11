@@ -97,7 +97,9 @@
                         <!-- Logo desktop -->		
                         <a href="home" class="logo">
 
+
                             <img src="${pageContext.request.contextPath}/view/images/T3.jpeg" alt="IMG-LOGO">
+
 
                         </a>
 
@@ -129,7 +131,7 @@
                                 </li>
                                 <li class="${inPage == "manageAccount" ? "active-menu" :""}">
 
-                                    <a href="${pageContext.request.contextPath}/view/about.html">Manage Account</a>
+                                    <a href="manageAccount">Manage Account</a>
                                 </li>
 
                                 <li class="${inPage == "manageProduct" ? "active-menu" :""}">

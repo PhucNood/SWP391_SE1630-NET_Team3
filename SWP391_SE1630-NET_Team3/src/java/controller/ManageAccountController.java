@@ -5,21 +5,22 @@
 
 package controller;
 
-import dao.ProductDAO;
-import dao.impl.ProductDAOImpl;
-import entity.Product;
+import dao.AccountDAO;
+import dao.impl.AccountDAOImpl;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
  * @author admin
  */
-public class SaveEditProductController extends HttpServlet {
+public class ManageAccountController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,10 +37,10 @@ public class SaveEditProductController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SaveEditProductController</title>");  
+            out.println("<title>Servlet ManageAccountController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SaveEditProductController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ManageAccountController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,7 +57,10 @@ public class SaveEditProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        AccountDAO AccountDAO = new AccountDAOImpl();
+        List<Account> listAccount = AccountDAO.getListAccount();
+        request.setAttribute("listAccount", listAccount);
+        request.getRequestDispatcher("view/manageAccount.jsp").forward(request, response);
     } 
 
     /** 
@@ -69,24 +73,7 @@ public class SaveEditProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        ProductDAO ProductDAO = new ProductDAOImpl();
-        String productID = request.getParameter("productID");
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        String size = request.getParameter("size");
-        String categoryID = request.getParameter("category");
-        String brandID = request.getParameter("brand");
-        String price = request.getParameter("price");
-        String quantity = request.getParameter("quantity");
-        String sale = request.getParameter("sale");
-      
-
-        ProductDAO.updateProduct(name, description, size, categoryID, brandID, quantity, price, sale, productID);
-        request.setAttribute("choice", 0);
-        request.setAttribute("messsucc", "Update product successful.");
-        Product product = ProductDAO.getProductById(productID);
-        request.setAttribute("product", product);
-        request.getRequestDispatcher("view/editProduct.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 
