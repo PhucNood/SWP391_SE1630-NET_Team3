@@ -19,12 +19,11 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-public class AccountDAOImpl extends DBContext implements AccountDAO{
+public class AccountDAOImpl extends DBContext implements AccountDAO {
 
     Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-
 
     public List<Account> getListAccount() {
         List<Account> list = new ArrayList<>();
@@ -91,6 +90,7 @@ public class AccountDAOImpl extends DBContext implements AccountDAO{
         return null;
     }
 
+    @Override
     public void addAccount(String email, String phone, String fullname, String username, String password) {
         String sql = "INSERT INTO [dbo].[account]\n"
                 + "           ([full_name]\n"
@@ -122,17 +122,22 @@ public class AccountDAOImpl extends DBContext implements AccountDAO{
 
     }
 
-    
     @Override
     public void updateAccountRole(String email, String role) {
         String sql = "UPDATE [dbo].[Account]"
                 + " set role = ? "
                 + "where email = ?";
-        
+
         try {
             con = getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, role);
+            ps.setString(2, email);
+            ps.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void ChangePass(String email, String password) {
         String sql = "UPDATE [dbo].[account]\n"
@@ -149,13 +154,9 @@ public class AccountDAOImpl extends DBContext implements AccountDAO{
             Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-       
-
     }
-    
 
-    }
-    
+    @Override
     public void UpdateInfo(String email, String phone, String fullname, String user) {
         String sql = "UPDATE [dbo].[account]\n"
                 + "   SET [phone] = ?\n"
@@ -175,7 +176,6 @@ public class AccountDAOImpl extends DBContext implements AccountDAO{
         }
     }
 
-
     public static void main(String[] args) {
         AccountDAOImpl d = new AccountDAOImpl();
 //        List<Account> list = d.getListAccount();
@@ -185,7 +185,7 @@ public class AccountDAOImpl extends DBContext implements AccountDAO{
 
         d.updateAccountRole("phuctolai@gmail.com", "3");
 
-        d.ChangePass("leetung@gmail.com","Tungfif");
+        d.ChangePass("leetung@gmail.com", "Tungfif");
         Account a = d.getAccByEmail("leetung@gmail.com");
         System.out.println(a.getPass());
 
