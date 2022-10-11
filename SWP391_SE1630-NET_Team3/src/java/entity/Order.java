@@ -116,5 +116,28 @@ public class Order {
     public Order() {
     }
 
+    public Account getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(Account orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public Order(int orderID, int accountID, String name, String mail, String status, String phone, String address, String note, Date createAt, Date editAt, Account orderBy, Collection<Product> products) {
+        this.orderID = orderID;
+        this.accountID = accountID;
+        this.name = name;
+        this.mail = mail;
+        this.status = status;
+        this.phone = phone;
+        this.address = address;
+        this.note = note;
+        this.createAt = createAt;
+        this.editAt = editAt;
+        this.orderBy = orderBy;
+        this.products = products;
+    }
+
     
 }

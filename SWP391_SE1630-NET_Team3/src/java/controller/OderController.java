@@ -14,9 +14,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author admin
+ * @author ACER
  */
-public class AddProductController extends HttpServlet {
+public class OderController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,15 +33,13 @@ public class AddProductController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddProductController</title>");  
+            out.println("<title>Servlet OderController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddProductController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet OderController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-        
-       
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,7 +53,7 @@ public class AddProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+       request.getRequestDispatcher("view/shopingCart.jsp").forward(request, response);
     } 
 
     /** 

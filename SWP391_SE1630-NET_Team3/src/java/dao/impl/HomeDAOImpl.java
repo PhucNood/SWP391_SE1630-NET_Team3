@@ -69,10 +69,12 @@ public class HomeDAOImpl extends DBContext implements dao.HomeDAO {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        HomeDAOImpl dao = new HomeDAOImpl();
-        for (Product product : dao.productDAOImpl.getAllProduct()) {
-            System.out.println(product.getProductID());
-        }
+//        HomeDAOImpl dao = new HomeDAOImpl();
+//        for (Product product : dao.productDAOImpl.getAllProduct()) {
+//            System.out.println(product.getProductID());
+//        }
+               System.out.println(java.time.LocalDateTime.now());    
+
     }
 
 }
