@@ -4,6 +4,7 @@
  */
 package dao.impl;
 
+import dao.BlogDAO;
 import entity.Archive;
 import entity.Blog;
 import entity.Image;
@@ -20,9 +21,10 @@ import java.util.logging.Logger;
  *
  * @author stick
  */
-public class BlogDAOImpl extends DBContext {
+public class BlogDAOImpl extends DBContext implements BlogDAO{
 
     // <editor-fold defaultstate="collapsed" desc="simple get blog arraylist and get image of an blog">
+    @Override
     public List<Blog> searchBlogPage(String searchTitle, int month, int year, int numPerPage, int curPage) throws SQLException, ClassNotFoundException {
         List<Blog> list = new ArrayList<>();
         String searchMonth = "";
@@ -75,6 +77,7 @@ public class BlogDAOImpl extends DBContext {
         return list;
     }
 
+    @Override
     public int getTotalSearchPage(String searchTitle, int month, int year, int numPerPage) throws SQLException, ClassNotFoundException {
         String searchMonth = "";
         String searchYear = "";
@@ -108,6 +111,7 @@ public class BlogDAOImpl extends DBContext {
         return totalPage;
     }
 
+    @Override
     public List<Archive> getAllArchive() throws SQLException, ClassNotFoundException {
         List<Archive> resultList = new ArrayList<>();
 
@@ -138,6 +142,7 @@ public class BlogDAOImpl extends DBContext {
         return resultList;
     }
 
+    @Override
     public Blog getBlogById(int id) throws SQLException, ClassNotFoundException {
         String sql = "SELECT b.*,a.full_name FROM blog b \n"
                 + "INNER JOIN account a ON a.id = b.author_id\n"

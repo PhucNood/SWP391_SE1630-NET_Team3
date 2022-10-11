@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dao.BlogDAO;
 import dao.impl.BlogDAOImpl;
 import entity.Archive;
 import entity.Blog;
@@ -17,6 +18,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -36,7 +39,7 @@ public class BlogListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BlogDAOImpl blogDAO = new BlogDAOImpl();
+        BlogDAO blogDAO = new BlogDAOImpl();
         List<Blog> blogList = null;
         List<Archive> archiveList = null;
         try {
