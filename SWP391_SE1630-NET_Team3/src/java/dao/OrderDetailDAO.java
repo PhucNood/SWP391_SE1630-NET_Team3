@@ -4,7 +4,7 @@
  */
 package dao;
 
-import entity.Order;
+import entity.OrderDetail;
 import entity.Product;
 import java.util.Collection;
 
@@ -12,8 +12,8 @@ import java.util.Collection;
  *
  * @author ACER
  */
-public interface OrderDAO {
-    public Collection<Order> getOrders();
-    public Order getOrderbyID(int id);
-
+public interface OrderDetailDAO {
+    
+        public Collection<OrderDetail> getAllOrderDetail();
+        public Collection<Product> getProductsByOrder(int orderID);
 }

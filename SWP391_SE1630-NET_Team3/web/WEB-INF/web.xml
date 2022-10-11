@@ -25,14 +25,6 @@
         <servlet-class>controller.SignoutController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SearchController</servlet-name>
-        <servlet-class>controller.SearchController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BlogListController</servlet-name>
-        <servlet-class>controller.BlogListController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ProductDetailController</servlet-name>
         <servlet-class>controller.ProductDetailController</servlet-class>
     </servlet>
@@ -41,7 +33,6 @@
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>ManageProductController</servlet-name>
         <servlet-class>controller.ManageProductController</servlet-class>
     </servlet>
@@ -72,7 +63,8 @@
     <servlet>
         <servlet-name>DeleteProductImageController</servlet-name>
         <servlet-class>controller.DeleteProductImageController</servlet-class>
-
+    </servlet>
+    <servlet>
         <servlet-name>ChangePassController</servlet-name>
         <servlet-class>controller.ChangePassController</servlet-class>
     </servlet>
@@ -91,7 +83,10 @@
     <servlet>
         <servlet-name>ContactControler</servlet-name>
         <servlet-class>controller.ContactControler</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>OderController</servlet-name>
+        <servlet-class>controller.OderController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShopController</servlet-name>
@@ -126,7 +121,6 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>ManageProductController</servlet-name>
         <url-pattern>/manageProduct</url-pattern>
     </servlet-mapping>
@@ -157,7 +151,8 @@
     <servlet-mapping>
         <servlet-name>DeleteProductImageController</servlet-name>
         <url-pattern>/deleteProductImage</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ChangePassController</servlet-name>
         <url-pattern>/changepass</url-pattern>
     </servlet-mapping>
@@ -176,11 +171,15 @@
     <servlet-mapping>
         <servlet-name>ContactControler</servlet-name>
         <url-pattern>/contact</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OderController</servlet-name>
+        <url-pattern>/oder</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+   
 </web-app>
