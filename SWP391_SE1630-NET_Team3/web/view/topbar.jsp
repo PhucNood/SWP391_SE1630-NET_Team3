@@ -124,7 +124,16 @@
                                 </li>
 
                                 <li class="${inPage == "contact" ? "active-menu" :""}">
-                                    <a href="${pageContext.request.contextPath}/view/contact.jsp">Contact</a>
+                                    <a href="contact">Contact</a>
+
+                                </li>
+                                <li class="${inPage == "manageAccount" ? "active-menu" :""}">
+
+                                    <a href="${pageContext.request.contextPath}/view/about.html">Manage Account</a>
+                                </li>
+
+                                <li class="${inPage == "manageProduct" ? "active-menu" :""}">
+                                    <a href="manageProduct">Manage Product</a>
 
                                 </li>
                             </ul>
@@ -133,7 +142,7 @@
                         <!-- Icon header -->
                         <div class="wrap-icon-header flex-w flex-r-m h-full">
                             <ul class="main-menu">
-                                <c:if test="${account==null}">
+                                <c:if test="${sessionScope.account==null}">
                                     <li class="${inPage == "login" ? "active-menu" :""}">
                                     <a href="${pageContext.request.contextPath}/login">Login</a>
                                 </li>
@@ -161,11 +170,12 @@
                                     <li >
                                         <a href="signout">Sign Out</a>                                        
                                     </li>
-                                 </c:if>
+                                
                                     <c:if test="${sessionScope.account.role==1}">
                                     <a href="manageproduct" class="nav-item nav-link">Manage product</a>
                                     <a href="manageaccount" class="nav-item nav-link">Manage account</a>
                                 </c:if>
+                                     </c:if>
                                     
                             </ul>
                             <div class="flex-c-m h-full p-r-24">
@@ -175,7 +185,7 @@
                             </div>
 
                             <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-                                <a href="${pageContext.request.contextPath}/view/shopingCart.jsp"/>
+                                <a href="${pageContext.request.contextPath}/oder"/>
                                 <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti" data-notify="2">
                                     <i class="zmdi zmdi-shopping-cart"></i>
                                 </div>
