@@ -5,19 +5,9 @@
 
 package controller;
 
-import dao.BrandDAO;
-import dao.CategoryDAO;
-import dao.ImageDAO;
-import dao.Image_ProductDAO;
-import dao.ProductDAO;
-import dao.impl.BrandDAOImpl;
-import dao.impl.CategoryDAOImpl;
-import dao.impl.ImageDAOImpl;
-import dao.impl.Image_ProductDAOImpl;
-import dao.impl.ProductDAOImpl;
-import entity.Brand;
-import entity.Category;
-import entity.Product;
+import dao.AccountDAO;
+import dao.impl.AccountDAOImpl;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -25,13 +15,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
- * @author admin
+ * @author FPT SHOP DOAN HUNG
  */
-public class AddProductController extends HttpServlet {
+public class ChangeInformationController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -48,15 +39,13 @@ public class AddProductController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddProductController</title>");  
+            out.println("<title>Servlet ChangeInformationController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddProductController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ChangeInformationController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-        
-       
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -71,13 +60,29 @@ public class AddProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
-        BrandDAO BrandDAO = new BrandDAOImpl();
-        List<Brand> listBrand = BrandDAO.getAllBrand();
-        session.setAttribute("listBrand", listBrand);
-        CategoryDAO CategoryDAO = new CategoryDAOImpl();
-        List<Category> listCategory = CategoryDAO.getAllCategory();
-        session.setAttribute("listCategory",listCategory);
-        request.getRequestDispatcher("view/addProduct.jsp").forward(request, response);
+        String phonePattern = "^[0-9]{10}";
+        Pattern pho = Pattern.compile(phonePattern);
+        Account a = (Account) session.getAttribute("account");
+        String email = a.getEmail();
+        String phone = request.getParameter("phone").trim();
+        String name = request.getParameter("fullname").trim();
+        String user = request.getParameter("username").trim();
+
+        Matcher matpho = pho.matcher(phone);
+        AccountDAO accD = new AccountDAOImpl();
+        if (!matpho.matches()) {
+            request.setAttribute("phone", phone);
+            request.setAttribute("username", user);
+            request.setAttribute("fullname", name);
+            request.setAttribute("mess1", "Phone must have 10 character");
+            request.getRequestDispatcher("information.jsp").forward(request, response);
+        } else {
+            accD.UpdateInfo(email, phone, name, user);
+            a = accD.getAccByEmail(email);
+            session.setAttribute("account", a);
+            request.setAttribute("success", "Change information successful.");
+            request.getRequestDispatcher("information.jsp").forward(request, response);
+        }
     } 
 
     /** 
@@ -90,29 +95,7 @@ public class AddProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        ProductDAO ProductDAO = new ProductDAOImpl();
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        String size = request.getParameter("size");
-        String categoryID = request.getParameter("category");
-        String brandID = request.getParameter("brand");
-        String price = request.getParameter("price");
-        String quantity = request.getParameter("quantity");
-        String sale = request.getParameter("sale");
-        String imgFile = request.getParameter("imgFile");
-        ImageDAO ImageDAO = new ImageDAOImpl();
-        String imageID = ImageDAO.getImageID(imgFile);
-        Image_ProductDAO Image_ProductDAO = new Image_ProductDAOImpl();
-        
-
-        ProductDAO.addProduct(name, description, size, categoryID, brandID, quantity, price, sale);
-        String productID = ProductDAO.getIdOfProduct();
-        Image_ProductDAO.addImage_Product(imageID, productID);
-        request.setAttribute("choice", 0);
-        request.setAttribute("messsucc", "Add product successful.");
-        Product product = ProductDAO.getProductById(productID);
-        request.setAttribute("product", product);
-        request.getRequestDispatcher("view/addProduct.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 

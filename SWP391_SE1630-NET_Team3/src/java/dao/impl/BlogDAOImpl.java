@@ -4,6 +4,7 @@
  */
 package dao.impl;
 
+import entity.Archive;
 import entity.Blog;
 import entity.Image;
 import java.sql.Connection;
@@ -22,9 +23,7 @@ import java.util.logging.Logger;
 public class BlogDAOImpl extends DBContext {
 
     // <editor-fold defaultstate="collapsed" desc="simple get blog arraylist and get image of an blog">
-
-    
-    public List<Blog> searchBlogPage(String searchTitle,int month, int year, int numPerPage, int curPage) throws SQLException, ClassNotFoundException {
+    public List<Blog> searchBlogPage(String searchTitle, int month, int year, int numPerPage, int curPage) throws SQLException, ClassNotFoundException {
         List<Blog> list = new ArrayList<>();
         String searchMonth = "";
         String searchYear = "";
@@ -67,10 +66,8 @@ public class BlogDAOImpl extends DBContext {
 
                 list.add(b);
             }
-        } catch (SQLException e) {
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw ex;
         } finally {
             rs.close();
             ps.close();
@@ -78,7 +75,7 @@ public class BlogDAOImpl extends DBContext {
         return list;
     }
 
-    public int getTotalSearchPage(String searchTitle, int month, int year, int numPerPage) throws SQLException {
+    public int getTotalSearchPage(String searchTitle, int month, int year, int numPerPage) throws SQLException, ClassNotFoundException {
         String searchMonth = "";
         String searchYear = "";
         if (month != -1) {
@@ -104,13 +101,73 @@ public class BlogDAOImpl extends DBContext {
                 }
 
             }
-        } catch (SQLException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return totalPage;
+    }
+
+    public List<Archive> getAllArchive() throws SQLException, ClassNotFoundException {
+        List<Archive> resultList = new ArrayList<>();
+
+        String sql = "SELECT COUNT(b.id)as'total',\n"
+                + "MONTH(b.created_at) AS month_created,\n"
+                + "YEAR(b.created_at) AS year_created, \n"
+                + "FORMAT(b.created_at, 'MMM yyyy') AS sqlDate\n"
+                + "FROM blog b \n"
+                + "GROUP BY MONTH(b.created_at),YEAR(b.created_at), FORMAT(b.created_at, 'MMM yyyy')";
+        Connection conn;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Archive a = new Archive();
+                a.setMonthYear(rs.getString("sqlDate"));
+                a.setSearchValue(rs.getString("year_created") + "-" + rs.getString("month_created"));
+                a.setTotalBlog(rs.getInt("total"));
+                resultList.add(a);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        return resultList;
+    }
+
+    public Blog getBlogById(int id) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT b.*,a.full_name FROM blog b \n"
+                + "INNER JOIN account a ON a.id = b.author_id\n"
+                + "WHERE b.id = ?";
+        Connection conn;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Blog resultBlog = null;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                resultBlog = new Blog();
+                resultBlog.setId(rs.getInt("id"));
+                resultBlog.setIdAuthor(rs.getInt("author_id"));
+                resultBlog.setAuthorName(rs.getNString("full_name"));
+                resultBlog.setTitle(rs.getString("title"));
+                resultBlog.setContent(rs.getNString("content"));
+                resultBlog.setCreateAt(rs.getString("created_at"));
+                resultBlog.setUpdateAt(rs.getString("update_at"));
+                resultBlog.setListImg(getBlogImage(id));
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        return resultBlog;
     }
 
     public List<Image> getBlogImage(int blogId) throws SQLException {
@@ -124,9 +181,9 @@ public class BlogDAOImpl extends DBContext {
         ResultSet rs = null;
         try {
             conn = getConnection();
-             ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, blogId);
-             rs = ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 Image img = new Image();
                 img.setId(rs.getInt("image_id"));
@@ -146,20 +203,33 @@ public class BlogDAOImpl extends DBContext {
     }
     //</editor-fold> 
 
-//    public static void main(String[] args) {
-//        try {
-//            BlogDAOImpl dao = new BlogDAOImpl();
-//            List<Blog> blist = dao.searchBlogPage("t",10,2022, 3, 1);
-//            for (Blog b : blist) {
-//                System.out.println("-------");
-//                System.out.println(b.getTitle()+"\n"+b.getContent()+"\n"+b.getCreateAt());
-//                for (Image i : b.getListImg()) {
-//                    System.out.println(i.getId() + " | " + i.getImgSource() + " | " + i.getName());
-//                }
-//            }
-//            System.out.println("total page:"+dao.getTotalSearchPage("t",-1,-1, 10));
-//        } catch (SQLException ex) {
-//            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    public static void main(String[] args) {
+        try {
+            BlogDAOImpl dao = new BlogDAOImpl();
+            /*
+            List<Blog> blist = dao.searchBlogPage("t", 10, 2022, 3, 1);
+            for (Blog b : blist) {
+                System.out.println("-------");
+                System.out.println(b.getTitle() + "\n" + b.getContent() + "\n" + b.getCreateAt());
+                for (Image i : b.getListImg()) {
+                    System.out.println(i.getId() + " | " + i.getImgSource() + " | " + i.getName());
+                }
+            }
+             */
+            List<Archive> arcList = dao.getAllArchive();
+            for (Archive archive : arcList) {
+                System.out.println("archive: " + archive.getMonthYear() + "|" + archive.getSearchValue());
+            }
+            System.out.println("total page:" + dao.getTotalSearchPage("t", 10, 2022, 3));
+            Blog btest = dao.getBlogById(1);
+            System.out.println(btest.getTitle() + "\n" + btest.getContent() + "\n" + btest.getCreateAt());
+            for (Image i : btest.getListImg()) {
+                System.out.println(i.getId() + " | " + i.getImgSource() + " | " + i.getName());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
