@@ -13,13 +13,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -77,14 +74,13 @@ public class BlogListController extends HttpServlet {
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("searchTitle", searchTitle);
             request.setAttribute("searchTime", searchTime);
+            request.setAttribute("inPage", "blogList");
             
             request.setAttribute(searchTime, this);
 
             request.getRequestDispatcher("view/blogList.jsp").forward(request, response);
 //        response.sendRedirect("view/blog.jsp");
-        } catch (SQLException ex) {
-            Logger.getLogger(BlogListController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(BlogListController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

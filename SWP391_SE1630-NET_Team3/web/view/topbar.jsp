@@ -112,9 +112,9 @@
                                     <a href="shop">Shop</a>
                                 </li>
 
-                                <li class="${inPage == "blog" ? "active-menu" :""}">
+                                <li class="${inPage == "blogList" ? "active-menu" :""}">
 
-                                    <a href="blog">Blog</a>
+                                    <a href="blogList">Blog</a>
 
                                 </li>
 
