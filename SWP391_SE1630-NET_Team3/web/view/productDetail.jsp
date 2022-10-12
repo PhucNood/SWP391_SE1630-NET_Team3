@@ -185,23 +185,25 @@
 
                             <!--  -->
                             <div class="p-t-33">
-                                <div class="flex-w flex-r-m p-b-10">
-                                    <div class="size-204 flex-w flex-m respon6-next">
-                                        <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                                <i class="fs-16 zmdi zmdi-minus"></i>
+                                <div class="flex-w flex-r-m p-b-10" >
+                                    <div class="size-204 flex-w flex-m respon6-next" style="position: absolute; left: 20px;margin-top: 50px">
+                                        <form action="addCart?id=${product.productID}" method="get">
+                                            <div class="wrap-num-product flex-w m-r-20 m-tb-10" >
+                                                <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                    <i class="fs-16 zmdi zmdi-minus"></i>
+                                                </div>
+
+                                                <input class="mtext-104 cl3 txt-center num-product" type="number" min="1" name="numProduct" value="1">
+
+                                                <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                    <i class="fs-16 zmdi zmdi-plus"></i>
+                                                </div>
                                             </div>
 
-                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
-                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                                <i class="fs-16 zmdi zmdi-plus"></i>
-                                            </div>
-                                        </div>
-
-                                        <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                            Add to cart
-                                        </button>
+                                            <button  class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                                                <input type="submit" value="">Add to cart
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>	
                             </div>
@@ -300,6 +302,22 @@
         <script src="${pageContext.request.contextPath}/view/vendor/bootstrap/js/bootstrap.min.js"></script>
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/vendor/select2/select2.min.js"></script>
+        <script>
+            $('.btn-num-product-down').on('click', function () {
+                var min_value_product = Number(document.getElementById("num-product").min);
+                var numProduct = Number($(this).next().val());
+                if (numProduct > min_value_product)
+                    $(this).next().val(numProduct - 1);
+            });
+
+            $('.btn-num-product-up').on('click', function () {
+                var max_value_product = Number(document.getElementById("num-product").max);
+                ;
+                var numProduct = Number($(this).prev().val());
+                if (numProduct < max_value_product)
+                    $(this).prev().val(numProduct + 1);
+            });
+        </script>
         <script>
             $(".js-select2").each(function () {
                 $(this).select2({

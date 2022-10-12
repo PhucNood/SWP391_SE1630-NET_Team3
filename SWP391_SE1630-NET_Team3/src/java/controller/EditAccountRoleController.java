@@ -5,10 +5,9 @@
 
 package controller;
 
-import dao.HomeDAO;
-import dao.impl.BlogDAOImpl;
-import dao.impl.HomeDAOImpl;
-import dao.impl.ProductDAOImpl;
+import dao.AccountDAO;
+import dao.impl.AccountDAOImpl;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,15 +15,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author admin
  */
-public class HomeController extends HttpServlet {
+public class EditAccountRoleController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +37,10 @@ public class HomeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet homeController</title>");  
+            out.println("<title>Servlet EditAccountRoleController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet homeController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet EditAccountRoleController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,19 +58,11 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.setAttribute("inPage", "home");
-        HomeDAO homeDAOImpl = new HomeDAOImpl();
-        
-       request.setAttribute("products", new ProductDAOImpl().getAllProduct());
-        request.setAttribute("listNewProduct", homeDAOImpl.getNewProductsEachCategory());
-        try {
-            request.setAttribute("newBlogs", new BlogDAOImpl().searchBlogPage("", -1, -1, 3, 1));
-        } catch (SQLException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.getRequestDispatcher("view/home.jsp").forward(request, response);
+        String email = request.getParameter("email");
+        AccountDAO d = new AccountDAOImpl();
+        Account account = d.getAccByEmail(email);
+        request.setAttribute("account", account);
+        request.getRequestDispatcher("view/editAccountRole.jsp").forward(request, response);
     } 
 
     /** 
@@ -87,7 +75,16 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String email = request.getParameter("email");
+        String role = request.getParameter("role");
+        AccountDAO AccountDAO = new AccountDAOImpl();
+        
+        
+        AccountDAO.updateAccountRole(email, role);
+        request.setAttribute("messsucc", "Update product successful.");
+        Account account = AccountDAO.getAccByEmail(email);
+        request.setAttribute("account", account);
+        request.getRequestDispatcher("view/editAccountRole.jsp").forward(request, response);
     }
 
     /** 

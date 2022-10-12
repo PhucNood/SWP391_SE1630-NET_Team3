@@ -4,15 +4,16 @@
  */
 package dao;
 
+import entity.OrderDetail;
 import entity.Product;
-import java.util.List;
+import java.util.Collection;
 
 /**
  *
- * @author admin
+ * @author ACER
  */
-public interface ProductDAO1 {
-    public List<Product> getAllProduct();
-    public List<Product> getProduct(String cid, String bid, String fid, String sid);
-    public List<Product> searchListProduct(String text);
+public interface OrderDetailDAO {
+    
+        public Collection<OrderDetail> getAllOrderDetail();
+        public Collection<Product> getProductsByOrder(int orderID);
 }

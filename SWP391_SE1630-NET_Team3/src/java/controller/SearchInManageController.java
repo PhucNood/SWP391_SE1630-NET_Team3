@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package controller;
 
 import dao.BrandDAO;
@@ -24,38 +25,35 @@ import java.util.List;
  *
  * @author admin
  */
-public class SearchController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+public class SearchInManageController extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet searchController</title>");
+            out.println("<title>Servlet SearchInManageController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet searchController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SearchInManageController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -63,7 +61,7 @@ public class SearchController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         HttpSession session = request.getSession();
         String text = "";
         if(request.getParameter("text")!= null){
@@ -85,7 +83,7 @@ public class SearchController extends HttpServlet {
         List<Brand> listBrand = BrandDAO.getAllBrand();
         request.setAttribute("listB", listBrand);
         String categoryID = null, brandID = null, filterID = null, sortID = null;
-        session.setAttribute("inPage", "shop");
+        session.setAttribute("inPage", "manageProduct");
         categoryID = "0";
         if (session.getAttribute("brandID") != null) {
             brandID = (String) session.getAttribute("brandID");
@@ -123,7 +121,7 @@ public class SearchController extends HttpServlet {
         }
         
         int size = newList.size();
-        int page, numberpage = 8;
+        int page, numberpage = 5;
         int number = (size % numberpage == 0 ? (size / numberpage) : ((size / numberpage) + 1));
         String xpage = request.getParameter("page");
         if (xpage == null) {
@@ -138,31 +136,16 @@ public class SearchController extends HttpServlet {
         request.setAttribute("page", page);
         request.setAttribute("num", number);
         
-        session.setAttribute("listProduct", listProductInPage);
+        session.setAttribute("productList", listProductInPage);
         session.removeAttribute("categoryID");
         session.setAttribute("text", text);
         session.setAttribute("brandID", brandID);
         session.setAttribute("filterID", filterID);
         session.setAttribute("sortID", sortID);
         
-        request.getRequestDispatcher("view/shop.jsp").forward(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-
-    }
-
+        request.getRequestDispatcher("view/manageProduct.jsp").forward(request, response);
+    } 
+    
     public boolean checkInSearchList(Product item, List<Product> sList) {
         for (Product p : sList) {
             if (item.getProductID() == p.getProductID()) {
@@ -172,9 +155,21 @@ public class SearchController extends HttpServlet {
         return false;
     }
 
-    /**
+    /** 
+     * Handles the HTTP <code>POST</code> method.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

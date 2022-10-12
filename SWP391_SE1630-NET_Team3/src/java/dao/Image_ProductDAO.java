@@ -4,15 +4,11 @@
  */
 package dao;
 
-import entity.Image;
-import java.util.List;
-
 /**
  *
  * @author admin
  */
-public interface ImageDAO {
-    public List<Image> getListByIdProduct(int id);
-    public String getImageID(String Image);
-    public void addImage(String name, String Image);
+public interface Image_ProductDAO {
+    public void addImage_Product(String ImageID, String ProductID);
+    public void deleteImage_Product(String ImageID, String ProductID);
 }

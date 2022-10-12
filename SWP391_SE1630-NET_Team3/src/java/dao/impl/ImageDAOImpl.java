@@ -20,13 +20,12 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-public class ImageDAOImpl extends DBContext implements ImageDAO{
+public class ImageDAOImpl extends DBContext implements ImageDAO {
 
     Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    
     //getlist image by productID 
     @Override
     public List<Image> getListByIdProduct(int id) {
@@ -52,9 +51,47 @@ public class ImageDAOImpl extends DBContext implements ImageDAO{
         return listImg;
     }
 
+    public void addImage(String name, String Image) {
+        String getIdExist = getImageID(Image);
+        if (getIdExist == null) {
+            String sql = "INSERT INTO [dbo].[image]\n"
+                    + "           ([name]\n"
+                    + "           ,[imageSource])\n"
+                    + "     VALUES(?,?)";
+            try {
+                con = getConnection();
+                ps = con.prepareStatement(sql);
+                ps.setString(1, name);
+                ps.setString(2, Image);
+                ps.executeUpdate();
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(ImageDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public String getImageID(String Image) {
+        String sql = "select * from [dbo].[image] where imageSource = ?";
+        try {
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, Image);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                String ImageID = String.valueOf(rs.getInt("id"));
+                return ImageID;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ImageDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         ImageDAOImpl d = new ImageDAOImpl();
         List<Image> listImg = d.getListByIdProduct(1);
         System.out.println(listImg.get(0).getImgSource());
+//        d.addImage("name","nam.jpg");
+        System.out.println(d.getImageID("AG-201.jpg"));
     }
 }

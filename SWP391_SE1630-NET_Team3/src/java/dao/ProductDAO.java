@@ -18,4 +18,12 @@ public interface ProductDAO {
     public List<Product> getListByPage(List<Product> listProduct,int start, int end);
     public Product getProductById(String productID);
     public List<Product> getProductListByCategoryID(int categoryID);
+    public void deleteProductDetail(String productID);
+    public void updateProduct(String name, String description,
+            String size, String categoryID, String brandID,
+            String quantity, String price, String sale, String productID);
+    public void addProduct(String name, String description, 
+            String size, String categoryID, String brandID,
+            String quantity, String price, String sale);
+    public String getIdOfProduct();
 }

@@ -5,10 +5,20 @@
 
 package controller;
 
-import dao.HomeDAO;
-import dao.impl.BlogDAOImpl;
-import dao.impl.HomeDAOImpl;
+import dao.BrandDAO;
+import dao.CategoryDAO;
+import dao.ImageDAO;
+import dao.Image_ProductDAO;
+import dao.ProductDAO;
+import dao.impl.BrandDAOImpl;
+import dao.impl.CategoryDAOImpl;
+import dao.impl.ImageDAOImpl;
+import dao.impl.Image_ProductDAOImpl;
 import dao.impl.ProductDAOImpl;
+import entity.Brand;
+import entity.Category;
+import entity.Image;
+import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,15 +26,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 
 /**
  *
  * @author admin
  */
-public class HomeController extends HttpServlet {
+public class SaveAddImageController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +49,10 @@ public class HomeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet homeController</title>");  
+            out.println("<title>Servlet SaveAddImageController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet homeController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet SaveAddImageController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,20 +69,7 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.setAttribute("inPage", "home");
-        HomeDAO homeDAOImpl = new HomeDAOImpl();
-        
-       request.setAttribute("products", new ProductDAOImpl().getAllProduct());
-        request.setAttribute("listNewProduct", homeDAOImpl.getNewProductsEachCategory());
-        try {
-            request.setAttribute("newBlogs", new BlogDAOImpl().searchBlogPage("", -1, -1, 3, 1));
-        } catch (SQLException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.getRequestDispatcher("view/home.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -87,7 +82,28 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
+        ProductDAO ProductDAO = new ProductDAOImpl();
+        String productID = request.getParameter("productID");
+        String img = request.getParameter("imgFile");
+        String name = request.getParameter("name");
+        ImageDAO ImageDAO = new ImageDAOImpl();
+        ImageDAO.addImage(name, img);
+        String getImageID = ImageDAO.getImageID(img);
+        Image_ProductDAO Image_ProductDAO = new Image_ProductDAOImpl();
+        Image_ProductDAO.addImage_Product(getImageID, productID);
+        
+        HttpSession session = request.getSession();
+        Product product = ProductDAO.getProductById(productID);
+        
+        BrandDAO BrandDAO = new BrandDAOImpl();
+        List<Brand> listBrand = BrandDAO.getAllBrand();
+        session.setAttribute("listBrand", listBrand);
+        CategoryDAO CategoryDAO = new CategoryDAOImpl();
+        List<Category> listCategory = CategoryDAO.getAllCategory();
+        session.setAttribute("listCategory",listCategory);
+        session.setAttribute("product", product);
+        request.getRequestDispatcher("view/editProduct.jsp").forward(request, response);
     }
 
     /** 
