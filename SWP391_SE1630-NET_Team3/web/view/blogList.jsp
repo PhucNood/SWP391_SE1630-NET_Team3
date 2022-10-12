@@ -64,7 +64,7 @@
                                 <!-- item blog -->
                                 <div class="p-b-30">
                                     <div class="txt-center blog-img">
-                                        <a href="${pageContext.request.contextPath}/view/blog-detail.html" class="hov-img0 how-pos5-parent">
+                                        <a href="BlogDetail?id=${blog.id}" class="hov-img0 how-pos5-parent">
                                             <img src="${pageContext.request.contextPath}/view/images/${blog.getFirstImgSrc()}" alt="IMG-BLOG">
                                             <div class="flex-col-c-m size-123 bg9 how-pos5">
                                                 <span class="ltext-107 cl2 txt-center">
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="p-t-32">
                                         <h4 class="p-b-15">
-                                            <a href="${pageContext.request.contextPath}/view/blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
+                                            <a href="BlogDetail?id=${blog.id}" class="ltext-108 cl2 hov-cl1 trans-04">
                                                 ${blog.title}
                                             </a>
                                         </h4>
@@ -92,7 +92,7 @@
                                                     <span class="cl12 m-l-4 m-r-6">|</span>
                                                 </span>
                                             </span>
-                                            <a href="${pageContext.request.contextPath}/view/blogDetail.jsp" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
+                                            <a href="$BlogDetail?id=${blog.id}" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
                                                 Continue Reading
                                                 <i class="fa fa-long-arrow-right m-l-9"></i>
                                             </a>

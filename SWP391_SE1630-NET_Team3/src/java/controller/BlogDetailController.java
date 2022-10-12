@@ -6,6 +6,7 @@ package controller;
 
 import dao.BlogDAO;
 import dao.impl.BlogDAOImpl;
+import entity.Archive;
 import entity.Blog;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,12 +39,23 @@ public class BlogDetailController extends HttpServlet {
             throws ServletException, IOException {
         BlogDAO blogDAO = new BlogDAOImpl();
         Blog blogDetail = null;
+        List<Archive> archiveList = null;
+
         try {
-            blogDetail = blogDAO.getBlogById(0);
+            String idString = request.getParameter("id");
+            if (idString == null || idString.isEmpty()) {
+                throw new Exception("Error not found id");
+            }
+            int id = Integer.parseInt(idString);
+            System.out.println("ID BLOG: " + id);
+            blogDetail = blogDAO.getBlogById(id);
+            archiveList = blogDAO.getAllArchive();
 
             request.setAttribute("blog", blogDetail);
+            request.setAttribute("archiveList", archiveList);
+
             request.getRequestDispatcher("view/blogDetail.jsp").forward(request, response);
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(BlogDetailController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
