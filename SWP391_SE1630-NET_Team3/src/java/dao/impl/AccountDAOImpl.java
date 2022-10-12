@@ -139,8 +139,9 @@ public class AccountDAOImpl extends DBContext implements AccountDAO{
     public void UpdateInfo(String email, String phone, String fullname, String user) {
         String sql = "UPDATE [dbo].[account]\n"
                 + "   SET [phone] = ?\n"
-                + "      ,[fullname] = ?\n"
-                + "      ,[username] = ?\n"
+                + "      ,[full_name] = ?\n"
+                + "      ,[user] = ?\n"
+                + "      ,[address] = ?\n"
                 + " WHERE email = ?";
         try {
             con = getConnection();
@@ -161,8 +162,10 @@ public class AccountDAOImpl extends DBContext implements AccountDAO{
 //        Account a = d.getAccByEmail("quochung123@gmail.com");
 //        System.out.println(a.getPass());
 //        System.out.println(list.get(1).getFullname());
-        d.ChangePass("leetung@gmail.com","Tungfif");
+//        d.ChangePass("leetung@gmail.com","Tungfif");
         Account a = d.getAccByEmail("leetung@gmail.com");
-        System.out.println(a.getPass());
+        d.UpdateInfo("leetung@gmail.com", "0366757037","Le Thanh Tung" , "leetung");           
+        a = d.getAccByEmail("leetung@gmail.com");
+        System.out.println(a.getPhone());
     }
 }

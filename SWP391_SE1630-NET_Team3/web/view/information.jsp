@@ -111,11 +111,13 @@
 
             <div class="inner-box">
 
-                <form action="changeinfo" >
+                <form action="information" method="get" >
+                    
                     <h2>Information</h2>
                     Phone<input class="input1" type="text" name="phone" placeholder="Phone" value="${requestScope.phone}" required/>
                     Full Name<input class="input1" type="text" name="fullname" placeholder="Your Full Name" value="${requestScope.fullname}" required/>
                     User Name<input class="input1" type="text" name="username" placeholder="Username" required value="${requestScope.username}"/>
+                    Address<input class="input1" type="text" name="address" placeholder="Address" required value="${requestScope.address}"/>
                     <p class="text-warning">${mess1}</p> 
 
                     <c:if test="${requestScope.success !=null}">

@@ -63,25 +63,35 @@ public class ChangeInformationController extends HttpServlet {
         String phonePattern = "^[0-9]{10}";
         Pattern pho = Pattern.compile(phonePattern);
         Account a = (Account) session.getAttribute("account");
+        
         String email = a.getEmail();
         String phone = request.getParameter("phone").trim();
         String name = request.getParameter("fullname").trim();
         String user = request.getParameter("username").trim();
-
+        String address = request.getParameter("address").trim();
+        
         Matcher matpho = pho.matcher(phone);
-        AccountDAO accD = new AccountDAOImpl();
-        if (!matpho.matches()) {
+        AccountDAO changeinfo = new AccountDAOImpl();
+        
+        if (!matpho.matches()){
             request.setAttribute("phone", phone);
             request.setAttribute("username", user);
             request.setAttribute("fullname", name);
+            request.setAttribute("address", name);
             request.setAttribute("mess1", "Phone must have 10 character");
-            request.getRequestDispatcher("information.jsp").forward(request, response);
-        } else {
-            accD.UpdateInfo(email, phone, name, user);
-            a = accD.getAccByEmail(email);
+            request.getRequestDispatcher("view/information.jsp").forward(request, response);
+            
+        }else{
+            changeinfo.UpdateInfo(email, phone, name, user);
+            a = changeinfo.getAccByEmail(email);
             session.setAttribute("account", a);
-            request.setAttribute("success", "Change information successful.");
-            request.getRequestDispatcher("information.jsp").forward(request, response);
+            request.setAttribute("success", "Change information successful!");
+            
+            request.setAttribute("phone", a.getPhone());
+            request.setAttribute("fullname", a.getFullname());
+            request.setAttribute("username", a.getUsername());
+            request.setAttribute("address", a.getAddress());
+            request.getRequestDispatcher("view/information.jsp").forward(request, response);
         }
     } 
 
@@ -95,7 +105,9 @@ public class ChangeInformationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+         HttpSession session = request.getSession();
+        session.setAttribute("inPage", "changeInfo");
+        request.getRequestDispatcher("view/information.jsp").forward(request, response);
     }
 
     /** 

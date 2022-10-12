@@ -25,14 +25,6 @@
         <servlet-class>controller.SignoutController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SearchController</servlet-name>
-        <servlet-class>controller.SearchController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BlogListController</servlet-name>
-        <servlet-class>controller.BlogListController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ProductDetailController</servlet-name>
         <servlet-class>controller.ProductDetailController</servlet-class>
     </servlet>
