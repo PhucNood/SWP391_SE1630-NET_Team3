@@ -25,7 +25,7 @@ import java.util.List;
  *
  * @author admin
  */
-public class ManageProductController extends HttpServlet {
+public class SearchInManageController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -42,10 +42,10 @@ public class ManageProductController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ManageProductController</title>");  
+            out.println("<title>Servlet SearchInManageController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ManageProductController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet SearchInManageController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,30 +63,28 @@ public class ManageProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.setAttribute("inPage", "manageProduct");
+        String text = "";
+        if(request.getParameter("text")!= null){
+            text = request.getParameter("text");
+            request.setAttribute("textSearch", text);
+            session.setAttribute("doSearch", "1");
+            session.removeAttribute("brandID");
+            session.removeAttribute("filterID");
+            session.removeAttribute("sortID");
+        }
+        else {
+            text = (String) session.getAttribute("text");
+        }
         ProductDAO ProductDAO = new ProductDAOImpl();
-        
-        
-        
-        List<Product> listProduct = new ArrayList<>();
+        List<Product> sList = ProductDAO.searchListProduct(text);
+        List<Product> list = new ArrayList<>();
         BrandDAO BrandDAO = new BrandDAOImpl();
 
         List<Brand> listBrand = BrandDAO.getAllBrand();
         request.setAttribute("listB", listBrand);
         String categoryID = null, brandID = null, filterID = null, sortID = null;
-
-        if ((String) request.getParameter("categoryID") != null) {
-            categoryID = (String) request.getParameter("categoryID");
-            session.removeAttribute("doSearch");
-            session.removeAttribute("text");
-            session.removeAttribute("brandID");
-            session.removeAttribute("filterID");
-            session.removeAttribute("sortID");
-        } else {
-            if (session.getAttribute("categoryID") != null) {
-                categoryID = (String) session.getAttribute("categoryID");
-            }else categoryID = "0";
-        }
+        session.setAttribute("inPage", "manageProduct");
+        categoryID = "0";
         if (session.getAttribute("brandID") != null) {
             brandID = (String) session.getAttribute("brandID");
         } else {
@@ -102,6 +100,7 @@ public class ManageProductController extends HttpServlet {
         } else {
             sortID = "0";
         }
+
         if (request.getParameter("brandID") != null) {
             brandID = request.getParameter("brandID");
         }
@@ -111,12 +110,17 @@ public class ManageProductController extends HttpServlet {
         if (request.getParameter("sortID") != null) {
             sortID = request.getParameter("sortID");
         }
-
-        listProduct = ProductDAO.getProduct(categoryID, brandID, filterID, sortID);
-        if (listProduct.isEmpty()) {
+        List<Product> newList = new ArrayList<>();
+        list = ProductDAO.getProduct(categoryID, brandID, filterID, sortID);
+        if (list.isEmpty()) {
             request.setAttribute("emptyP", "Not found!");
+        } else {
+            for (Product item : list) {
+                if(checkInSearchList(item, sList)) newList.add(item);
+            }
         }
-        int size = listProduct.size();
+        
+        int size = newList.size();
         int page, numberpage = 5;
         int number = (size % numberpage == 0 ? (size / numberpage) : ((size / numberpage) + 1));
         String xpage = request.getParameter("page");
@@ -128,18 +132,28 @@ public class ManageProductController extends HttpServlet {
         int start, end;
         start = (page - 1) * numberpage;
         end = Math.min(page * numberpage, size);
-        List<Product> listProductInPage = ProductDAO.getListByPage(listProduct, start, end);
+        List<Product> listProductInPage = ProductDAO.getListByPage(newList, start, end);
         request.setAttribute("page", page);
         request.setAttribute("num", number);
-
+        
         session.setAttribute("productList", listProductInPage);
-        session.setAttribute("categoryID", categoryID);
+        session.removeAttribute("categoryID");
+        session.setAttribute("text", text);
         session.setAttribute("brandID", brandID);
         session.setAttribute("filterID", filterID);
         session.setAttribute("sortID", sortID);
-
+        
         request.getRequestDispatcher("view/manageProduct.jsp").forward(request, response);
     } 
+    
+    public boolean checkInSearchList(Product item, List<Product> sList) {
+        for (Product p : sList) {
+            if (item.getProductID() == p.getProductID()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.

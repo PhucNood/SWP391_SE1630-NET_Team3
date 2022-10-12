@@ -5,19 +5,9 @@
 
 package controller;
 
-import dao.BrandDAO;
-import dao.CategoryDAO;
-import dao.ImageDAO;
-import dao.Image_ProductDAO;
-import dao.ProductDAO;
-import dao.impl.BrandDAOImpl;
-import dao.impl.CategoryDAOImpl;
-import dao.impl.ImageDAOImpl;
-import dao.impl.Image_ProductDAOImpl;
-import dao.impl.ProductDAOImpl;
-import entity.Brand;
-import entity.Category;
-import entity.Product;
+import dao.AccountDAO;
+import dao.impl.AccountDAOImpl;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -25,13 +15,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  *
  * @author admin
  */
-public class DeleteProductImageController extends HttpServlet {
+public class EditAccountRoleController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -48,10 +37,10 @@ public class DeleteProductImageController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DeleteProductImageController</title>");  
+            out.println("<title>Servlet EditAccountRoleController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DeleteProductImageController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet EditAccountRoleController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -68,24 +57,12 @@ public class DeleteProductImageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String productID = request.getParameter("productID");
-        String img = request.getParameter("img");
-        ImageDAO ImageDAO = new ImageDAOImpl();
-        String imageID = ImageDAO.getImageID(img);
-        Image_ProductDAO Image_ProductDAO = new Image_ProductDAOImpl();
-        Image_ProductDAO.deleteImage_Product(imageID, productID);
-        ProductDAO ProductDAO = new ProductDAOImpl();
         HttpSession session = request.getSession();
-        Product product = ProductDAO.getProductById(productID);
-        
-        BrandDAO BrandDAO = new BrandDAOImpl();
-        List<Brand> listBrand = BrandDAO.getAllBrand();
-        session.setAttribute("listBrand", listBrand);
-        CategoryDAO CategoryDAO = new CategoryDAOImpl();
-        List<Category> listCategory = CategoryDAO.getAllCategory();
-        session.setAttribute("listCategory",listCategory);
-        session.setAttribute("product", product);
-        request.getRequestDispatcher("view/editProduct.jsp").forward(request, response);
+        String email = request.getParameter("email");
+        AccountDAO d = new AccountDAOImpl();
+        Account account = d.getAccByEmail(email);
+        request.setAttribute("account", account);
+        request.getRequestDispatcher("view/editAccountRole.jsp").forward(request, response);
     } 
 
     /** 
@@ -98,7 +75,16 @@ public class DeleteProductImageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String email = request.getParameter("email");
+        String role = request.getParameter("role");
+        AccountDAO AccountDAO = new AccountDAOImpl();
+        
+        
+        AccountDAO.updateAccountRole(email, role);
+        request.setAttribute("messsucc", "Update product successful.");
+        Account account = AccountDAO.getAccByEmail(email);
+        request.setAttribute("account", account);
+        request.getRequestDispatcher("view/editAccountRole.jsp").forward(request, response);
     }
 
     /** 

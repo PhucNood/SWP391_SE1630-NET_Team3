@@ -45,16 +45,8 @@
         <servlet-class>controller.EditProductController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SaveEditProductController</servlet-name>
-        <servlet-class>controller.SaveEditProductController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AddProductImageController</servlet-name>
         <servlet-class>controller.AddProductImageController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SaveAddImageController</servlet-name>
-        <servlet-class>controller.SaveAddImageController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddProductController</servlet-name>
@@ -63,6 +55,23 @@
     <servlet>
         <servlet-name>DeleteProductImageController</servlet-name>
         <servlet-class>controller.DeleteProductImageController</servlet-class>
+    </servlet>
+    <servlet>
+
+        <servlet-name>SaveAddImageController</servlet-name>
+        <servlet-class>controller.SaveAddImageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchInManageController</servlet-name>
+        <servlet-class>controller.SearchInManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageAccountController</servlet-name>
+        <servlet-class>controller.ManageAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditAccountRoleController</servlet-name>
+        <servlet-class>controller.EditAccountRoleController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangePassController</servlet-name>
@@ -87,6 +96,7 @@
     <servlet>
         <servlet-name>OderController</servlet-name>
         <servlet-class>controller.OderController</servlet-class>
+
     </servlet>
     <servlet>
         <servlet-name>BlogDetailController</servlet-name>
@@ -137,16 +147,8 @@
         <url-pattern>/editProduct</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SaveEditProductController</servlet-name>
-        <url-pattern>/saveEditProduct</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>AddProductImageController</servlet-name>
         <url-pattern>/addProductImage</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SaveAddImageController</servlet-name>
-        <url-pattern>/saveAddImage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddProductController</servlet-name>
@@ -155,6 +157,23 @@
     <servlet-mapping>
         <servlet-name>DeleteProductImageController</servlet-name>
         <url-pattern>/deleteProductImage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+
+        <servlet-name>SaveAddImageController</servlet-name>
+        <url-pattern>/saveAddImage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchInManageController</servlet-name>
+        <url-pattern>/searchInManage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageAccountController</servlet-name>
+        <url-pattern>/manageAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAccountRoleController</servlet-name>
+        <url-pattern>/editAccountRole</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChangePassController</servlet-name>
@@ -179,6 +198,7 @@
     <servlet-mapping>
         <servlet-name>OderController</servlet-name>
         <url-pattern>/oder</url-pattern>
+
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BlogDetailController</servlet-name>
