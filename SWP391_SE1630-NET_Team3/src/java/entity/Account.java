@@ -81,6 +81,10 @@ public class Account {
     public void setUser(String user) {
         this.user = user;
     }
+    
+    public String getUsername() {
+        return user;
+    }
 
     public String getEmail() {
         return email;
@@ -138,9 +142,7 @@ public class Account {
         this.updateAt = updateAt;
     }
 
-    public Object getUsername() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
     
     
