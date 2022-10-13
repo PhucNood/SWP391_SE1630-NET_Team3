@@ -62,8 +62,9 @@ public class ManageProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        
         HttpSession session = request.getSession();
-        session.setAttribute("inPage", "manageProduct");
+        session.setAttribute("inPage", "manage");
         ProductDAO ProductDAO = new ProductDAOImpl();
         
         
@@ -131,7 +132,7 @@ public class ManageProductController extends HttpServlet {
         List<Product> listProductInPage = ProductDAO.getListByPage(listProduct, start, end);
         request.setAttribute("page", page);
         request.setAttribute("num", number);
-
+        
         session.setAttribute("productList", listProductInPage);
         session.setAttribute("categoryID", categoryID);
         session.setAttribute("brandID", brandID);

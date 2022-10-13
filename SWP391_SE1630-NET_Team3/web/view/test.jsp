@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>${test1}   ===   ${test2}</h1>
+        <h1>${test}</h1>
     </body>
 </html>

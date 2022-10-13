@@ -51,6 +51,7 @@ public class ImageDAOImpl extends DBContext implements ImageDAO {
     }
 
     //add image of product
+    @Override
     public void addImage(String name, String Image) {
         Connection con = null;
         PreparedStatement ps = null;
