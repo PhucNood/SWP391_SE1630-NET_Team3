@@ -312,6 +312,9 @@
                 background-color: #fff;
                 border-color: #808080;
             }
+            .textcolor{
+                color: #808080;
+            }
 
         </style>
     </head>
@@ -333,7 +336,7 @@
                 <form action="searchAccount" method="post" style="width: 300px !important;">
 
                 </form>
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover textcolor">
                     <thead>
                         <tr>
                             <th>Name</th>

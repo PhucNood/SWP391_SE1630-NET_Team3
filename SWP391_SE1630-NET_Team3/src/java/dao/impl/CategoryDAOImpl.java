@@ -21,13 +21,12 @@ import java.util.logging.Logger;
  */
 public class CategoryDAOImpl extends DBContext implements CategoryDAO {
 
-    Connection con = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
-
     //get all list category 
     @Override
     public List<Category> getAllCategory() {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Category> listCategory = new ArrayList<>();
         String sql = "SELECT [categoryID]\n"
                 + "      ,[title]\n"
@@ -46,13 +45,18 @@ public class CategoryDAOImpl extends DBContext implements CategoryDAO {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CategoryDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
         return listCategory;
     }
 
     //get category by productID
     @Override
     public Category getCategoryById(int categoryID) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         String sql = "SELECT [categoryID]\n"
                 + "      ,[title]\n"
                 + "      ,[detail]\n"
@@ -64,7 +68,7 @@ public class CategoryDAOImpl extends DBContext implements CategoryDAO {
         try {
             con = getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1,categoryID);
+            ps.setInt(1, categoryID);
             rs = ps.executeQuery();
             if (rs.next()) {
                 Category category = new Category(rs.getInt("categoryID"), rs.getString("title"), rs.getString("detail"),
@@ -75,6 +79,9 @@ public class CategoryDAOImpl extends DBContext implements CategoryDAO {
             Logger.getLogger(CategoryDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
         return null;
     }
 

@@ -307,7 +307,7 @@
 
         <div class="container">
             <div class="table-wrapper">
-                <div class="flex-w flex-sb-m p-b-52">
+                <div class="flex-w flex-sb-m p-b-52 " style="justify-content: end">
                     <div class="flex-w flex-l-m filter-tope-group m-tb-10">
                         <a href="manageProduct?categoryID=0" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${(categoryID == 0) ? "how-active1" : ""}">
                             All Products
@@ -500,7 +500,7 @@
 
                 <div class="col-12 pb-1">
                     <nav aria-label="Page navigation">
-                        <c:if test="${sessionScope.listProduct != null}">
+                        <c:if test="${sessionScope.productList != null}">
                             <ul class="pagination justify-content-center mb-3">
                                 <li class="page-i ${page==1?"disabled":""}">
                                     <a class="page-l" href="${doSearch == "1" ? "searchInManage" : "manageProduct"}?page=${page-1}" aria-label="Previous">

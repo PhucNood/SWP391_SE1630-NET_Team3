@@ -36,6 +36,8 @@ public class BlogListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.setAttribute("inPage", "blog");
         BlogDAOImpl blogDAO = new BlogDAOImpl();
         List<Blog> blogList = null;
         List<Archive> archiveList = null;

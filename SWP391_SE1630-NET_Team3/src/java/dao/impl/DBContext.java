@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class DBContext {
@@ -26,21 +28,33 @@ public class DBContext {
     private final String userName = "sa";
     private final String password = "123123";
     
-    public void closeConnection(Connection con) throws SQLException{
+    public void closeConnection(Connection con){
         if(con!=null){
-            con.close();
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
-    public void closeResultSet (ResultSet rs) throws SQLException{
+    public void closeResultSet (ResultSet rs) {
         if(rs!=null){
-            rs.close();
+            try {
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
-    public void closePrepareState (PreparedStatement ps) throws SQLException{
+    public void closePrepareState (PreparedStatement ps){
         if(ps!=null){
-            ps.close();
+            try {
+                ps.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

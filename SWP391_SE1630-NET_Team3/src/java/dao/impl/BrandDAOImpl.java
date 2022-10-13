@@ -4,7 +4,6 @@
  */
 package dao.impl;
 
-
 import dao.BrandDAO;
 import entity.Brand;
 import java.sql.Connection;
@@ -20,17 +19,14 @@ import java.util.logging.Logger;
  *
  * @author 84923
  */
+public class BrandDAOImpl extends DBContext implements BrandDAO {
 
-public class BrandDAOImpl extends DBContext implements BrandDAO{
-
-    Connection con = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
-
-    
     //get all list brand 
     @Override
     public List<Brand> getAllBrand() {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Brand> listBrand = new ArrayList<>();
 
         String sql = "SELECT [brandID]\n"
@@ -44,21 +40,25 @@ public class BrandDAOImpl extends DBContext implements BrandDAO{
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Brand brand = new Brand(rs.getInt("brandID"), rs.getString("title"), 
+                Brand brand = new Brand(rs.getInt("brandID"), rs.getString("title"),
                         rs.getString("detail"), rs.getString("created_at"), rs.getString("update_at"));
                 listBrand.add(brand);
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(BrandDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
         return listBrand;
     }
 
-    
     //get brand info with brandID
     @Override
     public Brand getBrandById(int id) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         String sql = "SELECT [brandID]\n"
                 + "      ,[title]\n"
                 + "      ,[detail]\n"
@@ -78,7 +78,9 @@ public class BrandDAOImpl extends DBContext implements BrandDAO{
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(BrandDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
         return null;
     }
 
