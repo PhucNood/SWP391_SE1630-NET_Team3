@@ -22,13 +22,12 @@ import java.util.logging.Logger;
  */
 public class ImageDAOImpl extends DBContext implements ImageDAO {
 
-    Connection con = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
-
     //getlist image by productID 
     @Override
     public List<Image> getListByIdProduct(int id) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Image> listImg = new ArrayList<>();
         String sql = "Select img.*\n"
                 + "From image_product imp inner join product p on p.productID = imp.product_id\n"
@@ -51,7 +50,11 @@ public class ImageDAOImpl extends DBContext implements ImageDAO {
         return listImg;
     }
 
+    //add image of product
     public void addImage(String name, String Image) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         String getIdExist = getImageID(Image);
         if (getIdExist == null) {
             String sql = "INSERT INTO [dbo].[image]\n"
@@ -70,7 +73,12 @@ public class ImageDAOImpl extends DBContext implements ImageDAO {
         }
     }
 
+    //get ID of image
+    @Override
     public String getImageID(String Image) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         String sql = "select * from [dbo].[image] where imageSource = ?";
         try {
             con = getConnection();
@@ -84,6 +92,9 @@ public class ImageDAOImpl extends DBContext implements ImageDAO {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ImageDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
         return null;
     }
 

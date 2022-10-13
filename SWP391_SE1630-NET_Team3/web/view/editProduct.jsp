@@ -304,10 +304,33 @@
             <div id="addEmployeeModal" class="">
                 <div class="modal-dialog">
                     <div class="modal-content">
+                        <div class="modal-header">						
+                            <h4 style="margin: auto" class="modal-title">Image</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group" >
+                                <c:forEach var="j" items="${product.list}">
+                                    <div class="col-sm-6 col-md-4 col-lg-3 ">
+                                        <c:set var="img" value="${j.imgSource}"/>
+                                        <img src="view/images/${img}" width="80" height="80" >
+                                        <a href="deleteProductImage?productID=${product.productID}&img=${img}" onclick="alertUser(${product.productID},${img})" >
+                                            <i style="font-size:24px; color: black" class="fa">&#xf014;</i>
+                                        </a>
+                                    </div>
+                                </c:forEach>  
+                                <a type="button" href="addProductImage?productID=${product.productID}" class="btn btn-success" data-dismiss="modal" value="Cancel">
+                                    <i style="font-size:24px; color: WHITE" class="fa">&#xf055;</i>
+                                </a>
+
+                            </div> 
+                        </div>
+
+                    </div>
+                    <div class="modal-content" style="margin-top: 20px;" >
                         <p style="color: #44EC79; text-align: center">${messsucc}</p> 
                         <form action="editProduct?productID=${product.productID}" method="post" >
                             <div class="modal-header">						
-                                <h4 class="modal-title">Edit product</h4>
+                                <h4 style="margin: auto" class="modal-title">Edit product</h4>
                             </div>
                             <div class="modal-body">					
 
@@ -341,23 +364,7 @@
                                     <label>Price</label>
                                     <input type="number" name="price" min="0" class="form-control" value="${product.price}">
                                 </div>
-                                <div class="form-group" >
-                                    <label>Image</label>
 
-                                    <c:forEach var="j" items="${product.list}">
-                                        <div class="col-sm-6 col-md-4 col-lg-3 ">
-                                            <c:set var="img" value="${j.imgSource}"/>
-                                            <img src="view/images/${img}" width="80" height="80" >
-                                            <a href="#" style="clear: both" onclick="alertUser(${product.productID},${img})" class="delete" data-toggle="modal">
-                                                <p style="font-size:24px; color: black" class="fa">&#xf014;</p>
-                                            </a>
-                                        </div>
-                                    </c:forEach>  
-                                    <a type="button" href="addProductImage?productID=${product.productID}" class="btn btn-success" data-dismiss="modal" value="Cancel">
-                                        <i style="font-size:24px; color: WHITE" class="fa">&#xf055;</i>
-                                    </a>
-
-                                </div>
                                 <div class="form-group" style="clear: both">
                                     <label>Quantity</label>
                                     <input type="number" name="quantity" class="form-control" min="0" value="${product.quantity}" >
@@ -391,7 +398,7 @@
             function alertUser(productID, img) {
                 var option = confirm('Are you sure to delete?');
                 if (option === true) {
-                    window.location.href = "deleteProductImage?productID=" + productID + "&img=" + img;
+                    window.location.href = location.href;
                 }
             }
 

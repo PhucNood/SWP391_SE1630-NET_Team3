@@ -18,11 +18,13 @@ import java.util.logging.Logger;
  */
 public class Image_ProductDAOImpl extends DBContext implements Image_ProductDAO {
 
-    Connection con = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
-
+    
+    //add connect of pro and imag in database
+    @Override
     public void addImage_Product(String ImageID, String ProductID) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         String sql = "INSERT INTO [dbo].[image_product]\n"
                 + "           ([product_id]\n"
                 + "           ,[image_id])\n"
@@ -38,9 +40,18 @@ public class Image_ProductDAOImpl extends DBContext implements Image_ProductDAO 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ImageDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
     }
 
+    
+    //delete connect of pro and imag in database
+    @Override
     public void deleteImage_Product(String ImageID, String ProductID) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         String sql = "DELETE FROM [dbo].[image_product]\n"
                 + "      WHERE product_id = ? and image_id = ?";
         try {
@@ -52,7 +63,9 @@ public class Image_ProductDAOImpl extends DBContext implements Image_ProductDAO 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ImageDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
     }
 
     public static void main(String[] args) {
