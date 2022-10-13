@@ -55,12 +55,14 @@ public class InformationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+  
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("account");
         request.setAttribute("phone", a.getPhone());
         request.setAttribute("fullname", a.getFullname());
         request.setAttribute("username", a.getUsername());
-        request.getRequestDispatcher("information.jsp").forward(request, response);
+        request.setAttribute("address", a.getAddress());
+        request.getRequestDispatcher("view/information.jsp").forward(request, response);
     } 
 
     /** 
@@ -73,7 +75,12 @@ public class InformationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        session.setAttribute("inPage", "information");
+        request.getRequestDispatcher("view/information.jsp").forward(request, response);
+        
+        
+//        processRequest(request, response);
     }
 
     /** 
