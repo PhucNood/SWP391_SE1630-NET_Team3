@@ -22,13 +22,12 @@ import java.util.logging.Logger;
  */
 public class ProductDAOImpl extends DBContext implements ProductDAO {
 
-    Connection con = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
-
     // Get All Product in DataBase
     @Override
     public List<Product> getAllProduct() {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Product> listProduct = new ArrayList<>();
         List<Image> listImg = new ArrayList<>();
         ImageDAOImpl ImageDAO = new ImageDAOImpl();
@@ -60,13 +59,18 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
         return listProduct;
     }
 
     //Get list product base: category, brand, filter, sort type
     @Override
     public List<Product> getProduct(String categoryID, String brandID, String filterID, String sortID) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Product> listProduct = new ArrayList<>();
         List<Image> listImg = new ArrayList<>();
         ImageDAOImpl ImageDAO = new ImageDAOImpl();
@@ -129,13 +133,18 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
         return listProduct;
     }
 
     //get list product after search by text
     @Override
     public List<Product> searchListProduct(String text) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Product> listProduct = new ArrayList<>();
         List<Image> listImg = new ArrayList<>();
         ImageDAOImpl ImageDAO = new ImageDAOImpl();
@@ -158,6 +167,9 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
         return listProduct;
 
     }
@@ -165,6 +177,9 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
     //get product by productID
     @Override
     public Product getProductById(String productID) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Image> listImg = new ArrayList<>();
         ImageDAOImpl ImageDAO = new ImageDAOImpl();
         String sql = "select * from Product where productID = " + productID;
@@ -183,6 +198,9 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
         return null;
     }
 
@@ -200,6 +218,9 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
     //get list product by category
     @Override
     public List<Product> getProductListByCategoryID(int categoryID) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Product> listProduct = new ArrayList<>();
         List<Image> listImg = new ArrayList<>();
         ImageDAOImpl ImageDAO = new ImageDAOImpl();
@@ -219,12 +240,18 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
         return listProduct;
     }
 
     //delete product in shop
     @Override
     public void deleteProductDetail(String productID) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         String sql = "DELETE FROM [dbo].[image_product]\n"
                 + "       WHERE product_id = " + productID
                 + "\nDELETE FROM [dbo].[product]\n"
@@ -237,12 +264,18 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
     }
 
     //update info of product
     public void updateProduct(String name, String description,
             String size, String categoryID, String brandID,
             String quantity, String price, String sale, String productID) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         String sql = "UPDATE [dbo].[product]\n"
                 + "   SET [name] = ?\n"
                 + "      ,[description] = ?\n"
@@ -270,13 +303,20 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
 
     }
 
     //add new product
+    @Override
     public void addProduct(String name, String description,
             String size, String categoryID, String brandID,
             String quantity, String price, String sale) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         String sql = "INSERT INTO [dbo].[product]\n"
                 + "           ([name]\n"
                 + "           ,[description]\n"
@@ -303,10 +343,16 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
     }
 
     @Override
     public String getIdOfProduct() {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Image> listImg = new ArrayList<>();
         ImageDAOImpl ImageDAO = new ImageDAOImpl();
         String sql = "SELECT top 1 [productID]\n"
@@ -337,6 +383,9 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        closeResultSet(rs);
+        closePrepareState(ps);
+        closeConnection(con);
         return null;
     }
 

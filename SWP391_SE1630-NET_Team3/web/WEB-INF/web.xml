@@ -186,7 +186,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AboutController</servlet-name>
-        <url-pattern>/AboutController</url-pattern>
+        <url-pattern>/about</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ContactControler</servlet-name>
