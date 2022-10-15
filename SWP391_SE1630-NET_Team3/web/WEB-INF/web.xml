@@ -57,6 +57,10 @@
         <servlet-class>controller.DeleteProductImageController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SaveAddImageController</servlet-name>
+        <servlet-class>controller.SaveAddImageController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SearchInManageController</servlet-name>
         <servlet-class>controller.SearchInManageController</servlet-class>
     </servlet>
@@ -92,6 +96,10 @@
         <servlet-name>OderController</servlet-name>
         <servlet-class>controller.OderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlogDetailController</servlet-name>
+        <servlet-class>controller.BlogDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShopController</servlet-name>
         <url-pattern>/shop</url-pattern>
@@ -106,7 +114,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BlogListController</servlet-name>
-        <url-pattern>/blog</url-pattern>
+        <url-pattern>/blogList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SignupController</servlet-name>
@@ -149,6 +157,10 @@
         <url-pattern>/deleteProductImage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SaveAddImageController</servlet-name>
+        <url-pattern>/saveAddImage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SearchInManageController</servlet-name>
         <url-pattern>/searchInManage</url-pattern>
     </servlet-mapping>
@@ -183,6 +195,10 @@
     <servlet-mapping>
         <servlet-name>OderController</servlet-name>
         <url-pattern>/oder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogDetailController</servlet-name>
+        <url-pattern>/BlogDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

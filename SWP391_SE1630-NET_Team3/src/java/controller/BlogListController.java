@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dao.BlogDAO;
 import dao.impl.BlogDAOImpl;
 import entity.Archive;
 import entity.Blog;
@@ -36,9 +37,8 @@ public class BlogListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.setAttribute("inPage", "blog");
         BlogDAOImpl blogDAO = new BlogDAOImpl();
+
         List<Blog> blogList = null;
         List<Archive> archiveList = null;
         try {
@@ -76,14 +76,14 @@ public class BlogListController extends HttpServlet {
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("searchTitle", searchTitle);
             request.setAttribute("searchTime", searchTime);
-            
+            request.setAttribute("inPage", "blogList");
+            HttpSession session = request.getSession();
+            session.setAttribute("inPage", "blog");
             request.setAttribute(searchTime, this);
 
             request.getRequestDispatcher("view/blogList.jsp").forward(request, response);
 //        response.sendRedirect("view/blog.jsp");
-        } catch (SQLException ex) {
-            Logger.getLogger(BlogListController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(BlogListController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

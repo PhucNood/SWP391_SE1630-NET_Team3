@@ -4,6 +4,7 @@
  */
 package dao.impl;
 
+import dao.BlogDAO;
 import entity.Archive;
 import entity.Blog;
 import entity.Image;
@@ -20,9 +21,10 @@ import java.util.logging.Logger;
  *
  * @author stick
  */
-public class BlogDAOImpl extends DBContext {
+public class BlogDAOImpl extends DBContext implements BlogDAO{
 
     // <editor-fold defaultstate="collapsed" desc="simple get blog arraylist and get image of an blog">
+    @Override
     public List<Blog> searchBlogPage(String searchTitle, int month, int year, int numPerPage, int curPage) throws SQLException, ClassNotFoundException {
         List<Blog> list = new ArrayList<>();
         String searchMonth = "";
@@ -41,13 +43,14 @@ public class BlogDAOImpl extends DBContext {
                 + "WHERE b.title like ? \n"
                 + searchMonth + searchYear + ") sub\n"
                 + "WHERE sub.rownum >= ? AND sub.rownum <= ?";
-        Connection conn;
+        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         int startItem = numPerPage * (curPage - 1) + 1;
         int endItem = startItem + numPerPage - 1;
         try {
-            ps = getConnection().prepareStatement(sql);
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
             ps.setString(1, "%" + searchTitle + "%");
             ps.setInt(2, startItem);
             ps.setInt(3, endItem);
@@ -69,12 +72,14 @@ public class BlogDAOImpl extends DBContext {
         } catch (SQLException | ClassNotFoundException ex) {
             throw ex;
         } finally {
-            rs.close();
-            ps.close();
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(conn);
         }
         return list;
     }
 
+    @Override
     public int getTotalSearchPage(String searchTitle, int month, int year, int numPerPage) throws SQLException, ClassNotFoundException {
         String searchMonth = "";
         String searchYear = "";
@@ -85,7 +90,7 @@ public class BlogDAOImpl extends DBContext {
             searchYear = " AND YEAR(b.created_at)=" + year;
         }
         String sql = "SELECT COUNT(b.id)as'total' FROM blog b WHERE b.title like ? " + searchMonth + searchYear;
-        Connection conn;
+        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         int totalPage = 0;
@@ -104,10 +109,15 @@ public class BlogDAOImpl extends DBContext {
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
+        } finally{
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(conn);
         }
         return totalPage;
     }
 
+    @Override
     public List<Archive> getAllArchive() throws SQLException, ClassNotFoundException {
         List<Archive> resultList = new ArrayList<>();
 
@@ -117,7 +127,7 @@ public class BlogDAOImpl extends DBContext {
                 + "FORMAT(b.created_at, 'MMM yyyy') AS sqlDate\n"
                 + "FROM blog b \n"
                 + "GROUP BY MONTH(b.created_at),YEAR(b.created_at), FORMAT(b.created_at, 'MMM yyyy')";
-        Connection conn;
+        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -134,15 +144,20 @@ public class BlogDAOImpl extends DBContext {
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
+        }finally{
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(conn);
         }
         return resultList;
     }
 
+    @Override
     public Blog getBlogById(int id) throws SQLException, ClassNotFoundException {
         String sql = "SELECT b.*,a.full_name FROM blog b \n"
                 + "INNER JOIN account a ON a.id = b.author_id\n"
                 + "WHERE b.id = ?";
-        Connection conn;
+        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         Blog resultBlog = null;
@@ -166,6 +181,10 @@ public class BlogDAOImpl extends DBContext {
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
+        }finally{
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(conn);
         }
         return resultBlog;
     }
@@ -176,7 +195,7 @@ public class BlogDAOImpl extends DBContext {
                 + "FROM image_blog ib\n"
                 + "INNER JOIN [image] i ON ib.image_id = i.id\n"
                 + "WHERE blog_id = ?";
-        Connection conn;
+        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -196,8 +215,9 @@ public class BlogDAOImpl extends DBContext {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            rs.close();
-            ps.close();
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(conn);
         }
         return list;
     }

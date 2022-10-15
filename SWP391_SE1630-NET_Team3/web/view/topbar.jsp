@@ -41,7 +41,6 @@
             * {
                 box-sizing: border-box;
             }
-
             /* Style the search field */
             form.example input[type=text] {
                 padding: 10px;
@@ -114,10 +113,8 @@
                                     <a href="${pageContext.request.contextPath}/shop">Shop</a>
                                 </li>
 
-                                <li class="${inPage == "blog" ? "active-menu" :""}">
-
-                                    <a href="${pageContext.request.contextPath}/blog">Blog</a>
-
+                                <li class="${inPage == "blogList" ? "active-menu" :""}">
+                                    <a href="${pageContext.request.contextPath}/blogList">Blog</a>
                                 </li>
 
                                 <li class="${inPage == "about" ? "active-menu" :""}">
@@ -158,8 +155,6 @@
                                     </li>
                                 </c:if>
 
-
-
                             </ul>
                             <div class="flex-c-m h-full p-r-24">
                                 <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-modal-search">
@@ -190,9 +185,7 @@
                     </nav>
                 </div>	
             </div>
-
-            
-
+                                
             <!-- Modal Search -->
             <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
                 <div class="container-search-header">
