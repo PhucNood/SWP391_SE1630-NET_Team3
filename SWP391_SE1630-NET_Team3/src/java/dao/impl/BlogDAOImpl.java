@@ -43,13 +43,14 @@ public class BlogDAOImpl extends DBContext implements BlogDAO{
                 + "WHERE b.title like ? \n"
                 + searchMonth + searchYear + ") sub\n"
                 + "WHERE sub.rownum >= ? AND sub.rownum <= ?";
-        Connection conn;
+        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         int startItem = numPerPage * (curPage - 1) + 1;
         int endItem = startItem + numPerPage - 1;
         try {
-            ps = getConnection().prepareStatement(sql);
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
             ps.setString(1, "%" + searchTitle + "%");
             ps.setInt(2, startItem);
             ps.setInt(3, endItem);
@@ -71,8 +72,9 @@ public class BlogDAOImpl extends DBContext implements BlogDAO{
         } catch (SQLException | ClassNotFoundException ex) {
             throw ex;
         } finally {
-            rs.close();
-            ps.close();
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(conn);
         }
         return list;
     }
@@ -88,7 +90,7 @@ public class BlogDAOImpl extends DBContext implements BlogDAO{
             searchYear = " AND YEAR(b.created_at)=" + year;
         }
         String sql = "SELECT COUNT(b.id)as'total' FROM blog b WHERE b.title like ? " + searchMonth + searchYear;
-        Connection conn;
+        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         int totalPage = 0;
@@ -107,6 +109,10 @@ public class BlogDAOImpl extends DBContext implements BlogDAO{
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
+        } finally{
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(conn);
         }
         return totalPage;
     }
@@ -121,7 +127,7 @@ public class BlogDAOImpl extends DBContext implements BlogDAO{
                 + "FORMAT(b.created_at, 'MMM yyyy') AS sqlDate\n"
                 + "FROM blog b \n"
                 + "GROUP BY MONTH(b.created_at),YEAR(b.created_at), FORMAT(b.created_at, 'MMM yyyy')";
-        Connection conn;
+        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -138,6 +144,10 @@ public class BlogDAOImpl extends DBContext implements BlogDAO{
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
+        }finally{
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(conn);
         }
         return resultList;
     }
@@ -147,7 +157,7 @@ public class BlogDAOImpl extends DBContext implements BlogDAO{
         String sql = "SELECT b.*,a.full_name FROM blog b \n"
                 + "INNER JOIN account a ON a.id = b.author_id\n"
                 + "WHERE b.id = ?";
-        Connection conn;
+        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         Blog resultBlog = null;
@@ -171,6 +181,10 @@ public class BlogDAOImpl extends DBContext implements BlogDAO{
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
+        }finally{
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(conn);
         }
         return resultBlog;
     }
@@ -181,7 +195,7 @@ public class BlogDAOImpl extends DBContext implements BlogDAO{
                 + "FROM image_blog ib\n"
                 + "INNER JOIN [image] i ON ib.image_id = i.id\n"
                 + "WHERE blog_id = ?";
-        Connection conn;
+        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -201,8 +215,9 @@ public class BlogDAOImpl extends DBContext implements BlogDAO{
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            rs.close();
-            ps.close();
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(conn);
         }
         return list;
     }
