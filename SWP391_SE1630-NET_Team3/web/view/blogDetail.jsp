@@ -30,6 +30,18 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/util.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/main.css">
         <!--===============================================================================================-->
+        <style>
+            
+            .blog-img>img {
+                height: 300px;
+                width: auto;
+                object-fit:cover;
+            }
+            .button-archive{
+                padding: 10px;
+                border-radius: 4px;
+            }
+        </style>
     </head>
     <body class="animsition">
         <jsp:include page="topbar.jsp"/>
@@ -141,6 +153,7 @@
         
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/view/js/blogListJS.js"></script>
 
     </body>
 </html>

@@ -92,7 +92,7 @@
                                                     <span class="cl12 m-l-4 m-r-6">|</span>
                                                 </span>
                                             </span>
-                                            <a href="$BlogDetail?id=${blog.id}" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
+                                            <a href="BlogDetail?id=${blog.id}" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
                                                 Continue Reading
                                                 <i class="fa fa-long-arrow-right m-l-9"></i>
                                             </a>

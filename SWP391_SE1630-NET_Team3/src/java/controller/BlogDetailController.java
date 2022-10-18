@@ -1,6 +1,9 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * Copyright(C).
+ * Transport and Information Network
+ *
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-10-18      1.0                 LongLH           First Implement
  */
 package controller;
 
@@ -9,12 +12,10 @@ import dao.impl.BlogDAOImpl;
 import entity.Archive;
 import entity.Blog;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,6 +58,9 @@ public class BlogDetailController extends HttpServlet {
             request.getRequestDispatcher("view/blogDetail.jsp").forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(BlogDetailController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", ex.getMessage());
+            request.getRequestDispatcher("view/error.jsp").forward(request, response);
+
         }
 
     }

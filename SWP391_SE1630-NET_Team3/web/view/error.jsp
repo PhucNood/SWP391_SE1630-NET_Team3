@@ -100,7 +100,7 @@
 
                 <div class="inner-box">
 
-                    <h3>Error: </h3>
+                    <h3>Error: </h3> ${errorMessage}
 
                 </div>
 

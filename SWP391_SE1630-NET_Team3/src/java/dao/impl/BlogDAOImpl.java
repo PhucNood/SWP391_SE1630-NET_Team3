@@ -1,6 +1,9 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Copyright(C).
+ * Transport and Information Network
+ *
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-10-18      1.0                 LongLH           First Implement
  */
 package dao.impl;
 
@@ -21,7 +24,7 @@ import java.util.logging.Logger;
  *
  * @author stick
  */
-public class BlogDAOImpl extends DBContext implements BlogDAO{
+public class BlogDAOImpl extends DBContext implements BlogDAO {
 
     // <editor-fold defaultstate="collapsed" desc="simple get blog arraylist and get image of an blog">
     @Override
@@ -109,7 +112,7 @@ public class BlogDAOImpl extends DBContext implements BlogDAO{
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
-        } finally{
+        } finally {
             closeResultSet(rs);
             closePrepareState(ps);
             closeConnection(conn);
@@ -144,7 +147,7 @@ public class BlogDAOImpl extends DBContext implements BlogDAO{
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
-        }finally{
+        } finally {
             closeResultSet(rs);
             closePrepareState(ps);
             closeConnection(conn);
@@ -181,7 +184,7 @@ public class BlogDAOImpl extends DBContext implements BlogDAO{
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
-        }finally{
+        } finally {
             closeResultSet(rs);
             closePrepareState(ps);
             closeConnection(conn);
@@ -189,7 +192,7 @@ public class BlogDAOImpl extends DBContext implements BlogDAO{
         return resultBlog;
     }
 
-    public List<Image> getBlogImage(int blogId) throws SQLException {
+    public List<Image> getBlogImage(int blogId) throws SQLException, ClassNotFoundException {
         List<Image> list = new ArrayList<>();
         String sql = "SELECT blog_id,image_id,i.* \n"
                 + "FROM image_blog ib\n"
@@ -210,10 +213,9 @@ public class BlogDAOImpl extends DBContext implements BlogDAO{
                 img.setName(rs.getString("name"));
                 list.add(img);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, e);
             throw e;
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResultSet(rs);
             closePrepareState(ps);
