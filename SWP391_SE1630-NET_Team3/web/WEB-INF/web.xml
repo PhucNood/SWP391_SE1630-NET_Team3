@@ -106,6 +106,10 @@
         <servlet-name>BlogDetailController</servlet-name>
         <servlet-class>controller.BlogDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageBlogController</servlet-name>
+        <servlet-class>controller.ManageBlogController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShopController</servlet-name>
         <url-pattern>/shop</url-pattern>
@@ -205,6 +209,10 @@
     <servlet-mapping>
         <servlet-name>BlogDetailController</servlet-name>
         <url-pattern>/BlogDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageBlogController</servlet-name>
+        <url-pattern>/ManageBlog</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
