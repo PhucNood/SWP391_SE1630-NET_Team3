@@ -69,16 +69,8 @@
         <servlet-class>controller.EditAccountRoleController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ChangePassController</servlet-name>
-        <servlet-class>controller.ChangePassController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>InformationController</servlet-name>
         <servlet-class>controller.InformationController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ChangeInformationController</servlet-name>
-        <servlet-class>controller.ChangeInformationController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AboutController</servlet-name>
@@ -91,6 +83,10 @@
     <servlet>
         <servlet-name>OderController</servlet-name>
         <servlet-class>controller.OderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePassController</servlet-name>
+        <servlet-class>controller.ChangePassController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShopController</servlet-name>
@@ -161,16 +157,8 @@
         <url-pattern>/editAccountRole</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ChangePassController</servlet-name>
-        <url-pattern>/changepass</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>InformationController</servlet-name>
         <url-pattern>/information</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ChangeInformationController</servlet-name>
-        <url-pattern>/changeinfo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AboutController</servlet-name>
@@ -183,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>OderController</servlet-name>
         <url-pattern>/oder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassController</servlet-name>
+        <url-pattern>/changepass</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

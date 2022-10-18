@@ -18,6 +18,6 @@ public interface AccountDAO {
 
     public void updateAccountRole(String email, String role);
     public void ChangePass(String email, String password);
-    public void UpdateInfo(String email, String phone, String fullname, String user);
+    public void UpdateInfo(String email, String phone, String fullname, String user, String address);
 
 }

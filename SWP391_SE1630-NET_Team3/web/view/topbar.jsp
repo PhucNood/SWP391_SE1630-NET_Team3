@@ -173,10 +173,7 @@
                                         <a href="signout">Sign Out</a>                                        
                                     </li>
                                 
-                                    <c:if test="${sessionScope.account.role==1}">
-                                    <a href="manageproduct" class="nav-item nav-link">Manage product</a>
-                                    <a href="manageaccount" class="nav-item nav-link">Manage account</a>
-                                </c:if>
+                                    
                                      </c:if>
                                     
                             </ul>

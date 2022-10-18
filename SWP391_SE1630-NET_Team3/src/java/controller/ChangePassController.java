@@ -88,8 +88,8 @@ public class ChangePassController extends HttpServlet {
             request.setAttribute("mess", "Incorrect password or new password does not match.");
             request.getRequestDispatcher("view/changepass.jsp").forward(request, response);
         } else {
-            AccountDAO change = new AccountDAOImpl();
-            change.ChangePass(email, newPass);
+            AccountDAO changepass = new AccountDAOImpl();
+            changepass.ChangePass(email, newPass);
             request.setAttribute("messSuccessFull", "Change password successful!");
             request.getRequestDispatcher("view/changepass.jsp").forward(request, response);
         }

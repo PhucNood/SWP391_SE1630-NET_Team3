@@ -5,6 +5,8 @@
 
 package controller;
 
+import dao.AccountDAO;
+import dao.impl.AccountDAOImpl;
 import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +15,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -55,12 +59,14 @@ public class InformationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+  
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("account");
         request.setAttribute("phone", a.getPhone());
         request.setAttribute("fullname", a.getFullname());
         request.setAttribute("username", a.getUsername());
-        request.getRequestDispatcher("information.jsp").forward(request, response);
+        request.setAttribute("address", a.getAddress());
+        request.getRequestDispatcher("view/information.jsp").forward(request, response);
     } 
 
     /** 
@@ -73,7 +79,49 @@ public class InformationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+//        HttpSession session = request.getSession();
+//        session.setAttribute("inPage", "information");
+//        request.getRequestDispatcher("view/information.jsp").forward(request, response);
+        
+        
+//        processRequest(request, response);
+
+        HttpSession session = request.getSession();
+        String phonePattern = "^[0-9]{10}";
+        Pattern pho = Pattern.compile(phonePattern);
+        Account a = (Account) session.getAttribute("account");
+        
+        String email = a.getEmail().trim();
+        String phone = request.getParameter("phone").trim();
+        String name = request.getParameter("fullname").trim();
+        String user = request.getParameter("username").trim();
+        String address = request.getParameter("address").trim();
+        
+        Matcher matpho = pho.matcher(phone);
+        AccountDAO changeinfo = new AccountDAOImpl();
+        //check cac dieu kien thoa man
+        if (!matpho.matches()){
+            request.setAttribute("phone", phone);
+            request.setAttribute("username", user);
+            request.setAttribute("fullname", name);
+            request.setAttribute("address", address);
+            request.setAttribute("mess1", "Phone must have 10 character");
+            request.getRequestDispatcher("view/information.jsp").forward(request, response);
+            
+        }else{
+            changeinfo.UpdateInfo(email, phone, name, user, address);
+            a = changeinfo.getAccByEmail(email);
+            session.setAttribute("account", a);
+            request.setAttribute("success", "Change information successful!");
+            
+            request.setAttribute("phone", a.getPhone());
+            request.setAttribute("fullname", a.getFullname());
+            request.setAttribute("username", a.getUsername());
+            request.setAttribute("address", a.getAddress());
+            
+            request.setAttribute("test", a.getPhone());
+            request.getRequestDispatcher("view/information.jsp").forward(request, response);
+        }
     }
 
     /** 
