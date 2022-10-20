@@ -4,9 +4,6 @@
  */
 package entity;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-
 /**
  *
  * @author stick

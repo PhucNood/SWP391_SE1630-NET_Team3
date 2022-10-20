@@ -128,7 +128,7 @@
                             <!--search-->
                             <div class="bor17 of-hidden pos-relative">
                                 <form method="get" action="blogList">
-                                    <input id="SearchName" class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="searchTitle" placeholder="Search">
+                                    <input id="SearchName" class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="searchTitle" placeholder="Search" value="${searchTitle}">
                                     <input id="SearchTime" class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="searchTime" placeholder="Search" style="display: none">
                                     <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04" type="submit">
                                         <i class="zmdi zmdi-search"></i>

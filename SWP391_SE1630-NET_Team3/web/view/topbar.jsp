@@ -135,6 +135,7 @@
                                     <div class="dropdown-menu rounded-0 m-0">
                                         <a href="${pageContext.request.contextPath}/manageAccount" class="dropdown-item">Manage Account</a>
                                         <a href="${pageContext.request.contextPath}/manageProduct" class="dropdown-item">Manage Product</a>
+                                        <a href="${pageContext.request.contextPath}/ManageBlog" class="dropdown-item">Manage Blog</a>
 
                                     </div>
 
@@ -216,7 +217,7 @@
                     minimumResultsForSearch: 20,
                     dropdownParent: $(this).next('.dropDownSelect2')
                 });
-            })
+            });
         </script>
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/vendor/daterangepicker/moment.min.js"></script>
@@ -291,12 +292,12 @@
                 var ps = new PerfectScrollbar(this, {
                     wheelSpeed: 1,
                     scrollingThreshold: 1000,
-                    wheelPropagation: false,
+                    wheelPropagation: false
                 });
 
                 $(window).on('resize', function () {
                     ps.update();
-                })
+                });
             });
         </script>
         <!--===============================================================================================-->
