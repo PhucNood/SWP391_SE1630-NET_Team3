@@ -235,11 +235,11 @@
                         </div>
 
                         <div class="header-cart-buttons flex-w w-full">
-                            <a href="${pageContext.request.contextPath}/view/shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+                            <a href="order" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
                                 View Cart
                             </a>
 
-                            <a href="${pageContext.request.contextPath}/view/shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                            <a href="order" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
                                 Check Out
                             </a>
                         </div>
@@ -1299,7 +1299,7 @@
                         <div class="col-sm-6 col-md-4 p-b-40">
                             <div class="blog-item">
                                 <div class="hov-img0">
-                                    <a href="blog">
+                                    <a href="BlogDetail?id=${b.getId()}">
                                         <img src="${pageContext.request.contextPath}/view/images/${b.getListImg().get(0).getImgSource()}" alt="${b.getListImg().get(0).getName()}">
                                     </a>
                                 </div>
@@ -1328,7 +1328,7 @@
                                     </div>
 
                                     <h4 class="p-b-12">
-                                        <a href="blog" class="mtext-101 cl2 hov-cl1 trans-04">
+                                        <a href="BlogDetail?id=${b.getId()}" class="mtext-101 cl2 hov-cl1 trans-04">
                                             ${b.getTitle()}
                                         </a>
                                     </h4>
@@ -1349,9 +1349,7 @@
 
         <jsp:include page="footer.jsp"/>
 
-        
         <!--===============================================================================================-->
-        <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
         <script src="${pageContext.request.contextPath}/view/vendor/daterangepicker/moment.min.js"></script>
         <script src="${pageContext.request.contextPath}/view/vendor/daterangepicker/daterangepicker.js"></script>
         <!--===============================================================================================-->
@@ -1359,9 +1357,7 @@
         <script src="${pageContext.request.contextPath}/view/js/slick-custom.js"></script>
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/vendor/parallax100/parallax100.js"></script>
-        <script>
-            $('.parallax100').parallax100();
-        </script>
+        
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
     </body>

@@ -553,5 +553,7 @@
                 }
             }
         </script>
+        <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
+
     </body>
 </html>

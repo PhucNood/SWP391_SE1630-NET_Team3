@@ -64,7 +64,7 @@
                                 <!-- item blog -->
                                 <div class="p-b-30">
                                     <div class="txt-center blog-img">
-                                        <a href="${pageContext.request.contextPath}/view/blog-detail.html" class="hov-img0 how-pos5-parent">
+                                        <a href="BlogDetail?id=${blog.id}" class="hov-img0 how-pos5-parent">
                                             <img src="${pageContext.request.contextPath}/view/images/${blog.getFirstImgSrc()}" alt="IMG-BLOG">
                                             <div class="flex-col-c-m size-123 bg9 how-pos5">
                                                 <span class="ltext-107 cl2 txt-center">
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="p-t-32">
                                         <h4 class="p-b-15">
-                                            <a href="${pageContext.request.contextPath}/view/blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
+                                            <a href="BlogDetail?id=${blog.id}" class="ltext-108 cl2 hov-cl1 trans-04">
                                                 ${blog.title}
                                             </a>
                                         </h4>
@@ -92,7 +92,7 @@
                                                     <span class="cl12 m-l-4 m-r-6">|</span>
                                                 </span>
                                             </span>
-                                            <a href="${pageContext.request.contextPath}/view/blogDetail.jsp" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
+                                            <a href="BlogDetail?id=${blog.id}" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
                                                 Continue Reading
                                                 <i class="fa fa-long-arrow-right m-l-9"></i>
                                             </a>
@@ -106,13 +106,13 @@
                                 <c:if test="${totalPage > 1}">
                                     <c:forEach step="1" begin="1" end="${totalPage}" var="index">
                                         <c:if test="${curPage eq index}">
-                                            <a href="blog?page=${index}&searchTitle=${searchTitle}&searchTime=${searchTime}" 
+                                            <a href="blogList?page=${index}&searchTitle=${searchTitle}&searchTime=${searchTime}" 
                                                class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
                                                 ${index}
                                             </a>
                                         </c:if>
                                         <c:if test="${curPage ne index}">
-                                            <a href="blog?page=${index}&searchTitle=${searchTitle}&searchTime=${searchTime}" 
+                                            <a href="blogList?page=${index}&searchTitle=${searchTitle}&searchTime=${searchTime}" 
                                                class="flex-c-m how-pagination1 trans-04 m-all-7 ">
                                                 ${index}
                                             </a>
@@ -127,7 +127,7 @@
                         <div class="side-menu">
                             <!--search-->
                             <div class="bor17 of-hidden pos-relative">
-                                <form method="get" action="blog">
+                                <form method="get" action="blogList">
                                     <input id="SearchName" class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="searchTitle" placeholder="Search">
                                     <input id="SearchTime" class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="searchTime" placeholder="Search" style="display: none">
                                     <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04" type="submit">
@@ -154,38 +154,6 @@
                             
                                                                         <span class="stext-116 cl6 p-t-20">
                                                                             $19.00
-                                                                        </span>
-                                                                    </div>
-                                                                </li>
-                            
-                                                                <li class="flex-w flex-t p-b-30">
-                                                                    <a href="${pageContext.request.contextPath}/view/#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                                                        <img src="${pageContext.request.contextPath}/view/images/product-min-02.jpg" alt="PRODUCT">
-                                                                    </a>
-                            
-                                                                    <div class="size-215 flex-col-t p-t-8">
-                                                                        <a href="${pageContext.request.contextPath}/view/#" class="stext-116 cl8 hov-cl1 trans-04">
-                                                                            Converse All Star Hi Black Canvas
-                                                                        </a>
-                            
-                                                                        <span class="stext-116 cl6 p-t-20">
-                                                                            $39.00
-                                                                        </span>
-                                                                    </div>
-                                                                </li>
-                            
-                                                                <li class="flex-w flex-t p-b-30">
-                                                                    <a href="${pageContext.request.contextPath}/view/#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                                                        <img src="${pageContext.request.contextPath}/view/images/product-min-03.jpg" alt="PRODUCT">
-                                                                    </a>
-                            
-                                                                    <div class="size-215 flex-col-t p-t-8">
-                                                                        <a href="${pageContext.request.contextPath}/view/#" class="stext-116 cl8 hov-cl1 trans-04">
-                                                                            Nixon Porter Leather Watch In Tan
-                                                                        </a>
-                            
-                                                                        <span class="stext-116 cl6 p-t-20">
-                                                                            $17.00
                                                                         </span>
                                                                     </div>
                                                                 </li>

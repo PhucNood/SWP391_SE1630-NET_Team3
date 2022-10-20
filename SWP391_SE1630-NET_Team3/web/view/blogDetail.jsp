@@ -30,112 +30,37 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/util.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/main.css">
         <!--===============================================================================================-->
+        <style>
+            
+            .blog-img>img {
+                height: 300px;
+                width: auto;
+                object-fit:cover;
+            }
+            .button-archive{
+                padding: 10px;
+                border-radius: 4px;
+            }
+        </style>
     </head>
     <body class="animsition">
-
         <jsp:include page="topbar.jsp"/>
-
-        <!-- Cart -->
-        <div class="wrap-header-cart js-panel-cart">
-            <div class="s-full js-hide-cart"></div>
-
-            <div class="header-cart flex-col-l p-l-65 p-r-25">
-                <div class="header-cart-title flex-w flex-sb-m p-b-8">
-                    <span class="mtext-103 cl2">
-                        Your Cart
-                    </span>
-
-                    <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-                        <i class="zmdi zmdi-close"></i>
-                    </div>
-                </div>
-
-                <div class="header-cart-content flex-w js-pscroll">
-                    <ul class="header-cart-wrapitem w-full">
-                        <li class="header-cart-item flex-w flex-t m-b-12">
-                            <div class="header-cart-item-img">
-                                <img src="${pageContext.request.contextPath}/view/images/item-cart-01.jpg" alt="IMG">
-                            </div>
-
-                            <div class="header-cart-item-txt p-t-8">
-                                <a href="${pageContext.request.contextPath}/view/#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                                    White Shirt Pleat
-                                </a>
-
-                                <span class="header-cart-item-info">
-                                    1 x $19.00
-                                </span>
-                            </div>
-                        </li>
-
-                        <li class="header-cart-item flex-w flex-t m-b-12">
-                            <div class="header-cart-item-img">
-                                <img src="${pageContext.request.contextPath}/view/images/item-cart-02.jpg" alt="IMG">
-                            </div>
-
-                            <div class="header-cart-item-txt p-t-8">
-                                <a href="${pageContext.request.contextPath}/view/#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                                    Converse All Star
-                                </a>
-
-                                <span class="header-cart-item-info">
-                                    1 x $39.00
-                                </span>
-                            </div>
-                        </li>
-
-                        <li class="header-cart-item flex-w flex-t m-b-12">
-                            <div class="header-cart-item-img">
-                                <img src="${pageContext.request.contextPath}/view/images/item-cart-03.jpg" alt="IMG">
-                            </div>
-
-                            <div class="header-cart-item-txt p-t-8">
-                                <a href="${pageContext.request.contextPath}/view/#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                                    Nixon Porter Leather
-                                </a>
-
-                                <span class="header-cart-item-info">
-                                    1 x $17.00
-                                </span>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <div class="w-full">
-                        <div class="header-cart-total w-full p-tb-40">
-                            Total: $75.00
-                        </div>
-
-                        <div class="header-cart-buttons flex-w w-full">
-                            <a href="${pageContext.request.contextPath}/view/shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-                                View Cart
-                            </a>
-
-                            <a href="${pageContext.request.contextPath}/view/shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-                                Check Out
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
         <!-- breadcrumb -->
         <div class="container">
             <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-                <a href="${pageContext.request.contextPath}/view/index.html" class="stext-109 cl8 hov-cl1 trans-04">
+                <a href="home" class="stext-109 cl8 hov-cl1 trans-04">
                     Home
                     <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
                 </a>
 
-                <a href="${pageContext.request.contextPath}/view/blog.html" class="stext-109 cl8 hov-cl1 trans-04">
+                <a href="blogList" class="stext-109 cl8 hov-cl1 trans-04">
                     Blog
                     <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
                 </a>
 
                 <span class="stext-109 cl4">
-                    8 Inspiring Ways to Wear Dresses in the Winter
+                    ${blog.title}
                 </span>
             </div>
         </div>
@@ -147,54 +72,50 @@
                 <div class="row">
                     <div class="col-md-8 col-lg-9 p-b-80">
                         <div class="p-r-45 p-r-0-lg">
-                            <!--  -->
+                            <!-- blog header -->
                             <div class="wrap-pic-w how-pos5-parent">
-                                <img src="${pageContext.request.contextPath}/view/images/blog-04.jpg" alt="IMG-BLOG">
+                                <img src="${pageContext.request.contextPath}/view/images/${blog.getFirstImgSrc()}" alt="${blog.title}">
 
                                 <div class="flex-col-c-m size-123 bg9 how-pos5">
                                     <span class="ltext-107 cl2 txt-center">
-                                        22
+                                        ${blog.getDayCreate()}
                                     </span>
                                     <span class="stext-109 cl3 txt-center">
-                                        Jan 2018
+                                        ${blog.getMonthYearCreate()}
                                     </span>
                                 </div>
                             </div>
-
+                            <!-- blog body -->
                             <div class="p-t-32">
                                 <span class="flex-w flex-m stext-111 cl2 p-b-19">
                                     <span>
-                                        <span class="cl4">By</span> Admin  
+                                        <span class="cl4">By:</span> ${blog.authorName}
                                         <span class="cl12 m-l-4 m-r-6">|</span>
                                     </span>
 
                                     <span>
-                                        22 Jan, 2018
+                                        ${blog.getMonthYearCreate()}-${blog.getDayCreate()}
                                         <span class="cl12 m-l-4 m-r-6">|</span>
                                     </span>
                                 </span>
 
                                 <h4 class="ltext-109 cl2 p-b-28">
-                                    8 Inspiring Ways to Wear Dresses in the Winter
+                                    ${blog.title}
                                 </h4>
 
                                 <p class="stext-117 cl6 p-b-26">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet est vel orci luctus sollicitudin. Duis eleifend vestibulum justo, varius semper lacus condimentum dictum. Donec pulvinar a magna ut malesuada. In posuere felis diam, vel sodales metus accumsan in. Duis viverra dui eu pharetra pellentesque. Donec a eros leo. Quisque sed ligula vitae lorem efficitur faucibus. Praesent sit amet imperdiet ante. Nulla id tellus auctor, dictum libero a, malesuada nisi. Nulla in porta nibh, id vestibulum ipsum. Praesent dapibus tempus erat quis aliquet. Donec ac purus id sapien condimentum feugiat.
-                                </p>
-
-                                <p class="stext-117 cl6 p-b-26">
-                                    Praesent vel mi bibendum, finibus leo ac, condimentum arcu. Pellentesque sem ex, tristique sit amet suscipit in, mattis imperdiet enim. Integer tempus justo nec velit fringilla, eget eleifend neque blandit. Sed tempor magna sed congue auctor. Mauris eu turpis eget tortor ultricies elementum. Phasellus vel placerat orci, a venenatis justo. Phasellus faucibus venenatis nisl vitae vestibulum. Praesent id nibh arcu. Vivamus sagittis accumsan felis, quis vulputate
+                                    ${blog.content}
                                 </p>
                             </div>
                         </div>
                     </div>
-
-
+                                
+                    <!--side bar-->
                     <div class="col-md-4 col-lg-3 p-b-80">
                         <div class="side-menu">
                             <!--search-->
                             <div class="bor17 of-hidden pos-relative">
-                                <form method="get" action="blog">
+                                <form method="get" action="blogList">
                                     <input id="SearchName" class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="searchTitle" placeholder="Search">
                                     <input id="SearchTime" class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="searchTime" placeholder="Search" style="display: none">
                                     <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04" type="submit">
@@ -206,7 +127,6 @@
                                 <h4 class="mtext-112 cl2 p-b-20">
                                     Archive
                                 </h4>
-
                                 <ul>
                                     <c:forEach items="${archiveList}" var="archive">
                                         <li class="p-b-7">
@@ -228,13 +148,12 @@
             </div>
         </section>	
 
-
-
         <jsp:include page="footer.jsp"/>
 
         
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/view/js/blogListJS.js"></script>
 
     </body>
 </html>

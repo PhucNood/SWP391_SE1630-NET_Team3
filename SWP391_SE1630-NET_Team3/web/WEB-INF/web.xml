@@ -12,6 +12,12 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>controller.HomeController</servlet-class>
     </servlet>
+    
+    <welcome-file-list>
+        <welcome-file>home</welcome-file>
+    </welcome-file-list>  
+
+    
     <servlet>
         <servlet-name>SearchController</servlet-name>
         <servlet-class>controller.SearchController</servlet-class>
@@ -57,6 +63,10 @@
         <servlet-class>controller.DeleteProductImageController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SaveAddImageController</servlet-name>
+        <servlet-class>controller.SaveAddImageController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SearchInManageController</servlet-name>
         <servlet-class>controller.SearchInManageController</servlet-class>
     </servlet>
@@ -93,8 +103,12 @@
         <servlet-class>controller.OderController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SearchAccountController</servlet-name>
-        <servlet-class>controller.SearchAccountController</servlet-class>
+        <servlet-name>BlogDetailController</servlet-name>
+        <servlet-class>controller.BlogDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageBlogController</servlet-name>
+        <servlet-class>controller.ManageBlogController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShopController</servlet-name>
@@ -110,7 +124,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BlogListController</servlet-name>
-        <url-pattern>/blog</url-pattern>
+        <url-pattern>/blogList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SignupController</servlet-name>
@@ -153,6 +167,10 @@
         <url-pattern>/deleteProductImage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SaveAddImageController</servlet-name>
+        <url-pattern>/saveAddImage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SearchInManageController</servlet-name>
         <url-pattern>/searchInManage</url-pattern>
     </servlet-mapping>
@@ -189,12 +207,19 @@
         <url-pattern>/oder</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SearchAccountController</servlet-name>
-        <url-pattern>/searchAccount</url-pattern>
+
+        <servlet-name>BlogDetailController</servlet-name>
+        <url-pattern>/BlogDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageBlogController</servlet-name>
+        <url-pattern>/ManageBlog</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    
+        
 </web-app>
