@@ -44,10 +44,11 @@ public class BlogListController extends HttpServlet {
         List<Blog> blogList = null;
         List<Archive> archiveList = null;
         try {
-            String searchTitle = request.getParameter("searchTitle").trim();
+            String searchTitle = request.getParameter("searchTitle");
             if (searchTitle == null || searchTitle.isEmpty()) {
                 searchTitle = "";
             }
+            searchTitle = searchTitle.trim();
             String curPageString = request.getParameter("page");
             int curPage = 1;
             if (curPageString != null && !curPageString.isEmpty()) {
@@ -62,11 +63,10 @@ public class BlogListController extends HttpServlet {
                 searchYear = -1;
             } else {
                 searchMonth = Integer.parseInt(searchTime.split("-")[1]);
-                searchYear = Integer.parseInt(searchTime.split("-")[0]);;
-
+                searchYear = Integer.parseInt(searchTime.split("-")[0]);
             }
-            blogList = blogDAO.searchBlogPage(searchTitle, searchMonth, searchYear, 3, curPage);
-            int totalPage = blogDAO.getTotalSearchPage(searchTitle, searchMonth, searchYear, 3);
+            blogList = blogDAO.searchBlogPage(searchTitle, searchMonth, searchYear, -1, 3, curPage);
+            int totalPage = blogDAO.getTotalSearchPage(searchTitle, searchMonth, searchYear, -1, 3);
             System.out.println("total page:" + totalPage);
 
             archiveList = blogDAO.getAllArchive();
@@ -80,7 +80,6 @@ public class BlogListController extends HttpServlet {
             request.setAttribute("inPage", "blogList");
             HttpSession session = request.getSession();
             session.setAttribute("inPage", "blog");
-            request.setAttribute(searchTime, this);
 
             request.getRequestDispatcher("view/blogList.jsp").forward(request, response);
 //        response.sendRedirect("view/blog.jsp");

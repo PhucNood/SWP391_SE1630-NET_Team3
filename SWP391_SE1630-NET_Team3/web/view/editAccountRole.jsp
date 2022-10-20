@@ -10,31 +10,31 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--===============================================================================================-->	
-        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/view/images/icons/favicon.png"/>
-        <!--===============================================================================================-->
+<!--        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/view/images/icons/favicon.png"/>
+        ===============================================================================================
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/bootstrap/css/bootstrap.min.css">
-        <!--===============================================================================================-->
+        ===============================================================================================
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-        <!--===============================================================================================-->
+        ===============================================================================================
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/fonts/iconic/css/material-design-iconic-font.min.css">
-        <!--===============================================================================================-->
+        ===============================================================================================
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/fonts/linearicons-v1.0.0/icon-font.min.css">
-        <!--===============================================================================================-->
+        ===============================================================================================
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/animate/animate.css">
-        <!--===============================================================================================-->	
+        ===============================================================================================	
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/css-hamburgers/hamburgers.min.css">
-        <!--===============================================================================================-->
+        ===============================================================================================
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/animsition/css/animsition.min.css">
-        <!--===============================================================================================-->
+        ===============================================================================================
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/select2/select2.min.css">
-        <!--===============================================================================================-->	
+        ===============================================================================================	
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/daterangepicker/daterangepicker.css">
-        <!--===============================================================================================-->
+        ===============================================================================================
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/slick/slick.css">
-        <!--===============================================================================================-->
+        ===============================================================================================
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/MagnificPopup/magnific-popup.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/perfect-scrollbar/perfect-scrollbar.css">
+        ===============================================================================================
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/vendor/perfect-scrollbar/perfect-scrollbar.css">-->
 
         <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -50,8 +50,8 @@
         <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/util.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/main.css">
+        <!--<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/util.css">-->
+        <!--<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/css/main.css">-->
         <!--===============================================================================================-->
         <style>
 
@@ -281,22 +281,22 @@
 
         <jsp:include page="topbar.jsp"/>
 
-        <div class="container">
+        <div class="container" style="color: #808080">
             <div id="addEmployeeModal" class="">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <p style="color: #44EC79; text-align: center">${messsucc}</p> 
                         <c:set var="user" value="${sessionScope.account.username}"/>
                         <form action="editAccountRole?email=${account.email}" method="post" >
-                            <div class="modal-header">						
-                                <h4 class="modal-title">Edit Account</h4>
+                            <div class="modal-header" >						
+                                <h4 class="modal-title"style="color: #808080">Edit Account</h4>
                             </div>
-                            <p style="text-align: center; font-weight: 1000">${account.email}</p>
+                            <p style="text-align: center; font-weight: 1000 ;color: #808080">${account.email}</p>
                             <div class="modal-body">					
 
-                                <div class="form-group">
+                                <div class="" style="color: #808080">
                                     <label>Set Role</label></br>
-                                    <div class="col-sm-6 col-md-6 ">
+                                    <div class="col-sm-6 col-md-6 " style="clear: both">
                                         <input  name="role" value="2" type="radio" ${account.role == 2 ? "checked":""}>&nbsp;Employee
                                     </div>
                                     <div class="col-sm-6 col-md-6 ">

@@ -207,6 +207,7 @@
         <url-pattern>/oder</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>BlogDetailController</servlet-name>
         <url-pattern>/BlogDetail</url-pattern>
     </servlet-mapping>

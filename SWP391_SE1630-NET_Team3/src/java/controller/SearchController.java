@@ -68,7 +68,7 @@ public class SearchController extends HttpServlet {
         String text = "";
         if(request.getParameter("text")!= null){
             text = request.getParameter("text");
-            request.setAttribute("textSearch", text);
+            session.setAttribute("text", text);
             session.setAttribute("doSearch", "1");
             session.removeAttribute("brandID");
             session.removeAttribute("filterID");

@@ -25,7 +25,7 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public List<Account> getListAccount() {
+    public List<Account> getListAccount(String sort, String gender, String role, String search) {
         List<Account> list = new ArrayList<>();
         String sql = "SELECT [id]\n"
                 + "      ,[full_name]\n"
@@ -39,7 +39,28 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
                 + "      ,[role]\n"
                 + "      ,[create_at]\n"
                 + "      ,[updated_at]\n"
-                + "  FROM [dbo].[account]";
+                + "  FROM [dbo].[account]"
+                + " Where 1=1 ";
+        if(gender.equals("1")) sql+=" and gender = 1 ";
+        else if (gender.equals("2")) sql+=" and gender = 0 ";
+        
+        if(!role.equals("0")){
+            String roleInData = String.valueOf(Integer.parseInt(role)+1);
+            sql+=" and role = "+roleInData;
+        }
+        if(!search.trim().equals("")){
+            sql+=" and (full_name like '%"+search+"%' or email like '%"+search+"%' or phone like '%"+search+"%') ";
+        }
+        if(sort.equals("1")){
+            sql+=" order by full_name asc ";
+        }
+        else if(sort.equals("2")){
+            sql+=" order by full_name desc ";
+        }else if(sort.equals("3")){
+            sql+=" order by email asc ";
+        }else if(sort.equals("4")){
+            sql+=" order by email desc ";
+        }
         try {
             con = getConnection();
             ps = con.prepareStatement(sql);
@@ -185,10 +206,11 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
 //        System.out.println(list.get(1).getFullname());
 
 //        d.ChangePass("leetung@gmail.com","Tungfif");
-        Account a = d.getAccByEmail("leetung@gmail.com");
-        d.UpdateInfo("leetung@gmail.com", "0366757037","Le Thanh Tung" , "leetung");           
-        a = d.getAccByEmail("leetung@gmail.com");
-        System.out.println(a.getPhone());
+//        Account a = d.getAccByEmail("leetung@gmail.com");
+//        d.UpdateInfo("leetung@gmail.com", "0366757037","Le Thanh Tung" , "leetung");           
+//        a = d.getAccByEmail("leetung@gmail.com");
+//        System.out.println(a.getPhone());
+        System.out.println(d.getListAccount("0", "0", "0","0").size());
 
     }
 }
