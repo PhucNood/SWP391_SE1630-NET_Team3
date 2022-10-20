@@ -119,18 +119,22 @@
                 </div>
                 <form action="">
                     <div class="rowss manage-search">
-                        <input type="text" class="stext-103 cl2 mx-1 plh4 size-101 p-l-28 p-r-55" name="searchTitle" placeholder="Input search title">
-                        <select id="cars" class="stext-103 cl2 mx-1 plh4 size-50 p-l-28 p-r-55" name="searchArchive">
+                        <input type="text" class="stext-103 cl2 mx-1 plh4 size-101 p-l-28 p-r-55" name="searchTitle" placeholder="Input search title" value="${searchTitle}">
+                        <select class="stext-103 cl2 mx-1 plh4 size-50 p-l-28 p-r-55" name="searchAuthor">
                             <option value="-1">Author</option>
-                            <option value="saab">Saab</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
+                            <c:forEach items="${authorList}" var="author">
+                                <option value="${author.id}"
+                                        <c:if test="${author.id == searchAuthorId}">selected</c:if>
+                                        >${author.fullname}</option>
+                            </c:forEach>
                         </select>
-                        <select id="cars" class="stext-103 cl2 mx-1 plh4 size-50 p-l-28 p-r-55" name="searchArchive">
+                        <select class="stext-103 cl2 mx-1 plh4 size-50 p-l-28 p-r-55" name="searchTime">
                             <option value="-1">Archive</option>
-                            <option value="saab">Saab</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
+                            <c:forEach items="${archiveList}" var="archive">
+                                <option value="${archive.searchValue}"
+                                        <c:if test="${archive.searchValue == searchTime}">selected</c:if>
+                                        >${archive.monthYear}</option>
+                            </c:forEach>
                         </select>
                         <input type="submit" class="px-2 rounded" value="Search">
                     </div>

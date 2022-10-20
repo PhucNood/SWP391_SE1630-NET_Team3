@@ -5,10 +5,11 @@
  * DATE            Version             AUTHOR           DESCRIPTION
  * 2022-10-18      1.0                 LongLH           First Implement
  */
-
 package controller;
 
+import dao.BlogDAO;
 import dao.impl.BlogDAOImpl;
+import entity.Account;
 import entity.Archive;
 import entity.Blog;
 import java.io.IOException;
@@ -40,20 +41,23 @@ public class ManageBlogController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BlogDAOImpl blogDAO = new BlogDAOImpl();
+        BlogDAO blogDAO = new BlogDAOImpl();
         List<Blog> blogList = null;
         List<Archive> archiveList = null;
+        List<Account> authorList = null;
         try {
-            String searchTitle = request.getParameter("searchTitle").trim();
+            String searchTitle = request.getParameter("searchTitle");
             if (searchTitle == null || searchTitle.isEmpty()) {
                 searchTitle = "";
             }
+            searchTitle = searchTitle.trim();
+
             String curPageString = request.getParameter("page");
             int curPage = 1;
             if (curPageString != null && !curPageString.isEmpty()) {
                 curPage = Integer.parseInt(curPageString);
             }
-            String searchTime = request.getParameter("searchTime").trim();
+            String searchTime = request.getParameter("searchTime");
             int searchMonth;
             int searchYear;
             if (searchTime == null || searchTime.isEmpty()) {
@@ -62,30 +66,40 @@ public class ManageBlogController extends HttpServlet {
                 searchYear = -1;
             } else {
                 searchMonth = Integer.parseInt(searchTime.split("-")[1]);
-                searchYear = Integer.parseInt(searchTime.split("-")[0]);;
-
+                searchYear = Integer.parseInt(searchTime.split("-")[0]);
             }
-            blogList = blogDAO.searchBlogPage(searchTitle, searchMonth, searchYear, 5, curPage);
-            int totalPage = blogDAO.getTotalSearchPage(searchTitle, searchMonth, searchYear, 5);
-            System.out.println("total page:" + totalPage);
+            String idAuthorStr = request.getParameter("searchAuthor");
+            int idAuthor;
+            if (idAuthorStr == null || idAuthorStr.isEmpty()) {
+                idAuthor = -1;
+            } else {
+                idAuthor = Integer.parseInt(idAuthorStr);
+            }
 
+            blogList = blogDAO.searchBlogPage(searchTitle, searchMonth, searchYear, -1, 5, curPage);
+            int totalPage = blogDAO.getTotalSearchPage(searchTitle, searchMonth, searchYear, -1, 5);
             archiveList = blogDAO.getAllArchive();
+            authorList = blogDAO.getAllAuthor();
 
             request.setAttribute("blogList", blogList);
             request.setAttribute("archiveList", archiveList);
+            request.setAttribute("authorList", authorList);
             request.setAttribute("curPage", curPage);
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("searchTitle", searchTitle);
             request.setAttribute("searchTime", searchTime);
+            request.setAttribute("searchAuthorId", idAuthor);
+
             request.setAttribute("inPage", "manage");
             HttpSession session = request.getSession();
             session.setAttribute("inPage", "manage");
-            request.setAttribute(searchTime, this);
 
             request.getRequestDispatcher("view/manageBlogList.jsp").forward(request, response);
 
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(BlogListController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", ex.getMessage());
+
         }
     }
 

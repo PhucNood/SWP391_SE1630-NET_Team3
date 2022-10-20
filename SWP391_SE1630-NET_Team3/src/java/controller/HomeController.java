@@ -68,7 +68,7 @@ public class HomeController extends HttpServlet {
        request.setAttribute("products", new ProductDAOImpl().getAllProduct());
         request.setAttribute("listNewProduct", homeDAOImpl.getNewProductsEachCategory());
         try {
-            request.setAttribute("newBlogs", new BlogDAOImpl().searchBlogPage("", -1, -1, 3, 1));
+            request.setAttribute("newBlogs", new BlogDAOImpl().searchBlogPage("", -1, -1,-1, 3, 1));
         } catch (SQLException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
