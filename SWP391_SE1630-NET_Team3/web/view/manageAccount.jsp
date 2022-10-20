@@ -323,6 +323,133 @@
         <jsp:include page="topbar.jsp"/>
 
         <div class="container">
+
+            <div class="flex-w flex-sb-m p-b-52" style="justify-content: end">
+                <div class="flex-w flex-l-m filter-tope-group m-tb-10">
+                    <a href="#" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
+                    </a>
+                </div>
+
+                <div class="flex-w flex-c-m m-tb-10">
+                    <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+                        <i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+                        <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                        Filter
+                    </div>
+
+                    <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+                        <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+                        <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                        Search
+                    </div>
+                </div>
+
+                <!-- Search product -->
+                <div class="dis-none panel-search w-full p-t-10 p-b-15">
+                    <form class="example" action="manageAccount?all=1" method="get">
+                        <input type="text" placeholder="Search by name, email, phone,.." name="text" value="${text}">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Filter -->
+                <div class="dis-none panel-filter w-full p-t-10">
+                    <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+                        <div class="filter-col1 p-r-15 p-b-27">
+                            <div class="mtext-102 cl2 p-b-15">
+                                <a href="manageAccount?all=1" style="color: black">
+                                    Reset Filter
+                                </a>
+                            </div>
+                        </div>
+                        <div class="filter-col2 p-r-15 p-b-27">
+                            <div class="mtext-102 cl2 p-b-15">
+                                Sort By
+                            </div>
+
+                            <ul>
+
+                                <li class="p-b-6">
+                                    <a href="manageAccount?sort=1" class="filter-link stext-106 trans-04 ${(sort == "1") ? "filter-link-active" :""}">
+                                        Name: A->Z
+                                    </a>
+                                </li>
+
+                                <li class="p-b-6">
+                                    <a href="manageAccount?sort=2" class="filter-link stext-106 trans-04 ${(sort == "2") ? "filter-link-active" :""}">
+                                        Name: Z->A
+                                    </a>
+                                </li>
+
+                                <li class="p-b-6">
+                                    <a href="manageAccount?sort=3" class="filter-link stext-106 trans-04 ${(sort == "3") ? "filter-link-active" :""}">
+                                        Mail: A->Z
+                                    </a>
+                                </li>
+
+                                <li class="p-b-6">
+                                    <a href="manageAccount?sort=4" class="filter-link stext-106 trans-04 ${(sort == "4") ? "filter-link-active" :""}">
+                                        Mail: Z->A
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="filter-col3 p-r-15 p-b-27">
+                            <div class="mtext-102 cl2 p-b-15">
+                                Gender
+                            </div>
+
+                            <ul>
+                                <li class="p-b-6">
+                                    <a href="manageAccount?gender=0" class="filter-link stext-106 trans-04 ${(gender == "0") ? "filter-link-active" : ""}">
+                                        All
+                                    </a>
+                                </li>
+
+                                <li class="p-b-6">
+                                    <a href="manageAccount?gender=1" class="filter-link stext-106 trans-04 ${(gender == "1") ? "filter-link-active" : ""}">
+                                        Male
+                                    </a>
+                                </li>
+
+                                <li class="p-b-6">
+                                    <a href="manageAccount?gender=2" class="filter-link stext-106 trans-04 ${(gender == "2") ? "filter-link-active" : ""}">
+                                        Female
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="filter-col4 p-r-15 p-b-27">
+                            <div class="mtext-102 cl2 p-b-15">
+                                Role
+                            </div>
+
+                            <ul>
+                                <li class="p-b-6">
+                                    <a href="manageAccount?role=0" class="filter-link stext-106 trans-04 ${(role == 0 ? "filter-link-active" : "")}">
+                                        All
+                                    </a>
+                                </li>
+                                <li class="p-b-6">
+                                    <a href="manageAccount?role=1" class="filter-link stext-106 trans-04 ${(role == 1 ? "filter-link-active" : "")}">
+                                        Employee
+                                    </a>
+                                </li>
+                                <li class="p-b-6">
+                                    <a href="manageAccount?role=2" class="filter-link stext-106 trans-04 ${(role == 2 ? "filter-link-active" : "")}">
+                                        Customer
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
             <div class="table-wrapper">
                 <div class="table-title">
                     <div class="row">
@@ -333,7 +460,7 @@
 
                     </div>
                 </div>
-                <form action="searchAccount" method="post" style="width: 300px !important;">
+                <form action="manageAccount" method="post" style="width: 300px !important;">
 
                 </form>
                 <table class="table table-striped table-hover textcolor">
@@ -378,7 +505,7 @@
 
         <jsp:include page="footer.jsp"/>
 
-
+        <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
 
     </body>
 </html>

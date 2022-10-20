@@ -92,6 +92,10 @@
         <servlet-name>OderController</servlet-name>
         <servlet-class>controller.OderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchAccountController</servlet-name>
+        <servlet-class>controller.SearchAccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShopController</servlet-name>
         <url-pattern>/shop</url-pattern>
@@ -183,6 +187,10 @@
     <servlet-mapping>
         <servlet-name>OderController</servlet-name>
         <url-pattern>/oder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchAccountController</servlet-name>
+        <url-pattern>/searchAccount</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

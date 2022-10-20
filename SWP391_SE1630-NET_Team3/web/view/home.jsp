@@ -1352,6 +1352,17 @@
         
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
-
+        <script src="${pageContext.request.contextPath}/view/vendor/daterangepicker/moment.min.js"></script>
+        <script src="${pageContext.request.contextPath}/view/vendor/daterangepicker/daterangepicker.js"></script>
+        <!--===============================================================================================-->
+        <script src="${pageContext.request.contextPath}/view/vendor/slick/slick.min.js"></script>
+        <script src="${pageContext.request.contextPath}/view/js/slick-custom.js"></script>
+        <!--===============================================================================================-->
+        <script src="${pageContext.request.contextPath}/view/vendor/parallax100/parallax100.js"></script>
+        <script>
+            $('.parallax100').parallax100();
+        </script>
+        <!--===============================================================================================-->
+        <script src="${pageContext.request.contextPath}/view/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
     </body>
 </html>

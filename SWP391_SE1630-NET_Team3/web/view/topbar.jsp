@@ -136,7 +136,7 @@
                                         <b style="font-weight: normal"> Manage Shop</b>
                                     </a>
                                     <div class="dropdown-menu rounded-0 m-0">
-                                        <a href="${pageContext.request.contextPath}/manageAccount" class="dropdown-item">Manage Account</a>
+                                        <a href="${pageContext.request.contextPath}/manageAccount?all=1" class="dropdown-item">Manage Account</a>
                                         <a href="${pageContext.request.contextPath}/manageProduct" class="dropdown-item">Manage Product</a>
 
                                     </div>
@@ -161,14 +161,10 @@
 
 
                             </ul>
-                            <div class="flex-c-m h-full p-r-24">
-                                <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-modal-search">
-                                    <i class="zmdi zmdi-search"></i>
-                                </div>
-                            </div>
+                           
 
                             <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-                                <a href="${pageContext.request.contextPath}/oder"/>
+                                <a href="#"/>
                                 <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti" data-notify="2">
                                     <i class="zmdi zmdi-shopping-cart"></i>
                                 </div>

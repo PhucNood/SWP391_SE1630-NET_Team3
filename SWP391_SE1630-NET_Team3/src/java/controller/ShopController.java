@@ -54,7 +54,10 @@ public class ShopController extends HttpServlet {
 
         List<Brand> listBrand = BrandDAO.getAllBrand();
         request.setAttribute("listB", listBrand);
-        String categoryID = null, brandID = null, filterID = null, sortID = null;
+        String categoryID = null;
+        String brandID = null;
+        String filterID = null;
+        String sortID = null;
 
         session.setAttribute("inPage", "shop");
         if ((String) request.getParameter("categoryID") != null) {
