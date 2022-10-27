@@ -48,7 +48,6 @@ public class BlogDetailController extends HttpServlet {
                 throw new Exception("Error not found id");
             }
             int id = Integer.parseInt(idString);
-            System.out.println("ID BLOG: " + id);
             blogDetail = blogDAO.getBlogById(id);
             archiveList = blogDAO.getAllArchive();
 

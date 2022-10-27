@@ -188,13 +188,13 @@
                     <c:if test="${totalPage > 1}">
                         <c:forEach step="1" begin="1" end="${totalPage}" var="index">
                             <c:if test="${curPage eq index}">
-                                <a href="ManageBlog?page=${index}&searchTitle=${searchTitle}&searchTime=${searchTime}" 
+                                <a href="ManageBlog?page=${index}&searchAuthorId=${searchAuthorId}&searchTitle=${searchTitle}&searchTime=${searchTime}" 
                                    class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
                                     ${index}
                                 </a>
                             </c:if>
                             <c:if test="${curPage ne index}">
-                                <a href="ManageBlog?page=${index}&searchTitle=${searchTitle}&searchTime=${searchTime}" 
+                                <a href="ManageBlog?page=${index}&searchAuthorId=${searchAuthorId}&searchTitle=${searchTitle}&searchTime=${searchTime}" 
                                    class="flex-c-m how-pagination1 trans-04 m-all-7 ">
                                     ${index}
                                 </a>
