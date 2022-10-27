@@ -5,6 +5,7 @@
 package dao;
 
 import entity.Product;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -12,18 +13,18 @@ import java.util.List;
  * @author admin
  */
 public interface ProductDAO {
-    public List<Product> getAllProduct();
-    public List<Product> getProduct(String cid, String bid, String fid, String sid);
-    public List<Product> searchListProduct(String text);
-    public List<Product> getListByPage(List<Product> listProduct,int start, int end);
-    public Product getProductById(String productID);
-    public List<Product> getProductListByCategoryID(int categoryID);
-    public void deleteProductDetail(String productID);
+    public List<Product> getAllProduct()throws ClassNotFoundException, SQLException;
+    public List<Product> getProduct(String cid, String bid, String fid, String sid) throws ClassNotFoundException, SQLException; 
+    public List<Product> searchListProduct(String text)throws ClassNotFoundException, SQLException;
+    public List<Product> getListByPage(List<Product> listProduct,int start, int end)throws ClassNotFoundException, SQLException;
+    public Product getProductById(String productID)throws ClassNotFoundException, SQLException;
+    public List<Product> getProductListByCategoryID(int categoryID)throws ClassNotFoundException, SQLException;
+    public void deleteProduct(String productID)throws ClassNotFoundException, SQLException;
     public void updateProduct(String name, String description,
             String size, String categoryID, String brandID,
-            String quantity, String price, String sale, String productID);
+            String quantity, String price, String sale, String productID)throws ClassNotFoundException, SQLException;
     public void addProduct(String name, String description, 
             String size, String categoryID, String brandID,
-            String quantity, String price, String sale);
-    public String getIdOfProduct();
+            String quantity, String price, String sale)throws ClassNotFoundException, SQLException;
+    public String getIdOfProduct()throws ClassNotFoundException, SQLException;
 }

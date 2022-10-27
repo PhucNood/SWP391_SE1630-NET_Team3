@@ -10,7 +10,10 @@ package entity;
  */
 public class Image {
     private int id;
-    private String name, imgSource, createAt,updateAt;
+    private String name;
+    private String imgSource;
+    private String createAt;
+    private String updateAt;
 
     public Image() {
     }

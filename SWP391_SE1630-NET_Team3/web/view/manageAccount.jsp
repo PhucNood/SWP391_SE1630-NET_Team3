@@ -347,7 +347,7 @@
                 <!-- Search product -->
                 <div class="dis-none panel-search w-full p-t-10 p-b-15">
                     <form class="example" action="manageAccount?all=1" method="get">
-                        <input type="text" placeholder="Search by name, email, phone,.." name="text" value="${text}">
+                        <input type="text" placeholder="Search by name, email, phone,.." name="text" value="${text}" id="text" onfocusout="formValidate()">
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
@@ -466,6 +466,7 @@
                 <table class="table table-striped table-hover textcolor">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Name</th>
                             <th>Gender</th>
                             <th>Email</th>
@@ -476,9 +477,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <c:set var="no" value="0"/>
                         <c:forEach items="${listAccount}" var="o">
                             <c:if test="${o.role !=1}">
+                                <c:set var="no" value="${no+1}"/>
                                 <tr >
+                                    <td>${no}</td>
                                     <td>${o.fullname}</td>
                                     <td>${o.gender==1?"Male":"Female"}</td>
                                     <td id="form-acc" data-email="${o.email}">${o.email}</td>
@@ -506,6 +510,13 @@
         <jsp:include page="footer.jsp"/>
 
         <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
-
+        <script>
+                            function formValidate() {
+                                var regExp = /^[\w$.]$/;
+                                var text = document.getElementById("text").value;
+                                if (!regExp.test(text))
+                                    alert('Not Null!');                                    
+                            }
+        </script>
     </body>
 </html>

@@ -313,7 +313,7 @@
 
                                 <div class="form-group">
                                     <label>Product name</label>
-                                    <input name="name" type="text" class="form-control" required >
+                                    <input name="name" type="text" class="form-control" required id="text" onfocusout="formValidate()">
                                 </div>
                                 <div class="form-group">
                                     <label>Category</label>
@@ -390,6 +390,13 @@
                 }
             }
         </script>
-
+        <script>
+                            function formValidate() {
+                                var regExp = /^[\w$.]+$/;
+                                var text = document.getElementById("text").value;
+                                if (!regExp.test(text))
+                                    alert('Not Null!');                                    
+                            }
+        </script>
     </body>
 </html>

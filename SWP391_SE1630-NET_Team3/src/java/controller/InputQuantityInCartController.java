@@ -1,9 +1,6 @@
 /*
- * Copyright(C).
- * Transport and Information Network
- *
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-10-18      1.0                 LongLH           First Implement
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller;
 
@@ -12,9 +9,12 @@ import dao.ProductDAO;
 import dao.impl.BrandDAOImpl;
 import dao.impl.ProductDAOImpl;
 import entity.Brand;
+import entity.Cart;
+import entity.Item;
 import entity.Product;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,12 +26,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * get all product list from database to display for admin and employee can view
- * and edit information of product or add new product
+ * get quantity from request to set quantity of product in cart
  *
  * @author admin
  */
-public class ManageProductController extends HttpServlet {
+public class InputQuantityInCartController extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -45,10 +44,9 @@ public class ManageProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         try {
             HttpSession session = request.getSession();
-            session.setAttribute("inPage", "manage");
+            session.setAttribute("inPage", "cart");
             ProductDAO ProductDAO = new ProductDAOImpl();
             List<Product> listProduct = new ArrayList<>();
             BrandDAO BrandDAO = new BrandDAOImpl();
@@ -97,35 +95,84 @@ public class ManageProductController extends HttpServlet {
             }
             //get product list with filter
             listProduct = ProductDAO.getProduct(categoryID, brandID, filterID, sortID);
-            if (listProduct.isEmpty()) {
-                request.setAttribute("emptyP", "Not found!");
+            
+            
+            ProductDAO d = new ProductDAOImpl();
+            //get all product list
+            List<Product> list = d.getProduct("0", "0", "0", "0");
+            Cookie[] arr = request.getCookies();
+            String txt = "";
+            //add product and quantity to cookie
+            if (arr != null) {
+                for (Cookie o : arr) {
+                    if (o.getName().equals("cart")) {
+                        txt += o.getValue().trim();
+                        o.setMaxAge(0);
+                        response.addCookie(o);
+                    }
+                }
             }
-            //PAGING for product list
-            int size = listProduct.size();
-            int page, numberpage = 5;
-            int number = (size % numberpage == 0 ? (size / numberpage) : ((size / numberpage) + 1));
-            String xpage = request.getParameter("page");
-            if (xpage == null) {
-                page = 1;
+            Cart cart = new Cart(txt, list);
+            int id, num = 0;
+            String num_raw = request.getParameter("num");
+            String id_raw = request.getParameter("id");
+
+            Product p = d.getProductById(id_raw);
+            int numStore = p.getQuantity();
+            id = Integer.parseInt(id_raw);
+            num = Integer.parseInt(num_raw);
+            double price = p.getPrice();
+            //update quantity of product in cart
+            Item t = new Item(p, -cart.getQuantityById(id));
+            cart.addItem(t);
+            //remove product if quantity < 0
+            if (num <= 0) {
+                cart.removeItem(id);
             } else {
-                page = Integer.parseInt(xpage);
+                if (num > numStore) {
+                    num = numStore;
+                    request.setAttribute("maximum", "There are "+numStore+" products left in stock");
+                    request.setAttribute("OutId", id_raw);
+                }
+                t = new Item(p, num);
+                cart.addItem(t);
             }
-            int start, end;
-            start = (page - 1) * numberpage;
-            end = Math.min(page * numberpage, size);
-            List<Product> listProductInPage = ProductDAO.getListByPage(listProduct, start, end);
-            request.setAttribute("page", page);
-            request.setAttribute("num", number);
-            session.setAttribute("productList", listProductInPage);
+            
+            //update cart on cookie
+            List<Item> items = cart.getItems();
+            txt = "";
+            if (items.size() > 0) {
+                txt = items.get(0).getProduct().getProductID() + ":"
+                        + items.get(0).getQuantity();
+                for (int i = 1; i < items.size(); i++) {
+                    txt += "-" + items.get(i).getProduct().getProductID() + ":"
+                            + items.get(i).getQuantity();
+                }
+            }
+            int n;
+            if (items != null) {
+                n = items.size();
+            } else {
+                n = 0;
+            }
+            session.setAttribute("size", n);
+            Cookie c = new Cookie("cart", txt);
+            c.setMaxAge(24 * 2 * 60 * 60);
+            response.addCookie(c);
+            
+            //sort cart by filter
+            Cart newCart = cart.sortCartByListPoduct(listProduct);
             session.setAttribute("categoryID", categoryID);
             session.setAttribute("brandID", brandID);
             session.setAttribute("filterID", filterID);
             session.setAttribute("sortID", sortID);
-            request.getRequestDispatcher("view/manageProduct.jsp").forward(request, response);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(ManageProductController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("cart", newCart);
+            request.getRequestDispatcher("view/cart.jsp").forward(request, response);
+        } catch (ClassNotFoundException | SQLException | NumberFormatException ex) {
+            Logger.getLogger(InputQuantityInCartController.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("errorMessage", ex.getMessage());
             request.getRequestDispatcher("view/error.jsp").forward(request, response);
         }
     }
+
 }

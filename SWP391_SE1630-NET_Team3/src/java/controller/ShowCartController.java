@@ -1,20 +1,22 @@
-/*
- * Copyright(C).
- * Transport and Information Network
- *
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-10-18      1.0                 LongLH           First Implement
- */
 package controller;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+
 
 import dao.BrandDAO;
 import dao.ProductDAO;
 import dao.impl.BrandDAOImpl;
 import dao.impl.ProductDAOImpl;
 import entity.Brand;
+import entity.Cart;
 import entity.Product;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,17 +28,38 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * get all product list from database to display for admin and employee can view
- * and edit information of product or add new product
  *
  * @author admin
  */
-public class ManageProductController extends HttpServlet {
+public class ShowCartController extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ShowCartController</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ShowCartController at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -44,11 +67,10 @@ public class ManageProductController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+    throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
-            session.setAttribute("inPage", "manage");
+            session.setAttribute("inPage", "cart");
             ProductDAO ProductDAO = new ProductDAOImpl();
             List<Product> listProduct = new ArrayList<>();
             BrandDAO BrandDAO = new BrandDAOImpl();
@@ -97,35 +119,56 @@ public class ManageProductController extends HttpServlet {
             }
             //get product list with filter
             listProduct = ProductDAO.getProduct(categoryID, brandID, filterID, sortID);
-            if (listProduct.isEmpty()) {
-                request.setAttribute("emptyP", "Not found!");
+            
+            
+            
+            ProductDAO d = new ProductDAOImpl();
+            List<Product> list = d.getProduct("0", "0", "0", "0");
+            Cookie[] arr = request.getCookies();
+            String txt = "";
+            if (arr != null) {
+                for (Cookie o : arr) {
+                    if (o.getName().equals("cart")) {
+                        txt += o.getValue();
+                    }
+                }
             }
-            //PAGING for product list
-            int size = listProduct.size();
-            int page, numberpage = 5;
-            int number = (size % numberpage == 0 ? (size / numberpage) : ((size / numberpage) + 1));
-            String xpage = request.getParameter("page");
-            if (xpage == null) {
-                page = 1;
-            } else {
-                page = Integer.parseInt(xpage);
-            }
-            int start, end;
-            start = (page - 1) * numberpage;
-            end = Math.min(page * numberpage, size);
-            List<Product> listProductInPage = ProductDAO.getListByPage(listProduct, start, end);
-            request.setAttribute("page", page);
-            request.setAttribute("num", number);
-            session.setAttribute("productList", listProductInPage);
+            Cart cart = new Cart(txt, list);
+            
+            Cart newCart = cart.sortCartByListPoduct(listProduct);
             session.setAttribute("categoryID", categoryID);
             session.setAttribute("brandID", brandID);
             session.setAttribute("filterID", filterID);
             session.setAttribute("sortID", sortID);
-            request.getRequestDispatcher("view/manageProduct.jsp").forward(request, response);
+            request.setAttribute("cart", newCart);
+            request.getRequestDispatcher("view/cart.jsp").forward(request, response);
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(ManageProductController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ShowCartController.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("errorMessage", ex.getMessage());
             request.getRequestDispatcher("view/error.jsp").forward(request, response);
         }
+    } 
+
+    /** 
+     * Handles the HTTP <code>POST</code> method.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        processRequest(request, response);
     }
+
+    /** 
+     * Returns a short description of the servlet.
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
 }

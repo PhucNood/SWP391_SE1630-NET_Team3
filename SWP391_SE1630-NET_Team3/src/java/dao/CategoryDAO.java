@@ -5,6 +5,7 @@
 package dao;
 
 import entity.Category;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * @author admin
  */
 public interface CategoryDAO {
-    public List<Category> getAllCategory();
-    public Category getCategoryById(int id);
+    public List<Category> getAllCategory()throws ClassNotFoundException, SQLException;
+    public Category getCategoryById(int id)throws ClassNotFoundException, SQLException;
     
 }

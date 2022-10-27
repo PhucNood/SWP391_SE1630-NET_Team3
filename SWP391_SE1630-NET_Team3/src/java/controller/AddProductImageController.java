@@ -19,7 +19,6 @@ import entity.Category;
 import entity.Product;
 import jakarta.servlet.ServletContext;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,36 +34,11 @@ import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 /**
- *
+ *get image form form to add to database
  * @author admin
  */
 public class AddProductImageController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddProductImageController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddProductImageController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -78,9 +52,13 @@ public class AddProductImageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String productID = request.getParameter("productID");
-        request.setAttribute("productID", productID);
-        request.getRequestDispatcher("view/addProductImage.jsp").forward(request, response);
+        try {
+            String productID = request.getParameter("productID");
+            request.setAttribute("productID", productID);
+            request.getRequestDispatcher("view/addProductImage.jsp").forward(request, response);
+        } catch (ServletException | IOException e) {
+            throw e;
+        }
     }
 
     /**
@@ -97,10 +75,11 @@ public class AddProductImageController extends HttpServlet {
         try {
             ProductDAO ProductDAO = new ProductDAOImpl();
             String productID = request.getParameter("productID");
-            
+
             String name = request.getParameter("name");
             ImageDAO ImageDAO = new ImageDAOImpl();
 
+            //save image to folder
             ServletContext context = request.getServletContext();
             String fullPath = context.getRealPath("/img");
             String partFullPath[] = fullPath.split("\\\\");
@@ -114,8 +93,6 @@ public class AddProductImageController extends HttpServlet {
             }
             realPath += "web\\view\\images\\";
             System.out.println("file path:" + fullPath);
-
-            
             String img = "";
             if (ServletFileUpload.isMultipartContent(request)) {
                 List<FileItem> mulFile = null;
@@ -132,38 +109,36 @@ public class AddProductImageController extends HttpServlet {
                     }
                 }
             }
-            
+
             request.setAttribute("test", img);
+            //add image to database
             ImageDAO.addImage(name, img);
             String getImageID = ImageDAO.getImageID(img);
             Image_ProductDAO Image_ProductDAO = new Image_ProductDAOImpl();
+            //add connection image with product
             Image_ProductDAO.addImage_Product(getImageID, productID);
 
             HttpSession session = request.getSession();
+            //get product by productID
             Product product = ProductDAO.getProductById(productID);
 
             BrandDAO BrandDAO = new BrandDAOImpl();
+            //get all list brand
             List<Brand> listBrand = BrandDAO.getAllBrand();
             session.setAttribute("listBrand", listBrand);
             CategoryDAO CategoryDAO = new CategoryDAOImpl();
+            //get list category
             List<Category> listCategory = CategoryDAO.getAllCategory();
             session.setAttribute("listCategory", listCategory);
             session.setAttribute("product", product);
             request.getRequestDispatcher("view/editProduct.jsp").forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(AddProductImageController.class.getName()).log(Level.SEVERE, null, ex);
-
+            request.setAttribute("errorMessage", ex.getMessage());
+            request.getRequestDispatcher("view/error.jsp").forward(request, response);
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    
 
 }

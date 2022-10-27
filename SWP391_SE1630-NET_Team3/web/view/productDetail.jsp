@@ -161,7 +161,11 @@
                             <h4 class="mtext-105 cl2 js-name-detail p-b-14">
                                 ${product.name}
                             </h4>
-
+                            
+                            <p class="stext-102 cl3 p-t-23" style="margin-bottom: 30px;">
+                                Description: ${product.description}
+                            </p>
+                            
                             <span class="mtext-106 cl2">
                                 <div>
                                     $<fmt:formatNumber pattern="###,###,###.##" value="${product.price*(100-product.sale)*10}"/>
@@ -179,9 +183,7 @@
                                 </div>
                             </span>
 
-                            <p class="stext-102 cl3 p-t-23">
-                                ${product.description}
-                            </p>
+                            
 
                             <!--  -->
                             <div class="p-t-33">
@@ -189,13 +191,13 @@
                                     <div class="size-204 flex-w flex-m respon6-next" style="position: absolute; left: 20px;margin-top: 50px">
                                         <form action="addCart?id=${product.productID}" method="get">
                                             <div class="wrap-num-product flex-w m-r-20 m-tb-10" >
-                                                <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                <div onclick="minus()" class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                     <i class="fs-16 zmdi zmdi-minus"></i>
                                                 </div>
 
-                                                <input class="mtext-104 cl3 txt-center num-product" type="number" min="1" name="numProduct" value="1">
+                                                <input id="numProduct" class="mtext-104 cl3 txt-center num-product" type="number" min="1" name="numProduct" value="1">
 
-                                                <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                <div onclick="plus(${product.quantity})" class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                     <i class="fs-16 zmdi zmdi-plus"></i>
                                                 </div>
                                             </div>
@@ -410,6 +412,23 @@
         </script>
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
-
+        <script>
+            function minus(){
+                var t = document.getElementById("numProduct").value;
+                if(parseInt(t)>1){
+                    document.getElementById("numProduct").value = parseInt(t)-1;
+                }
+            }
+            
+            function plus(quantity){
+                var t = document.getElementById("numProduct").value;
+                if(parseInt(t)<quantity){
+                    document.getElementById("numProduct").value = parseInt(t)+1;
+                }
+                else{
+                    alert("There are "+quantity+" products left in stock")
+                }
+            }
+        </script>
     </body>
 </html>

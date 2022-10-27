@@ -335,8 +335,11 @@
                             <div class="modal-body">					
 
                                 <div class="form-group">
-                                    <label>Product name</label>
-                                    <input name="name" type="text" class="form-control" required value="${product.name}">
+                                    <label>Product name
+                                        <p style="color: red">(*)</p>
+                                    </label>
+                                    <input name="name" type="text" class="form-control" required value="${requestScope.name !=null ? name : product.name}">
+                                    <p style="color: red">${NameNull}</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Category</label>
@@ -358,27 +361,42 @@
                                 </div>     
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea name="description" type="text" class="form-control">${product.description}</textarea>
+                                    <textarea name="description" type="text" required class="form-control">${product.description}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label>Price</label>
-                                    <input type="number" name="price" min="0" class="form-control" value="${product.price}">
+                                    <label>
+                                        Price
+                                        <p style="color: red">(*)</p>
+                                    </label>
+                                    <input type="number" name="price" min="0" class="form-control" required 
+                                           value="${requestScope.price !=null ? price : product.price}">
+                                    <p style="color: red">${PriceInfinity}</p>
                                 </div>
 
                                 <div class="form-group" style="clear: both">
-                                    <label>Quantity</label>
-                                    <input type="number" name="quantity" class="form-control" min="0" value="${product.quantity}" >
+                                    <label>Quantity
+                                        <p style="color: red">(*)</p>
+                                    </label>
+                                    <input type="number" name="quantity" class="form-control" min="0" required 
+                                           value="${requestScope.quantity !=null ? quantity : product.quantity}" >
+                                    <p style="color: red">${QuantityInfinity}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label>Size</label>
-                                    <input name="size" class="form-control" required value="${product.size}">
+                                    <label>Size
+                                        <p style="color: red">(*)</p>
+                                    </label>
+                                    <input name="size" type="number" min="0" class="form-control" required 
+                                           value="${requestScope.size !=null ? size : product.size}">
+                                    <p style="color: red">${SizeInfinity}</p>
                                 </div>
 
 
 
                                 <div class="form-group">
-                                    <label>Sale(%)</label>
-                                    <input type="number" name="sale" class="form-control" required value="${product.sale}">
+                                    <label>Sale(%)
+                                        <p style="color: red">(*)</p>
+                                    </label>
+                                    <input type="number" name="sale" min="0" max="100" class="form-control" required value="${product.sale}">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -415,6 +433,7 @@
                     preview.src = "";
                 }
             }
+
         </script>
 
     </body>

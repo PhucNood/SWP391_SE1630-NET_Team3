@@ -21,7 +21,7 @@ public class Image_ProductDAOImpl extends DBContext implements Image_ProductDAO 
     
     //add connect of pro and imag in database
     @Override
-    public void addImage_Product(String ImageID, String ProductID) {
+    public void addImage_Product(String ImageID, String ProductID) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -39,16 +39,18 @@ public class Image_ProductDAOImpl extends DBContext implements Image_ProductDAO 
             ps.executeUpdate();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ImageDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(con);
         }
-        closeResultSet(rs);
-        closePrepareState(ps);
-        closeConnection(con);
     }
 
     
     //delete connect of pro and imag in database
     @Override
-    public void deleteImage_Product(String ImageID, String ProductID) {
+    public void deleteImage_Product(String ImageID, String ProductID) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -62,13 +64,15 @@ public class Image_ProductDAOImpl extends DBContext implements Image_ProductDAO 
             ps.executeUpdate();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ImageDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(con);
         }
-        closeResultSet(rs);
-        closePrepareState(ps);
-        closeConnection(con);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Image_ProductDAO d = new Image_ProductDAOImpl();
 //        d.addImage_Product("30", "29");
         d.deleteImage_Product("30", "29");
