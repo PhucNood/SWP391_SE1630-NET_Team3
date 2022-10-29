@@ -137,6 +137,65 @@
                 background: #f0f0f0;
                 border-top-right-radius: 80px;
             }
+
+            html {
+                box-sizing: border-box;
+            }
+            *,
+            *:before,
+            *:after {
+                box-sizing: inherit;
+            }
+
+            .table-scroll {
+                position: relative;
+                width:100%;
+                z-index: 1;
+                margin: auto;
+                overflow: auto;
+                height: 500px;
+            }
+            .table-scroll table {
+                width: 100%;
+                min-width: 1000px;
+                margin: auto;
+                border-collapse: separate;
+                border-spacing: 0;
+            }
+            .table-wrap {
+                position: relative;
+            }
+            .table-scroll th,
+            .table-scroll td {
+                padding: 5px 10px;
+                border: 1px solid #f8f8f8;
+                background: #fff;
+                vertical-align: top;
+            }
+            .table-scroll thead th {
+                background: #808080;
+                color: #fff;
+                position: -webkit-sticky;
+                position: sticky;
+                top: 0;
+            }
+            .relative{
+                position: relative;
+            }
+            .absolute1{
+                position: absolute;
+                left: 0;
+            }
+            .absolute2{
+                position: absolute;
+                right: 0;
+            }
+            .absolute3{
+                position: absolute;
+                left: 155px;
+            }
+
+
         </style>
     </head>
     <body class="animsition">
@@ -284,19 +343,18 @@
                 </div>
                 <section id="cart_items">
                     <div class="container">
-                        <div class="table-responsive cart_info">
-                            <table class="table table-condensed">
+                        <div class="table-responsive cart_info table-scroll" id="table-scroll">
+                            <table class="table table-condensed main-table" id="main-table">
                                 <thead>
                                     <tr class="cart_menu">
-                                        <td class="image">No</td>
-                                        <td class="image">Product</td>
-                                        <td class="name">Image</td> 
-                                        <td class="description">Quantity</td>
-                                        <td class="price">Price</td>
-                                        <td class="price">Sale</td>
-                                        <td class="quantity">Total Money</td>
-                                        <td class="total">Action</td>
-                                        <td></td>
+                                        <th class="image">No</th>
+                                        <th class="image">Product</th>
+                                        <th class="name">Image</th> 
+                                        <th class="description">Quantity</th>
+                                        <th class="price">Price</th>
+                                        <th class="price">Sale</th>
+                                        <th class="quantity">Total Money</th>
+                                        <th class="total">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="showOut">
@@ -317,14 +375,14 @@
                                                 </td>
                                                 <td class="cart_quantity" style="clear: both;">
                                                     <c:if test="${o.quantity > 1}">
-                                                        <button>
+                                                        <button >
                                                             <a href="updown?num=-1&id=${o.product.productID}"  class="btn btn1">-</a>
                                                         </button>
                                                     </c:if>
                                                     <c:if test="${o.quantity == 1}">
-                                                        <button disabled class="btn">
+                                                        <div class="btn" style="background-color: #E6E4DF;">
                                                             -
-                                                        </button>
+                                                        </div>
                                                     </c:if>
                                                     <input id="inputnumber${o.product.productID}" onchange="reloadnumber(${o.product.productID})" style="text-align: center" 
                                                            class="btn" type="text" name="quantity" value="${o.quantity}" size="2"/>
@@ -363,18 +421,18 @@
 
                                 </tbody>
                             </table>
-
-
+                        </div>
+                        <hr  width="100%" align="center"/>
+                        <div class=" relative" style="margin-top: 30px">
+                            <h3 class="absolute1" style="color: #999999;clear: both; margin-left: 0px; display: block">Total money:</h3>
+                            <h3 class="absolute3"><fmt:formatNumber pattern="###,###,###.##" value="${i.totalMoney}"/> VNÐ</h3>
+                            <a type="button" href="checkout?total=${i.totalMoney}" class="btn btn-success absolute2" data-dismiss="modal">Click To Buy</a>
                         </div>
                     </div>
             </div>
 
         </div>
-        <button class="sticky">
-            <p style="color: #999999;clear: both; margin-left: 0px">Total money:</p>
-            <p>$ <fmt:formatNumber pattern="###,###,###.##" value="${i.totalMoney}"/></p>
-            <a href="manageProduct" data-dismiss="modal" value="Cancel">Click To Buy</a>
-        </button>                            
+                        <div style="height: 100px"></div>                          
         <jsp:include page="footer.jsp"/>
 
         <script type="text/javascript">

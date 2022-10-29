@@ -31,17 +31,17 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         List<Product> listProduct = new ArrayList<>();
         List<Image> listImg = new ArrayList<>();
         ImageDAOImpl ImageDAO = new ImageDAOImpl();
-        String sql = "SELECT [productID]\n"
-                + "      ,[name]\n"
-                + "      ,[description]\n"
-                + "      ,[size]\n"
-                + "      ,[categoryID]\n"
-                + "      ,[brandID]\n"
-                + "      ,[quantity]\n"
-                + "      ,[price]\n"
-                + "      ,[sale]\n"
-                + "      ,[created_at]\n"
-                + "      ,[update_at]\n"
+        String sql = "SELECT [productID]"
+                + "      ,[name]"
+                + "      ,[description]"
+                + "      ,[size]"
+                + "      ,[categoryID]"
+                + "      ,[brandID]"
+                + "      ,[quantity]"
+                + "      ,[price]"
+                + "      ,[sale]"
+                + "      ,[created_at]"
+                + "      ,[update_at]"
                 + "  FROM [dbo].[product]";
 
         try {
@@ -170,9 +170,9 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         List<Product> listProduct = new ArrayList<>();
         List<Image> listImg = new ArrayList<>();
         ImageDAOImpl ImageDAO = new ImageDAOImpl();
-        String sql = "select * from Product p inner join brand b on p.brandID = b.brandID\n"
-                + "			inner join category c on p.categoryID = c.categoryID\n"
-                + "where 1=1\n"
+        String sql = "select * from Product p inner join brand b on p.brandID = b.brandID"
+                + "			inner join category c on p.categoryID = c.categoryID"
+                + "where 1=1"
                 + " and (p.name like '%" + text + "%' or b.title like '%" + text + "%' or c.title like '%" + text + "%')";
         try {
             con = getConnection();
@@ -304,9 +304,9 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "DELETE FROM [dbo].[image_product]\n"
+        String sql = "DELETE FROM [dbo].[image_product]"
                 + "       WHERE product_id = " + productID
-                + "\nDELETE FROM [dbo].[product]\n"
+                + "\nDELETE FROM [dbo].[product]"
                 + "       WHERE productID = " + productID;
 
         try {
@@ -331,15 +331,15 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "UPDATE [dbo].[product]\n"
-                + "   SET [name] = ?\n"
-                + "      ,[description] = ?\n"
-                + "      ,[size] = ?\n"
-                + "      ,[categoryID] = ?\n"
-                + "      ,[brandID] = ?\n"
-                + "      ,[quantity] = ?\n"
-                + "      ,[price] = ?\n"
-                + "      ,[sale] = ?\n"
+        String sql = "UPDATE [dbo].[product]"
+                + "   SET [name] = ?"
+                + "      ,[description] = ?"
+                + "      ,[size] = ?"
+                + "      ,[categoryID] = ?"
+                + "      ,[brandID] = ?"
+                + "      ,[quantity] = ?"
+                + "      ,[price] = ?"
+                + "      ,[sale] = ?"
                 + " WHERE productID = ?";
 
         try {
@@ -374,16 +374,16 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "INSERT INTO [dbo].[product]\n"
-                + "           ([name]\n"
-                + "           ,[description]\n"
-                + "           ,[size]\n"
-                + "           ,[categoryID]\n"
-                + "           ,[brandID]\n"
-                + "           ,[quantity]\n"
-                + "           ,[price]\n"
-                + "           ,[sale])\n"
-                + "     VALUES\n"
+        String sql = "INSERT INTO [dbo].[product]"
+                + "           ([name]"
+                + "           ,[description]"
+                + "           ,[size]"
+                + "           ,[categoryID]"
+                + "           ,[brandID]"
+                + "           ,[quantity]"
+                + "           ,[price]"
+                + "           ,[sale])"
+                + "     VALUES"
                 + "           (?,?,?,?,?,?,?,?)";
         try {
             con = getConnection();
@@ -415,18 +415,18 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         ResultSet rs = null;
         List<Image> listImg = new ArrayList<>();
         ImageDAOImpl ImageDAO = new ImageDAOImpl();
-        String sql = "SELECT top 1 [productID]\n"
-                + "      ,[name]\n"
-                + "      ,[description]\n"
-                + "      ,[size]\n"
-                + "      ,[categoryID]\n"
-                + "      ,[brandID]\n"
-                + "      ,[quantity]\n"
-                + "      ,[price]\n"
-                + "      ,[sale]\n"
-                + "      ,[created_at]\n"
-                + "      ,[update_at]\n"
-                + "  FROM [dbo].[product]\n"
+        String sql = "SELECT top 1 [productID]"
+                + "      ,[name]"
+                + "      ,[description]"
+                + "      ,[size]"
+                + "      ,[categoryID]"
+                + "      ,[brandID]"
+                + "      ,[quantity]"
+                + "      ,[price]"
+                + "      ,[sale]"
+                + "      ,[created_at]"
+                + "      ,[update_at]"
+                + "  FROM [dbo].[product]"
                 + "  order by productID desc";
         try {
             con = getConnection();

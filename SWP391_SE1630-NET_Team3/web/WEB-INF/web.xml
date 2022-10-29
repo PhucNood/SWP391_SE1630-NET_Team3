@@ -123,6 +123,14 @@
         <servlet-name>InputQuantityInCartController</servlet-name>
         <servlet-class>controller.InputQuantityInCartController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckoutCartController</servlet-name>
+        <servlet-class>controller.CheckoutCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddOrderController</servlet-name>
+        <servlet-class>controller.AddOrderController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShopController</servlet-name>
         <url-pattern>/shop</url-pattern>
@@ -242,6 +250,14 @@
     <servlet-mapping>
         <servlet-name>InputQuantityInCartController</servlet-name>
         <url-pattern>/inputQuantityInCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutCartController</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddOrderController</servlet-name>
+        <url-pattern>/addOrder</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

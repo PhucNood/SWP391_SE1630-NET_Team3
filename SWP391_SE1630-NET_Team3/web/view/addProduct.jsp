@@ -212,7 +212,7 @@
             a {
                 transition: 300ms;
                 background: transparent;
-                color: #428bca;
+                color: #808080;
                 text-decoration: none;
             }
             .pagination li a {
@@ -292,15 +292,17 @@
                 width: 80px;
                 height: 80px;
             }
-
+/*            .form-group{
+                color: #666666 !important
+            }*/
 
         </style>
     </head>
     <body class="animsition">
 
         <jsp:include page="topbar.jsp"/>
-
-        <div class="container">
+        <a></a>
+        <div class="container" >
             <div id="addEmployeeModal" class="">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -312,12 +314,12 @@
                             <div class="modal-body">					
 
                                 <div class="form-group">
-                                    <label>Product name</label>
+                                    <span>Product name</span><span style="margin-left: 10px; color: red">(*)</span>
                                     <input name="name" type="text" class="form-control" required id="text" onfocusout="formValidate()">
                                 </div>
                                 <div class="form-group">
-                                    <label>Category</label>
-                                    <select name="category" class="form-select" aria-label="Default select example"">
+                                    <span>Category</span>
+                                    <select name="category" class="form-select" aria-span="Default select example"">
                                         <c:forEach items="${listCategory}" var="i">
                                             <option value="${i.categoryID}">${i.title}</option>
 
@@ -325,8 +327,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Brand</label>
-                                    <select name="brand" class="form-select" aria-label="Default select example">
+                                    <span>Brand</span>
+                                    <select name="brand" class="form-select" aria-span="Default select example">
                                         <c:forEach items="${listBrand}" var="i">
                                             <option value="${i.brandID}" selected>${i.title}</option>
 
@@ -334,31 +336,31 @@
                                     </select>
                                 </div>     
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <span>Description</span>
                                     <textarea name="description" type="text" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label>Price</label>
+                                    <span>Price</span><span style="margin-left: 10px; color: red">(*)</span>
                                     <input type="number" name="price" min="0" class="form-control" >
                                 </div>
                                 <div class="form-group" >
-                                    <label>Image</label>
+                                    <span>Image</span><span style="margin-left: 10px; color: red">(*)</span>
                                     <input  onchange="previewFile()" type="file" name="imgFile" class="form-control" value="view/images/${img}">
                                     <img class="change-img" src="view/images/${img}" height="200" alt="Image preview...">
                                 </div>
                                 <div class="form-group" style="clear: both">
-                                    <label>Quantity</label>
+                                    <span>Quantity</span><span style="margin-left: 10px; color: red">(*)</span>
                                     <input type="number" name="quantity" class="form-control" min="0" " >
                                 </div>
                                 <div class="form-group">
-                                    <label>Size</label>
+                                    <span>Size</span><span style="margin-left: 10px; color: red">(*)</span>
                                     <input name="size" class="form-control" required ">
                                 </div>
 
 
 
                                 <div class="form-group">
-                                    <label>Sale(%)</label>
+                                    <span>Sale(%)</span><span style="margin-left: 10px; color: red">(*)</span>
                                     <input type="number" name="sale" class="form-control" required >
                                 </div>
                             </div>
