@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>CheckUrlFilter</filter-name>
+        <filter-class>filter.CheckUrlFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CheckUrlFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>BlogListController</servlet-name>
         <servlet-class>controller.BlogListController</servlet-class>
@@ -102,10 +110,6 @@
     <servlet>
         <servlet-name>ManageBlogController</servlet-name>
         <servlet-class>controller.ManageBlogController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>OderController</servlet-name>
-        <servlet-class>controller.OderController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddToCartController</servlet-name>
@@ -230,10 +234,6 @@
     <servlet-mapping>
         <servlet-name>ManageBlogController</servlet-name>
         <url-pattern>/ManageBlog</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>OderController</servlet-name>
-        <url-pattern>/oder</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddToCartController</servlet-name>

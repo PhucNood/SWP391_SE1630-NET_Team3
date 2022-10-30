@@ -137,6 +137,24 @@
                 background: #f0f0f0;
                 border-top-right-radius: 80px;
             }
+            .div_left{
+
+                width: 50%;
+
+                float: left;
+
+                text-align: center;
+
+            }
+
+            .div_right{
+                width: 50%;
+
+                float: left;
+
+                text-align: center;
+
+            }
         </style>
     </head>
     <body class="animsition">
@@ -191,7 +209,7 @@
                                     ADDRESS
                                 </span>
                                 <span style="margin-left: 10px; color: red">(*)</span>
-                                
+
                                 <div class="bor8 bg0 m-b-22">
                                     <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address" value="${account.address}">
                                 </div>
@@ -220,15 +238,20 @@
                                 <fmt:formatNumber pattern="###,###,###.##" value="${total}"/> VND
                             </span>
                         </div>
+                        <div style="margin-top: 50px"></div>
+                        <a href ="showCart"
+                            class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer col-md-5 div_left" style="width: 80%;">
+                            Back to Cart
+                        </a>
+                        <div class="col-md-2"></div>
+                        <button type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer col-md-5 div_right" style="width: 80%;">
+                            Proceed to Checkout
+                        </button>
                     </div>
-
-                    <button type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-                        Proceed to Checkout
-                    </button>
                 </form>
-
             </div>
         </div>
+        <div style="margin-top: 20px"></div>
 
         <jsp:include page="footer.jsp"/>
         <script src="${pageContext.request.contextPath}/view/js/main.js"></script>

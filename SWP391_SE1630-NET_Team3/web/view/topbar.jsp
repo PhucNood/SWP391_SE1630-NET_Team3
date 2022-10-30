@@ -127,21 +127,23 @@
 
                                 </li>
 
-                                <%--<c:if test="${account !=null && account.role == 1}">--%>
+                                <c:if test="${account !=null && (account.role == 1 || account.role == 2  )}">
                                     <li class="${inPage == "manage" ? "active-menu" :""}">
 
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                         <b style="font-weight: normal"> Manage Shop</b>
                                     </a>
                                     <div class="dropdown-menu rounded-0 m-0">
+                                        <c:if test="${account.role == 1 }">
                                         <a href="${pageContext.request.contextPath}/manageAccount?all=1" class="dropdown-item">Manage Account</a>
+                                        </c:if>
                                         <a href="${pageContext.request.contextPath}/manageProduct" class="dropdown-item">Manage Product</a>
                                         <a href="${pageContext.request.contextPath}/ManageBlog" class="dropdown-item">Manage Blog</a>
 
                                     </div>
 
                                 </li>
-                                <%--</c:if>--%>
+                                </c:if>
                             </ul>
                         </div>	
 
