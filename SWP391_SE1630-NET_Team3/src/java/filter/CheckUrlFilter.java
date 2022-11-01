@@ -113,6 +113,7 @@ public class CheckUrlFilter implements Filter {
         }
 
         doBeforeProcessing(request, response);
+
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
@@ -120,13 +121,14 @@ public class CheckUrlFilter implements Filter {
         String uri = req.getServletPath();
         FilterDAO FilterDAO = new FilterDAOImpl();
         int roleID = 0;
-        if(account != null){
+        if (account != null) {
             roleID = account.getRole();
         }
-        
         try {
-            if(!FilterDAO.checkUrlWithRole(uri, String.valueOf(roleID))){
-                req.getRequestDispatcher("/home").forward(request, response);
+            if (!uri.contains("images") && !uri.contains("home")) {
+                if (!FilterDAO.checkUrlWithRole(uri, String.valueOf(roleID))) {
+                    res.sendRedirect(req.getContextPath() + "/home");
+                }
             }
 
         } catch (ClassNotFoundException | SQLException ex) {
@@ -194,6 +196,7 @@ public class CheckUrlFilter implements Filter {
 
     /**
      * Init method for this filter
+     *
      * @param filterConfig
      */
     @Override

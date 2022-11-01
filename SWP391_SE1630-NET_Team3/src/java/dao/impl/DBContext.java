@@ -1,7 +1,6 @@
 
 package dao.impl;
 
-import jakarta.servlet.jsp.jstl.sql.Result;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

@@ -255,5 +255,8 @@
 
         <jsp:include page="footer.jsp"/>
         <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
+        <script>
+            
+        </script>
     </body>
 </html>
