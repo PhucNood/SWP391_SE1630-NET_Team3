@@ -113,27 +113,27 @@ public class CheckUrlFilter implements Filter {
         }
 
         doBeforeProcessing(request, response);
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
-        HttpSession session = req.getSession();
-        Account account = (Account) session.getAttribute("account");
-        String uri = req.getServletPath();
-        FilterDAO FilterDAO = new FilterDAOImpl();
-        int roleID = 0;
-        if(account != null){
-            roleID = account.getRole();
-        }
-        
-        try {
-            if(!FilterDAO.checkUrlWithRole(uri, String.valueOf(roleID))){
-                req.getRequestDispatcher("/home").forward(request, response);
-            }
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(CheckUrlFilter.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("errorMessage", ex.getMessage());
-            request.getRequestDispatcher("view/error.jsp").forward(request, response);
-        }
+//        HttpServletRequest req = (HttpServletRequest) request;
+//        HttpServletResponse res = (HttpServletResponse) response;
+//        HttpSession session = req.getSession();
+//        Account account = (Account) session.getAttribute("account");
+//        String uri = req.getServletPath();
+//        FilterDAO FilterDAO = new FilterDAOImpl();
+//        int roleID = 0;
+//        if(account != null){
+//            roleID = account.getRole();
+//        }
+//        
+//        try {
+//            if(!FilterDAO.checkUrlWithRole(uri, String.valueOf(roleID))){
+//                req.getRequestDispatcher("/home").forward(request, response);
+//            }
+//
+//        } catch (ClassNotFoundException | SQLException ex) {
+//            Logger.getLogger(CheckUrlFilter.class.getName()).log(Level.SEVERE, null, ex);
+//            request.setAttribute("errorMessage", ex.getMessage());
+//            request.getRequestDispatcher("view/error.jsp").forward(request, response);
+//        }
         Throwable problem = null;
         try {
             chain.doFilter(request, response);

@@ -1,9 +1,8 @@
-/*
- * Copyright(C).
- * Transport and Information Network
+/*ManageProductController
  *
+ * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-10-18      1.0                 LongLH           First Implement
+ * 2022/10/30      1.0                 NamVH           First Implement
  */
 package controller;
 
