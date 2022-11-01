@@ -112,6 +112,10 @@
         <servlet-class>controller.ManageBlogController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>addBlogController</servlet-name>
+        <servlet-class>controller.addBlogController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AddToCartController</servlet-name>
         <servlet-class>controller.AddToCartController</servlet-class>
     </servlet>
@@ -234,6 +238,10 @@
     <servlet-mapping>
         <servlet-name>ManageBlogController</servlet-name>
         <url-pattern>/ManageBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addBlogController</servlet-name>
+        <url-pattern>/addBlog</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddToCartController</servlet-name>
