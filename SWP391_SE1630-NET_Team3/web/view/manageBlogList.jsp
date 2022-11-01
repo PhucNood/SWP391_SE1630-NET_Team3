@@ -111,7 +111,7 @@
                         <div class="col">
                             <h2>Manage Blog</h2>
                         </div>
-                        <a href="addProduct"  class="btn addBlog yesClick m-l-2">
+                        <a href="addBlog"  class="btn addBlog yesClick m-l-2">
                             <i style="font-size:20px; color: white" class="fa">&#xf055;</i> 
                             <span>Add blog</span>
                         </a>
