@@ -12,12 +12,9 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>controller.HomeController</servlet-class>
     </servlet>
-    
     <welcome-file-list>
         <welcome-file>home</welcome-file>
-    </welcome-file-list>  
-
-    
+    </welcome-file-list>
     <servlet>
         <servlet-name>SearchController</servlet-name>
         <servlet-class>controller.SearchController</servlet-class>
@@ -109,6 +106,10 @@
     <servlet>
         <servlet-name>ManageBlogController</servlet-name>
         <servlet-class>controller.ManageBlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addBlogController</servlet-name>
+        <servlet-class>controller.addBlogController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShopController</servlet-name>
@@ -207,7 +208,6 @@
         <url-pattern>/oder</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>BlogDetailController</servlet-name>
         <url-pattern>/BlogDetail</url-pattern>
     </servlet-mapping>
@@ -215,11 +215,13 @@
         <servlet-name>ManageBlogController</servlet-name>
         <url-pattern>/ManageBlog</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addBlogController</servlet-name>
+        <url-pattern>/addBlog</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
-        
 </web-app>

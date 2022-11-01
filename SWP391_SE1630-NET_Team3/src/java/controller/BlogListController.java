@@ -86,7 +86,7 @@ public class BlogListController extends HttpServlet {
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(BlogListController.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("errorMessage", ex.getMessage());
-            request.getRequestDispatcher("view/blogList.jsp").forward(request, response);
+            request.getRequestDispatcher("view/error.jsp").forward(request, response);
         }
     }
 
