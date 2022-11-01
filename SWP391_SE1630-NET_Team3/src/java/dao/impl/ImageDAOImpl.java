@@ -24,7 +24,7 @@ public class ImageDAOImpl extends DBContext implements ImageDAO {
 
     //getlist image by productID 
     @Override
-    public List<Image> getListByIdProduct(int id) {
+    public List<Image> getListByIdProduct(int id) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -40,11 +40,19 @@ public class ImageDAOImpl extends DBContext implements ImageDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Image image = new Image(rs.getInt("id"),
-                        rs.getString("name"), rs.getString("imageSource"), rs.getString("created_at"), rs.getString("update_at"));
+                        rs.getString("name"), 
+                        rs.getString("imageSource"),
+                        rs.getString("created_at"),
+                        rs.getString("update_at"));
                 listImg.add(image);
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ImageDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(con);
         }
 
         return listImg;
@@ -52,7 +60,7 @@ public class ImageDAOImpl extends DBContext implements ImageDAO {
 
     //add image of product
     @Override
-    public void addImage(String name, String Image) {
+    public void addImage(String name, String Image) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -70,13 +78,18 @@ public class ImageDAOImpl extends DBContext implements ImageDAO {
                 ps.executeUpdate();
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ImageDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                throw ex;
+            } finally {
+                closeResultSet(rs);
+                closePrepareState(ps);
+                closeConnection(con);
             }
         }
     }
 
     //get ID of image
     @Override
-    public String getImageID(String Image) {
+    public String getImageID(String Image) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -92,14 +105,16 @@ public class ImageDAOImpl extends DBContext implements ImageDAO {
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ImageDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(con);
         }
-        closeResultSet(rs);
-        closePrepareState(ps);
-        closeConnection(con);
         return null;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
         ImageDAOImpl d = new ImageDAOImpl();
         List<Image> listImg = d.getListByIdProduct(1);
         System.out.println(listImg.get(0).getImgSource());

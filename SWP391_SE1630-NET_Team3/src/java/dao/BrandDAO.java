@@ -5,6 +5,7 @@
 package dao;
 
 import entity.Brand;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * @author admin
  */
 public interface BrandDAO {
-    public List<Brand> getAllBrand();
-    public Brand getBrandById(int id);
+    public List<Brand> getAllBrand()throws ClassNotFoundException, SQLException;
+    public Brand getBrandById(int id)throws ClassNotFoundException, SQLException;
     
 }

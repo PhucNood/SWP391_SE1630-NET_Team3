@@ -23,7 +23,7 @@ public class CategoryDAOImpl extends DBContext implements CategoryDAO {
 
     //get all list category 
     @Override
-    public List<Category> getAllCategory() {
+    public List<Category> getAllCategory() throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -39,21 +39,27 @@ public class CategoryDAOImpl extends DBContext implements CategoryDAO {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Category category = new Category(rs.getInt("categoryID"), rs.getString("title"), rs.getString("detail"), rs.getString("created_at"), rs.getString("update_at"));
+                Category category = new Category(rs.getInt("categoryID"), 
+                        rs.getString("title"), 
+                        rs.getString("detail"),
+                        rs.getString("created_at"),
+                        rs.getString("update_at"));
                 listCategory.add(category);
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CategoryDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(con);
         }
-        closeResultSet(rs);
-        closePrepareState(ps);
-        closeConnection(con);
         return listCategory;
     }
 
     //get category by productID
     @Override
-    public Category getCategoryById(int categoryID) {
+    public Category getCategoryById(int categoryID) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -71,21 +77,25 @@ public class CategoryDAOImpl extends DBContext implements CategoryDAO {
             ps.setInt(1, categoryID);
             rs = ps.executeQuery();
             if (rs.next()) {
-                Category category = new Category(rs.getInt("categoryID"), rs.getString("title"), rs.getString("detail"),
-                        rs.getString("created_at"), rs.getString("update_at"));
+                Category category = new Category(rs.getInt("categoryID"), 
+                        rs.getString("title"), 
+                        rs.getString("detail"),
+                        rs.getString("created_at"), 
+                        rs.getString("update_at"));
                 return category;
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CategoryDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(con);
         }
-        closeResultSet(rs);
-        closePrepareState(ps);
-        closeConnection(con);
         return null;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
         CategoryDAOImpl categoryDAO = new CategoryDAOImpl();
         Category category = categoryDAO.getCategoryById(2);
         List<Category> listCategory = categoryDAO.getAllCategory();

@@ -27,18 +27,18 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
 
     public List<Account> getListAccount(String sort, String gender, String role, String search) {
         List<Account> list = new ArrayList<>();
-        String sql = "SELECT [id]\n"
-                + "      ,[full_name]\n"
-                + "      ,[gender]\n"
-                + "      ,[password]\n"
-                + "      ,[user]\n"
-                + "      ,[email]\n"
-                + "      ,[phone]\n"
-                + "      ,[image_id]\n"
-                + "      ,[address]\n"
-                + "      ,[role]\n"
-                + "      ,[create_at]\n"
-                + "      ,[updated_at]\n"
+        String sql = "SELECT [id]"
+                + "      ,[full_name]"
+                + "      ,[gender]"
+                + "      ,[password]"
+                + "      ,[user]"
+                + "      ,[email]"
+                + "      ,[phone]"
+                + "      ,[image_id]"
+                + "      ,[address]"
+                + "      ,[role]"
+                + "      ,[create_at]"
+                + "      ,[updated_at]"
                 + "  FROM [dbo].[account]"
                 + " Where 1=1 ";
         if(gender.equals("1")) sql+=" and gender = 1 ";
@@ -66,9 +66,18 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Account a = new Account(rs.getInt("id"), rs.getString("full_name"), rs.getInt("gender"),
-                        rs.getString("password"), rs.getString("user"), rs.getString("email"), rs.getString("phone"),
-                        rs.getInt("image_id"), rs.getString("address"), rs.getInt("role"), rs.getString("create_at"), rs.getString("updated_at"));
+                Account a = new Account(rs.getInt("id"),
+                        rs.getString("full_name"),
+                        rs.getInt("gender"),
+                        rs.getString("password"),
+                        rs.getString("user"),
+                        rs.getString("email"),
+                        rs.getString("phone"),
+                        rs.getInt("image_id"),
+                        rs.getString("address"),
+                        rs.getInt("role"), 
+                        rs.getString("create_at"),
+                        rs.getString("updated_at"));
                 list.add(a);
             }
         } catch (ClassNotFoundException | SQLException ex) {
@@ -78,19 +87,20 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
         return list;
     }
 
-    public Account getAccByEmail(String email) {
-        String sql = "SELECT [id]\n"
-                + "      ,[full_name]\n"
-                + "      ,[gender]\n"
-                + "      ,[password]\n"
-                + "      ,[user]\n"
-                + "      ,[email]\n"
-                + "      ,[phone]\n"
-                + "      ,[image_id]\n"
-                + "      ,[address]\n"
-                + "      ,[role]\n"
-                + "      ,[create_at]\n"
-                + "      ,[updated_at]\n"
+    @Override
+    public Account getAccByEmail(String email) throws ClassNotFoundException, SQLException {
+        String sql = "SELECT [id]"
+                + "      ,[full_name]"
+                + "      ,[gender]"
+                + "      ,[password]"
+                + "      ,[user]"
+                + "      ,[email]"
+                + "      ,[phone]"
+                + "      ,[image_id]"
+                + "      ,[address]"
+                + "      ,[role]"
+                + "      ,[create_at]"
+                + "      ,[updated_at]"
                 + "  FROM [dbo].[account]"
                 + "  Where email = ?";
         try {
@@ -99,13 +109,27 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
             ps.setString(1, email);
             rs = ps.executeQuery();
             if (rs.next()) {
-                Account a = new Account(rs.getInt("id"), rs.getString("full_name"), rs.getInt("gender"),
-                        rs.getString("password"), rs.getString("user"), rs.getString("email"), rs.getString("phone"),
-                        rs.getInt("image_id"), rs.getString("address"), rs.getInt("role"), rs.getString("create_at"), rs.getString("updated_at"));
+                Account a = new Account(rs.getInt("id"),
+                        rs.getString("full_name"), 
+                        rs.getInt("gender"),
+                        rs.getString("password"), 
+                        rs.getString("user"),
+                        rs.getString("email"),
+                        rs.getString("phone"),
+                        rs.getInt("image_id"),
+                        rs.getString("address"),
+                        rs.getInt("role"),
+                        rs.getString("create_at"),
+                        rs.getString("updated_at"));
                 return a;
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }finally{
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(con);
         }
 
         return null;
@@ -113,19 +137,19 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
 
     @Override
     public void addAccount(String email, String phone, String fullname, String username, String password) {
-        String sql = "INSERT INTO [dbo].[account]\n"
-                + "           ([full_name]\n"
-                + "           ,[password]\n"
-                + "           ,[user]\n"
-                + "           ,[email]\n"
-                + "           ,[phone]\n"
-                + "           ,[role])\n"
-                + "     VALUES\n"
-                + "           (?\n"
-                + "           , ?\n"
-                + "           , ?\n"
-                + "           , ?\n"
-                + "           , ?\n"
+        String sql = "INSERT INTO [dbo].[account]"
+                + "           ([full_name]"
+                + "           ,[password]"
+                + "           ,[user]"
+                + "           ,[email]"
+                + "           ,[phone]"
+                + "           ,[role])"
+                + "     VALUES"
+                + "           (?"
+                + "           , ?"
+                + "           , ?"
+                + "           , ?"
+                + "           , ?"
                 + "           ,3)";
 
         try {
@@ -160,9 +184,10 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
         }
     }
 
+    @Override
     public void ChangePass(String email, String password) {
-        String sql = "UPDATE [dbo].[account]\n"
-                + "   SET [password] = ?\n"
+        String sql = "UPDATE [dbo].[account]"
+                + "   SET [password] = ?"
                 + " WHERE email = ?";
         try {
             con = getConnection();
@@ -179,11 +204,11 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
 
     @Override
     public void UpdateInfo(String email, String phone, String fullname, String user) {
-        String sql = "UPDATE [dbo].[account]\n"
-                + "   SET [phone] = ?\n"
-                + "      ,[full_name] = ?\n"
-                + "      ,[user] = ?\n"
-                + "      ,[address] = ?\n"
+        String sql = "UPDATE [dbo].[account]"
+                + "   SET [phone] = ?"
+                + "      ,[full_name] = ?"
+                + "      ,[user] = ?"
+                + "      ,[address] = ?"
                 + " WHERE email = ?";
         try {
             con = getConnection();

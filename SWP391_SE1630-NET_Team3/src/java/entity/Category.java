@@ -10,7 +10,10 @@ package entity;
  */
 public class Category {
     private int categoryID;
-    private String title,detail,createAt,updateAt;
+    private String title;
+    private String detail;
+    private String createAt;
+    private String updateAt;
 
     public Category() {
     }

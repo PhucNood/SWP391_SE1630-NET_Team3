@@ -12,18 +12,25 @@ import java.util.List;
  */
 public class Product {
     private int productID;
-    private String name,description,size;
-    private int categoryID,brandID,quantity;
+    private String name;
+    private String description;
+    private String size;
+    private int categoryID;
+    private int brandID;
+    private int quantity;
     private double price;
     private int sale;
-    private String createAt,updateAt;
+    private String createAt;
+    private String updateAt;
     private List<Image> list;
 
     public Product() {
     }
 
 
-    public Product(int productID, String name, String description, String size, int categoryID, int brandID, int quantity, double price, int sale, String createAt, String updateAt, List<Image> list) {
+    public Product(int productID, String name, String description, String size, 
+            int categoryID, int brandID, int quantity, double price, int sale, 
+            String createAt, String updateAt, List<Image> list) {
         this.productID = productID;
         this.name = name;
         this.description = description;

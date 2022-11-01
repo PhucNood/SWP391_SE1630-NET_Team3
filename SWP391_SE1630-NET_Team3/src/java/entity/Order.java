@@ -4,34 +4,37 @@
  */
 package entity;
 
-import java.sql.Date;
-import java.util.Collection;
-
 /**
  *
- * @author ACER
+ * @author admin
  */
 public class Order {
+    private int orderID;
+    private int accountID;
+    private String name;
+    private String email;
+    private String phone;
+    private String address;
+    private String note;
+    private String status;
+    private String createAt;
+    private String updateAt;
 
-    public final static String APPROVING = "Aprroving";
-    public final static String WAITING = "Waiting";
-    public final static String PROCESS = "Process";
-    public final static String CANCELED = "Canceled";
-    public final static String DENIED = "Diened";
-
-    private int orderID, accountID;
-    private String name, mail, status, phone, address, note;
-    private Date createAt, editAt;
-    private Account orderBy;
-      private Collection<Product> products;
-    public Collection<Product> getProducts() {
-        return products;
+    public Order() {
     }
 
-    public void setProducts(Collection<Product> products) {
-        this.products = products;
+    public Order(int orderID, int accountID, String name, String email, String phone, String address, String note, String status, String createAt, String updateAt) {
+        this.orderID = orderID;
+        this.accountID = accountID;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.note = note;
+        this.status = status;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
     }
- 
 
     public int getOrderID() {
         return orderID;
@@ -57,20 +60,12 @@ public class Order {
         this.name = name;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPhone() {
@@ -97,47 +92,30 @@ public class Order {
         this.note = note;
     }
 
-    public Date getCreateAt() {
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Date createAt) {
+    public void setCreateAt(String createAt) {
         this.createAt = createAt;
     }
 
-    public Date getEditAt() {
-        return editAt;
+    public String getUpdateAt() {
+        return updateAt;
     }
 
-    public void setEditAt(Date editAt) {
-        this.editAt = editAt;
+    public void setUpdateAt(String updateAt) {
+        this.updateAt = updateAt;
     }
 
-    public Order() {
-    }
-
-    public Account getOrderBy() {
-        return orderBy;
-    }
-
-    public void setOrderBy(Account orderBy) {
-        this.orderBy = orderBy;
-    }
-
-    public Order(int orderID, int accountID, String name, String mail, String status, String phone, String address, String note, Date createAt, Date editAt, Account orderBy, Collection<Product> products) {
-        this.orderID = orderID;
-        this.accountID = accountID;
-        this.name = name;
-        this.mail = mail;
-        this.status = status;
-        this.phone = phone;
-        this.address = address;
-        this.note = note;
-        this.createAt = createAt;
-        this.editAt = editAt;
-        this.orderBy = orderBy;
-        this.products = products;
-    }
-
+    
     
 }

@@ -4,16 +4,17 @@
  */
 package dao;
 
-import entity.Order;
-import entity.Product;
-import java.util.Collection;
+import entity.Account;
+import entity.Cart;
+import java.sql.SQLException;
 
 /**
  *
- * @author ACER
+ * @author admin
  */
 public interface OrderDAO {
-    public Collection<Order> getOrders();
-    public Order getOrderbyID(int id);
-
+    public void addOrder(int accountID, String fullname, String email,
+            String phone, String address, String note, Cart cart)
+            throws ClassNotFoundException, SQLException ;
+    
 }

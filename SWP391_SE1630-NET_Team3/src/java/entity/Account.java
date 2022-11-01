@@ -12,11 +12,15 @@ public class Account {
     private int id;
     private String fullname;
     private int gender;
-    private String pass,user,email,phone;
+    private String pass;
+    private String user;
+    private String email;
+    private String phone;
     private int imageID;
     private String address;
     private int role;
-    private String createAt,updateAt;
+    private String createAt;
+    private String updateAt;
 
     public Account() {
     }

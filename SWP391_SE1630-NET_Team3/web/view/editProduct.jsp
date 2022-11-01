@@ -299,7 +299,7 @@
     <body class="animsition">
 
         <jsp:include page="topbar.jsp"/>
-
+        <a></a>
         <div class="container">
             <div id="addEmployeeModal" class="">
                 <div class="modal-dialog">
@@ -335,12 +335,14 @@
                             <div class="modal-body">					
 
                                 <div class="form-group">
-                                    <label>Product name</label>
-                                    <input name="name" type="text" class="form-control" required value="${product.name}">
+                                    <span>Product name</span>
+                                    <span style="margin-left: 10px; color: red">(*)</span>
+                                    <input name="name" type="text" class="form-control" required value="${requestScope.name !=null ? name : product.name}">
+                                    <p style="color: red">${NameNull}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label>Category</label>
-                                    <select name="category" class="form-select" aria-label="Default select example"">
+                                    <span>Category</span>
+                                    <select name="category" class="form-select" aria-span="Default select example"">
                                         <c:forEach items="${listCategory}" var="i">
                                             <option value="${i.categoryID}">${i.title}</option>
 
@@ -348,8 +350,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Brand</label>
-                                    <select name="brand" class="form-select" aria-label="Default select example">
+                                    <span>Brand</span>
+                                    <select name="brand" class="form-select" aria-span="Default select example">
                                         <c:forEach items="${listBrand}" var="i">
                                             <option value="${i.brandID}" selected>${i.title}</option>
 
@@ -357,28 +359,38 @@
                                     </select>
                                 </div>     
                                 <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea name="description" type="text" class="form-control">${product.description}</textarea>
+                                    <span>Description</span>
+                                    <textarea name="description" type="text" required class="form-control">${product.description}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label>Price</label>
-                                    <input type="number" name="price" min="0" class="form-control" value="${product.price}">
+                                    <span>Price</span>
+                                    <span style="margin-left: 10px; color: red">(*)</span>
+                                    <input type="number" name="price" min="0" class="form-control" required 
+                                           value="${requestScope.price !=null ? price : product.price}">
+                                    <p style="color: red">${PriceInfinity}</p>
                                 </div>
 
                                 <div class="form-group" style="clear: both">
-                                    <label>Quantity</label>
-                                    <input type="number" name="quantity" class="form-control" min="0" value="${product.quantity}" >
+                                    <span>Quantity</span>
+                                    <span style="margin-left: 10px; color: red">(*)</span>
+                                    <input type="number" name="quantity" class="form-control" min="0" required 
+                                           value="${requestScope.quantity !=null ? quantity : product.quantity}" >
+                                    <p style="color: red">${QuantityInfinity}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label>Size</label>
-                                    <input name="size" class="form-control" required value="${product.size}">
+                                    <span>Size</span>
+                                    <span style="margin-left: 10px; color: red">(*)</span>
+                                    <input name="size" type="number" min="0" class="form-control" required 
+                                           value="${requestScope.size !=null ? size : product.size}">
+                                    <p style="color: red">${SizeInfinity}</p>
                                 </div>
 
 
 
                                 <div class="form-group">
-                                    <label>Sale(%)</label>
-                                    <input type="number" name="sale" class="form-control" required value="${product.sale}">
+                                    <span>Sale(%)</span>
+                                    <span style="margin-left: 10px; color: red">(*)</span>
+                                    <input type="number" name="sale" min="0" max="100" class="form-control" required value="${product.sale}">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -415,6 +427,7 @@
                     preview.src = "";
                 }
             }
+
         </script>
 
     </body>
