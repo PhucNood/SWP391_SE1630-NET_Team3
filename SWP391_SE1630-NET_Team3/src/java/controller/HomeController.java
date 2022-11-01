@@ -61,20 +61,20 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.setAttribute("inPage", "home");
-        HomeDAO homeDAOImpl = new HomeDAOImpl();
-        
-       request.setAttribute("products", new ProductDAOImpl().getAllProduct());
-        request.setAttribute("listNewProduct", homeDAOImpl.getNewProductsEachCategory());
         try {
+            HttpSession session = request.getSession();
+            session.setAttribute("inPage", "home");
+            HomeDAO homeDAOImpl = new HomeDAOImpl();
+            
+            request.setAttribute("products", new ProductDAOImpl().getAllProduct());
+            request.setAttribute("listNewProduct", homeDAOImpl.getNewProductsEachCategory());
             request.setAttribute("newBlogs", new BlogDAOImpl().searchBlogPage("", -1, -1,-1, 3, 1));
-        } catch (SQLException ex) {
+            request.getRequestDispatcher("view/home.jsp").forward(request, response);
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", ex.getMessage());
+            request.getRequestDispatcher("view/error.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("view/home.jsp").forward(request, response);
     } 
 
     /** 

@@ -345,7 +345,7 @@
                     <!-- Search product -->
                     <div class="dis-none panel-search w-full p-t-10 p-b-15">
                         <form class="example" action="searchInManage" method="get">
-                            <input type="text" placeholder="Search by name, brand,.." name="text" value="${requestScope.textSearch}">
+                            <input type="text" placeholder="Search by name, brand,.." name="text" value="${requestScope.textSearch}" id="text" onfocusout="formValidate()">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
@@ -554,6 +554,13 @@
             }
         </script>
         <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
-
+        <script>
+                            function formValidate() {
+                                var regExp = /^[\w$.]$/;
+                                var text = document.getElementById("text").value;
+                                if (!regExp.test(text))
+                                    alert('Not Null!');                                    
+                            }
+        </script>
     </body>
 </html>

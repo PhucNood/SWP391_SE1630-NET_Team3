@@ -97,7 +97,7 @@
                         <a href="home" class="logo">
 
 
-                            <img src="${pageContext.request.contextPath}/view/images/T3.jpeg" alt="IMG-LOGO">
+                            <img src="${pageContext.request.contextPath}/view/images/T3.jpg" alt="IMG-LOGO">
 
 
                         </a>
@@ -127,19 +127,23 @@
 
                                 </li>
 
-                                <li class="${inPage == "manage" ? "active-menu" :""}">
+                                <c:if test="${account !=null && (account.role == 1 || account.role == 2  )}">
+                                    <li class="${inPage == "manage" ? "active-menu" :""}">
 
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                         <b style="font-weight: normal"> Manage Shop</b>
                                     </a>
                                     <div class="dropdown-menu rounded-0 m-0">
+                                        <c:if test="${account.role == 1 }">
                                         <a href="${pageContext.request.contextPath}/manageAccount?all=1" class="dropdown-item">Manage Account</a>
+                                        </c:if>
                                         <a href="${pageContext.request.contextPath}/manageProduct" class="dropdown-item">Manage Product</a>
                                         <a href="${pageContext.request.contextPath}/ManageBlog" class="dropdown-item">Manage Blog</a>
 
                                     </div>
 
                                 </li>
+                                </c:if>
                             </ul>
                         </div>	
 
@@ -157,13 +161,20 @@
                                 </c:if>
 
                             </ul>
-                           
+
 
                             <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-                                <a href="#"/>
-                                <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti" data-notify="2">
-                                    <i class="zmdi zmdi-shopping-cart"></i>
-                                </div>
+                                <a href="${pageContext.request.contextPath}/showCart"/>
+                                <c:if test="${size != null}">
+                                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti" data-notify="${size}">
+                                        <i class="zmdi zmdi-shopping-cart ${inPage == "cart" ? "active-menu" :""}"></i>
+                                    </div>
+                                </c:if>
+                                <c:if test="${size == null}">
+                                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11">
+                                        <i class="zmdi zmdi-shopping-cart" ></i>
+                                    </div>
+                                </c:if>
                             </div>
                             <div class="flex-c-m h-full p-r-24">
                                 <c:if test="${sessionScope.account!=null}">
@@ -182,7 +193,7 @@
                     </nav>
                 </div>	
             </div>
-                                
+
             <!-- Modal Search -->
             <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
                 <div class="container-search-header">

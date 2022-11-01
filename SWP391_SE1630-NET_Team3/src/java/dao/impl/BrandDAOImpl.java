@@ -23,7 +23,7 @@ public class BrandDAOImpl extends DBContext implements BrandDAO {
 
     //get all list brand 
     @Override
-    public List<Brand> getAllBrand() {
+    public List<Brand> getAllBrand() throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -40,22 +40,28 @@ public class BrandDAOImpl extends DBContext implements BrandDAO {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Brand brand = new Brand(rs.getInt("brandID"), rs.getString("title"),
-                        rs.getString("detail"), rs.getString("created_at"), rs.getString("update_at"));
+                Brand brand = new Brand(rs.getInt("brandID"), 
+                        rs.getString("title"),
+                        rs.getString("detail"),
+                        rs.getString("created_at"), 
+                        rs.getString("update_at"));
                 listBrand.add(brand);
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(BrandDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(con);
         }
-        closeResultSet(rs);
-        closePrepareState(ps);
-        closeConnection(con);
+        
         return listBrand;
     }
 
     //get brand info with brandID
     @Override
-    public Brand getBrandById(int id) {
+    public Brand getBrandById(int id) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -72,19 +78,25 @@ public class BrandDAOImpl extends DBContext implements BrandDAO {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                Brand brand = new Brand(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                Brand brand = new Brand(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5));
                 return brand;
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(BrandDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(con);
         }
-        closeResultSet(rs);
-        closePrepareState(ps);
-        closeConnection(con);
         return null;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
         BrandDAOImpl brandDAO = new BrandDAOImpl();
         Brand brand = brandDAO.getBrandById(1);
         System.out.println(brand.getTitle());

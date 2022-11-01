@@ -4,58 +4,79 @@
  */
 package entity;
 
-import java.sql.Date;
-
 /**
  *
- * @author ACER
+ * @author admin
  */
 public class OrderDetail {
-    private int orderID,productID,feedbackID;
-    private Date createAt,editAt;
+    private int orderID;
+    private int productID;
+    private int quantitY;
+    private int feedbackID;
+    private String createAt;
+    private String updateAt;
 
     public OrderDetail() {
     }
 
-    public int getOrderID() {
-        return orderID;
+    public OrderDetail(int orderID, int productID, int quantitY, int feedbackID, String createAt, String updateAt) {
+        this.orderID = orderID;
+        this.productID = productID;
+        this.quantitY = quantitY;
+        this.feedbackID = feedbackID;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
     }
 
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
+   
+
+    
+    
+    public int getOrderID() {
+        return orderID;
     }
 
     public int getProductID() {
         return productID;
     }
 
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public int getQuantitY() {
+        return quantitY;
     }
 
     public int getFeedbackID() {
         return feedbackID;
     }
 
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public String getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
+    }
+
+    public void setProductID(int productID) {
+        this.productID = productID;
+    }
+
+    public void setQuantitY(int quantitY) {
+        this.quantitY = quantitY;
+    }
+
     public void setFeedbackID(int feedbackID) {
         this.feedbackID = feedbackID;
     }
 
-    public Date getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Date createAt) {
+    public void setCreateAt(String createAt) {
         this.createAt = createAt;
     }
 
-    public Date getEditAt() {
-        return editAt;
+    public void setUpdateAt(String updateAt) {
+        this.updateAt = updateAt;
     }
-
-    public void setEditAt(Date editAt) {
-        this.editAt = editAt;
-    }
-    
-    
 }

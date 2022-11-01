@@ -177,7 +177,7 @@
                     <!-- Search product -->
                     <div class="dis-none panel-search w-full p-t-10 p-b-15">
                         <form class="example" action="search" method="get">
-                            <input type="text" placeholder="Search by name, brand,.." name="text" value="${text}">
+                            <input type="text" placeholder="Search by name, brand,.." required name="text" value="${text}" id="text" onfocusout="formValidate()">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
@@ -274,7 +274,12 @@
                         </div>
                     </div>
                 </div>
-
+                <c:if test="${maximum != null}">
+                    <h3 style="color: red; margin-bottom: 20px; text-align: center">${maximum}</h3>
+                </c:if>    
+                <c:if test="${susscess != null}">
+                    <h3 style="color: #44EC79; margin-bottom: 20px; text-align: center">${susscess}</h3>
+                </c:if>  
                 <div class="row isotope-grid">
 
                     <h2 style="margin: auto;">${emptyP}</h2>
@@ -319,7 +324,7 @@
                                     </div>
 
                                     <div class="block2-txt-child2" style="margin-left: 35px; height: 50px">
-                                        <a href="${pageContext.request.contextPath}/view/#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                        <a href="${pageContext.request.contextPath}/addToCart?id=${i.productID}&num=1" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
                                             <i class="cart zmdi zmdi-shopping-cart" style="font-size:28px"></i>
                                         </a>
                                     </div>
@@ -520,6 +525,14 @@
 
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
+        <script>
+                            function formValidate() {
+                                var regExp = /^[\w$.]+$/;
+                                var text = document.getElementById("text").value;
+                                if (!regExp.test(text))
+                                    alert('Text is not null!');
+                            }
 
+        </script>
     </body>
 </html>

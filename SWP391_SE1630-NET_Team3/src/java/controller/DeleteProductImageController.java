@@ -19,43 +19,24 @@ import entity.Brand;
 import entity.Category;
 import entity.Product;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- *
+ *delete 1 image has been selected of product and 
+ * delete link between it and product 
  * @author admin
  */
 public class DeleteProductImageController extends HttpServlet {
    
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DeleteProductImageController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DeleteProductImageController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    } 
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -68,46 +49,35 @@ public class DeleteProductImageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String productID = request.getParameter("productID");
-        String img = request.getParameter("img");
-        ImageDAO ImageDAO = new ImageDAOImpl();
-        String imageID = ImageDAO.getImageID(img);
-        Image_ProductDAO Image_ProductDAO = new Image_ProductDAOImpl();
-        Image_ProductDAO.deleteImage_Product(imageID, productID);
-        ProductDAO ProductDAO = new ProductDAOImpl();
-        HttpSession session = request.getSession();
-        Product product = ProductDAO.getProductById(productID);
-        
-        BrandDAO BrandDAO = new BrandDAOImpl();
-        List<Brand> listBrand = BrandDAO.getAllBrand();
-        session.setAttribute("listBrand", listBrand);
-        CategoryDAO CategoryDAO = new CategoryDAOImpl();
-        List<Category> listCategory = CategoryDAO.getAllCategory();
-        session.setAttribute("listCategory",listCategory);
-        session.setAttribute("product", product);
-        request.getRequestDispatcher("view/editProduct.jsp").forward(request, response);
+        try {
+            //get productID
+            String productID = request.getParameter("productID");
+            String img = request.getParameter("img");
+            ImageDAO ImageDAO = new ImageDAOImpl();
+            //get imageID by Image name
+            String imageID = ImageDAO.getImageID(img);
+            Image_ProductDAO Image_ProductDAO = new Image_ProductDAOImpl();
+            //delete connect of product and image
+            Image_ProductDAO.deleteImage_Product(imageID, productID);
+            ProductDAO ProductDAO = new ProductDAOImpl();
+            HttpSession session = request.getSession();
+            //get product by id
+            Product product = ProductDAO.getProductById(productID);
+            
+            BrandDAO BrandDAO = new BrandDAOImpl();
+            //get all brand list
+            List<Brand> listBrand = BrandDAO.getAllBrand();
+            session.setAttribute("listBrand", listBrand);
+            CategoryDAO CategoryDAO = new CategoryDAOImpl();
+            //get alii category list
+            List<Category> listCategory = CategoryDAO.getAllCategory();
+            session.setAttribute("listCategory",listCategory);
+            session.setAttribute("product", product);
+            request.getRequestDispatcher("view/editProduct.jsp").forward(request, response);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DeleteProductImageController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", ex.getMessage());
+            request.getRequestDispatcher("view/error.jsp").forward(request, response);
+        }
     } 
-
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

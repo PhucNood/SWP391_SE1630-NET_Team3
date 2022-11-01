@@ -13,6 +13,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -107,16 +110,22 @@ public class SignupController extends HttpServlet {
             request.setAttribute("messRePass", "Incorrect password, please re-enter!");
         } else {
 
-            AccountDAOImpl accD = new AccountDAOImpl();
-            Account a = accD.getAccByEmail(email);
-
-            if (a == null) {
-                session.setAttribute("pass", password);
-                accD.addAccount(email, phone, username, user, password);
-                request.setAttribute("messSuc", "Create account successful, You can login!");
-
-            } else {
-                request.setAttribute("messMail", "Email is already exist!");
+            try {
+                AccountDAOImpl accD = new AccountDAOImpl();
+                Account a = accD.getAccByEmail(email);
+                
+                if (a == null) {
+                    session.setAttribute("pass", password);
+                    accD.addAccount(email, phone, username, user, password);
+                    request.setAttribute("messSuc", "Create account successful, You can login!");
+                    
+                } else {
+                    request.setAttribute("messMail", "Email is already exist!");
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(SignupController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(SignupController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }

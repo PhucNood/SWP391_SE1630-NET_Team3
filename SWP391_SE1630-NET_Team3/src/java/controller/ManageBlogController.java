@@ -4,6 +4,7 @@
  *
  * DATE            Version             AUTHOR           DESCRIPTION
  * 2022-10-18      1.0                 LongLH           First Implement
+ * 
  */
 package controller;
 
@@ -60,8 +61,9 @@ public class ManageBlogController extends HttpServlet {
             String searchTime = request.getParameter("searchTime");
             int searchMonth;
             int searchYear;
-            if (searchTime == null || searchTime.isEmpty()) {
-                searchTime = "";
+
+            if (searchTime == null || searchTime.isEmpty() || searchTime.equals("-1")) {
+                searchTime = "-1";
                 searchMonth = -1;
                 searchYear = -1;
             } else {
