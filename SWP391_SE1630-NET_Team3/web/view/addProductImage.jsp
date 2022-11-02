@@ -282,7 +282,7 @@
     <body class="animsition">
 
         <jsp:include page="topbar.jsp"/>
-
+        <a></a>
         <div class="container">
             <div id="addEmployeeModal" class="">
                 <div class="modal-dialog">
@@ -299,9 +299,6 @@
                                     <input name="name" type="text" class="form-control" required >
                                 </div>
                                 <div class="form-group" >
-
-
-
                                     <input  onchange="previewFile()" type="file" name="imgFile" class="form-control" value="view/images/${img}">
                                     <img class="change-img" src="view/images/${img}" height="200" alt="Image preview...">
                                 </div>

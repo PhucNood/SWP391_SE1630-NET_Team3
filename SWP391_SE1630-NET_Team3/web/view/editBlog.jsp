@@ -212,7 +212,7 @@
             a {
                 transition: 300ms;
                 background: transparent;
-                color: #808080;
+                color: #428bca;
                 text-decoration: none;
             }
             .pagination li a {
@@ -292,9 +292,7 @@
                 width: 80px;
                 height: 80px;
             }
-/*            .form-group{
-                color: #666666 !important
-            }*/
+
 
         </style>
     </head>
@@ -302,76 +300,46 @@
 
         <jsp:include page="topbar.jsp"/>
         <a></a>
-        <div class="container" >
+        <div class="container">
             <div id="addEmployeeModal" class="">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    
+                    <div class="modal-content" style="margin-top: 20px;" >
                         <p style="color: #44EC79; text-align: center">${messsucc}</p> 
-                        <form action="addProduct" method="post" >
+                        <form action="editBlog?blogID=${blog.id}" method="post" >
                             <div class="modal-header">						
-                                <h4 class="modal-title">Edit product</h4>
+                                <h4 class="modal-title">Create Blog</h4>
                             </div>
                             <div class="modal-body">					
 
                                 <div class="form-group">
-                                    <span>Product name</span><span style="margin-left: 10px; color: red">(*)</span>
-                                    <input name="name" type="text" class="form-control" required id="text" value="${name}">
-                                    <p style="color: red">${NameNull}</p>
+                                    <label>Title</label>
+                                    <input name="blogTitle" type="text" class="form-control" required value="${blog.title}">
                                 </div>
                                 <div class="form-group">
-                                    <span>Category</span>
-                                    <select name="category" class="form-select" aria-span="Default select example"">
-                                        <c:forEach items="${listCategory}" var="i">
-                                            <option value="${i.categoryID}">${i.title}</option>
-
+                                    <label>Description</label>
+                                    <textarea name="description" type="text" class="form-control" >${blog.content}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Author</label>
+                                    <select name="author" class="form-select form-control" aria-label="Default select example"">
+                                        <c:forEach items="${authorList}" var="au">
+                                            <option value="${au.id}">${au.fullname}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <span>Brand</span>
-                                    <select name="brand" class="form-select" aria-span="Default select example">
-                                        <c:forEach items="${listBrand}" var="i">
-                                            <option value="${i.brandID}" selected>${i.title}</option>
-
-                                        </c:forEach>
-                                    </select>
-                                </div>     
-                                <div class="form-group">
-                                    <span>Description</span>
-                                    <textarea name="description" type="text" class="form-control" value="${description}"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <span>Price</span><span style="margin-left: 10px; color: red">(*)</span>
-                                    <input type="number" name="price" min="0" class="form-control" value="${price}">
-                                    <p style="color: red">${PriceInfinity}</p>
-                                </div>
+                                <c:forEach var="j" items="${blog.listImg}">
+                                    <c:set var="img" value="${j.imgSource}"/>
+                                </c:forEach> 
                                 <div class="form-group" >
-                                    <span>Image</span><span style="margin-left: 10px; color: red">(*)</span>
+                                    <label>Image</label>
                                     <input  onchange="previewFile()" type="file" name="imgFile" class="form-control" value="view/images/${img}">
                                     <img class="change-img" src="view/images/${img}" height="200" alt="Image preview...">
                                 </div>
-                                <div class="form-group" style="clear: both">
-                                    <span>Quantity</span><span style="margin-left: 10px; color: red">(*)</span>
-                                    <input type="number" name="quantity" class="form-control" min="0" value="${quantity}" >
-                                    <p style="color: red">${QuantityInfinity}</p>
-                                </div>
-                                <div class="form-group">
-                                    <span>Size</span><span style="margin-left: 10px; color: red">(*)</span>
-                                    <input name="size" class="form-control" required " value="${sizeP}">
-                                    <p style="color: red">${SizeInfinity}</p>
-                                </div>
-
-
-
-                                <div class="form-group">
-                                    <span>Sale(%)</span><span style="margin-left: 10px; color: red">(*)</span>
-                                    <input type="number" min="0" max="100" name="sale" class="form-control" required  value="${sale}">
-                                </div>
                             </div>
                             <div class="modal-footer">
-                                <a type="button" href="manageProduct" class="btn btn-success" data-dismiss="modal" value="Cancel">Cancel</a>
-                                <input type="submit" class="btn btn-success" value="Save">
-
+                                <a type="button"  href="ManageBlog" class="btn btn-success" data-dismiss="modal">Cancel</a>
+                                <input type="submit" class="btn btn-success" value="Save"> 
                             </div>
                         </form>
                     </div>
@@ -382,6 +350,13 @@
         <jsp:include page="footer.jsp"/>
 
         <script>
+            function alertUser(productID, img) {
+                var option = confirm('Are you sure to delete?');
+                if (option === true) {
+                    window.location.href = location.href;
+                }
+            }
+
             function previewFile() {
                 var preview = document.querySelector('.change-img');
                 var file = document.querySelector('input[type=file]').files[0];
@@ -395,7 +370,8 @@
                     preview.src = "";
                 }
             }
+
         </script>
-        
+
     </body>
 </html>

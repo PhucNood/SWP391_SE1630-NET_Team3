@@ -112,7 +112,6 @@ public class AddProductImageController extends HttpServlet {
                 }
             }
 
-            request.setAttribute("test", img);
             //add image to database
             ImageDAO.addImage(name, img);
             String getImageID = ImageDAO.getImageID(img);

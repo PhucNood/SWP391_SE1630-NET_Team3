@@ -139,6 +139,14 @@
         <servlet-name>AddOrderController</servlet-name>
         <servlet-class>controller.AddOrderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteBlogController</servlet-name>
+        <servlet-class>controller.DeleteBlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditBlogController</servlet-name>
+        <servlet-class>controller.EditBlogController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShopController</servlet-name>
         <url-pattern>/shop</url-pattern>
@@ -266,6 +274,14 @@
     <servlet-mapping>
         <servlet-name>AddOrderController</servlet-name>
         <url-pattern>/addOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBlogController</servlet-name>
+        <url-pattern>/deleteBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditBlogController</servlet-name>
+        <url-pattern>/editBlog</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

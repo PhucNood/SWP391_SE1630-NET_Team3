@@ -4,35 +4,31 @@
  */
 package controller;
 
+import dao.BlogDAO;
 import dao.ImageDAO;
 import dao.Image_BlogDAO;
 import dao.impl.BlogDAOImpl;
 import dao.impl.ImageDAOImpl;
 import dao.impl.Image_BlogDAOImpl;
 import entity.Account;
-import jakarta.servlet.ServletContext;
+import entity.Blog;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 /**
  *
- * @author stick
+ * @author admin
  */
-public class addBlogController extends HttpServlet {
+public class EditBlogController extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -47,24 +43,21 @@ public class addBlogController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            dao.BlogDAO blogDAO = new BlogDAOImpl();
-            List<Account> authorList = blogDAO.getAllAuthor();
+            List<Account> authorList = new ArrayList<>();
+            String blogID = request.getParameter("blogID");
+            BlogDAO BlogDAO = new BlogDAOImpl();
+            authorList = BlogDAO.getAllAuthor();
+            Blog blog = BlogDAO.getBlogById(Integer.parseInt(blogID));
             request.setAttribute("authorList", authorList);
-
-            HttpSession session = request.getSession();
-            session.setAttribute("inPage", "manage");
-
-            request.getRequestDispatcher("view/createBlog.jsp").forward(request, response);
-
+            request.setAttribute("blog", blog);
+            request.getRequestDispatcher("view/editBlog.jsp").forward(request, response);
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(addBlogController.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("errorMessage", ex.getMessage());
-            request.getRequestDispatcher("view/error.jsp").forward(request, response);
+            Logger.getLogger(EditBlogController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method. save new blog to database
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -74,8 +67,12 @@ public class addBlogController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         try {
+            String blogID = request.getParameter("blogID");
+            BlogDAO BlogDAO = new BlogDAOImpl();
+            Blog blog = BlogDAO.getBlogById(Integer.parseInt(blogID));
+            String oldImg = String.valueOf(blog.getListImg().get(0).getId());
+
             dao.BlogDAO blogDAO;
             List<Account> authorList = new ArrayList<>();
             blogDAO = new BlogDAOImpl();
@@ -86,20 +83,18 @@ public class addBlogController extends HttpServlet {
             String author = request.getParameter("author");
             String img = request.getParameter("imgFile");
 
-            
             ImageDAO ImageDAO = new ImageDAOImpl();
-            ImageDAO.addImage("", img);
             String imageId = ImageDAO.getImageID(img);
-            blogDAO.addBlog(blogTitle, Integer.parseInt(author), description);
-            String BlogId = blogDAO.getNewBlogId();
+            blogDAO.updateBlog(blogID, blogTitle, Integer.parseInt(author), description);
             Image_BlogDAO Image_BlogDAO = new Image_BlogDAOImpl();
-            Image_BlogDAO.addImage_Blog(imageId, BlogId);
+            Image_BlogDAO.deleteImage_Blog( blogID);
+            Image_BlogDAO.addImage_Blog(imageId, blogID);
 
-            request.setAttribute("messsucc", "Add Blog Success!");
+            request.setAttribute("messsucc", "Update Blog Success!");
             request.setAttribute("authorList", authorList);
             HttpSession session = request.getSession();
             session.setAttribute("inPage", "manage");
-            request.getRequestDispatcher("view/createBlog.jsp").forward(request, response);
+            request.getRequestDispatcher("view/editBlog.jsp").forward(request, response);
 
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(addBlogController.class.getName()).log(Level.SEVERE, null, ex);

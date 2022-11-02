@@ -127,7 +127,7 @@
 
                                 </li>
 
-                                <c:if test="${account !=null && (account.role == 1 || account.role == 2  )}">
+                                <%--<c:if test="${account !=null && (account.role == 1 || account.role == 2  )}">--%>
                                     <li class="${inPage == "manage" ? "active-menu" :""}">
 
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -143,7 +143,7 @@
                                     </div>
 
                                 </li>
-                                </c:if>
+                                <%--</c:if>--%>
                             </ul>
                         </div>	
 

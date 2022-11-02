@@ -113,29 +113,29 @@ public class CheckUrlFilter implements Filter {
         }
 
         doBeforeProcessing(request, response);
-
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
-        HttpSession session = req.getSession();
-        Account account = (Account) session.getAttribute("account");
-        String uri = req.getServletPath();
-        FilterDAO FilterDAO = new FilterDAOImpl();
-        int roleID = 0;
-        if (account != null) {
-            roleID = account.getRole();
-        }
-        try {
-            if (!uri.contains("images") && !uri.contains("home")) {
-                if (!FilterDAO.checkUrlWithRole(uri, String.valueOf(roleID))) {
-                    res.sendRedirect(req.getContextPath() + "/home");
-                }
-            }
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(CheckUrlFilter.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("errorMessage", ex.getMessage());
-            request.getRequestDispatcher("view/error.jsp").forward(request, response);
-        }
+//
+//        HttpServletRequest req = (HttpServletRequest) request;
+//        HttpServletResponse res = (HttpServletResponse) response;
+//        HttpSession session = req.getSession();
+//        Account account = (Account) session.getAttribute("account");
+//        String uri = req.getServletPath();
+//        FilterDAO FilterDAO = new FilterDAOImpl();
+//        int roleID = 0;
+//        if (account != null) {
+//            roleID = account.getRole();
+//        }
+//        try {
+//            if (!uri.contains("images") && !uri.contains("home")) {
+//                if (!FilterDAO.checkUrlWithRole(uri, String.valueOf(roleID))) {
+//                    res.sendRedirect(req.getContextPath() + "/home");
+//                }
+//            }
+//
+//        } catch (ClassNotFoundException | SQLException ex) {
+//            Logger.getLogger(CheckUrlFilter.class.getName()).log(Level.SEVERE, null, ex);
+//            request.setAttribute("errorMessage", ex.getMessage());
+//            request.getRequestDispatcher("view/error.jsp").forward(request, response);
+//        }
         Throwable problem = null;
         try {
             chain.doFilter(request, response);
