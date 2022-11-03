@@ -102,7 +102,7 @@
     </head>
     <body>
         <jsp:include page="topbar.jsp"/>
-
+        <a></a>
         <div class="container">
             <div class="table-wrapper">
 
@@ -117,6 +117,7 @@
                         </a>
                     </div>
                 </div>
+                <h3 style="color: #44EC79; text-align: center">${messsucc}</h3> 
                 <form action="">
                     <div class="rowss manage-search">
                         <input type="text" class="stext-103 cl2 mx-1 plh4 size-101 p-l-28 p-r-55" name="searchTitle" placeholder="Input search title" value="${searchTitle}">
@@ -153,6 +154,7 @@
                             <th>Delete</th>
                         </tr>
                     </thead>
+                    
                     <tbody>
                         <c:forEach items="${blogList}" var="blog">
                             <tr>
@@ -168,13 +170,14 @@
                                 </td>
                                 <td>${blog.authorName}</td>
                                 <td>${blog.createAt}</td>
+                                
                                 <td>
-                                    <a href="#?blogID=${blog.id}" >
-                                        <i style="font-size:24px; color: black" class="fa">	&#xf044;</i>
+                                    <a href="editBlog?blogID=${blog.id}" >
+                                        <i style="font-size:24px; color: black" class="fa">&#xf044;</i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="#" onclick="alertUser()" class="delete" data-toggle="modal">
+                                    <a href="#" onclick="alertUser(${blog.id})" >
                                         <i style="font-size:24px; color: black" class="fa">&#xf014;</i>
                                     </a>
                                 </td>
@@ -209,10 +212,10 @@
         <jsp:include page="footer.jsp"/>
 
         <script>
-            function alertUser(productID) {
+            function alertUser(blogID) {
                 var option = confirm('Are you sure to delete?');
                 if (option === true) {
-                    window.location.href = "deleteProduct?productID=" + productID;
+                    window.location.href = "deleteBlog?blogID=" + blogID;
                 }
             }
             function previewFile() {

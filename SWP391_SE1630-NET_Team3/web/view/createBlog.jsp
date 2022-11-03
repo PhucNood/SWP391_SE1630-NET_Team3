@@ -22,7 +22,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <p style="color: #44EC79; text-align: center">${messsucc}</p> 
-                        <form action="addBlog" method="post" enctype="multipart/form-data">
+                        <form action="addBlog" method="post" >
                             <div class="modal-header">						
                                 <h4 class="modal-title">Create Blog</h4>
                             </div>
@@ -46,8 +46,8 @@
                                 </div>
                                 <div class="form-group" >
                                     <label>Image</label>
-                                    <input  onchange="previewFile('uploadImg')" type="file" name="imgFile" class="form-control" value="view/images/${img}">
-                                    <img class="change-img" src="view/images/${img}" height="200" alt="Image preview..." id="uploadImg">
+                                    <input  onchange="previewFile()" type="file" name="imgFile" class="form-control" value="view/images/${img}">
+                                    <img class="change-img" src="view/images/${img}" height="200" alt="Image preview...">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -63,5 +63,20 @@
         <jsp:include page="footer.jsp"/>
         <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
         <script src="${pageContext.request.contextPath}/view/js/previewImg.js"></script>
+        <script>
+            function previewFile() {
+                var preview = document.querySelector('.change-img');
+                var file = document.querySelector('input[type=file]').files[0];
+                var reader = new FileReader();
+                reader.onloadend = function () {
+                    preview.src = reader.result;
+                };
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                    preview.src = "";
+                }
+            }
+        </script>
     </body>
 </html>

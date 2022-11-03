@@ -95,7 +95,9 @@ public class ManageBlogController extends HttpServlet {
             request.setAttribute("inPage", "manage");
             HttpSession session = request.getSession();
             session.setAttribute("inPage", "manage");
-
+            if(session.getAttribute("messsucc")!=null){
+                request.setAttribute("messsucc", session.getAttribute("messsucc"));
+            }
             request.getRequestDispatcher("view/manageBlogList.jsp").forward(request, response);
 
         } catch (SQLException | ClassNotFoundException ex) {

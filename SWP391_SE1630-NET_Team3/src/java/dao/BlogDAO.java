@@ -31,5 +31,8 @@ public interface BlogDAO {
     public List<Archive> getAllArchive() throws SQLException, ClassNotFoundException;
 
     public List<Image> getBlogImage(int blogId) throws SQLException, ClassNotFoundException;
-
+    public void addBlog(String title, int author, String content) throws SQLException, ClassNotFoundException ;
+    public void updateBlog(String id, String title, int author, String content) throws SQLException, ClassNotFoundException;
+    public String getNewBlogId() throws SQLException, ClassNotFoundException;
+    public void deleteBlog(String blogID) throws SQLException, ClassNotFoundException;
 }

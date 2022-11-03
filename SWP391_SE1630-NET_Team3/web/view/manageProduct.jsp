@@ -484,7 +484,7 @@
                                 <td>${o.sale}%</td>
                                 <td>
                                     <a href="editProduct?productID=${o.productID}" >
-                                        <i style="font-size:24px; color: black" class="fa">	&#xf044;</i>
+                                        <i style="font-size:24px; color: black" class="fa">&#xf044;</i>
                                         &nbsp;&nbsp; 
                                     </a>
                                     <a href="#" onclick="alertUser(${o.productID})" class="delete" data-toggle="modal">

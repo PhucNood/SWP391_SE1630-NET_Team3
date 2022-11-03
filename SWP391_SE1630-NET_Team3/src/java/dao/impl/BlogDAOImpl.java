@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -126,7 +127,7 @@ public class BlogDAOImpl extends DBContext implements BlogDAO {
         if (authorId != -1) {
             searchAuthor = " AND b.author_id=" + authorId;
         }
-        String sql = "SELECT COUNT(b.id)as'total' FROM blog b WHERE b.title like ? " + searchMonth + searchYear +searchAuthor;
+        String sql = "SELECT COUNT(b.id)as'total' FROM blog b WHERE b.title like ? " + searchMonth + searchYear + searchAuthor;
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -163,12 +164,12 @@ public class BlogDAOImpl extends DBContext implements BlogDAO {
     public List<Archive> getAllArchive() throws SQLException, ClassNotFoundException {
         List<Archive> resultList = new ArrayList<>();
 
-        String sql = "SELECT COUNT(b.id)as'total',\n"
-                + "MONTH(b.created_at) AS month_created,\n"
-                + "YEAR(b.created_at) AS year_created, \n"
-                + "FORMAT(b.created_at, 'MMM yyyy') AS sqlDate\n"
-                + "FROM blog b \n"
-                + "GROUP BY MONTH(b.created_at),YEAR(b.created_at), FORMAT(b.created_at, 'MMM yyyy')";
+        String sql = " SELECT COUNT(b.id)as'total', "
+                + " MONTH(b.created_at) AS month_created, "
+                + " YEAR(b.created_at) AS year_created, "
+                + " FORMAT(b.created_at, 'MMM yyyy') AS sqlDate "
+                + " FROM blog b "
+                + " GROUP BY MONTH(b.created_at),YEAR(b.created_at), FORMAT(b.created_at, 'MMM yyyy')";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -202,8 +203,8 @@ public class BlogDAOImpl extends DBContext implements BlogDAO {
     @Override
     public List<Account> getAllAuthor() throws SQLException, ClassNotFoundException {
         List<Account> resultList = new ArrayList<>();
-        String sql = "SELECT a.id,a.full_name FROM blog b\n"
-                + "INNER JOIN account a ON b.author_id = a.id GROUP BY a.id, a.full_name";
+        String sql = "SELECT a.id,a.full_name FROM blog b "
+                + " INNER JOIN account a ON b.author_id = a.id GROUP BY a.id, a.full_name";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -237,9 +238,9 @@ public class BlogDAOImpl extends DBContext implements BlogDAO {
      */
     @Override
     public Blog getBlogById(int id) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT b.*,a.full_name FROM blog b \n"
-                + "INNER JOIN account a ON a.id = b.author_id\n"
-                + "WHERE b.id = ?";
+        String sql = "SELECT b.*,a.full_name FROM blog b "
+                + " INNER JOIN account a ON a.id = b.author_id "
+                + " WHERE b.id = ?";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -282,10 +283,10 @@ public class BlogDAOImpl extends DBContext implements BlogDAO {
     @Override
     public List<Image> getBlogImage(int blogId) throws SQLException, ClassNotFoundException {
         List<Image> list = new ArrayList<>();
-        String sql = "SELECT blog_id,image_id,i.* \n"
-                + "FROM image_blog ib\n"
-                + "INNER JOIN [image] i ON ib.image_id = i.id\n"
-                + "WHERE blog_id = ?";
+        String sql = "SELECT blog_id,image_id,i.* "
+                + " FROM image_blog ib "
+                + " INNER JOIN [image] i ON ib.image_id = i.id "
+                + " WHERE blog_id = ? ";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -311,16 +312,139 @@ public class BlogDAOImpl extends DBContext implements BlogDAO {
         }
         return list;
     }
-    //</editor-fold> 
 
-//    public static void main(String[] args) {
-//        try {
-//            BlogDAOImpl dao = new BlogDAOImpl();
-//            
-//        } catch (SQLException ex) {
-//            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    @Override
+    public void addBlog(String title, int author, String content) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO [dbo].[blog]"
+                + "           ([author_id]"
+                + "           ,[title]"
+                + "           ,[content]"
+                + "           ,[count_view]"
+                + "           ,[created_at]"
+                + "           ,[update_at])"
+                + "     VALUES"
+                + "           (?"
+                + "           ,?"
+                + "           ,?"
+                + "           ,0"
+                + "           ,?"
+                + "           ,null)";
+        LocalDate now = LocalDate.now();
+        String date = now.toString();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, author);
+            ps.setString(2, title);
+            ps.setString(3, content);
+            ps.setString(4, date);
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, e);
+            throw e;
+        } finally {
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(conn);
+        }
+    }
+
+    @Override
+    public void updateBlog(String id, String title, int author, String content) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE [dbo].[blog]"
+                + "   SET [author_id] = ?"
+                + "      ,[title] = ?"
+                + "      ,[content] = ?"
+                + "      ,[update_at] = ?"
+                + " WHERE id = ?";
+        LocalDate now = LocalDate.now();
+        String date = now.toString();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, author);
+            ps.setString(2, title);
+            ps.setString(3, content);
+            ps.setString(4, date);
+            ps.setString(5, id);
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, e);
+            throw e;
+        } finally {
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(conn);
+        }
+    }
+
+    @Override
+    public String getNewBlogId() throws SQLException, ClassNotFoundException {
+        String sql = "SELECT TOP 1 [id]"
+                + "  FROM [dbo].[blog]"
+                + "  ORDER BY id DESC";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                String id = rs.getString("id");
+                return id;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, e);
+            throw e;
+        } finally {
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(conn);
+        }
+        return "";
+    }
+
+    @Override
+    public void deleteBlog(String blogID) throws SQLException, ClassNotFoundException {
+        String sql = "DELETE FROM [image_blog] "
+                + " WHERE blog_id = " + blogID
+                + " DELETE FROM [dbo].[blog]"
+                + "      WHERE id = " + blogID;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, e);
+            throw e;
+        } finally {
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(conn);
+        }
+    }
+
+    //</editor-fold> 
+    public static void main(String[] args) {
+        try {
+            BlogDAOImpl dao = new BlogDAOImpl();
+            dao.deleteBlog("2");
+        } catch (SQLException ex) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BlogDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
