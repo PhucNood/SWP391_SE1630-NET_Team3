@@ -23,7 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *  preform method create update delete select blog in the database
  * @author stick
  */
 public class BlogDAOImpl extends DBContext implements BlogDAO {
@@ -312,7 +312,14 @@ public class BlogDAOImpl extends DBContext implements BlogDAO {
         }
         return list;
     }
-
+    /**
+     * 
+     * @param title
+     * @param author
+     * @param content
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     @Override
     public void addBlog(String title, int author, String content) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO [dbo].[blog]"
@@ -352,7 +359,15 @@ public class BlogDAOImpl extends DBContext implements BlogDAO {
             closeConnection(conn);
         }
     }
-
+    /**
+     * 
+     * @param id
+     * @param title
+     * @param author
+     * @param content
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     @Override
     public void updateBlog(String id, String title, int author, String content) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE [dbo].[blog]"
@@ -385,7 +400,12 @@ public class BlogDAOImpl extends DBContext implements BlogDAO {
             closeConnection(conn);
         }
     }
-
+    /**
+     * 
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     @Override
     public String getNewBlogId() throws SQLException, ClassNotFoundException {
         String sql = "SELECT TOP 1 [id]"
@@ -412,7 +432,12 @@ public class BlogDAOImpl extends DBContext implements BlogDAO {
         }
         return "";
     }
-
+    /**
+     * 
+     * @param blogID
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     @Override
     public void deleteBlog(String blogID) throws SQLException, ClassNotFoundException {
         String sql = "DELETE FROM [image_blog] "
