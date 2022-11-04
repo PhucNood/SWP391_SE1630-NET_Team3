@@ -78,8 +78,8 @@ public class ManageBlogController extends HttpServlet {
                 idAuthor = Integer.parseInt(idAuthorStr);
             }
 
-            blogList = blogDAO.searchBlogPage(searchTitle, searchMonth, searchYear, -1, 5, curPage);
-            int totalPage = blogDAO.getTotalSearchPage(searchTitle, searchMonth, searchYear, -1, 5);
+            blogList = blogDAO.searchBlogPage(searchTitle, searchMonth, searchYear, idAuthor, 5, curPage);
+            int totalPage = blogDAO.getTotalSearchPage(searchTitle, searchMonth, searchYear, idAuthor, 5);
             archiveList = blogDAO.getAllArchive();
             authorList = blogDAO.getAllAuthor();
 
