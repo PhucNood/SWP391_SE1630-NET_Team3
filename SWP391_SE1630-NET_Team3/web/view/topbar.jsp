@@ -174,6 +174,7 @@
                                     <div class="dropdown-menu rounded-0 m-0">
                                         <a href="information" class="dropdown-item">Edit profile</a>
                                         <a href="changepass" class="dropdown-item">Change password</a>
+                                        <a href="view/historyOrder.jsp" class="dropdown-item">History Order</a>
                                         <a href="signout" class="dropdown-item">Sign Out</a>
                                     </div>
                                 </c:if>

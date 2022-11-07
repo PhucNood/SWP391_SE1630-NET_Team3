@@ -84,6 +84,7 @@ public class ChangePassController extends HttpServlet {
         request.setAttribute("oldpass", oldPass);
         request.setAttribute("newpass", newPass);
         request.setAttribute("renewpass", reNewpass);
+        //check cac dieu kien thoa man
         if (!a.getPass().equals(oldPass) || !newPass.equals(reNewpass)) {
             request.setAttribute("mess", "Incorrect password or new password does not match.");
             request.getRequestDispatcher("view/changepass.jsp").forward(request, response);

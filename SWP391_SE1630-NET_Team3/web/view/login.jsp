@@ -122,7 +122,7 @@
 <!--                    <label><span class="sao">Required*</span></label>   -->
                     <input type="checkbox"  name ="remember" ${sessionScope.check!=null ?"checked":""} value="1"/>
                         <span>Keep me Signed In</span>
-                        <span class="forgot"><a href="${pageContext.request.contextPath}/view/recovery" style="color: #808080">Forgot Password?</a></span>
+                        <span class="forgot"><a href="${pageContext.request.contextPath}/view/recovery" style="    float: right;color: #808080">Forgot Password?</a></span>
                     </p>
                     <input class="input1 input2" type="submit" value="Login" />
 

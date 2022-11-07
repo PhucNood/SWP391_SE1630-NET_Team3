@@ -102,39 +102,14 @@
 					</li>
 				</ul>
 				
-				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
-					</div>
-
-					<div class="header-cart-buttons flex-w w-full">
-						<a href="${pageContext.request.contextPath}/view/shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart
-						</a>
-
-						<a href="${pageContext.request.contextPath}/view/shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out
-						</a>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	</div>
 
 
 	<!-- breadcrumb -->
-	<div class="container">
-		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-			<a href="${pageContext.request.contextPath}/view/index.html" class="stext-109 cl8 hov-cl1 trans-04">
-				Home
-				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-			</a>
-
-			<span class="stext-109 cl4">
-				Shoping Cart
-			</span>
-		</div>
-	</div>
+	
 		
 
 	<!-- Shoping Cart -->
@@ -150,31 +125,33 @@
 									<th class="column-2"></th>
 									<th class="column-3">Price</th>
 									<th class="column-4">Quantity</th>
-									<th class="column-5">Total</th>
+                                                                        <th class="column-5">Description</th>
+									<th class="column-6">Total</th>
 								</tr>
 
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="${pageContext.request.contextPath}/view/images/item-cart-04.jpg" alt="IMG">
+											<img src="${pageContext.request.contextPath}/view/images/AG-201.jpg" alt="IMG">
 										</div>
 									</td>
-									<td class="column-2">Fresh Strawberries</td>
+									<td class="column-2">Fury AG-201</td>
 									<td class="column-3">$ 36.00</td>
 									<td class="column-4">
 										<div class="wrap-num-product flex-w m-l-auto m-r-0">
 											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
+												
 											</div>
 
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
+											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="10">
 
 											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
+												
 											</div>
 										</div>
 									</td>
-									<td class="column-5">$ 36.00</td>
+									<td class="column-5">New</td>
+                                                                        <td class="column-6">$36.00</td>
 								</tr>
 
 								
@@ -190,9 +167,7 @@
 								</div>
 							</div>-->
 
-							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-								Update Cart
-							</div>
+							
 						</div>
 					</div>
 				</div>

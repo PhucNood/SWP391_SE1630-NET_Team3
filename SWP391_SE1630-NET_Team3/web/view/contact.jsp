@@ -56,8 +56,7 @@
                             </h4>
 
                             <div class="bor8 m-b-20 how-pos4-parent">
-                                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="Your Email Address">
-                                <img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
+                                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="Your Email Address">                               
                             </div>
 
                             <div class="bor8 m-b-30">
@@ -82,7 +81,7 @@
                                 </span>
 
                                 <p class="stext-115 cl6 size-213 p-t-18">
-                                    Đất Thổ Cư Hòa Lạc, Km29 Đường Cao Tốc 08, Thạch Hoà, Thạch Thất, Hà Nội 10000, Việt Nam
+                                    Đất Thổ Cư Hòa Lạc, Km29 Đường Cao Tốc 08, Thạch Hoà, Thạch Thất, Hà Nội 1630, Việt Nam
                                 </p>
                             </div>
                         </div>
@@ -98,7 +97,7 @@
                                 </span>
 
                                 <p class="stext-115 cl1 size-213 p-t-18">
-                                    (024) 7308.13.13
+                                    (084) 1630.03.13
                                 </p>
                             </div>
                         </div>
@@ -110,11 +109,11 @@
 
                             <div class="size-212 p-t-2">
                                 <span class="mtext-110 cl2">
-                                    Sale Support
+                                    Support
                                 </span>
 
                                 <p class="stext-115 cl1 size-213 p-t-18">
-                                    hoalacbillar@example.com
+                                    SE1630G3@gmail.com
                                 </p>
                             </div>
                         </div>

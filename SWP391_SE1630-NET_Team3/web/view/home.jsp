@@ -1295,52 +1295,7 @@
                 </div>
 
                 <div class="row">
-                    <c:forEach items="${newBlogs}" var="b">
-                        <div class="col-sm-6 col-md-4 p-b-40">
-                            <div class="blog-item">
-                                <div class="hov-img0">
-                                    <a href="BlogDetail?id=${b.getId()}">
-                                        <img src="${pageContext.request.contextPath}/view/images/${b.getListImg().get(0).getImgSource()}" alt="${b.getListImg().get(0).getName()}">
-                                    </a>
-                                </div>
-
-                                <div class="p-t-15">
-                                    <div class="stext-107 flex-w p-b-14">
-                                        <span class="m-r-3">
-                                            <span class="cl4">
-                                                By
-                                            </span>
-
-                                            <span class="cl5">
-                                                ${b.getAuthorName()}
-                                            </span>
-                                        </span>
-
-                                        <span>
-                                            <span class="cl4">
-                                                on
-                                            </span>
-
-                                            <span class="cl5">
-                                                ${b.getCreateAt()}
-                                            </span>
-                                        </span>
-                                    </div>
-
-                                    <h4 class="p-b-12">
-                                        <a href="BlogDetail?id=${b.getId()}" class="mtext-101 cl2 hov-cl1 trans-04">
-                                            ${b.getTitle()}
-                                        </a>
-                                    </h4>
-
-                                    <p class="stext-108 cl6">
-                                        ${b.getContent()}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </c:forEach>
+                   
 
                 </div>
             </div>

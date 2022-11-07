@@ -101,7 +101,7 @@ public class LoginController extends HttpServlet {
                         session.removeAttribute("pass");
                         session.removeAttribute("check");
                     }
-                    request.getRequestDispatcher("view/home.jsp").forward(request, response);
+                    response.sendRedirect("home");
                 } else {
                     session.setAttribute("fail", "Incorrect email or password!");
                     request.getRequestDispatcher("view/login.jsp").forward(request, response);

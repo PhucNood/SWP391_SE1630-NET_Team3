@@ -178,7 +178,8 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
     }
 
     @Override
-    public void UpdateInfo(String email, String phone, String fullname, String user) {
+    
+    public void UpdateInfo(String email, String phone, String fullname, String user, String address) {
         String sql = "UPDATE [dbo].[account]\n"
                 + "   SET [phone] = ?\n"
                 + "      ,[full_name] = ?\n"
@@ -191,7 +192,8 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
             ps.setString(1, phone);
             ps.setString(2, fullname);
             ps.setString(3, user);
-            ps.setString(4, email);
+            ps.setString(4, address);
+            ps.setString(5, email);
             ps.executeUpdate();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);

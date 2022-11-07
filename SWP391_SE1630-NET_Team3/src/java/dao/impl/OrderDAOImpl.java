@@ -108,13 +108,7 @@ public class OrderDAOImpl extends DBContext implements OrderDAO {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        OrderDAOImpl dao = new OrderDAOImpl();
-
-        for (Order order : dao.getOrders()) {
-            System.out.println(order);
-        }
-    }
+    
+    
 
 }
