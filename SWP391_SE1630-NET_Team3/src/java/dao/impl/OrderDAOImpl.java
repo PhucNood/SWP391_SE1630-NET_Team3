@@ -8,11 +8,14 @@ import dao.OrderDAO;
 import entity.Account;
 import entity.Cart;
 import entity.Item;
+import entity.Order;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,6 +24,56 @@ import java.util.logging.Logger;
  * @author admin
  */
 public class OrderDAOImpl extends DBContext implements OrderDAO {
+
+    public List<Order> getOrder(String status, String search) throws ClassNotFoundException, SQLException {
+        List<Order> listOrder = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            LocalDate now = LocalDate.now();
+            String date = now.toString();
+            //insert new order to order table
+            String sql = "SELECT *"
+                    + "  FROM [dbo].[order] where 1=1 ";
+            if(!status.equals("0")){
+                sql+= " and status = "+status;
+            }
+            if(!search.trim().equals("")){
+                sql+= "and ( email like '%"+search+"%' "
+                        + "or full_name like '%"+search+"%' "
+                        + "or phone like '%"+search+"%' "
+                        + "or address like '%"+search+"%')";
+            }
+            
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            rs= ps.executeQuery();
+            while(rs.next()){
+                Order oder = new Order(rs.getInt("id"), 
+                        rs.getInt("account_id"),
+                        rs.getString("full_name"), 
+                        rs.getString("email"), 
+                        rs.getString("phone"), 
+                        rs.getString("address"), 
+                        rs.getString("note"), 
+                        rs.getString("status"), rs.getString("created_at"), rs.getString("update_at"));
+                listOrder.add(oder);
+            }
+            
+            return listOrder;
+
+            
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePrepareState(ps);
+            closeConnection(con);
+        }
+    }
 
     @Override
     public void addOrder(int accountID, String fullname, String email,

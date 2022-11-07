@@ -84,7 +84,7 @@ public class AddToCartController extends HttpServlet {
                 n = 0;
             }
             session.setAttribute("size", n);
-            request.getRequestDispatcher("view/shop.jsp").forward(request, response);
+            response.sendRedirect("shop");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(AddToCartController.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("errorMessage", ex.getMessage());
