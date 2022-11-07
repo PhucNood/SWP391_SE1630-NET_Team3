@@ -82,6 +82,9 @@ public class EditBlogController extends HttpServlet {
             String description = request.getParameter("description");
             String author = request.getParameter("author");
             String img = request.getParameter("imgFile");
+            if(img!=null){
+                img=oldImg;
+            }
 
             ImageDAO ImageDAO = new ImageDAOImpl();
             String imageId = ImageDAO.getImageID(img);

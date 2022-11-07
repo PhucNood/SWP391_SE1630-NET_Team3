@@ -325,6 +325,7 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
     }
 
     //update info of product
+    @Override
     public void updateProduct(String name, String description,
             String size, String categoryID, String brandID,
             String quantity, String price, String sale, String productID) throws ClassNotFoundException, SQLException {

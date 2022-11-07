@@ -5,6 +5,7 @@
 
 package controller;
 
+import dao.BlogDAO;
 import dao.HomeDAO;
 import dao.impl.BlogDAOImpl;
 import dao.impl.HomeDAOImpl;
@@ -65,10 +66,10 @@ public class HomeController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("inPage", "home");
             HomeDAO homeDAOImpl = new HomeDAOImpl();
-            
+            BlogDAO BlogDAO = new BlogDAOImpl();
             request.setAttribute("products", new ProductDAOImpl().getAllProduct());
             request.setAttribute("listNewProduct", homeDAOImpl.getNewProductsEachCategory());
-            request.setAttribute("newBlogs", new BlogDAOImpl().searchBlogPage("", -1, -1,-1, 3, 1));
+            request.setAttribute("newBlogs", BlogDAO.searchBlogPage("", -1, -1,-1, 0, 0));
             request.getRequestDispatcher("view/home.jsp").forward(request, response);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
