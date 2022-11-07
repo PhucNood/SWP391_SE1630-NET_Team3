@@ -1,10 +1,6 @@
 /*
- * Copyright(C).
- * Transport and Information Network
- *
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-10-18      1.0                 LongLH           First Implement
- * 
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller;
 
@@ -14,17 +10,23 @@ import dao.impl.BlogDAOImpl;
 import dao.impl.ImageDAOImpl;
 import dao.impl.Image_BlogDAOImpl;
 import entity.Account;
+import jakarta.servlet.ServletContext;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -83,6 +85,7 @@ public class addBlogController extends HttpServlet {
             String description = request.getParameter("description");
             String author = request.getParameter("author");
             String img = request.getParameter("imgFile");
+
             
             ImageDAO ImageDAO = new ImageDAOImpl();
             ImageDAO.addImage("", img);

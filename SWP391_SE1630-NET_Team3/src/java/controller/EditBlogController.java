@@ -1,10 +1,6 @@
 /*
- * Copyright(C).
- * Transport and Information Network
- *
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-10-18      1.0                 LongLH           First Implement
- * 
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller;
 
@@ -54,7 +50,6 @@ public class EditBlogController extends HttpServlet {
             Blog blog = BlogDAO.getBlogById(Integer.parseInt(blogID));
             request.setAttribute("authorList", authorList);
             request.setAttribute("blog", blog);
-            request.setAttribute("img", blog.getFirstImgSrc());
             request.getRequestDispatcher("view/editBlog.jsp").forward(request, response);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(EditBlogController.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,6 +71,7 @@ public class EditBlogController extends HttpServlet {
             String blogID = request.getParameter("blogID");
             BlogDAO BlogDAO = new BlogDAOImpl();
             Blog blog = BlogDAO.getBlogById(Integer.parseInt(blogID));
+            String oldImg = String.valueOf(blog.getListImg().get(0).getId());
 
             dao.BlogDAO blogDAO;
             List<Account> authorList = new ArrayList<>();
@@ -86,9 +82,12 @@ public class EditBlogController extends HttpServlet {
             String description = request.getParameter("description");
             String author = request.getParameter("author");
             String img = request.getParameter("imgFile");
-            System.out.println("img: "+img);
+
             ImageDAO ImageDAO = new ImageDAOImpl();
             String imageId = ImageDAO.getImageID(img);
+            if(img!=null || img.trim().equals("")){
+                imageId=oldImg;
+            }
             blogDAO.updateBlog(blogID, blogTitle, Integer.parseInt(author), description);
             Image_BlogDAO Image_BlogDAO = new Image_BlogDAOImpl();
             Image_BlogDAO.deleteImage_Blog( blogID);
@@ -106,12 +105,8 @@ public class EditBlogController extends HttpServlet {
             request.getRequestDispatcher("view/error.jsp").forward(request, response);
         } catch (ServletException | IOException | NumberFormatException ex) {
             Logger.getLogger(addBlogController.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("errorMessage: ", ex.getMessage());
-            request.getRequestDispatcher("view/error.jsp").forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(addBlogController.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("errorMessage: ", ex.getMessage());
-            request.getRequestDispatcher("view/error.jsp").forward(request, response);
         }
     }
 

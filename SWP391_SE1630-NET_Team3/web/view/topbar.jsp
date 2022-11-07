@@ -139,6 +139,7 @@
                                         </c:if>
                                         <a href="${pageContext.request.contextPath}/manageProduct" class="dropdown-item">Manage Product</a>
                                         <a href="${pageContext.request.contextPath}/ManageBlog" class="dropdown-item">Manage Blog</a>
+                                        <a href="${pageContext.request.contextPath}/manageShopOrder" class="dropdown-item">Manage Order</a>
 
                                     </div>
 

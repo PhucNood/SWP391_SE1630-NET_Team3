@@ -409,9 +409,9 @@
                                                     <p><fmt:formatNumber pattern="###,###,###.##" value="${(o.product.price*(100-o.product.sale)*10)*o.quantity}"/></p>
                                                 </td>
                                                 <td class ="cart_total" style="text-align: center">
-                                                    <form action="updown" method="post">
+                                                    <form action="updown" method="post" id="frmSub">
                                                         <input type="hidden" name="id" value="${o.product.productID}"/>
-                                                        <button style="font-size:24px; color: black" class="fa" type="submit" value="Delete">&#xf014;</button>
+                                                        <button style="font-size:24px; color: black" class="fa" onclick="alertUser()" value="Delete" >&#xf014;</button>
                                                     </form>
                                                 </td>
 
@@ -439,6 +439,12 @@
             function reloadnumber(id) {
                 var x = document.getElementById("inputnumber" + id).value;
                 window.location.href = "inputQuantityInCart?num=" + x + "&id=" + id;
+            }
+            function alertUser() {
+                var option = confirm('Are you sure to delete?');
+                if (option === true) {
+                    document.getElementById("frmSub").submit();
+                }
             }
         </script>
         <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
