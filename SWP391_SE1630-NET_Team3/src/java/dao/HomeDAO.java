@@ -7,11 +7,12 @@ package dao;
 import entity.Category;
 import entity.Product;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
  * @author ACER
  */
 public interface HomeDAO {
-    public HashMap<Category,Product> getNewProductsEachCategory();
+    public List<Product> getNewProductsEachCategory();
 }

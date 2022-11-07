@@ -306,7 +306,7 @@
                         </div>
                     </div>
 
-                    
+
                 </div>
             </div>
         </section>
@@ -316,18 +316,25 @@
         <div class="sec-banner bg0 p-t-80 p-b-50">
             <div class="container">
                 <div class="row">
+                    <c:set var="tt" value="0"/>
                     <c:forEach items="${listNewProduct}" var="p">
+                        <c:set var="tt" value="${tt+1}"/>
                         <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                             <!-- Block1 -->
-
+                            <c:set var="img" value=""/>
+                            <c:forEach begin="0" end="0" var="j" items="${p.list}">
+                                <c:set var="img" value="${j.imgSource}"/>
+                            </c:forEach>
                             <div class="block1 wrap-pic-w">
-                                <img height="400" src="${pageContext.request.contextPath}/view/images/${p.value.getList().get(0).getImgSource()}" alt="IMG-BANNER">
+                                <img height="400" src="${pageContext.request.contextPath}/view/images/${img}" alt="IMG-BANNER">
 
-                                <a href="productdetail?productID=${p.value.getProductID()}" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+                                <a href="productdetail?productID=${p.productID}" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 
                                     <div class="block1-txt-child1 flex-col-l">
                                         <span class="block1-name ltext-102 trans-04 p-b-8">
-                                            ${p.key.getTitle()}
+                                            <c:if test="${tt==1}">Cues</c:if>
+                                            <c:if test="${tt==2}">Ball Sets</c:if>
+                                            <c:if test="${tt==3}">Table</c:if>
                                         </span>
 
                                         <span class="block1-info stext-102 trans-04">
@@ -368,17 +375,7 @@
                             <a class="nav-link active" data-toggle="tab" href="${pageContext.request.contextPath}/view/#best-seller" role="tab">Best Seller</a>
                         </li>
 
-                        <!--					<li class="nav-item p-b-10">
-                                                                        <a class="nav-link" data-toggle="tab" href="${pageContext.request.contextPath}/view/#featured" role="tab">Featured</a>
-                                                                </li>
                         
-                                                                <li class="nav-item p-b-10">
-                                                                        <a class="nav-link" data-toggle="tab" href="${pageContext.request.contextPath}/view/#sale" role="tab">Sale</a>
-                                                                </li>
-                        
-                                                                <li class="nav-item p-b-10">
-                                                                        <a class="nav-link" data-toggle="tab" href="${pageContext.request.contextPath}/view/#top-rate" role="tab">Top Rate</a>
-                                                                </li>-->
                     </ul>
 
                     <!-- Tab panes -->
@@ -388,12 +385,16 @@
                             <!-- Slide2 -->
                             <div class="wrap-slick2">
                                 <div class="slick2">
-                                    <c:forEach items="${products}" var="p" >
+                                    <c:forEach items="${allProduct}" var="p" >
+                                        <c:set var="img" value=""/>
+                                        <c:forEach begin="0" end="0" var="j" items="${p.list}">
+                                            <c:set var="img" value="${j.imgSource}"/>
+                                        </c:forEach>
                                         <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
                                             <!-- Block2 -->
                                             <div class="block2">
                                                 <div class="block2-pic hov-img0">
-                                                    <a href="${pageContext.request.contextPath}/productdetail?productID=${p.getProductID()}"><img src="${pageContext.request.contextPath}/view/images/${p.getList().get(0).getImgSource()}" alt="IMG-${p.getList().get(0).getName()}">
+                                                    <a href="${pageContext.request.contextPath}/productdetail?productID=${p.productID}"><img src="${pageContext.request.contextPath}/view/images/${img}">
                                                     </a>
 
 
@@ -401,12 +402,12 @@
 
                                                 <div class="block2-txt flex-w flex-t p-t-14">
                                                     <div class="block2-txt-child1 flex-col-l ">
-                                                        <a href="${pageContext.request.contextPath}/productdetail?productID=${p.getProductID()}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                            ${p.getName()}
+                                                        <a href="${pageContext.request.contextPath}/productdetail?productID=${p.productID}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                                            ${p.name}
                                                         </a>
 
                                                         <span class="stext-105 cl3">
-                                                            $${p.getPrice()}
+                                                            $${p.price}
                                                         </span>
                                                     </div>
 
@@ -1275,7 +1276,7 @@
                             <div class="blog-item">
                                 <div class="hov-img0">
                                     <a href="BlogDetail?id=${b.getId()}">
-                                        <img src="${pageContext.request.contextPath}/view/images/${b.getListImg().get(0).getImgSource()}" alt="${b.getListImg().get(0).getName()}">
+                                        <img style="width: 370px; height: 310px" src="${pageContext.request.contextPath}/view/images/${b.getListImg().get(0).getImgSource()}" alt="${b.getListImg().get(0).getName()}">
                                     </a>
                                 </div>
 
@@ -1332,7 +1333,7 @@
         <script src="${pageContext.request.contextPath}/view/js/slick-custom.js"></script>
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/vendor/parallax100/parallax100.js"></script>
-        
+
         <!--===============================================================================================-->
         <script src="${pageContext.request.contextPath}/view/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
     </body>

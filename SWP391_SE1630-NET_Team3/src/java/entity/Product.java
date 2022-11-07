@@ -5,6 +5,7 @@
 package entity;
 
 import java.util.List;
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
 
 /**
  *
@@ -48,7 +49,9 @@ public class Product {
     
     
     
-    
+    public String getFirstImg(){
+        return list.get(0).getImgSource();
+    }
     
     public List<Image> getList() {
         return list;
