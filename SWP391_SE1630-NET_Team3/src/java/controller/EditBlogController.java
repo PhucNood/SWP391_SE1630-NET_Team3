@@ -76,6 +76,7 @@ public class EditBlogController extends HttpServlet {
             String blogID = request.getParameter("blogID");
             BlogDAO BlogDAO = new BlogDAOImpl();
             Blog blog = BlogDAO.getBlogById(Integer.parseInt(blogID));
+            int oldImgID = blog.getListImg().get(0).getId();
 
             dao.BlogDAO blogDAO;
             List<Account> authorList = new ArrayList<>();
@@ -86,7 +87,7 @@ public class EditBlogController extends HttpServlet {
             String description = request.getParameter("description");
             String author = request.getParameter("author");
             String img = request.getParameter("imgFile");
-
+            
             
 
 
@@ -95,6 +96,9 @@ public class EditBlogController extends HttpServlet {
             blogDAO.updateBlog(blogID, blogTitle, Integer.parseInt(author), description);
             Image_BlogDAO Image_BlogDAO = new Image_BlogDAOImpl();
             Image_BlogDAO.deleteImage_Blog( blogID);
+            if(img == null || img.equals("")){
+                imageId = String.valueOf(oldImgID);
+            }
             Image_BlogDAO.addImage_Blog(imageId, blogID);
 
             request.setAttribute("messsucc", "Update Blog Success!");

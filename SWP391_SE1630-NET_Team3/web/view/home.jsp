@@ -271,7 +271,7 @@
 
                                 <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
 
-                                    <a href="${pageContext.request.contextPath}/view/product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                                    <a href="${pageContext.request.contextPath}/shop" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 
                                         Shop Now
                                     </a>
@@ -297,7 +297,7 @@
 
                                 <div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
 
-                                    <a href="${pageContext.request.contextPath}/view/product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                                    <a href="${pageContext.request.contextPath}/shop" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 
                                         Shop Now
                                     </a>
@@ -1275,7 +1275,7 @@
                             <div class="blog-item">
                                 <div class="hov-img0">
                                     <a href="BlogDetail?id=${b.getId()}">
-                                        <img src="${pageContext.request.contextPath}/view/images/${b.getListImg().get(0).getImgSource()}" alt="${b.getListImg().get(0).getName()}">
+                                        <img style="width: 370px; height: 310px" src="${pageContext.request.contextPath}/view/images/${b.getListImg().get(0).getImgSource()}" alt="${b.getListImg().get(0).getName()}">
                                     </a>
                                 </div>
 

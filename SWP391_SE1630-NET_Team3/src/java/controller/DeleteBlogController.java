@@ -45,7 +45,7 @@ public class DeleteBlogController extends HttpServlet {
             String blogID = request.getParameter("blogID");
             BlogDAO BlogDAO = new BlogDAOImpl();
             BlogDAO.deleteBlog(blogID);
-            session.setAttribute("messsucc", "Delete Blog Success!");
+            request.setAttribute("messsucc", "Delete Blog Success!");
             response.sendRedirect("ManageBlog");
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DeleteBlogController.class.getName()).log(Level.SEVERE, null, ex);

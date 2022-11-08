@@ -333,7 +333,7 @@
                                 </c:forEach> 
                                 <div class="form-group" >
                                     <label>Image</label>
-                                    <input  onchange="previewFile()" type="file" name="imgFile" class="form-control" required value="view/images/${img}" src="view/images/${img}">
+                                    <input  onchange="previewFile()" type="file" name="imgFile" class="form-control" value="view/images/${img}" src="view/images/${img}">
                                     <img class="change-img" src="view/images/${img}" height="200" alt="Image preview...">
                                 </div>
                             </div>

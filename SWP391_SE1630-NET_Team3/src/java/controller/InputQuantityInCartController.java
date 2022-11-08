@@ -97,8 +97,7 @@ public class InputQuantityInCartController extends HttpServlet {
             }
             //get product list with filter
             listProduct = ProductDAO.getProduct(categoryID, brandID, filterID, sortID);
-            
-            
+
             ProductDAO d = new ProductDAOImpl();
             //get all product list
             List<Product> list = d.getProduct("0", "0", "0", "0");
@@ -123,23 +122,23 @@ public class InputQuantityInCartController extends HttpServlet {
             int numStore = p.getQuantity();
             id = Integer.parseInt(id_raw);
             num = Integer.parseInt(num_raw);
-            double price = p.getPrice();
             //update quantity of product in cart
-            Item t = new Item(p, -cart.getQuantityById(id));
-            cart.addItem(t);
+
             //remove product if quantity < 0
             if (num <= 0) {
-                cart.removeItem(id);
+
             } else {
+                Item t = new Item(p, -cart.getQuantityById(id));
+                cart.addItem(t);
                 if (num > numStore) {
                     num = numStore;
-                    request.setAttribute("maximum", "There are "+numStore+" products left in stock");
+                    request.setAttribute("maximum", "There are " + numStore + " products left in stock");
                     request.setAttribute("OutId", id_raw);
                 }
                 t = new Item(p, num);
                 cart.addItem(t);
             }
-            
+
             //update cart on cookie
             List<Item> items = cart.getItems();
             txt = "";
@@ -161,7 +160,7 @@ public class InputQuantityInCartController extends HttpServlet {
             Cookie c = new Cookie("cart", txt);
             c.setMaxAge(24 * 2 * 60 * 60);
             response.addCookie(c);
-            
+
             //sort cart by filter
             Cart newCart = cart.sortCartByListPoduct(listProduct);
             session.setAttribute("categoryID", categoryID);

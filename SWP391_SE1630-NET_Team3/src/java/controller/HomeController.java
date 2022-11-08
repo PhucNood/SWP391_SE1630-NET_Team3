@@ -69,7 +69,7 @@ public class HomeController extends HttpServlet {
             BlogDAO BlogDAO = new BlogDAOImpl();
             request.setAttribute("products", new ProductDAOImpl().getAllProduct());
             request.setAttribute("listNewProduct", homeDAOImpl.getNewProductsEachCategory());
-            request.setAttribute("newBlogs", BlogDAO.searchBlogPage("", -1, -1,-1, 0, 0));
+            request.setAttribute("newBlogs", BlogDAO.searchBlogPage("", -1, -1,-1, 3, 1));
             request.getRequestDispatcher("view/home.jsp").forward(request, response);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);

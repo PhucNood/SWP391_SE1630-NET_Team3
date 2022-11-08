@@ -409,9 +409,11 @@
                                                     <p><fmt:formatNumber pattern="###,###,###.##" value="${(o.product.price*(100-o.product.sale)*10)*o.quantity}"/></p>
                                                 </td>
                                                 <td class ="cart_total" style="text-align: center">
-                                                    <form action="updown" method="post">
+                                                    <form id="frmSub" action="updown" method="post">
                                                         <input type="hidden" name="id" value="${o.product.productID}"/>
-                                                        <button style="font-size:24px; color: black" class="fa" type="submit" value="Delete">&#xf014;</button>
+                                                        <a href="#" onclick="alertUser()" class="delete" data-toggle="modal">
+                                                            <i style="font-size:24px; color: black" class="fa">&#xf014;</i>
+                                                        </a>
                                                     </form>
                                                 </td>
 
@@ -426,16 +428,24 @@
                         <div class=" relative" style="margin-top: 30px">
                             <h3 class="absolute1" style="color: #999999;clear: both; margin-left: 0px; display: block">Total money:</h3>
                             <h3 class="absolute3"><fmt:formatNumber pattern="###,###,###.##" value="${i.totalMoney}"/> VNÐ</h3>
-                            <a type="button" href="checkout?total=${i.totalMoney}" class="btn btn-success absolute2" data-dismiss="modal">Click To Buy</a>
+                            <c:if test="${i.totalMoney > 0}">
+                                <a type="button" href="checkout?total=${i.totalMoney}" class="btn btn-success absolute2" data-dismiss="modal">Click To Buy</a>
+                            </c:if>
                         </div>
                     </div>
             </div>
 
         </div>
-                        <div style="height: 100px"></div>                          
+        <div style="height: 100px"></div>                          
         <jsp:include page="footer.jsp"/>
 
         <script type="text/javascript">
+            function alertUser() {
+                var option = confirm('Are you sure to delete?');
+                if (option === true) {
+                    document.getElementById("frmSub").submit();
+                }
+            }
             function reloadnumber(id) {
                 var x = document.getElementById("inputnumber" + id).value;
                 window.location.href = "inputQuantityInCart?num=" + x + "&id=" + id;
