@@ -7,9 +7,11 @@ package controller;
 
 import dao.BlogDAO;
 import dao.HomeDAO;
+import dao.ProductDAO;
 import dao.impl.BlogDAOImpl;
 import dao.impl.HomeDAOImpl;
 import dao.impl.ProductDAOImpl;
+import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,6 +20,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,8 +69,10 @@ public class HomeController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("inPage", "home");
             HomeDAO homeDAOImpl = new HomeDAOImpl();
+
             BlogDAO BlogDAO = new BlogDAOImpl();
             request.setAttribute("products", new ProductDAOImpl().getAllProduct());
+
             request.setAttribute("listNewProduct", homeDAOImpl.getNewProductsEachCategory());
             request.setAttribute("newBlogs", BlogDAO.searchBlogPage("", -1, -1,-1, 3, 1));
             request.getRequestDispatcher("view/home.jsp").forward(request, response);

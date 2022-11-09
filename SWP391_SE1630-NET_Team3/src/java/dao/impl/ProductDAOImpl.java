@@ -462,8 +462,14 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
     }
 
     public static void main(String[] args) {
-        ProductDAOImpl d = new ProductDAOImpl();
-//        List<Product> listProduct = d.searchListProduct("mit");
+        try {
+            ProductDAOImpl d = new ProductDAOImpl();
+            List<Product> listProduct = d.getProduct("0", "0", "0", "0");
+            for(Product p : listProduct){
+                for(Image i : p.getList()){
+                    System.out.println(i.getImgSource());
+                }
+            }
 //        System.out.println(listProduct.get(1));
 //
 //        Product p = d.getProductById("1");
@@ -471,7 +477,12 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
 
 //        d.deleteProductDetail("1");
 //        System.out.println(d.getIdOfProduct());
-        //System.out.println(d.getProductById("1"));
+//System.out.println(d.getProductById("1"));
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
