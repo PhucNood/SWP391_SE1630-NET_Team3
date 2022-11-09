@@ -16,8 +16,8 @@
     <body>
         <jsp:include page="topbar.jsp"/>
         <a href="#"></a>
-        
-            <div class="container">
+
+        <div class="container">
             <div id="addEmployeeModal" class="">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="form-group" >
                                     <label>Image</label>
-                                    <input  onchange="previewFile()" type="file" name="imgFile" class="form-control" value="view/images/${img}">
+                                    <input  onchange="previewFile()" required="" type="file" name="imgFile" class="form-control" value="view/images/${img}">
                                     <img class="change-img" src="view/images/${img}" height="200" alt="Image preview...">
                                 </div>
                             </div>
@@ -59,24 +59,24 @@
                 </div>
             </div>
         </div>
-        
+
         <jsp:include page="footer.jsp"/>
         <script src="${pageContext.request.contextPath}/view/js/main.js"></script>
         <script src="${pageContext.request.contextPath}/view/js/previewImg.js"></script>
         <script>
-            function previewFile() {
-                var preview = document.querySelector('.change-img');
-                var file = document.querySelector('input[type=file]').files[0];
-                var reader = new FileReader();
-                reader.onloadend = function () {
-                    preview.src = reader.result;
-                };
-                if (file) {
-                    reader.readAsDataURL(file);
-                } else {
-                    preview.src = "";
-                }
-            }
+                                    function previewFile() {
+                                        var preview = document.querySelector('.change-img');
+                                        var file = document.querySelector('input[type=file]').files[0];
+                                        var reader = new FileReader();
+                                        reader.onloadend = function () {
+                                            preview.src = reader.result;
+                                        };
+                                        if (file) {
+                                            reader.readAsDataURL(file);
+                                        } else {
+                                            preview.src = "";
+                                        }
+                                    }
         </script>
     </body>
 </html>
