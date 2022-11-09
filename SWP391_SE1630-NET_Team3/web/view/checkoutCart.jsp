@@ -193,7 +193,7 @@
                                 <span style="margin-left: 10px; color: red">(*)</span>
 
                                 <div class="bor8 bg0 m-b-12">
-                                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="mail" value="${account.email}">
+                                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="email" value="${account.email}">
                                 </div>
 
                                 <span class="stext-112 cl8">

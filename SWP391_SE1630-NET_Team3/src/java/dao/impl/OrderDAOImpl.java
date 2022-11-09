@@ -5,14 +5,19 @@
 package dao.impl;
 
 import dao.OrderDAO;
-import entity.Account;
+import dao.ProductDAO;
 import entity.Cart;
 import entity.Item;
+import entity.Order;
+import entity.OrderDetail;
+import entity.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,9 +59,9 @@ public class OrderDAOImpl extends DBContext implements OrderDAO {
             ps.setString(4, phone);
             ps.setString(5, address);
             ps.setString(6, note);
-            ps.setString(7, "1");
+            ps.setString(7, "Confirm");
             ps.setString(8, date);
-            ps.setString(9, null);
+            ps.setString(9, date);
             ps.executeUpdate();
 
             //get id of new order
@@ -111,8 +116,147 @@ public class OrderDAOImpl extends DBContext implements OrderDAO {
         }
     }
 
+    @Override
+    public List<Order> getOrderList(String accountID,String status, String search) throws ClassNotFoundException, SQLException {
+        List<Order> orderList = new ArrayList<>();
+        try {
+            Connection con = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            String sql = "SELECT *"
+                    + "  FROM [dbo].[order] where 1=1 ";
+            if(!accountID.equals("")){
+                sql += " and account_id = '"+accountID+"' ";
+            }
+            if (!status.equals("")) {
+                sql += " and status = '" + status + "' ";
+            }
+            if (!search.equals("")) {
+                sql += " and (full_name like '%" + search + "%' or email like '%" + search + "%' "
+                        + "or phone like '%" + search + "%' or address like '%" + search + "%' or note like '%" + search + "%') ";
+            }
+            sql+=" order by update_at desc";
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Order order = new Order(rs.getInt("id"),
+                        rs.getInt("account_id"),
+                        rs.getString("full_name"),
+                        rs.getString("email"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
+                        rs.getString("note"),
+                        rs.getString("status"),
+                        rs.getString("created_at"),
+                        rs.getString("update_at")
+                );
+                orderList.add(order);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        return orderList;
+    }
+
+    @Override
+    public Order getOrderById(String id) throws ClassNotFoundException, SQLException {
+        try {
+            Connection con = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            String sql = "SELECT *"
+                    + "  FROM [dbo].[order] where id=" + id;
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Order order = new Order(rs.getInt("id"),
+                        rs.getInt("account_id"),
+                        rs.getString("full_name"),
+                        rs.getString("email"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
+                        rs.getString("note"),
+                        rs.getString("status"),
+                        rs.getString("created_at"),
+                        rs.getString("update_at")
+                );
+                return order;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        return null;
+    }
+
+    @Override
+    public void updateStatus(String id, String status) throws ClassNotFoundException, SQLException {
+        try {
+            String sql = "UPDATE [dbo].[order]"
+                    + "   SET [status] = ?"
+                    + "      ,[update_at] = ?"
+                    + " WHERE id = " + id;
+            Connection con = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+
+            LocalDate now = LocalDate.now();
+            String date = now.toString();
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, status);
+            ps.setString(2, date);
+            ps.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
+
+    @Override
+    public List<OrderDetail> getOrderDetailListByOrderId(String orderID) throws ClassNotFoundException, SQLException {
+        List<OrderDetail> orderDetailList = new ArrayList<>();
+        try {
+            ProductDAO ProductDAO = new ProductDAOImpl();
+            String sql = "SELECT [order_id]"
+                    + "      ,[product_id]"
+                    + "      ,[quantity]"
+                    + "      ,[feedback_id]"
+                    + "      ,[created_at]"
+                    + "      ,[updated_at]"
+                    + "  FROM [dbo].[order_detail] where order_id = " + orderID;
+            Connection con = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+
+            con = getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = ProductDAO.getProductById(rs.getString("product_id"));
+                OrderDetail orderDetail = new OrderDetail(rs.getInt("order_id"),
+                        product, rs.getInt("quantity"),
+                        rs.getInt("feedback_id"), rs.getString("created_at"),
+                        rs.getString("updated_at"));
+                orderDetailList.add(orderDetail);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        return orderDetailList;
+    }
+
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         OrderDAO d = new OrderDAOImpl();
+        List<OrderDetail> list = d.getOrderDetailListByOrderId("1");
+        System.out.println(list.size());
+//        List<Order> list = d.getAllOrder();
+//        System.out.println(list.size());
 //        LocalDate now = LocalDate.now();
 //        String date = now.toString();
 //        System.out.println(date);

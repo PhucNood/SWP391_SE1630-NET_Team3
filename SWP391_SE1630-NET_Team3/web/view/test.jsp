@@ -16,21 +16,20 @@
     </body>
 </html>
 
-if (path.length > 2 && !uri.endsWith("home")) {
-                String link = "";
-                for (int i = 0; i < path.length - 2; i++) {
-                    link += "../";
-                }
-                req.getRequestDispatcher(link + "home").forward(request, response);
-            } else {
-                if (account == null) {
-                    urlList = FilterDAO.urlListForGuest();
-                } else {
-                    urlList = FilterDAO.urlListWithRole(String.valueOf(account.getRole()));
-                }
-                if (!checkInURLList(uri, urlList)) {
-                    req.getRequestDispatcher("home").forward(request, response);
-                } else {
-                    req.getRequestDispatcher(uri).forward(request, response);
-                }
-            }
+<c:if test="${o.status == 'Confirm' && (account.role == 1 || account.role == 2)}">
+                                                <td class ="cart_total" style="text-align: center; ">
+                                                    <button class="btn btn1">
+                                                        <a href="updateStatus?id=${o.orderID}">Confirm</a>
+                                                    </button>
+                                                </td>
+                                            </c:if>
+                                            <c:if test="${o.status == 'Delivering' && account.role == 3}">
+                                                <td class ="cart_total" style="text-align: center; ">
+                                                    <button class="btn btn1">
+                                                        <a href="updateStatus?id=${o.orderID}">Received</a>
+                                                    </button>
+                                                    <button class="btn btn1">
+                                                        <a href="updateStatus?id=${o.orderID}">Cancle</a>
+                                                    </button>
+                                                </td>
+                                            </c:if>

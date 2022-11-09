@@ -127,7 +127,7 @@
 
                                 </li>
 
-                                <%--<c:if test="${account !=null && (account.role == 1 || account.role == 2  )}">--%>
+                                <c:if test="${account !=null && (account.role == 1 || account.role == 2  )}">
                                     <li class="${inPage == "manage" ? "active-menu" :""}">
 
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -139,11 +139,11 @@
                                         </c:if>
                                         <a href="${pageContext.request.contextPath}/manageProduct" class="dropdown-item">Manage Product</a>
                                         <a href="${pageContext.request.contextPath}/ManageBlog" class="dropdown-item">Manage Blog</a>
-
+                                        <a href="${pageContext.request.contextPath}/manageOrderShop" class="dropdown-item">Manage Orders</a>
                                     </div>
 
                                 </li>
-                                <%--</c:if>--%>
+                                </c:if>
                             </ul>
                         </div>	
 
@@ -183,6 +183,7 @@
                                         <b> ${account.user}${acc.role==1 ? "(Admin)" : ""}</b>
                                     </a>
                                     <div class="dropdown-menu rounded-0 m-0">
+                                        <a href="myOrder" class="dropdown-item">My Orders</a>
                                         <a href="information" class="dropdown-item">Edit profile</a>
                                         <a href="changepass" class="dropdown-item">Change password</a>
                                         <a href="signout" class="dropdown-item">Sign Out</a>
