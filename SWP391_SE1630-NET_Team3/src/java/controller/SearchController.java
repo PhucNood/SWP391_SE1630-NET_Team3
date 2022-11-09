@@ -25,10 +25,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *used to search product by name, brand, categories follow to request of user
+ * used to search product by name, brand, categories follow to request of user
+ *
  * @author admin
  */
 public class SearchController extends HttpServlet {
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -45,17 +47,17 @@ public class SearchController extends HttpServlet {
             HttpSession session = request.getSession();
             String text = "";
             //if have request search then remove filter to get all search list
-            if(request.getParameter("text")!= null){
+            if (request.getParameter("text") != null) {
                 text = request.getParameter("text");
                 session.setAttribute("text", text);
                 session.setAttribute("doSearch", "1");
                 session.removeAttribute("brandID");
                 session.removeAttribute("filterID");
                 session.removeAttribute("sortID");
-            }
-            else {
+            } else {
                 text = (String) session.getAttribute("text");
-            }   ProductDAO ProductDAO = new ProductDAOImpl();
+            }
+            ProductDAO ProductDAO = new ProductDAOImpl();
             //get all product list after search
             List<Product> searchList = ProductDAO.searchListProduct(text);
             List<Product> list = new ArrayList<>();
@@ -71,20 +73,24 @@ public class SearchController extends HttpServlet {
                 brandID = (String) session.getAttribute("brandID");
             } else {
                 brandID = "0";
-            }   if (session.getAttribute("filterID") != null) {
+            }
+            if (session.getAttribute("filterID") != null) {
                 filterID = (String) session.getAttribute("filterID");
             } else {
                 filterID = "0";
-            }   if (session.getAttribute("sortID") != null) {
+            }
+            if (session.getAttribute("sortID") != null) {
                 sortID = (String) session.getAttribute("sortID");
             } else {
                 sortID = "0";
             }   //get filter in new request
             if (request.getParameter("brandID") != null) {
                 brandID = request.getParameter("brandID");
-            }   if (request.getParameter("filterID") != null) {
+            }
+            if (request.getParameter("filterID") != null) {
                 filterID = request.getParameter("filterID");
-            }   if (request.getParameter("sortID") != null) {
+            }
+            if (request.getParameter("sortID") != null) {
                 sortID = request.getParameter("sortID");
             }   //creat list to add general product from listProductByFilter and listProductBySearch
             List<Product> newList = new ArrayList<>();
@@ -94,7 +100,9 @@ public class SearchController extends HttpServlet {
                 request.setAttribute("emptyP", "Not found!");
             } else {
                 for (Product item : list) {
-                    if(checkInSearchList(item, searchList)) newList.add(item);
+                    if (checkInSearchList(item, searchList)) {
+                        newList.add(item);
+                    }
                 }
             }   //PAGING
             int size = newList.size();
@@ -105,7 +113,8 @@ public class SearchController extends HttpServlet {
                 page = 1;
             } else {
                 page = Integer.parseInt(xpage);
-            }   int start, end;
+            }
+            int start, end;
             start = (page - 1) * numberpage;
             end = Math.min(page * numberpage, size);
             List<Product> listProductInPage = ProductDAO.getListByPage(newList, start, end);
@@ -124,6 +133,7 @@ public class SearchController extends HttpServlet {
             request.getRequestDispatcher("view/error.jsp").forward(request, response);
         }
     }
+
     public boolean checkInSearchList(Product item, List<Product> sList) {
         for (Product p : sList) {
             if (item.getProductID() == p.getProductID()) {

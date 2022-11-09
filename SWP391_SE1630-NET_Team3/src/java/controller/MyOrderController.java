@@ -5,11 +5,10 @@
 
 package controller;
 
-import dao.BlogDAO;
-import dao.HomeDAO;
-import dao.impl.BlogDAOImpl;
-import dao.impl.HomeDAOImpl;
-import dao.impl.ProductDAOImpl;
+import dao.OrderDAO;
+import dao.impl.OrderDAOImpl;
+import entity.Account;
+import entity.Order;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-public class HomeController extends HttpServlet {
+public class MyOrderController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -42,10 +42,10 @@ public class HomeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet homeController</title>");  
+            out.println("<title>Servlet MyOrderController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet homeController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet MyOrderController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,19 +62,25 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.setAttribute("inPage", "");
+        Account account = (Account) session.getAttribute("account");
         try {
-            HttpSession session = request.getSession();
-            session.setAttribute("inPage", "home");
-            HomeDAO homeDAOImpl = new HomeDAOImpl();
-            BlogDAO BlogDAO = new BlogDAOImpl();
-            request.setAttribute("products", new ProductDAOImpl().getAllProduct());
-            request.setAttribute("listNewProduct", homeDAOImpl.getNewProductsEachCategory());
-            request.setAttribute("newBlogs", BlogDAO.searchBlogPage("", -1, -1,-1, 3, 1));
-            request.getRequestDispatcher("view/home.jsp").forward(request, response);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("errorMessage", ex.getMessage());
-            request.getRequestDispatcher("view/error.jsp").forward(request, response);
+            String status = "";
+            String text = "";
+            if(request.getParameter("status")!= null){
+                status = request.getParameter("status");
+            }
+            if(request.getParameter("text") != null){
+                text = request.getParameter("text");
+            }
+            OrderDAO OrderDAO = new OrderDAOImpl();
+            List<Order> orderlist = OrderDAO.getOrderList(String.valueOf(account.getId()),status, text);
+            request.setAttribute("status", status);
+            request.setAttribute("orderList", orderlist);
+            request.getRequestDispatcher("view/myOrder.jsp").forward(request, response);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ManageOrderShopController.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 
 

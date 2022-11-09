@@ -10,8 +10,8 @@ package entity;
  */
 public class OrderDetail {
     private int orderID;
-    private int productID;
-    private int quantitY;
+    private Product product;
+    private int quantity;
     private int feedbackID;
     private String createAt;
     private String updateAt;
@@ -19,12 +19,60 @@ public class OrderDetail {
     public OrderDetail() {
     }
 
-    public OrderDetail(int orderID, int productID, int quantitY, int feedbackID, String createAt, String updateAt) {
+    public OrderDetail(int orderID, Product product, int quantity, int feedbackID, String createAt, String updateAt) {
         this.orderID = orderID;
-        this.productID = productID;
-        this.quantitY = quantitY;
+        this.product = product;
+        this.quantity = quantity;
         this.feedbackID = feedbackID;
         this.createAt = createAt;
+        this.updateAt = updateAt;
+    }
+
+    public int getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getFeedbackID() {
+        return feedbackID;
+    }
+
+    public void setFeedbackID(int feedbackID) {
+        this.feedbackID = feedbackID;
+    }
+
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
+    }
+
+    public String getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(String updateAt) {
         this.updateAt = updateAt;
     }
 
@@ -32,51 +80,5 @@ public class OrderDetail {
 
     
     
-    public int getOrderID() {
-        return orderID;
-    }
-
-    public int getProductID() {
-        return productID;
-    }
-
-    public int getQuantitY() {
-        return quantitY;
-    }
-
-    public int getFeedbackID() {
-        return feedbackID;
-    }
-
-    public String getCreateAt() {
-        return createAt;
-    }
-
-    public String getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
-    }
-
-    public void setProductID(int productID) {
-        this.productID = productID;
-    }
-
-    public void setQuantitY(int quantitY) {
-        this.quantitY = quantitY;
-    }
-
-    public void setFeedbackID(int feedbackID) {
-        this.feedbackID = feedbackID;
-    }
-
-    public void setCreateAt(String createAt) {
-        this.createAt = createAt;
-    }
-
-    public void setUpdateAt(String updateAt) {
-        this.updateAt = updateAt;
-    }
+    
 }

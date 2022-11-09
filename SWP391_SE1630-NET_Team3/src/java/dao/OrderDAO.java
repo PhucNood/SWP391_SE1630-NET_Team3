@@ -4,9 +4,9 @@
  */
 package dao;
 
-import entity.Account;
 import entity.Cart;
 import entity.Order;
+import entity.OrderDetail;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,9 +15,19 @@ import java.util.List;
  * @author admin
  */
 public interface OrderDAO {
+
     public void addOrder(int accountID, String fullname, String email,
             String phone, String address, String note, Cart cart)
-            throws ClassNotFoundException, SQLException ;
+            throws ClassNotFoundException, SQLException;
+
+    public List<Order> getOrderList(String accountID, String status, String search) throws ClassNotFoundException, SQLException;
+
+    public Order getOrderById(String id) throws ClassNotFoundException, SQLException;
+
+    public void updateStatus(String id, String status) throws ClassNotFoundException, SQLException;
+
+    public List<OrderDetail> getOrderDetailListByOrderId(String orderID) throws ClassNotFoundException, SQLException;
+
     public List<Order> getOrder(String status, String search) throws ClassNotFoundException, SQLException;
-    
+
 }

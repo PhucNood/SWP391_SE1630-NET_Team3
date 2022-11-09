@@ -58,7 +58,7 @@
             <div style="text-align: center">
                 <span>You can see details in </span>
                 <span>
-                    <a href="#">My Order</a>
+                    <a href="myOrder">My Order</a>
                 </span>
             </div>
 
