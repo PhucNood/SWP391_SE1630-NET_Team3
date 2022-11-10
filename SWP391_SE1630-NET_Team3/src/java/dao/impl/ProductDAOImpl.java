@@ -172,7 +172,7 @@ public class ProductDAOImpl extends DBContext implements ProductDAO {
         ImageDAOImpl ImageDAO = new ImageDAOImpl();
         String sql = "select * from Product p inner join brand b on p.brandID = b.brandID"
                 + "			inner join category c on p.categoryID = c.categoryID"
-                + "where 1=1"
+                + " where 1=1"
                 + " and (p.name like '%" + text + "%' or b.title like '%" + text + "%' or c.title like '%" + text + "%')";
         try {
             con = getConnection();

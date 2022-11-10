@@ -309,7 +309,7 @@
                         <p style="color: #44EC79; text-align: center">${messsucc}</p> 
                         <form action="addProduct" method="post" >
                             <div class="modal-header">						
-                                <h4 class="modal-title">Edit product</h4>
+                                <h4 class="modal-title">Add product</h4>
                             </div>
                             <div class="modal-body">					
 

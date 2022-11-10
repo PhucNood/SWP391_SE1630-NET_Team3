@@ -143,6 +143,30 @@
         <servlet-name>ManageShopOrderController</servlet-name>
         <servlet-class>controller.ManageShopOrderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageOrderShopController</servlet-name>
+        <servlet-class>controller.ManageOrderShopController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateStatusController</servlet-name>
+        <servlet-class>controller.UpdateStatusDeliveringController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDetailShopController</servlet-name>
+        <servlet-class>controller.OrderDetailShopController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyOrderController</servlet-name>
+        <servlet-class>controller.MyOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDetailCustomerController</servlet-name>
+        <servlet-class>controller.OrderDetailCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateStatusOrderCustomerController</servlet-name>
+        <servlet-class>controller.UpdateStatusOrderCustomerController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShopController</servlet-name>
         <url-pattern>/shop</url-pattern>
@@ -282,6 +306,30 @@
     <servlet-mapping>
         <servlet-name>ManageShopOrderController</servlet-name>
         <url-pattern>/manageShopOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageOrderShopController</servlet-name>
+        <url-pattern>/manageOrderShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateStatusController</servlet-name>
+        <url-pattern>/updateStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDetailShopController</servlet-name>
+        <url-pattern>/orderDetailShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyOrderController</servlet-name>
+        <url-pattern>/myOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDetailCustomerController</servlet-name>
+        <url-pattern>/orderDetailCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateStatusOrderCustomerController</servlet-name>
+        <url-pattern>/updateStatusOrderCustomer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

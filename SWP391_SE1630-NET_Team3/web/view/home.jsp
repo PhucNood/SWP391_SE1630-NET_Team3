@@ -271,7 +271,7 @@
 
                                 <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
 
-                                    <a href="${pageContext.request.contextPath}/view/product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                                    <a href="${pageContext.request.contextPath}/shop" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 
                                         Shop Now
                                     </a>
@@ -297,7 +297,7 @@
 
                                 <div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
 
-                                    <a href="${pageContext.request.contextPath}/view/product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                                    <a href="${pageContext.request.contextPath}/shop" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 
                                         Shop Now
                                     </a>

@@ -3,24 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/EditBlogController.java</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/LoginController.java</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/dao/ImageDAO.java</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/dao/impl/OrderDAOImpl.java</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/manageBlogList.jsp</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/manageShopOrder.jsp</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/ManageShopOrderController.java</file>
+<<<<<<< HEAD
+            <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/EditProductController.java</file>
+            <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/ShopController.java</file>
+            <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/ManageProductController.java</file>
+            <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/dao/ProductDAO.java</file>
+            <file>file:/C:/Users/stick/Desktop/1_SWP391/team/test/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/dao/impl/ProductDAOImpl.java</file>
+=======
+            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/orderSuccess.jsp</file>
             <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/topbar.jsp</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/dao/impl/Image_BlogDAOImpl.java</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/dao/impl/BlogDAOImpl.java</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/dao/OrderDAO.java</file>
             <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/AddToCartController.java</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/controller/HomeController.java</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/cart.jsp</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/dao/Image_BlogDAO.java</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/view/home.jsp</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/src/java/dao/impl/ImageDAOImpl.java</file>
-            <file>file:/D:/FPT/SWP391/SWP391_SE1630-NET_Team3/SWP391_SE1630-NET_Team3/web/WEB-INF/web.xml</file>
+>>>>>>> n11
         </group>
     </open-files>
 </project-private>
